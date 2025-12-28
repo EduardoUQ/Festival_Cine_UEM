@@ -1,0 +1,322 @@
+/* FUENTE DEL TEXTO */
+@font-face {
+    font-family: "Hellix";
+    src: url(../font/Hellix-Regular.ttf);
+}
+
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Hellix"
+}
+
+/* HEADER */
+.header {
+    background: #000;
+    padding: 24px 8rem;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    color: #f5c542;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.logo img {
+    align-items: center;
+    width: 12rem;
+    height: 3rem;
+}
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    gap: 64px;
+}
+
+.nav a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    /* transition: color 0.2s ease; */
+}
+
+.nav a:hover {
+    color: #ffffff;
+}
+
+/* ACTIONS */
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+    background: #FF3228;
+    color: #ffffff;
+    /* border: none; */
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #ffffff;
+    color: #FF3228;
+}
+
+/* ------------------------------------------------- */
+/* FOOTER */
+.footer {
+    background: #000;
+    color: #cfcfcf;
+    padding: 40px 24px 30px;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 100px;
+}
+
+/* BRAND */
+.footer-logo {
+    display: flex;
+    justify-content: left;
+    padding-left: 40px;
+}
+
+.footer-logo img {
+    align-items: center;
+    width: 20rem;
+    height: 5rem;
+}
+
+.footer-description {
+    margin: 20px 0;
+    line-height: 1.6;
+    color: #9ca3af;
+    max-width: 400px;
+    text-align: center;
+
+}
+
+/* SOCIAL */
+.social-links {
+    display: flex;
+    gap: 12px;
+    text-align: center;
+    padding-left: 4rem;
+    margin-top: 1rem;
+}
+
+.social-links i {
+    width: 42px;
+    height: 42px;
+    background: #4B4B4B;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.5rem;
+    transition: background 0.2s ease;
+}
+
+.social-links i:hover {
+    background: #FF7D78;
+    cursor: pointer;
+}
+
+/* COLUMNS */
+.footer-column h4 {
+    color: #fff;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 10px;
+}
+
+.footer-column a {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.footer-column a:hover {
+    color: #FF7D78;
+}
+
+/* CONTACT */
+.contact-list li {
+    font-size: 1rem;
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+/* BOTTOM */
+.footer-bottom {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #9ca3af;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #FF7D78;
+}
+
+/* -------------------------- VACÍO ------------------------ */
+#espacio {
+    height: 50vh;
+}
+
+/* ------------------------------------------------- */
+/* OCULTO POR DEFECTO */
+.login-mobile {
+    display: none;
+}
+
+/* MÓVIL */
+@media (max-width: 1024px) {
+
+    .login-mobile {
+        display: block;
+        margin: 12px auto 0;
+        padding: 10px 24px;
+        background: #FF3228;
+        color: #fff;
+        border-radius: 4px;
+        font-weight: 600;
+        text-align: center;
+        width: fit-content;
+    }
+
+    .login-mobile:hover {
+        background: #fff;
+        color: #FF3228;
+    }
+}
+
+/* ----------------- RESPONSIVE ------------------ */
+@media (max-width: 1024px) {
+
+    /* HEADER */
+    .header {
+        padding: 20px 2rem;
+    }
+
+    /* OCULTAMOS NAV */
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #000;
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px 0;
+        z-index: 1000;
+    }
+
+    .nav.active {
+        display: flex;
+    }
+
+    .nav a {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    /* MOSTRAMOS HAMBURGUESA */
+    .hamburger {
+        display: block;
+        font-size: 1.8rem;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    /* BOTÓN INGRESAR */
+    .actions {
+        display: none;
+    }
+
+    /* FOOTER */
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .footer-logo {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .footer-description {
+        margin: 20px auto;
+    }
+
+    .social-links {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}

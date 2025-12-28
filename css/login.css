@@ -1,0 +1,154 @@
+/* FUENTE DEL TEXTO */
+@font-face {
+    font-family: "Hellix";
+    src: url(../font/Hellix-Regular.ttf);
+}
+
+/* BASE */
+body {
+    margin: 0;
+    font-family: "Hellix";
+    background: radial-gradient(circle at top, #111, #000);
+    color: #fff;
+}
+
+/* WRAPPER */
+.login-wrapper {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+/* CARD */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, #111, #0a0a0a);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* TEXT */
+.login-card h1 {
+    margin-bottom: 8px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.subtitle {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* FORM */
+label {
+    font-size: 1rem;
+    margin-bottom: 6px;
+    display: block;
+    color: #d1d5db;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    /* border-radius: 10px; */
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #262626;
+}
+
+.input-group input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.input-group #icon {
+    color: #9ca3af;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.input-group #eye {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+/* OPTIONS */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+}
+
+.remember {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    color: #9ca3af;
+    font-size: 0.75rem;
+
+}
+
+.forgot {
+    color: #FF3228;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+/* MAIN BUTTON */
+.login-btn {
+    width: 100%;
+    background: #FF3228;
+    color: #FFFF;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 24px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+
+}
+
+.login-btn:hover {
+    background: #FFFF;
+    color: #FF3228;
+}
+
+/* REGISTER */
+.register {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+}
+
+.register a {
+    color: #FF3228;
+    text-decoration: none;
+}
+
+/* TERMS */
+.terms {
+    font-size: 0.7rem;
+    text-align: center;
+    color: #6b7280;
+}
+
+.terms a {
+    color: #FF3228;
+    text-decoration: none;
+}

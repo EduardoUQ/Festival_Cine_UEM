@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'festival-gold': '#D4AF37',
+                        'festival-dark': '#0A0A0A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-festival-dark text-white font-sans">
+
+    <header id="header"
+        class="fixed top-0 left-0 right-0 z-50 bg-festival-dark/95 backdrop-blur-sm border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div id="logo" class="flex items-center space-x-3">
+                <i class="fa-solid fa-film text-festival-gold text-3xl"></i>
+                <span class="text-2xl font-bold tracking-tight">CINEFEST</span>
+            </div>
+
+            <nav id="main-nav" class="flex items-center space-x-8">
+                <a href="#bases" class="text-sm font-medium hover:text-festival-gold transition-colors">Bases del
+                    Concurso</a>
+                <a href="#calendario"
+                    class="text-sm font-medium hover:text-festival-gold transition-colors">Calendario</a>
+                <a href="#noticias" class="text-sm font-medium hover:text-festival-gold transition-colors">Noticias</a>
+                <a href="#galas" class="text-sm font-medium text-festival-gold transition-colors">Galas</a>
+                <a href="#subir-corto" class="text-sm font-medium hover:text-festival-gold transition-colors">Subir
+                    Corto</a>
+            </nav>
+
+            <div id="header-actions" class="flex items-center space-x-4">
+                <button class="text-white hover:text-festival-gold transition-colors">
+                    <i class="fa-solid fa-search text-lg"></i>
+                </button>
+                <button
+                    class="px-6 py-2.5 bg-white text-festival-dark rounded-full font-semibold text-sm hover:bg-festival-gold hover:text-white transition-all">
+                    Acceder
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero-galas" class="relative h-[700px] flex items-center justify-center overflow-hidden mt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-festival-dark/60 to-festival-dark z-10"></div>
+        <img class="absolute inset-0 w-full h-full object-cover"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/afd8af84d3-81ed0641de4e16116c66.png"
+            alt="elegant film festival gala ceremony, red carpet, golden lighting, cinematic atmosphere" />
+
+        <div class="relative z-20 text-center max-w-4xl px-8">
+            <div class="mb-6">
+                <span
+                    class="inline-block px-4 py-2 bg-festival-gold/20 border border-festival-gold rounded-full text-festival-gold text-sm font-semibold tracking-wide">
+                    GALA 2024
+                </span>
+            </div>
+            <h1 class="text-7xl font-bold mb-6 leading-tight">
+                Premios y Gala
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Celebramos la excelencia cinematográfica universitaria con premios excepcionales y una gala inolvidable
+            </p>
+        </div>
+    </section>
+
+    <section id="premios-section" class="py-24 bg-gradient-to-b from-festival-dark to-zinc-900">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <span class="text-festival-gold font-semibold tracking-wider text-sm mb-3 block">RECONOCIMIENTOS</span>
+                <h2 class="text-5xl font-bold mb-4">Premios del Festival</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Reconocemos la excelencia cinematográfica con premios en efectivo y reconocimientos especiales
+                </p>
+            </div>
+
+            <div id="premios-ue" class="mb-16">
+                <div class="flex items-center justify-center mb-10">
+                    <div
+                        class="h-px bg-gradient-to-r from-transparent via-festival-gold to-transparent w-full max-w-xs">
+                    </div>
+                    <h3 class="text-3xl font-bold mx-8 whitespace-nowrap">Mejor Cortometraje UE</h3>
+                    <div
+                        class="h-px bg-gradient-to-r from-transparent via-festival-gold to-transparent w-full max-w-xs">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-8">
+                    <div id="premio-ue-1"
+                        class="relative bg-gradient-to-br from-festival-gold/20 to-yellow-600/10 backdrop-blur-sm rounded-2xl p-10 border-2 border-festival-gold hover:shadow-2xl hover:shadow-festival-gold/20 transition-all group">
+                        <div
+                            class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-festival-gold to-yellow-600 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-2xl font-black text-festival-dark">1º</span>
+                        </div>
+                        <div class="text-center mt-6">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-festival-gold to-yellow-600 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-trophy text-4xl text-festival-dark"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Primer Premio</h4>
+                            <div class="text-5xl font-black text-festival-gold mb-3">600€</div>
+                            <p class="text-gray-300 text-sm mb-4">+ Premio Patrocinador</p>
+                            <div class="pt-4 border-t border-white/20">
+                                <p class="text-gray-400 text-sm">Reconocimiento a la excelencia cinematográfica</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="premio-ue-2"
+                        class="relative bg-gradient-to-br from-gray-400/20 to-gray-600/10 backdrop-blur-sm rounded-2xl p-10 border-2 border-gray-400 hover:shadow-2xl hover:shadow-gray-400/20 transition-all group">
+                        <div
+                            class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-2xl font-black text-festival-dark">2º</span>
+                        </div>
+                        <div class="text-center mt-6">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-award text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Segundo Premio</h4>
+                            <div class="text-5xl font-black text-gray-300 mb-3">300€</div>
+                            <p class="text-gray-300 text-sm mb-4 opacity-0">Placeholder</p>
+                            <div class="pt-4 border-t border-white/20">
+                                <p class="text-gray-400 text-sm">Distinción por calidad cinematográfica</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="premio-ue-3"
+                        class="relative bg-gradient-to-br from-amber-700/20 to-amber-900/10 backdrop-blur-sm rounded-2xl p-10 border-2 border-amber-700 hover:shadow-2xl hover:shadow-amber-700/20 transition-all group">
+                        <div
+                            class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-2xl font-black text-white">3º</span>
+                        </div>
+                        <div class="text-center mt-6">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-medal text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Tercer Premio</h4>
+                            <div class="text-5xl font-black text-amber-600 mb-3">100€</div>
+                            <p class="text-gray-300 text-sm mb-4 opacity-0">Placeholder</p>
+                            <div class="pt-4 border-t border-white/20">
+                                <p class="text-gray-400 text-sm">Mención especial del jurado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="premios-alumni" class="mb-16">
+                <div class="flex items-center justify-center mb-10">
+                    <div
+                        class="h-px bg-gradient-to-r from-transparent via-festival-gold to-transparent w-full max-w-xs">
+                    </div>
+                    <h3 class="text-3xl font-bold mx-8 whitespace-nowrap">Mejor Cortometraje Alumni</h3>
+                    <div
+                        class="h-px bg-gradient-to-r from-transparent via-festival-gold to-transparent w-full max-w-xs">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div id="premio-alumni-1"
+                        class="relative bg-gradient-to-br from-festival-gold/20 to-yellow-600/10 backdrop-blur-sm rounded-2xl p-10 border-2 border-festival-gold hover:shadow-2xl hover:shadow-festival-gold/20 transition-all group">
+                        <div
+                            class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-festival-gold to-yellow-600 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-2xl font-black text-festival-dark">1º</span>
+                        </div>
+                        <div class="text-center mt-6">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-festival-gold to-yellow-600 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-crown text-4xl text-festival-dark"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Primer Premio Alumni</h4>
+                            <div class="text-5xl font-black text-festival-gold mb-6">700€</div>
+                            <div class="pt-4 border-t border-white/20">
+                                <p class="text-gray-400 text-sm">Excelencia de antiguos estudiantes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="premio-alumni-2"
+                        class="relative bg-gradient-to-br from-gray-400/20 to-gray-600/10 backdrop-blur-sm rounded-2xl p-10 border-2 border-gray-400 hover:shadow-2xl hover:shadow-gray-400/20 transition-all group">
+                        <div
+                            class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center shadow-xl">
+                            <span class="text-2xl font-black text-festival-dark">2º</span>
+                        </div>
+                        <div class="text-center mt-6">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-star text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Segundo Premio Alumni</h4>
+                            <div class="text-5xl font-black text-gray-300 mb-6">300€</div>
+                            <div class="pt-4 border-t border-white/20">
+                                <p class="text-gray-400 text-sm">Distinción categoría Alumni</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="premio-honorifico" class="max-w-4xl mx-auto">
+                <div
+                    class="relative bg-gradient-to-br from-purple-600/20 to-indigo-800/10 backdrop-blur-sm rounded-2xl p-12 border-2 border-purple-500 hover:shadow-2xl hover:shadow-purple-500/20 transition-all">
+                    <div
+                        class="absolute -top-8 left-1/2 -translate-x-1/2 w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-700 rounded-full flex items-center justify-center shadow-2xl">
+                        <i class="fa-solid fa-gem text-4xl text-white"></i>
+                    </div>
+                    <div class="text-center mt-8">
+                        <h3 class="text-3xl font-bold mb-4">Premio Honorífico</h3>
+                        <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                            Reconocimiento especial a un profesional del sector audiovisual de gran trayectoria que
+                            actuará como padrino del concurso
+                        </p>
+                        <div class="mt-8 flex items-center justify-center space-x-3">
+                            <i class="fa-solid fa-award text-purple-400 text-2xl"></i>
+                            <span class="text-purple-300 font-semibold">Distinción de Honor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gala-info" class="py-24 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <span class="text-festival-gold font-semibold tracking-wider text-sm mb-3 block">EVENTO PRINCIPAL</span>
+                <h2 class="text-5xl font-bold mb-4">Información de la Gala 2024</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Detalles sobre la ceremonia de entrega de premios y programa del evento
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-12 mb-16">
+                <div id="localizacion-card"
+                    class="bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl p-10 border border-white/10 hover:border-festival-gold transition-all">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-16 h-16 bg-festival-gold/20 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-location-dot text-3xl text-festival-gold"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold">Localización</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-building text-festival-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Auditorio Principal</h4>
+                                <p class="text-gray-400 text-sm">Universidad Central - Campus Principal</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-map-marker-alt text-festival-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Dirección</h4>
+                                <p class="text-gray-400 text-sm">Av. Universitaria 1234, Edificio Cultural</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-users text-festival-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Capacidad</h4>
+                                <p class="text-gray-400 text-sm">500 personas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fa-solid fa-parking text-festival-gold mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold mb-1">Estacionamiento</h4>
+                                <p class="text-gray-400 text-sm">Disponible en el campus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="programa-card"
+                    class="bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl p-10 border border-white/10 hover:border-festival-gold transition-all">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-16 h-16 bg-festival-gold/20 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-calendar-days text-3xl text-festival-gold"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold">Programa del Día</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="flex items-start space-x-4 pb-5 border-b border-white/10">
+                            <div class="text-festival-gold font-bold text-lg min-w-[80px]">18:00</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Apertura de Puertas</h4>
+                                <p class="text-gray-400 text-sm">Recepción de invitados y alfombra roja</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 pb-5 border-b border-white/10">
+                            <div class="text-festival-gold font-bold text-lg min-w-[80px]">19:00</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Ceremonia de Inauguración</h4>
+                                <p class="text-gray-400 text-sm">Palabras del rector y presentación del jurado</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 pb-5 border-b border-white/10">
+                            <div class="text-festival-gold font-bold text-lg min-w-[80px]">19:30</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Proyección de Finalistas</h4>
+                                <p class="text-gray-400 text-sm">Exhibición de cortometrajes seleccionados</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 pb-5 border-b border-white/10">
+                            <div class="text-festival-gold font-bold text-lg min-w-[80px]">21:00</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Entrega de Premios</h4>
+                                <p class="text-gray-400 text-sm">Anuncio de ganadores y ceremonia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="text-festival-gold font-bold text-lg min-w-[80px]">22:00</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Cóctel de Clausura</h4>
+                                <p class="text-gray-400 text-sm">Networking y celebración</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mapa-auditorio" class="bg-zinc-800/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <h3 class="text-2xl font-bold mb-6 text-center">Ubicación del Auditorio</h3>
+                <div class="h-96 bg-zinc-900 rounded-xl overflow-hidden flex items-center justify-center">
+                    <img class="w-full h-full object-cover"
+                        src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b9b7104d1e-71f78e92547aec5402c0.png"
+                        alt="university auditorium exterior, modern architecture, elegant entrance, cinematic lighting" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galas-anteriores" class="py-24 bg-gradient-to-b from-zinc-900 to-festival-dark">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+                <span class="text-festival-gold font-semibold tracking-wider text-sm mb-3 block">ARCHIVO</span>
+                <h2 class="text-5xl font-bold mb-4">Galas Anteriores</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Revive los mejores momentos de nuestras ediciones pasadas
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-12">
+                <div id="gala-2023" class="group cursor-pointer">
+                    <div class="relative h-96 rounded-2xl overflow-hidden mb-6">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/afd8af84d3-81ed0641de4e16116c66.png"
+                            alt="film festival gala 2023, award ceremony, winners celebrating, elegant atmosphere" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-festival-dark via-festival-dark/50 to-transparent">
+                        </div>
+                        <div class="absolute top-6 left-6">
+                            <span
+                                class="px-4 py-2 bg-festival-gold text-festival-dark rounded-full text-sm font-bold">EDICIÓN
+                                2023</span>
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <h3 class="text-4xl font-bold mb-2">Gala 2023</h3>
+                            <p class="text-gray-300">Primera Edición del Festival</p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800/50 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">45</div>
+                                <div class="text-xs text-gray-400">Cortometrajes</div>
+                            </div>
+                            <div class="text-center border-x border-white/10">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">300+</div>
+                                <div class="text-xs text-gray-400">Asistentes</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">8</div>
+                                <div class="text-xs text-gray-400">Premios</div>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-white/10 hover:bg-festival-gold hover:text-festival-dark rounded-lg font-semibold transition-all flex items-center justify-center space-x-2">
+                            <span>Ver Galería Completa</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="gala-2022" class="group cursor-pointer">
+                    <div class="relative h-96 rounded-2xl overflow-hidden mb-6">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a6d1454c56-032f0a0167a9003e0686.png"
+                            alt="film festival gala 2022, stage presentation, golden lighting, professional event" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-festival-dark via-festival-dark/50 to-transparent">
+                        </div>
+                        <div class="absolute top-6 left-6">
+                            <span
+                                class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-bold">EDICIÓN
+                                2022</span>
+                        </div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <h3 class="text-4xl font-bold mb-2">Gala 2022</h3>
+                            <p class="text-gray-300">Edición Inaugural</p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800/50 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">32</div>
+                                <div class="text-xs text-gray-400">Cortometrajes</div>
+                            </div>
+                            <div class="text-center border-x border-white/10">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">250+</div>
+                                <div class="text-xs text-gray-400">Asistentes</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-festival-gold mb-1">6</div>
+                                <div class="text-xs text-gray-400">Premios</div>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-white/10 hover:bg-festival-gold hover:text-festival-dark rounded-lg font-semibold transition-all flex items-center justify-center space-x-2">
+                            <span>Ver Galería Completa</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-section" class="py-32 bg-gradient-to-br from-festival-gold to-yellow-600 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-8 text-center relative z-10">
+            <h2 class="text-5xl font-bold text-festival-dark mb-6">¿Listo para participar?</h2>
+            <p class="text-xl text-festival-dark/80 mb-10 max-w-2xl mx-auto">
+                Únete a la próxima edición del festival y muestra tu talento cinematográfico
+            </p>
+            <div class="flex items-center justify-center space-x-6">
+                <button
+                    class="px-10 py-4 bg-festival-dark text-white rounded-full font-bold text-lg hover:bg-festival-dark/90 transition-all shadow-2xl hover:shadow-festival-dark/50 hover:scale-105 transform">
+                    Subir Cortometraje
+                </button>
+                <button
+                    class="px-10 py-4 bg-white text-festival-dark rounded-full font-bold text-lg hover:bg-white/90 transition-all shadow-xl hover:scale-105 transform">
+                    Ver Bases del Concurso
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="bg-festival-dark border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-4 gap-12 mb-12">
+                <div id="footer-brand">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <i class="fa-solid fa-film text-festival-gold text-3xl"></i>
+                        <span class="text-2xl font-bold">CINEFEST</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Festival Universitario de Cortometrajes dedicado a promover el talento audiovisual emergente.
+                    </p>
+                </div>
+
+                <div id="footer-links-1">
+                    <h4 class="font-bold text-lg mb-4">Festival</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Bases
+                                del Concurso</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Calendario</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Premios</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Jurado</a></li>
+                    </ul>
+                </div>
+
+                <div id="footer-links-2">
+                    <h4 class="font-bold text-lg mb-4">Recursos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Noticias</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Galas
+                                Anteriores</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-festival-gold transition-colors text-sm">FAQ</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-festival-gold transition-colors text-sm">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="footer-social">
+                    <h4 class="font-bold text-lg mb-4">Síguenos</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 hover:bg-festival-gold rounded-full flex items-center justify-center transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 hover:bg-festival-gold rounded-full flex items-center justify-center transition-all">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 hover:bg-festival-gold rounded-full flex items-center justify-center transition-all">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-white/10 hover:bg-festival-gold rounded-full flex items-center justify-center transition-all">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">info@cinefest.edu</p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex items-center justify-between">
+                <p class="text-gray-400 text-sm">© 2024 CINEFEST. Todos los derechos reservados.</p>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-festival-gold text-sm transition-colors">Política de
+                        Privacidad</a>
+                    <a href="#" class="text-gray-400 hover:text-festival-gold text-sm transition-colors">Términos y
+                        Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -13,8 +13,10 @@
 
 /* HEADER */
 .news-header {
-    /* max-width: 600px; */
     margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .news-tag {
@@ -33,6 +35,24 @@
     color: #9ca3af;
     font-size: 0.9rem;
     line-height: 1.6;
+}
+
+/* CREAR NOTICIA */
+#create-news {
+    background: #FF3228;
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+#create-news:hover {
+    background: #ffffff;
+    color: #FF3228;
 }
 
 /* GRID */
@@ -166,6 +186,9 @@
     .news-header {
         text-align: center;
         margin: 0 auto 40px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
 
     .news-header p {

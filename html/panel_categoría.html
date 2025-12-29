@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración - Premios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/panel_categoria.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="https://i.pravatar.cc/80" alt="Admin">
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <a href="#"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a class="active" href="#"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="#"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a href="#"><i class="fa-solid fa-users"></i> Participantes</a>
+                <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+
+            <!-- HEADER -->
+            <header class="main-header">
+                <div>
+                    <h1>Panel de Administración</h1>
+                    <p>Gestiona las categorías y premios del festival</p>
+                </div>
+
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar premios...">
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <!-- CATEGORÍAS -->
+                <div class="card">
+                    <h3>Categorías</h3>
+
+                    <ul class="category-list">
+                        <li>
+                            <span>Mejor cortometraje UE</span>
+                            <div class="actions">
+                                <i class="fa-solid fa-pen"></i>
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Mejor cortometraje Alumni</span>
+                            <div class="actions">
+                                <i class="fa-solid fa-pen"></i>
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Premio Honorífico</span>
+                            <div class="actions">
+                                <i class="fa-solid fa-pen"></i>
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <button class="btn-primary full">+ Añadir categoría</button>
+                </div>
+
+                <!-- PREMIOS -->
+                <div class="card">
+                    <h3>Premios en la categoría:</h3>
+                    <span class="badge">Mejor cortometraje UE</span>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Premio</th>
+                                <th>Importe</th>
+                                <th>Tipo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Primer premio</td>
+                                <td>600 €</td>
+                                <td>Económico</td>
+                                <td>
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Segundo premio</td>
+                                <td>300 €</td>
+                                <td>Económico</td>
+                                <td>
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tercer premio</td>
+                                <td>100 €</td>
+                                <td>Económico</td>
+                                <td>
+                                    <i class="fa-solid fa-pen"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn-primary full">+ Añadir premio</button>
+                </div>
+
+                <!-- FORM CATEGORÍA -->
+                <div class="card">
+                    <h3>Añadir / Editar Categoría</h3>
+
+                    <label>Nombre de la categoría</label>
+                    <input type="text" placeholder="">
+
+                    <label>Descripción (opcional)</label>
+                    <textarea rows="3"></textarea>
+
+                    <div class="form-actions">
+                        <button class="btn-secondary">Cancelar</button>
+                        <button class="btn-primary">Guardar</button>
+                    </div>
+                </div>
+
+                <!-- FORM PREMIO -->
+                <div class="card">
+                    <h3>Añadir / Editar Premio</h3>
+
+                    <label>Nombre del premio</label>
+                    <input type="text">
+
+                    <label>Tipo de premio</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipo"> Económico</label>
+                        <label><input type="radio" name="tipo"> Honorífico</label>
+                    </div>
+
+                    <label>Importe (€)</label>
+                    <input type="number">
+
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                        Incluye patrocinador
+                    </label>
+
+                    <label>Descripción (opcional)</label>
+                    <textarea rows="2"></textarea>
+
+                    <div class="form-actions">
+                        <button class="btn-secondary">Cancelar</button>
+                        <button class="btn-primary">Guardar</button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

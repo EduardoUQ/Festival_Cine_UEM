@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/panel_ganadores.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="user">
+                <div class="avatar"><img src="https://i.pravatar.cc/80" alt="Admin"></div>
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav>
+                <a href="#"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a href="#"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="#" class="active"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a href="#"><i class="fa-solid fa-users"></i> Participantes</a>
+                <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+            <header class="header">
+                <h1>Asignación de Ganadores</h1>
+                <p>Asigna los ganadores de cada categoría</p>
+            </header>
+
+            <!-- SELECTOR CATEGORÍA -->
+            <div class="category-select">
+                <label>Categoría</label>
+                <select>
+                    <option>Mejor cortometraje UE</option>
+                    <option>Mejor cortometraje Alumni</option>
+                    <option>Premio Honorífico</option>
+                </select>
+            </div>
+
+            <div class="cards">
+
+                <!-- GANADOR POR CATEGORÍA -->
+                <section class="card">
+                    <h3>Premio: Primer premio (600 €)</h3>
+                    <span class="subtitle">Nominados</span>
+
+                    <div class="radio-group">
+                        <label><input type="radio" name="ganador"> Cortometraje “Sombras”</label>
+                        <label><input type="radio" name="ganador"> Cortometraje “Luz Roja”</label>
+                        <label><input type="radio" name="ganador"> Cortometraje “Destino Final”</label>
+                    </div>
+
+                    <button class="btn-primary">Guardar ganador</button>
+                </section>
+
+                <!-- PREMIO HONORÍFICO -->
+                <section class="card">
+                    <h3>Premio Honorífico – Ganador</h3>
+
+                    <div class="form-group">
+                        <label>Nombre completo *</label>
+                        <input type="text" placeholder="Nombre del profesional">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profesión / Cargo *</label>
+                        <input type="text" placeholder="Director, productor, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Trayectoria profesional *</label>
+                        <textarea rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Motivo del reconocimiento *</label>
+                        <textarea rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto (opcional)</label>
+                        <input type="file">
+                    </div>
+
+                    <button class="btn-primary">Guardar ganador</button>
+                </section>
+
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>

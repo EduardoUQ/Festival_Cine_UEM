@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Candidaturas</title>
+    <link rel="stylesheet" href="../css/panel-candidaturas.css">
+</head>
+
+<body>
+
+    <div class="panel">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="perfil">
+                <img src="https://via.placeholder.com/40" alt="Admin">
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav>
+                <a href="#">Dashboard</a>
+                <a href="#">Premios</a>
+                <a href="#">Ganadores</a>
+                <a class="active" href="#">Candidaturas</a>
+                <a href="#">Estadísticas</a>
+                <a href="#">Participantes</a>
+                <a href="#">Configuración</a>
+            </nav>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="content">
+
+            <!-- Cabecera -->
+            <div class="header">
+                <div>
+                    <h1>Gestión de Candidaturas</h1>
+                    <p>Revisa, acepta o rechaza las candidaturas, enviando un mensaje en caso de rechazo.</p>
+                </div>
+
+                <div class="search">
+                    <input type="text" placeholder="Buscar candidatura...">
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="tabs">
+                <button class="tab active">Pendientes</button>
+                <button class="tab">Aceptadas</button>
+                <button class="tab">Rechazadas</button>
+            </div>
+
+            <!-- Tabla -->
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Participante</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cortometraje "La Última Llamada"</td>
+                            <td>Mejor cortometraje Alumni</td>
+                            <td>Laura García</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><button class="btn">Ver candidatura</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>Cortometraje "Reflejos"</td>
+                            <td>Mejor cortometraje UE</td>
+                            <td>Marc Pérez</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><button class="btn">Ver candidatura</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>Cortometraje "Sueños Rotos"</td>
+                            <td>Mejor cortometraje UE</td>
+                            <td>Ana Torres</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><button class="btn">Ver candidatura</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Paginación -->
+                <div class="paginacion">
+                    <span>1–3 de 3 candidaturas</span>
+                    <div>
+                        <button>&lt; Anterior</button>
+                        <button class="active">1</button>
+                        <button>Siguiente &gt;</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

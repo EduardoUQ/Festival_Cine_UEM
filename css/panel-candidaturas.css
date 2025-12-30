@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f0f0f;
+    color: #fff;
+}
+
+/* Layout */
+.panel {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: #151515;
+    padding: 20px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.perfil img {
+    border-radius: 50%;
+}
+
+.perfil span {
+    font-size: 0.8em;
+    color: #aaa;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 10px;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header p {
+    color: #aaa;
+    margin-top: 5px;
+}
+
+.search input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #2a2a2a;
+    color: #fff;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 8px 14px;
+    background: #2a2a2a;
+    border: none;
+    border-radius: 6px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #d4af37;
+    color: #000;
+}
+
+/* Tabla */
+.tabla-container {
+    background: #1c1c1c;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #202020;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    color: #aaa;
+    font-weight: normal;
+}
+
+tbody tr {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+tbody tr:hover {
+    background: #222;
+}
+
+/* Estados */
+.estado {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+.estado.pendiente {
+    background: #d4af37;
+    color: #000;
+}
+
+/* Botón */
+.btn {
+    padding: 6px 12px;
+    background: #d4af37;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Paginación */
+.paginacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: #aaa;
+}
+
+.paginacion button {
+    background: #2a2a2a;
+    border: none;
+    color: #ccc;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.paginacion button.active {
+    background: #d4af37;
+    color: #000;
+}

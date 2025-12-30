@@ -1,12 +1,13 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', system-ui, sans-serif;
 }
 
 body {
-    margin: 0;
-    background: radial-gradient(circle at top, #1a1a1a, #000);
-    color: #fff;
+    font-family: "Inter", sans-serif;
+    background: #0b0b0b;
+    color: #e5e5e5;
 }
 
 /* LAYOUT */
@@ -18,49 +19,42 @@ body {
 /* SIDEBAR */
 .sidebar {
     width: 260px;
-    background: #0f0f0f;
+    background: #111;
     padding: 24px;
     border-right: 1px solid #1f1f1f;
 }
 
-.user {
+.profile {
     display: flex;
     gap: 12px;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
-.avatar {
-    width: 42px;
-    height: 42px;
+.profile i {
     border-radius: 50%;
-    background: #333;
 }
 
-.user span {
-    display: block;
-    font-size: 12px;
-    color: #c9a43b;
+.profile span {
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
-nav a {
-    display: block;
-    padding: 12px 14px;
-    border-radius: 10px;
-    color: #ccc;
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: #cfcfcf;
     text-decoration: none;
+    border-radius: 8px;
     margin-bottom: 6px;
-    transition: 0.2s;
 }
 
-nav a:hover {
-    background: #1b1b1b;
-}
-
-nav a.active {
-    background: #c9a43b;
+.menu a.active,
+.menu a:hover {
+    background: #f5c542;
     color: #000;
-    font-weight: 600;
 }
 
 /* MAIN */
@@ -69,12 +63,12 @@ nav a.active {
     padding: 40px;
 }
 
-.header h1 {
+.main-header h1 {
     margin: 0;
     font-size: 28px;
 }
 
-.header p {
+.main-header p {
     color: #aaa;
     margin-bottom: 30px;
 }

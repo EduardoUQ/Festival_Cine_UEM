@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Candidatura</title>
+    <link rel="stylesheet" href="../css/panel_detalle_candidatura.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="admin-user">
+                <div class="avatar"></div>
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav>
+                <a href="#">Dashboard</a>
+                <a href="#">Premios</a>
+                <a href="#">Ganadores</a>
+                <a class="active" href="#">Candidaturas</a>
+                <a href="#">Participantes</a>
+                <a href="#">Configuración</a>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO -->
+        <main class="content">
+
+            <a href="#" class="back-link">← Volver al listado</a>
+
+            <!-- DATOS PERSONALES -->
+            <section class="card">
+                <h3>👤 Datos Personales</h3>
+
+                <div class="grid">
+                    <div class="field">
+                        <label>Nombre completo</label>
+                        <input type="text" value="Laura García" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>DNI / NIE / Pasaporte</label>
+                        <input type="text" value="Y1234567Z" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>Número de expediente</label>
+                        <input type="text" value="EXP-2025-001" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label>Correo electrónico</label>
+                        <input type="email" value="laura.g@email.com" disabled>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INFORMACIÓN DEL CORTO -->
+            <section class="card">
+                <h3>🎬 Información del Corto</h3>
+
+                <div class="field">
+                    <label>Título del cortometraje</label>
+                    <input type="text" value="La Última Llamada" disabled>
+                </div>
+
+                <div class="field">
+                    <label>Cartel / Póster</label>
+                    <div class="poster-box">
+                        <img src="https://via.placeholder.com/300x420" alt="Cartel del corto">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Sinopsis</label>
+                    <textarea disabled>
+Un drama íntimo que explora la última conversación entre un padre y su hija en una noche decisiva.
+                </textarea>
+                </div>
+
+                <div class="field">
+                    <label>Cortometraje</label>
+                    <div class="video-box">
+                        <div class="play-button">▶</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MENSAJE DE RECHAZO -->
+            <section class="card">
+                <h3>✉️ Mensaje en caso de rechazo</h3>
+
+                <textarea
+                    placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
+            </section>
+
+            <!-- ACCIONES -->
+            <div class="actions">
+                <button class="btn reject">Rechazar</button>
+                <button class="btn accept">Aceptar</button>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

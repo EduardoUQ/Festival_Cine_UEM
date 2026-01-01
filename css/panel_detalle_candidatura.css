@@ -19,39 +19,39 @@ body {
     width: 260px;
     background: #111;
     padding: 24px;
+    border-right: 1px solid #1f1f1f;
 }
 
-.admin-user {
+.profile {
     display: flex;
     gap: 12px;
     align-items: center;
     margin-bottom: 32px;
 }
 
-.avatar {
-    width: 40px;
-    height: 40px;
-    background: #444;
+.profile i {
     border-radius: 50%;
 }
 
-.admin-user span {
-    font-size: 12px;
-    color: #aaa;
+.profile span {
+    font-size: 0.8rem;
+    color: #9ca3af;
 }
 
-.sidebar nav a {
-    display: block;
-    padding: 10px 12px;
-    margin-bottom: 6px;
-    color: #ccc;
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: #cfcfcf;
     text-decoration: none;
     border-radius: 8px;
+    margin-bottom: 6px;
 }
 
-.sidebar nav a.active,
-.sidebar nav a:hover {
-    background: #f5c842;
+.menu a.active,
+.menu a:hover {
+    background: #f5c542;
     color: #000;
 }
 

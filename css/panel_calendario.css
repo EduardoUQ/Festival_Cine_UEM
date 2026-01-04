@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -109,6 +110,7 @@ body {
 .tab.active {
     background: #d4af37;
     color: #000;
+    text-decoration: none;
 }
 
 /* Tabla */

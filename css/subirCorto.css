@@ -1,0 +1,180 @@
+:root {
+    --bg-main: #0e0f12;
+    --bg-card: #1a1c20;
+    --bg-input: #22242a;
+    --gold: #d4af37;
+    --gold-soft: #b8962e;
+    --text-main: #ffffff;
+    --text-muted: #9aa0a6;
+    --radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1b1d22, var(--bg-main));
+    color: var(--text-main);
+}
+
+/* Layout */
+.upload-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Header */
+.upload-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.upload-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.upload-header h1 span {
+    color: var(--gold);
+}
+
+.upload-header p {
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Cards */
+.form-card {
+    background: linear-gradient(180deg, #1d1f24, #17191d);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.form-card h2 {
+    margin: 0 0 22px;
+    font-size: 18px;
+    color: var(--gold);
+}
+
+/* Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group.full {
+    grid-column: span 2;
+}
+
+/* Inputs */
+.form-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+}
+
+input,
+textarea {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text-main);
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--gold);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.counter {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--text-muted);
+}
+
+/* Upload box */
+.upload-box {
+    border: 2px dashed #3a3d44;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: border .2s;
+}
+
+.upload-box:hover {
+    border-color: var(--gold);
+}
+
+.upload-box span {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.upload-box small {
+    color: var(--text-muted);
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #000;
+}
+
+.btn-secondary {
+    background: #2a2d34;
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background: #32353d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: span 1;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

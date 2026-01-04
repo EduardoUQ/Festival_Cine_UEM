@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
+    <title>Gestión de Eventos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/panel_ganadores.css">
+    <link rel="stylesheet" href="../css/panel_calendario.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
-    <title>Panel de Administración - ganadores</title>
 </head>
 
 <body>
@@ -40,8 +40,7 @@
         </div>
     </header>
 
-    <!-- PANEL DE ADMINISTRACIÓN -->
-    <div class="admin-layout">
+    <div class="panel">
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile">
@@ -53,81 +52,92 @@
             </div>
 
             <nav class="menu">
-                <a href="#"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
+                    Candidaturas</a>
                 <a href="../html/panel_categoría.html"><i class="fa-solid fa-trophy"></i> Premios</a>
-                <a class="active" href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i>
-                    Ganadores</a>
-                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
+                <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a class="active" href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i>
+                    Calendario</a>
                 <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
             </nav>
         </aside>
 
-        <!-- MAIN -->
-        <main class="main">
-            <header class="main-header">
-                <h1>Asignación de Ganadores</h1>
-                <p>Asigna los ganadores de cada categoría</p>
-            </header>
+        <!-- Contenido -->
+        <main class="content">
 
-            <!-- SELECTOR CATEGORÍA -->
-            <div class="category-select">
-                <label>Categoría</label>
-                <select>
-                    <option>Mejor cortometraje UE</option>
-                    <option>Mejor cortometraje Alumni</option>
-                    <option>Premio Honorífico</option>
-                </select>
+            <!-- Cabecera -->
+            <div class="main-header">
+                <div>
+                    <h1>Gestión de Eventos</h1>
+                    <p>Revisa, edita o borra los eventos del calendario.</p>
+                </div>
+
+                <!-- <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar candidatura...">
+                </div> -->
             </div>
 
-            <div class="cards">
-
-                <!-- GANADOR POR CATEGORÍA -->
-                <section class="card">
-                    <h3>Premio: Primer premio (600 €)</h3>
-                    <span class="subtitle">Nominados</span>
-
-                    <div class="radio-group">
-                        <label><input type="radio" name="ganador"> Cortometraje “Sombras”</label>
-                        <label><input type="radio" name="ganador"> Cortometraje “Luz Roja”</label>
-                        <label><input type="radio" name="ganador"> Cortometraje “Destino Final”</label>
-                    </div>
-
-                    <button class="btn-primary">Guardar ganador</button>
-                </section>
-
-                <!-- PREMIO HONORÍFICO -->
-                <section class="card">
-                    <h3>Premio Honorífico – Ganador</h3>
-
-                    <div class="form-group">
-                        <label>Nombre completo *</label>
-                        <input type="text" placeholder="Nombre del profesional">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Profesión / Cargo *</label>
-                        <input type="text" placeholder="Director, productor, etc.">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Trayectoria profesional *</label>
-                        <textarea rows="3"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Motivo del reconocimiento *</label>
-                        <textarea rows="3"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Foto (opcional)</label>
-                        <input type="file">
-                    </div>
-
-                    <button class="btn-primary">Guardar ganador</button>
-                </section>
+            <!-- Filtros -->
+            <div class="tabs">
+                <a class="tab active" href="#">+ Crear evento</a>
             </div>
+
+            <!-- Tabla -->
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Taller de guión cinematografico</td>
+                            <td>5/12/2025</td>
+                            <td><a class="btn" href="#">Ver</a>
+                                <a class="btn" href="#">Editar</a>
+                                <a class="btn" href="#">Borrar</a>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Taller de guión cinematografico</td>
+                            <td>5/12/2025</td>
+                            <td><a class="btn" href="#">Ver</a>
+                                <a class="btn" href="#">Editar</a>
+                                <a class="btn" href="#">Borrar</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Taller de guión cinematografico</td>
+                            <td>5/12/2025</td>
+                            <td><a class="btn" href="#">Ver</a>
+                                <a class="btn" href="#">Editar</a>
+                                <a class="btn" href="#">Borrar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Paginación -->
+                <div class="paginacion">
+                    <span>1–3 de 3 noticias</span>
+                    <div>
+                        <button>&lt; Anterior</button>
+                        <button class="active">1</button>
+                        <button>Siguiente &gt;</button>
+                    </div>
+                </div>
+
+            </div>
+
         </main>
+
     </div>
 
     <!-- FOOTER -->

@@ -18,19 +18,19 @@
                 Ingresa tus credenciales para acceder a tu cuenta
             </p>
 
-            <form>
+            <form id="formLogin">
                 <!-- EMAIL -->
                 <label>Correo Electrónico</label>
                 <div class="input-group">
                     <i class="fa-solid fa-envelope" id="icon"></i>
-                    <input type="email" placeholder="tu@email.com">
+                    <input type="email" placeholder="tu@email.com" id="email">
                 </div>
 
                 <!-- PASSWORD -->
                 <label>Contraseña</label>
                 <div class="input-group">
                     <i class="fa-solid fa-lock" id="icon"></i>
-                    <input type="password" placeholder="••••••••">
+                    <input type="password" placeholder="••••••••" id="pass">
                     <i class="fa-solid fa-eye" id="eye"></i>
                 </div>
 
@@ -42,6 +42,8 @@
                     </label>
                     <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
                 </div>
+                
+                <p id="msg"></p>
 
                 <!-- BUTTON -->
                 <button type="submit" class="login-btn">Iniciar Sesión</button>

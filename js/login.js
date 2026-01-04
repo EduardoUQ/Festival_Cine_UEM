@@ -10,7 +10,7 @@ if (form_login) {
         event.preventDefault();
 
         const email = inputEmail.value.trim();
-        const pass = inputPass.value.trim();
+        const pass = inputPass.value;
 
         // Validaciones
         if (!email || !pass) {
@@ -37,9 +37,9 @@ function procesarLogin(email, pass) {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success" && data.rol === 'admin') {
-                window.location.href = "../HTML/panel_candidaturas.html";
+                window.location.href = "../html/panel_candidaturas.html";
             } else if (data.status === "success" && data.rol === 'usuario') {
-                window.location.href = "../HTML/index.html";
+                window.location.href = "../html/index.html";
             } else {
                 mensaje.textContent = data.message;
             }

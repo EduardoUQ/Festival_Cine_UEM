@@ -27,6 +27,9 @@ $sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_
 $conexion->query($sql) or die("Error al crear la base de datos: " . $conexion->error);
 $conexion->select_db($database);
 
+// Cifrar la contraseña del admin
+$hash = password_hash(1234, PASSWORD_DEFAULT);
+
 // Crear tablas + inserts
 $sql = "
 CREATE TABLE admin (
@@ -141,7 +144,7 @@ CREATE TABLE ganador (
 ) ENGINE=InnoDB;
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
-('00000000A', 'sara.delcastillo@universidadeuropea.es', '1234', 'Sara Del Castillo');
+('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash', 'Sara Del Castillo');
 
 INSERT INTO gala (anio, logo_url, cartel_url, descripcion, activa) VALUES
 (2026, 'uploads/logos/logo_gala_2026.png', 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026', TRUE);
@@ -162,11 +165,9 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ";
 
 if ($conexion->multi_query($sql)) {
-    while ($conexion->next_result()) { ; }
-    
+    while ($conexion->next_result()) {;
+    }
 } else {
-    
 }
 
 $conexion->close();
-?>

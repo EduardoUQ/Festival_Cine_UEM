@@ -23,7 +23,7 @@ if ($comprobar->num_rows > 0) {
 }
 
 // Crear y usar la BD
-$sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+$sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"; //utf8mb4 permite tildes, emokis y caracteres especiales. utf8mb4_unicode_ci define cómo se comparan los textos, ignorando mayus/minus y comparando bien acentos y letras internacionales.
 $conexion->query($sql) or die("Error al crear la base de datos: " . $conexion->error);
 $conexion->select_db($database);
 
@@ -39,6 +39,7 @@ CREATE TABLE admin (
     passwd_hash VARCHAR(255) NOT NULL,
     nombre_apellidos VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
+-- Hace que el motor de MySQL sea InnoDB forzadamente.
 
 CREATE TABLE gala (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -127,7 +128,7 @@ CREATE TABLE premio (
     UNIQUE (categoria, puesto)
 ) ENGINE=InnoDB;
 
-CREATE TABLE ganador (
+CREATE TABLE ganador_corto (
     id_gala INT NOT NULL,
     id_premio INT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
@@ -135,6 +136,22 @@ CREATE TABLE ganador (
     sinopsis TEXT,
     cartel_url VARCHAR(500),
     corto_url VARCHAR(500),
+    PRIMARY KEY (id_gala, id_premio),
+    FOREIGN KEY (id_gala) REFERENCES gala(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (id_premio) REFERENCES premio(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+CREATE TABLE ganador_honorifico (
+    id_gala INT NOT NULL,
+    id_premio INT NOT NULL,
+    nombre_apellidos VARCHAR(255),
+    email VARCHAR(255),
+    telefono VARCHAR(15),
+    video_url (500),
     PRIMARY KEY (id_gala, id_premio),
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON UPDATE CASCADE

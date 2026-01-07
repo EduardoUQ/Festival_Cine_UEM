@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Detalle de Candidatura</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/panel_detalle_candidatura.css">
+    <title>Gestión de Patrocinadores</title>
+    <link rel="stylesheet" href="../css/panel_patrocinadores.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -40,6 +40,7 @@
         </div>
     </header>
 
+    <!-- PANEL DE ADMINISTRADOR -->
     <div class="admin-layout">
         <!-- SIDEBAR -->
         <aside class="sidebar">
@@ -52,97 +53,93 @@
             </div>
 
             <nav class="menu">
-                <a class="active" href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
                     Candidaturas</a>
                 <a href="../html/panel_categoría.html"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
                 <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
-                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
+                <a class="active" href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
             </nav>
         </aside>
 
-        <!-- CONTENIDO -->
+        <!-- MAIN CONTENT -->
         <main class="content">
 
-            <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
+            <header class="page-header">
+                <h1>Gestión de Patrocinadores</h1>
+                <p>Administra los patrocinadores del festival.</p>
+            </header>
 
-            <!-- DATOS PERSONALES -->
-            <section class="card">
-                <h3>👤 Datos Personales</h3>
+            <div class="sponsors-layout">
 
-                <div class="grid">
-                    <div class="field">
-                        <label>Nombre completo</label>
-                        <input type="text" value="Laura García" disabled>
+                <!-- LISTADO -->
+                <section class="card sponsors-list">
+                    <h2>Lista de Patrocinadores</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Logo</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="../img/canon.png" alt="TechCorp"></td>
+                                <td>Canon</td>
+                                <td class="actions">
+                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td><img src="logo2.png" alt="Creative Studio"></td>
+                                <td>Creative Studio</td>
+                                <td class="actions">
+                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src="logo3.png" alt="Film Productions"></td>
+                                <td>Film Productions</td>
+                                <td class="actions">
+                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- FORMULARIO -->
+                <aside class="card sponsor-form">
+                    <h2>Añadir Patrocinador</h2>
+
+                    <label>Nombre del Patrocinador</label>
+                    <input type="text" placeholder="Ingresa el nombre...">
+
+                    <label>Logo</label>
+                    <div class="upload-box">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Arrastra el logo aquí o<br>
+                            <span>selecciona un archivo</span>
+                        </p>
+                        <input type="file">
                     </div>
 
-                    <div class="field">
-                        <label>DNI / NIE / Pasaporte</label>
-                        <input type="text" value="Y1234567Z" disabled>
-                    </div>
+                    <button class="btn primary">
+                        Añadir
+                    </button>
+                </aside>
 
-                    <div class="field">
-                        <label>Número de expediente</label>
-                        <input type="text" value="EXP-2025-001" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>Correo electrónico</label>
-                        <input type="email" value="laura.g@email.com" disabled>
-                    </div>
-                </div>
-            </section>
-
-            <!-- INFORMACIÓN DEL CORTO -->
-            <section class="card">
-                <h3>🎬 Información del Corto</h3>
-
-                <div class="field">
-                    <label>Título del cortometraje</label>
-                    <input type="text" value="La Última Llamada" disabled>
-                </div>
-
-                <div class="field">
-                    <label>Cartel / Póster</label>
-                    <div class="poster-box">
-                        <img src="../img/banner.png" alt="Cartel del corto">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label>Sinopsis</label>
-                    <textarea disabled>
-                    Un drama íntimo que explora la última conversación entre un padre y su hija en una noche decisiva.
-                </textarea>
-                </div>
-
-                <div class="field">
-                    <label>Cortometraje</label>
-                    <div class="video-box">
-                        <div class="play-button">▶</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- MENSAJE DE RECHAZO -->
-            <section class="card">
-                <h3>✉️ Mensaje en caso de rechazo</h3>
-
-                <textarea
-                    placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
-            </section>
-
-            <!-- ACCIONES -->
-            <div class="actions">
-                <button class="btn reject">Rechazar</button>
-                <button class="btn accept">Aceptar</button>
             </div>
 
         </main>
     </div>
-
 
     <!-- FOOTER -->
     <footer class="footer">

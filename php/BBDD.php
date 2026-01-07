@@ -130,10 +130,10 @@ CREATE TABLE ganador (
     id_gala INT NOT NULL,
     id_premio INT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
-    titulo VARCHAR(255) NOT NULL,
-    sinopsis TEXT NOT NULL,
-    cartel_url VARCHAR(500) NULL,
-    corto_url VARCHAR(500) NOT NULL,
+    titulo VARCHAR(255),
+    sinopsis TEXT,
+    cartel_url VARCHAR(500),
+    corto_url VARCHAR(500),
     PRIMARY KEY (id_gala, id_premio),
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON UPDATE CASCADE

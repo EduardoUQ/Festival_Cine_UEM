@@ -25,8 +25,8 @@
             </div>
             <!-- NAV -->
             <nav class="nav" id="nav">
-                <a href="#">Sube tu corto</a>
-                <a href="#">Bases legales</a>
+                <a href="subirCorto.html">Sube tu corto</a>
+                <a href="basesLegales.html">Bases legales</a>
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Galas</a>
                 <a href="calendario.html">Calendario</a>
@@ -57,7 +57,9 @@
                 <a class="active" href="#"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
                 <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
-                <a href="#"><i class="fa-solid fa-gear"></i> Configuración</a>
+                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
+                    Patrocinadores</a>
             </nav>
         </aside>
 
@@ -77,11 +79,21 @@
                 </div>
             </header>
 
+            <!-- SELECTOR CATEGORÍA -->
+            <div class="category-select">
+                <label>Categoría</label>
+                <select>
+                    <option>Mejor cortometraje UE</option>
+                    <option>Mejor cortometraje Alumni</option>
+                    <option>Premio Honorífico</option>
+                </select>
+            </div>
+
             <!-- CONTENT -->
             <section class="content">
 
                 <!-- CATEGORÍAS -->
-                <div class="card">
+                <!-- <div class="card">
                     <h3>Categorías</h3>
 
                     <ul class="category-list">
@@ -109,7 +121,7 @@
                     </ul>
 
                     <button class="btn-primary full">+ Añadir categoría</button>
-                </div>
+                </div> -->
 
                 <!-- PREMIOS -->
                 <div class="card">
@@ -119,15 +131,15 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Premio</th>
-                                <th>Importe</th>
-                                <th>Tipo</th>
+                                <th>Puesto</th>
+                                <th>Dotacion</th>
+                                <th>Descripción</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Primer premio</td>
+                                <td>1</td>
                                 <td>600 €</td>
                                 <td>Económico</td>
                                 <td>
@@ -136,7 +148,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Segundo premio</td>
+                                <td>2</td>
                                 <td>300 €</td>
                                 <td>Económico</td>
                                 <td>
@@ -145,7 +157,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Tercer premio</td>
+                                <td>3</td>
                                 <td>100 €</td>
                                 <td>Económico</td>
                                 <td>
@@ -153,14 +165,15 @@
                                     <i class="fa-solid fa-trash"></i>
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
 
-                    <button class="btn-primary full">+ Añadir premio</button>
+                    <!-- <button class="btn-primary full">+ Añadir premio</button> -->
                 </div>
 
                 <!-- FORM CATEGORÍA -->
-                <div class="card">
+                <!-- <div class="card">
                     <h3>Añadir / Editar Categoría</h3>
 
                     <label>Nombre de la categoría</label>
@@ -173,13 +186,13 @@
                         <button class="btn-secondary">Cancelar</button>
                         <button class="btn-primary">Guardar</button>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- FORM PREMIO -->
                 <div class="card">
                     <h3>Añadir / Editar Premio</h3>
 
-                    <label>Nombre del premio</label>
+                    <label>Puesto del premio</label>
                     <input type="text">
 
                     <label>Tipo de premio</label>
@@ -188,16 +201,16 @@
                         <label><input type="radio" name="tipo"> Honorífico</label>
                     </div>
 
-                    <label>Importe (€)</label>
-                    <input type="number">
+                    <!-- <label>Importe (€)</label>
+                    <input type="number"> -->
 
-                    <label class="switch">
+                    <!-- <label class="switch">
                         <input type="checkbox">
                         <span class="slider"></span>
                         Incluye patrocinador
-                    </label>
+                    </label> -->
 
-                    <label>Descripción (opcional)</label>
+                    <label>Dotación (opcional)</label>
                     <textarea rows="2"></textarea>
 
                     <div class="form-actions">

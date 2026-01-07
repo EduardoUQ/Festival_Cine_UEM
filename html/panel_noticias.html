@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Detalle de Candidatura</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/panel_detalle_candidatura.css">
+    <link rel="stylesheet" href="../css/panel_noticias.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <title>Gestión de Noticias</title>
 </head>
 
 <body>
-
     <!-- HEADER -->
     <header class="header">
         <div class="header-container">
@@ -40,7 +39,8 @@
         </div>
     </header>
 
-    <div class="admin-layout">
+    <!-- PANEL DE ADMINISTRADOR -->
+    <div class="panel">
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile">
@@ -52,97 +52,92 @@
             </div>
 
             <nav class="menu">
-                <a class="active" href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
                     Candidaturas</a>
                 <a href="../html/panel_categoría.html"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
                 <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
-                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+                <a class="active" href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
             </nav>
         </aside>
 
-        <!-- CONTENIDO -->
+        <!-- Contenido -->
         <main class="content">
 
-            <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
-
-            <!-- DATOS PERSONALES -->
-            <section class="card">
-                <h3>👤 Datos Personales</h3>
-
-                <div class="grid">
-                    <div class="field">
-                        <label>Nombre completo</label>
-                        <input type="text" value="Laura García" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>DNI / NIE / Pasaporte</label>
-                        <input type="text" value="Y1234567Z" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>Número de expediente</label>
-                        <input type="text" value="EXP-2025-001" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>Correo electrónico</label>
-                        <input type="email" value="laura.g@email.com" disabled>
-                    </div>
-                </div>
-            </section>
-
-            <!-- INFORMACIÓN DEL CORTO -->
-            <section class="card">
-                <h3>🎬 Información del Corto</h3>
-
-                <div class="field">
-                    <label>Título del cortometraje</label>
-                    <input type="text" value="La Última Llamada" disabled>
+            <!-- Cabecera -->
+            <div class="main-header">
+                <div>
+                    <h1>Gestión de Noticias</h1>
+                    <p>Revisa, edita y borra las noticias.</p>
                 </div>
 
-                <div class="field">
-                    <label>Cartel / Póster</label>
-                    <div class="poster-box">
-                        <img src="../img/banner.png" alt="Cartel del corto">
+                <!-- <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar candidatura...">
+                </div> -->
+            </div>
+
+            <!-- Filtros -->
+            <div class="tabs">
+                <a id="create-news" href="../html/formularioNoticia.html">+ Crear Noticia</a>
+            </div>
+
+            <!-- Tabla -->
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Participante</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cortometraje "La Última Llamada"</td>
+                            <td>Mejor cortometraje Alumni</td>
+                            <td>Laura García</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><a class="btn" href="../html/panel_detalle_candidatura.html">Ver candidatura</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Cortometraje "Reflejos"</td>
+                            <td>Mejor cortometraje UE</td>
+                            <td>Marc Pérez</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><button class="btn">Ver candidatura</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>Cortometraje "Sueños Rotos"</td>
+                            <td>Mejor cortometraje UE</td>
+                            <td>Ana Torres</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><button class="btn">Ver candidatura</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Paginación -->
+                <div class="paginacion">
+                    <span>1–3 de 3 candidaturas</span>
+                    <div>
+                        <button>&lt; Anterior</button>
+                        <button class="active">1</button>
+                        <button>Siguiente &gt;</button>
                     </div>
                 </div>
 
-                <div class="field">
-                    <label>Sinopsis</label>
-                    <textarea disabled>
-                    Un drama íntimo que explora la última conversación entre un padre y su hija en una noche decisiva.
-                </textarea>
-                </div>
-
-                <div class="field">
-                    <label>Cortometraje</label>
-                    <div class="video-box">
-                        <div class="play-button">▶</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- MENSAJE DE RECHAZO -->
-            <section class="card">
-                <h3>✉️ Mensaje en caso de rechazo</h3>
-
-                <textarea
-                    placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
-            </section>
-
-            <!-- ACCIONES -->
-            <div class="actions">
-                <button class="btn reject">Rechazar</button>
-                <button class="btn accept">Aceptar</button>
             </div>
 
         </main>
-    </div>
 
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">

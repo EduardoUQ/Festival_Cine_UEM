@@ -90,6 +90,26 @@ body {
     outline: none;
 }
 
+/* SELECT */
+.category-select {
+    margin-bottom: 30px;
+}
+
+.category-select label {
+    display: block;
+    margin-bottom: 6px;
+    color: #c9a43b;
+}
+
+select {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    width: 280px;
+}
+
 /* CONTENT */
 .content {
     display: grid;

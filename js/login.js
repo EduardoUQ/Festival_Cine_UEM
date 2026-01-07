@@ -39,7 +39,7 @@ function procesarLogin(email, pass) {
             if (data.status === "success" && data.rol === 'admin') {
                 window.location.href = "../html/panel_candidaturas.html";
             } else if (data.status === "success" && data.rol === 'usuario') {
-                window.location.href = "../html/index.html";
+                window.location.href = "../html/panel_candidaturas.html";
             } else {
                 mensaje.textContent = data.message;
             }

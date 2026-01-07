@@ -70,24 +70,24 @@ if (isset($_POST['funcion'])) {
 
     if ($res2->num_rows == 1) {
         $user = $res2->fetch_assoc();
-        // if (password_verify($pass, $user['passwd_hash'])) {
-        // Login usuario correcto
-        $_SESSION['rol'] = 'usuario';
-        $_SESSION['id']  = (int)$user['id'];
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['nombre_apellidos'] = $user['nombre_apellidos'];
+        if (password_verify($pass, $user['passwd_hash'])) {
+            // Login usuario correcto
+            $_SESSION['rol'] = 'usuario';
+            $_SESSION['id']  = (int)$user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['nombre_apellidos'] = $user['nombre_apellidos'];
 
 
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Login usuario correcto',
-            'rol' => 'usuario'
-        ]);
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Login usuario correcto',
+                'rol' => 'usuario'
+            ]);
 
-        $stmt2->close();
-        $conexion->close();
-        exit;
-        // }
+            $stmt2->close();
+            $conexion->close();
+            exit;
+        }
     }
 
     echo json_encode(['status' => 'error', 'message' => 'Email y/o contraseña incorrectos']);

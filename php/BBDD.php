@@ -87,6 +87,7 @@ CREATE TABLE noticia (
     contenido TEXT NOT NULL,
     imagen_url VARCHAR(500),
     id_admin INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY (id_admin) REFERENCES admin(id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT
@@ -150,7 +151,7 @@ INSERT INTO gala (anio, logo_url, cartel_url, descripcion, activa) VALUES
 (2026, 'uploads/logos/logo_gala_2026.png', 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026', TRUE);
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
-('Hugo Rubio', '12345678Z', 'hugo@correo.es', '1234', NOW(), '22441924', 2026);
+('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026);
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
 (1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Corto de ejemplo 2: La venganza', 'Un corto sobre el esfuerzo y la superación en el entorno académico.', 'uploads/carteles/sombras_en_el_aula.jpg', 'uploads/cortos/sombras_en_el_aula.mp4');

@@ -44,12 +44,13 @@
 
         <h1>CREAR NOTICIA</h1>
 
-        <form class="news-form">
+        <form class="news-form" id="news-form">
 
             <!-- TITULAR -->
             <div class="form-group">
                 <label for="title">Titular</label>
                 <input type="text" id="title" name="title" placeholder="Título de la noticia">
+                <p id="mensaje_titulo"></p>
             </div>
 
             <!-- CUERPO -->
@@ -57,6 +58,7 @@
                 <label for="content">Cuerpo</label>
                 <textarea id="content" name="content" rows="8"
                     placeholder="Escribe el contenido de la noticia..."></textarea>
+                <p id="mensaje_descripcion"></p>
             </div>
 
             <!-- IMAGEN -->
@@ -64,23 +66,27 @@
                 <label>Imagen de Portada</label>
 
                 <label class="image-upload">
-                    <input type="file" accept="image/png, image/jpeg">
+                    <input type="file" id="image" accept="image/png, image/jpeg">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                     <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
                     <small>JPG o PNG · Máx 2MB</small>
+                    <img id="preview" style="max-width:200px; display:none;">
                 </label>
+                <p id="mensaje_imagen"></p>
             </div>
 
             <!-- FECHA -->
             <div class="form-group">
                 <label for="date">Fecha de Publicación</label>
                 <input type="date" id="date" name="date">
+                <p id="mensaje_fecha"></p>
             </div>
 
+            <p id="mensaje_formulario"></p>
             <!-- BOTONES -->
             <div class="form-actions">
                 <button type="reset" class="btn-cancel">Cancelar</button>
-                <button type="submit" class="btn-save">
+                <button type="submit" class="btn-save" id="enviar">
                     <i class="fa-solid fa-floppy-disk"></i> Publicar
                 </button>
             </div>
@@ -172,6 +178,8 @@
             nav.classList.toggle("active");
         });
     </script>
+
+    <script src="../js/formulario_noticia.js"></script>
 </body>
 
 </html>

@@ -151,7 +151,14 @@ CREATE TABLE ganador_honorifico (
     nombre_apellidos VARCHAR(255),
     email VARCHAR(255),
     telefono VARCHAR(15),
-    video_url (500)
+    video_url (500),
+    PRIMARY KEY (id_gala, id_premio),
+    FOREIGN KEY (id_gala) REFERENCES gala(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (id_premio) REFERENCES premio(id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES

@@ -84,6 +84,7 @@ CREATE TABLE noticia (
     contenido TEXT NOT NULL,
     imagen_url VARCHAR(500),
     id_admin INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY (id_admin) REFERENCES admin(id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT

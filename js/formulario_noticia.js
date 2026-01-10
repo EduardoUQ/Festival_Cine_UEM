@@ -1,3 +1,37 @@
+// Cargar la cabecera
+let nombreUsuario;
+let idAdmin;
+document.addEventListener("DOMContentLoaded", () => {
+    const nombreSpan = document.getElementById("nombre");
+    const logOut = document.getElementById("btnCerrarSesion");
+    // Cargar datos del usuario
+    fetch("../PHP/sessionInfo.php")
+        .then(response => response.json())
+        .then(data => {
+            // Si no hay un usuario logeado se redirigirá al login
+            if (!data.logueado) {
+                window.location.href = "../HTML/index.html";
+                return;
+            }
+            // Se muestra el nombre del usuario en la cabecera
+            nombreUsuario = data.nombre;
+            // Asignamos el id del admin para más adelante
+            idAdmi = data.id;
+            nombreSpan.textContent = nombreUsuario;
+        });
+
+    // Botón para cerrar sesión
+    logOut.addEventListener("click", () => {
+        fetch("../PHP/logout.php")
+            .then(res => res.json())
+            .then(data => {
+                // Redirige al login
+                window.location.href = "../HTML/index.html";
+            });
+    });
+})
+
+
 // Variables del formulario
 const form_noticias = document.getElementById("news-form");
 const input_titulo = document.getElementById("title");
@@ -112,7 +146,7 @@ if (form_noticias) {
 
         const titulo = input_titulo.value;
         const contenido = input_contenido.value;
-        const imagen = input_imagen.value;
+        const imagen = input_imagen.files[0];
         const fecha = input_fecha.value;
 
         // Validaciones
@@ -127,7 +161,7 @@ if (form_noticias) {
 }
 
 // --- Envío al PHP ---
-function publicar_noticia(titulo, contenido) {
+function publicar_noticia(titulo, contenido, imagen, fecha) {
     let formData = new FormData();
     formData.append("funcion", "publicar_noticia");
     formData.append("titulo", titulo);

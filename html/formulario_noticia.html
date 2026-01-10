@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/panel_noticias.css">
+    <link rel="stylesheet" href="../css/formulario_noticia.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Gestión de Noticias</title>
@@ -46,7 +47,7 @@
             <div class="profile">
                 <i class="fa-solid fa-user"></i>
                 <div>
-                    <strong>Sara del Castillo</strong>
+                    <strong id="nombre"></strong>
                     <span>Administrador</span>
                 </div>
             </div>
@@ -66,75 +67,56 @@
         <!-- Contenido -->
         <main class="content">
 
-            <!-- Cabecera -->
-            <div class="main-header">
-                <div>
-                    <h1>Gestión de Noticias</h1>
-                    <p>Revisa, edita y borra las noticias.</p>
+            <h1>CREAR NOTICIA</h1>
+
+            <form class="news-form" id="news-form">
+
+                <!-- TITULAR -->
+                <div class="form-group">
+                    <label for="title">Titular</label>
+                    <input type="text" id="title" name="title" placeholder="Título de la noticia">
+                    <p id="mensaje_titulo"></p>
                 </div>
 
-                <!-- <div class="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar candidatura...">
-                </div> -->
-            </div>
-
-            <!-- Filtros -->
-            <div class="tabs">
-                <a id="create-news" href="../html/formulario_noticia.html">+ Crear Noticia</a>
-            </div>
-
-            <!-- Tabla -->
-            <div class="tabla-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Taller gratuito de cinematrografía avanzada</td>
-                            <td>02/01/26</td>
-                            <td>
-                                <i class="fa-solid fa-pen"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Conoce al jurado del 2026</td>
-                            <td>08/12/25</td>
-                            <td>
-                                <i class="fa-solid fa-pen"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Networking Night para Cineastas</td>
-                            <td>02/11/25</td>
-                            <td>
-                                <i class="fa-solid fa-pen"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Paginación -->
-                <div class="paginacion">
-                    <span>1–3 de 3 noticias</span>
-                    <div>
-                        <button>&lt; Anterior</button>
-                        <button class="active">1</button>
-                        <button>Siguiente &gt;</button>
-                    </div>
+                <!-- CUERPO -->
+                <div class="form-group">
+                    <label for="content">Cuerpo</label>
+                    <textarea id="content" name="content" rows="8"
+                        placeholder="Escribe el contenido de la noticia..."></textarea>
+                    <p id="mensaje_descripcion"></p>
                 </div>
 
-            </div>
+                <!-- IMAGEN -->
+                <div class="form-group">
+                    <label>Imagen de Portada</label>
+
+                    <label class="image-upload" id="image-upload">
+                        <input type="file" id="image" accept="image/png, image/jpeg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
+                        <small>JPG o PNG · Máx 2MB</small>
+                        <img id="preview">
+                    </label>
+                    <p id="mensaje_imagen"></p>
+                </div>
+
+                <!-- FECHA -->
+                <div class="form-group">
+                    <label for="date">Fecha de Publicación</label>
+                    <input type="date" id="date" name="date">
+                    <p id="mensaje_fecha"></p>
+                </div>
+
+                <p id="mensaje_formulario"></p>
+                <!-- BOTONES -->
+                <div class="form-actions">
+                    <button type="reset" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save" id="enviar">
+                        <i class="fa-solid fa-floppy-disk"></i> Publicar
+                    </button>
+                </div>
+
+            </form>
 
         </main>
 
@@ -201,6 +183,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/formulario_noticia.js"></script>
 </body>
 
 </html>

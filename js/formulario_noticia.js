@@ -13,9 +13,9 @@ const mensaje_formulario = document.getElementById("mensaje_formulario");
 
 // Creamos un array de las variables que haremos validaciones
 const campos = [
-    { input: input_titulo, mensaje: mensaje_titulo, texto: "Escribe un titulo" },
-    { input: input_contenido, mensaje: mensaje_descripcion, texto: "Escribe el cuerpo de la noticia" },
-    { input: input_fecha, mensaje: mensaje_fecha, texto: "Selecciona una fecha" }
+    { input: input_titulo, mensaje: mensaje_titulo, texto: "*Escribe un titulo" },
+    { input: input_contenido, mensaje: mensaje_descripcion, texto: "*Escribe el cuerpo de la noticia" },
+    { input: input_fecha, mensaje: mensaje_fecha, texto: "*Selecciona una fecha" }
 ];
 
 // Validación para algunos campos 
@@ -42,20 +42,20 @@ input_imagen.addEventListener("change", () => {
 
     // No hay archivo
     if (!archivo) {
-        mensaje_imagen.textContent = "Selecciona una imagen";
+        mensaje_imagen.textContent = "*Selecciona una imagen";
         return;
     }
 
     // Validar tipo
     if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
-        mensaje_imagen.textContent = "Solo se permiten imágenes JPG o PNG";
+        mensaje_imagen.textContent = "*Solo se permiten imágenes JPG o PNG";
         input_imagen.value = ""; // limpia el input
         return;
     }
 
     // Validar tamaño
     if (archivo.size > MAX_SIZE) {
-        mensaje_imagen.textContent = "La imagen no puede superar los 2MB";
+        mensaje_imagen.textContent = "*La imagen no puede superar los 2MB";
         input_imagen.value = "";
         return;
     }
@@ -117,7 +117,7 @@ if (form_noticias) {
 
         // Validaciones
         if (!titulo || !contenido || !fecha || imagen.lenght === 0) {
-            mensaje_formulario.textContent = "Por favor completa todos los campos";
+            mensaje_formulario.textContent = "*Por favor completa todos los campos";
             return;
         }
 

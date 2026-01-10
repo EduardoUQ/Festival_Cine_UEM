@@ -1,7 +1,19 @@
 <?php
 session_start();
+header('Content-Type: application/json; charset=utf-8');
 
 $isLogged = isset($_SESSION['id'], $_SESSION['email'], $_SESSION['rol']);
-$isAdmin  = $isLogged && $_SESSION['rol'] === 'admin';
-$nombre   = $isLogged ? ($_SESSION['nombre_apellidos'] ?? $_SESSION['email']) : null;
+
+if (!$isLogged) {
+    echo json_encode(['logged' => false]);
+    exit;
+}
+
+echo json_encode([
+    'logged' => true,
+    'rol' => $_SESSION['rol'],
+    'id' => (int)$_SESSION['id'],
+    'email' => $_SESSION['email'],
+    'nombre' => $_SESSION['nombre_apellidos'] ?? $_SESSION['email']
+]);
 ?>

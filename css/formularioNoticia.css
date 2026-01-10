@@ -64,9 +64,9 @@ body {
     color: #9ca3af;
 }
 
-/* .image-upload input {
+.image-upload input {
     display: none;
-} */
+}
 
 .image-upload i {
     font-size: 2rem;
@@ -86,6 +86,24 @@ body {
 .image-upload:hover {
     border-color: #FF7D78;
     color: #fff;
+}
+
+/* OCULTAR TEXTO */
+#preview {
+    display: none;
+    max-width: 200px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+/* .image-upload.has-image .preview {
+    display: block;
+} */
+
+#image-upload.has-image i,
+#image-upload.has-image span,
+#image-upload.has-image small {
+    display: none;
 }
 
 /* ACTIONS */

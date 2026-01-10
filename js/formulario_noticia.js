@@ -60,7 +60,7 @@ input_imagen.addEventListener("change", () => {
         return;
     }
 
-    // Todo OK
+    // Si esta TODO OK
     mensaje_imagen.textContent = "";
 });
 
@@ -80,6 +80,29 @@ input_imagen.addEventListener("change", () => {
         preview.style.display = "block";
     };
     reader.readAsDataURL(archivo);
+});
+
+// Ocultar texto de la imagen
+const uploadBox = document.getElementById("image-upload");
+
+input_imagen.addEventListener("change", () => {
+    const archivo = input_imagen.files[0];
+
+    if (!archivo) {
+        uploadBox.classList.remove("has-image");
+        return;
+    }
+
+    // Validaciones (tipo y tamaño)
+    if (!["image/png", "image/jpeg"].includes(archivo.type) ||
+        archivo.size > 2 * 1024 * 1024) {
+        uploadBox.classList.remove("has-image");
+        input_imagen.value = "";
+        return;
+    }
+
+    // Imagen correcta → ocultar contenido
+    uploadBox.classList.add("has-image");
 });
 
 // Verificamos cuando se envíe

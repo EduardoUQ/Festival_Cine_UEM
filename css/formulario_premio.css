@@ -1,0 +1,112 @@
+/* Body */
+body {
+    background: #171719;
+}
+
+.crear-premio {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.crear-premio h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* FORM */
+.formulario-premio {
+    background: #0b0b0b;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+/* GROUP */
+.grupo-campo {
+    margin-bottom: 25px;
+}
+
+.grupo-campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #d1d5db;
+}
+
+/* INPUTS */
+.formulario-premio input[type="text"],
+.formulario-premio input[type="number"],
+.formulario-premio textarea,
+.formulario-premio select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1f1f1f;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.formulario-premio textarea {
+    resize: vertical;
+}
+
+/* ACTIONS */
+.acciones-formulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* BUTTONS (mismos nombres que en evento para reutilizar estilo) */
+.btn-cancel {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-save {
+    background: #f5c542;
+    color: #000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-save:hover,
+.btn-cancel:hover {
+    opacity: 0.9;
+}
+
+/* Mensajes de error */
+#mensaje_categoria,
+#mensaje_puesto,
+#mensaje_descripcion,
+#mensaje_dotacion,
+#mensaje_activa,
+#mensaje_formulario {
+    color: #A71D2D;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .formulario-premio {
+        padding: 20px;
+    }
+
+    .acciones-formulario {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

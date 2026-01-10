@@ -30,12 +30,13 @@
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Galas</a>
                 <a href="calendario.html">Calendario</a>
-                <!-- LOGIN MOBILE -->
-                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+                <!-- BOTÓN LOGOUT -->
+                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
-                <a class="login-btn" href="../html/login.html">Ingresar</a>
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
         </div>
     </header>
@@ -174,6 +175,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL -->
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h2 id="modal_titulo"></h2>
+            <p id="modal_texto"></p>
+            <button id="modalBtn">Aceptar</button>
+        </div>
+    </div>
 
     <script>
         const hamburger = document.getElementById("hamburger");

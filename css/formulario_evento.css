@@ -3,6 +3,54 @@ body {
     background: #171719;
 }
 
+/* Layout */
+.panel {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: #111;
+    padding: 24px;
+    border-right: 1px solid #1f1f1f;
+}
+
+.profile {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.profile i {
+    border-radius: 50%;
+}
+
+.profile span {
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: #cfcfcf;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.menu a.active,
+.menu a:hover {
+    background: #f5c542;
+    color: #000;
+}
+
+/* CONTENIDO LATERAL */
 .create-event {
     max-width: 800px;
     margin: 60px auto;
@@ -67,16 +115,15 @@ body {
     color: #fff;
     padding: 10px 18px;
     border: none;
-    border-radius: 20px;
+    border-color: #FF3228;
     cursor: pointer;
 }
 
 .btn-save {
-    background: #f5c542;
-    color: #000;
+    background: #FF3228;
+    color: #ffff;
     padding: 10px 20px;
     border: none;
-    border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -89,6 +136,7 @@ body {
 .btn-save:hover {
     opacity: 0.9;
 }
+
 /* Mensajes de error */
 #mensaje_titulo,
 #mensaje_fecha,
@@ -107,5 +155,66 @@ body {
     .form-actions {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal.mostrar {
+    display: flex;
+}
+
+.modal_contenido {
+    background: #fff;
+    color: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    animation: aparecer 0.25s ease;
+}
+
+.modal_contenido i {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.modal_exito i {
+    color: #2ecc71;
+}
+
+.modal_error i {
+    color: #e74c3c;
+}
+
+.modal_contenido button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }

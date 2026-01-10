@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Evento</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/panel_calendario.css">
     <link rel="stylesheet" href="../css/formulario_evento.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
@@ -25,17 +26,18 @@
             </div>
             <!-- NAV -->
             <nav class="nav" id="nav">
-                <a href="#">Sube tu corto</a>
-                <a href="#">Bases legales</a>
+                <a href="subirCorto.html">Sube tu corto</a>
+                <a href="basesLegales.html">Bases legales</a>
                 <a href="noticias.html">Noticias</a>
-                <a href="#">Galas</a>
-                <a href="#">Calendario</a>
-                <!-- LOGIN MOBILE -->
-                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+                <a href="premios_galas.html">Galas</a>
+                <a href="calendario.html">Calendario</a>
+                <!-- BOTÓN LOGOUT -->
+                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
-                <a class="login-btn" href="../html/login.html">Ingresar</a>
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
         </div>
     </header>
@@ -57,13 +59,14 @@
                     Candidaturas</a>
                 <a href="../html/panel_categoría.html"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
-                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
-                <a class="active" href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+                <a class="active" href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i>
+                    Calendario</a>
+                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
             </nav>
         </aside>
-        
+
 
         <main class="create-event">
 
@@ -131,18 +134,6 @@
                 </ul>
             </div>
 
-            <!-- PARTICIPANTES -->
-            <!-- <div class="footer-column">
-                <h4>Participantes</h4>
-                <ul>
-                    <li><a href="#">Subir Cortometraje</a></li>
-                    <li><a href="#">Crear Cuenta</a></li>
-                    <li><a href="#">Iniciar Sesión</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Soporte</a></li>
-                </ul>
-            </div> -->
-
             <!-- CONTACTO -->
             <div class="footer-column">
                 <h4>Contacto</h4>
@@ -152,10 +143,7 @@
                     <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
                 </ul>
                 <div class="social-links">
-                    <!-- <i class="fa-brands fa-facebook-f"></i> -->
                     <i class="fa-brands fa-instagram"></i>
-                    <!-- <i class="fa-brands fa-youtube"></i> -->
-                    <!-- <a href="#" aria-label="YouTube">▶</a> -->
                 </div>
             </div>
 
@@ -172,6 +160,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL -->
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h2 id="modal_titulo"></h2>
+            <p id="modal_texto"></p>
+            <button id="modalBtn">Aceptar</button>
+        </div>
+    </div>
 
     <script>
         const hamburger = document.getElementById("hamburger");

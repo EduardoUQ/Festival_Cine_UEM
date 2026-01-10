@@ -4,7 +4,7 @@ include("conexion.php");
 header('Content-Type: application/json; charset=utf-8');
 
 //Recogemos el id del admin de la sesión
-$id_admi = 1;
+$id_admi = (int)$_SESSION['id'];
 
 //llamado a la función para procesar los datos
 if (isset($_POST['funcion'])) {

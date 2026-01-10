@@ -1,35 +1,82 @@
 // Cargar la cabecera
-let nombreUsuario;
-let idAdmin;
 document.addEventListener("DOMContentLoaded", () => {
-    const nombreSpan = document.getElementById("nombre");
-    const logOut = document.getElementById("btnCerrarSesion");
-    // Cargar datos del usuario
-    fetch("../php/sessionInfo.php")
-        .then(response => response.json())
-        .then(data => {
-            // Si no hay un usuario logeado se redirigirá al login
-            if (!data.logueado) {
-                window.location.href = "../HTML/index.html";
+    // 1) Cargar los datos del usuario
+    fetch("../php/session_info.php")
+        .then((response) => response.json())
+        .then((info) => {
+            if (!info.logged || info.rol !== "admin") {
+                window.location.href = "../html/login.html";
                 return;
             }
-            // Se muestra el nombre del usuario en la cabecera
-            nombreUsuario = data.nombre;
-            // Asignamos el id del admin para más adelante
-            idAdmi = data.id;
-            nombreSpan.textContent = nombreUsuario;
-        });
 
-    // Botón para cerrar sesión
-    logOut.addEventListener("click", () => {
-        fetch("../PHP/logout.php")
-            .then(res => res.json())
-            .then(data => {
-                // Redirige al login
-                window.location.href = "../HTML/index.html";
-            });
-    });
-})
+            // Cargamos el nombre del Admin en el panel
+            const elNombre = document.getElementById("nombre");
+            if (elNombre) {
+                elNombre.textContent = info.nombre;
+            }
+
+            // Botón para cerrar sesión
+            const btnLogout = document.getElementById("btn_logout");
+            if (btnLogout) {
+                btnLogout.addEventListener("click", () => {
+                    fetch("../php/logout.php", { method: "POST" })
+                        .then((r) => r.json())
+                        .then((resp) => {
+                            if (resp.status === "success") {
+                                window.location.href = "../html/login.html";
+                            } else {
+                                alert("No se pudo cerrar sesión");
+                            }
+                        })
+                        .catch((err) => {
+                            console.error("Error al cerrar sesión", err);
+                            alert("Error al cerrar sesión. Observa la consola.");
+                        });
+                });
+            }
+        })
+        .catch((error) => {
+            console.error("No se pudo comprobar la sesión:", error);
+            window.location.href = "../html/login.html";
+        });
+});
+
+// FUNCIÓN DEL MODAL
+const modal = document.getElementById("modal_mensaje");
+const modalIcono = document.getElementById("modal_icono");
+const modalTitulo = document.getElementById("modal_titulo");
+const modalTexto = document.getElementById("modal_texto");
+const modalBtn = document.getElementById("modalBtn");
+
+let redireccion = null;
+
+function mostrarModal(tipo, mensaje, redirect = null) {
+    modal.className = "modal mostrar";
+
+    modalIcono.className = "fa-solid";
+    modal.classList.remove("modal_exito", "modal_error");
+
+    if (tipo === "success") {
+        modal.classList.add("modal_exito");
+        modalIcono.classList.add("fa-circle-check");
+        modalTitulo.textContent = "Operación correcta";
+    } else {
+        modal.classList.add("modal_error");
+        modalIcono.classList.add("fa-circle-xmark");
+        modalTitulo.textContent = "Error";
+    }
+
+    modalTexto.textContent = mensaje;
+    redireccion = redirect;
+}
+
+modalBtn.addEventListener("click", () => {
+    modal.classList.remove("mostrar");
+    if (redireccion) {
+        window.location.href = redireccion;
+    }
+});
+
 
 
 // Variables del formulario
@@ -173,24 +220,31 @@ function publicar_noticia(titulo, contenido, imagen, fecha) {
         method: "POST",
         body: formData
     })
-        .then(function (response) {
+        .then(response => {
             if (!response.ok) {
-                throw new Error("Error en la solicitud: " + response.statusText);
+                throw new Error("Error HTTP");
             }
             return response.json();
         })
-        .then(function (data) {
-            console.log(data);
-            // Mostramos los mensajes en caso de que hayan 
+        .then(data => {
             if (data.status === "success") {
-                mostrarModal(data.message, function () {
-                    window.location.href = "../html/panel_noticias.html";
-                })
+                mostrarModal(
+                    "success",
+                    data.message,
+                    "../html/panel_noticias.html"
+                );
             } else {
-                mostrarModal(data.message);
+                mostrarModal(
+                    "error",
+                    data.message
+                );
             }
         })
-        .catch(function (error) {
-            console.error("Error en la solicitud:", error);
+        .catch(error => {
+            mostrarModal(
+                "error",
+                "Error de conexión con el servidor"
+            );
+            console.error(error);
         });
 }

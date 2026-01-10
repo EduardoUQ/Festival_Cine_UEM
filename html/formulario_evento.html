@@ -40,39 +40,64 @@
         </div>
     </header>
 
-    <main class="create-event">
+    <div class="panel">
 
-        <h1>CREAR EVENTO</h1>
-
-        <form class="event-form" id="news-form">
-
-            <!-- TITULAR -->
-            <div class="form-group">
-                <label for="title">Titulo</label>
-                <input type="text" id="title" name="title" placeholder="Título del evento">
-                <p id="mensaje_titulo"></p>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile">
+                <i class="fa-solid fa-user"></i>
+                <div>
+                    <strong id="nombre"></strong>
+                    <span>Administrador</span>
+                </div>
             </div>
 
-            <!-- FECHA -->
-            <div class="form-group">
-                <label for="date">Fecha del evento</label>
-                <input type="date" id="date" name="date">
-                <p id="mensaje_fecha"></p>
-            </div>
+            <nav class="menu">
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
+                    Candidaturas</a>
+                <a href="../html/panel_categoría.html"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
+                <a class="active" href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
+                    Patrocinadores</a>
+            </nav>
+        </aside>
+        
 
-            <p id="mensaje_formulario"></p>
-            <!-- BOTONES -->
-            <div class="form-actions">
-                <button type="reset" class="btn-cancel">Cancelar</button>
-                <button type="submit" class="btn-save" id="enviar">
-                    <i class="fa-solid fa-floppy-disk"></i> Publicar
-                </button>
-            </div>
+        <main class="create-event">
 
-        </form>
+            <h1>CREAR EVENTO</h1>
 
-    </main>
+            <form class="event-form" id="news-form">
 
+                <!-- TITULAR -->
+                <div class="form-group">
+                    <label for="title">Titulo</label>
+                    <input type="text" id="title" name="title" placeholder="Título del evento">
+                    <p id="mensaje_titulo"></p>
+                </div>
+
+                <!-- FECHA -->
+                <div class="form-group">
+                    <label for="date">Fecha del evento</label>
+                    <input type="date" id="date" name="date">
+                    <p id="mensaje_fecha"></p>
+                </div>
+
+                <p id="mensaje_formulario"></p>
+                <!-- BOTONES -->
+                <div class="form-actions">
+                    <button type="reset" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save" id="enviar">
+                        <i class="fa-solid fa-floppy-disk"></i> Publicar
+                    </button>
+                </div>
+
+            </form>
+
+        </main>
+    </div>
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">

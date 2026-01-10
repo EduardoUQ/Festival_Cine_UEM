@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombreSpan = document.getElementById("nombre");
     const logOut = document.getElementById("btnCerrarSesion");
     // Cargar datos del usuario
-    fetch("../PHP/sessionInfo.php")
+    fetch("../php/sessionInfo.php")
         .then(response => response.json())
         .then(data => {
             // Si no hay un usuario logeado se redirigirá al login
@@ -184,7 +184,7 @@ function publicar_noticia(titulo, contenido, imagen, fecha) {
             // Mostramos los mensajes en caso de que hayan 
             if (data.status === "success") {
                 mostrarModal(data.message, function () {
-                    window.location.href = "../html/panel_noticia";
+                    window.location.href = "../html/panel_noticias.html";
                 })
             } else {
                 mostrarModal(data.message);

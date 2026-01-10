@@ -1,4 +1,34 @@
+let nombreUsuario;
+let idAdmin;
 document.addEventListener("DOMContentLoaded", function () {
+
+    const nombreSpan = document.getElementById("nombre");
+    const logOut = document.getElementById("btnCerrarSesion");
+    // Cargar datos del usuario
+    fetch("../php/sessionInfo.php")
+        .then(response => response.json())
+        .then(data => {
+            // Si no hay un usuario logeado se redirigirá al login
+            if (!data.logueado) {
+                window.location.href = "../HTML/index.html";
+                return;
+            }
+            // Se muestra el nombre del usuario en la cabecera
+            nombreUsuario = data.nombre;
+            // Asignamos el id del admin para más adelante
+            idAdmi = data.id;
+            nombreSpan.textContent = nombreUsuario;
+        });
+
+    // Botón para cerrar sesión
+    logOut.addEventListener("click", () => {
+        fetch("../PHP/logout.php")
+            .then(res => res.json())
+            .then(data => {
+                // Redirige al login
+                window.location.href = "../HTML/index.html";
+            });
+    });
 
     // Variables del formulario
     const form_eventos = document.getElementById("news-form");
@@ -113,4 +143,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+// --- Envío al PHP ---
+function publicar_evento(titulo, fecha) {
+    let formData = new FormData();
+    formData.append("funcion", "publicar_evento");
+    formData.append("titulo", titulo);
+    formData.append("fecha", fecha);
 
+    fetch("./php/evento.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Error en la solicitud: " + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+
+            if (data.status === "success") {
+                mostrarModal(data.message, function () {
+                    window.location.href = "../html/panel_calendario.html";
+                });
+            } else {
+                mostrarModal(data.message);
+            }
+        })
+        .catch(function (error) {
+            console.error("Error en la solicitud:", error);
+        });
+}

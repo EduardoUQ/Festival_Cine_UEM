@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Premio</title>
+
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/formulario_premio.css">
-    <!-- Librería de la hamburguesa-->
-    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/panel_categoria.css">
 
+    <!-- Librería iconos -->
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -42,91 +44,120 @@
         </div>
     </header>
 
-    <main class="crear-premio">
+    <!-- PANEL DE ADMINISTRADOR-->
+    <div class="admin-layout">
 
-        <h1>CREAR PREMIO</h1>
-
-        <form class="formulario-premio" id="formulario-premio">
-
-            <!-- CATEGORIA -->
-            <div class="grupo-campo">
-                <label for="categoria">Categoría</label>
-                <input
-                    type="text"
-                    id="categoria"
-                    name="categoria"
-                    placeholder="Categoría del premio"
-                    required
-                    maxlength="30"
-                >
-                <p id="mensaje_categoria"></p>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile">
+                <i class="fa-solid fa-user"></i>
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
             </div>
 
-            <!-- PUESTO -->
-            <div class="grupo-campo">
-                <label for="puesto">Puesto</label>
-                <input
-                    type="number"
-                    id="puesto"
-                    name="puesto"
-                    placeholder="Ej: 1. Escribe 0 si solo hay un puesto en esta categoría."
-                    required
-                    min="0"
-                    step="1"
-                >
-                <p id="mensaje_puesto"></p>
-            </div>
+            <nav class="menu">
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a class="active" href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
+                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i> Patrocinadores</a>
+            </nav>
+        </aside>
 
-            <!-- DESCRIPCION -->
-            <div class="grupo-campo">
-                <label for="descripcion">Descripción</label>
-                <textarea
-                    id="descripcion"
-                    name="descripcion"
-                    placeholder="Descripción del premio"
-                    required
-                    rows="5"
-                ></textarea>
-                <p id="mensaje_descripcion"></p>
-            </div>  
+        <!-- MAIN -->
+        <main class="main">
 
-            <!-- DOTACION -->
-            <div class="grupo-campo">
-                <label for="dotacion">Dotación (€)</label>
-                <input
-                    type="number"
-                    id="dotacion"
-                    name="dotacion"
-                    placeholder="Ej: 300.00"
-                    min="0"
-                    step="0.01"
-                >
-                <p id="mensaje_dotacion"></p>
-            </div>
+            <section class="content">
+                <div class="card">
+                    <h1 style="margin-bottom: 16px;">CREAR PREMIO</h1>
 
-            <!-- ACTIVA -->
-            <div class="grupo-campo">
-                <label for="activa">Estado</label>
-                <select id="activa" name="activa" required>
-                    <option value="1" selected>Activa</option>
-                    <option value="0">Inactiva</option>
-                </select>
-                <p id="mensaje_activa"></p>
-            </div>
+                    <form class="formulario-premio" id="formulario-premio">
 
-            <p id="mensaje_formulario"></p>
+                        <!-- CATEGORÍA -->
+                        <div class="grupo-campo">
+                            <label for="categoria">Categoría</label>
+                            <input
+                                type="text"
+                                id="categoria"
+                                name="categoria"
+                                placeholder="Categoría del premio"
+                                required
+                                maxlength="30"
+                            >
+                            <p id="mensaje_categoria"></p>
+                        </div>
 
-            <!-- BOTONES -->
-            <div class="acciones-formulario">
-                <button type="reset" class="btn-cancel">Cancelar</button>
-                <button type="submit" class="btn-save">
-                    Publicar
-                </button>
-            </div>
+                        <!-- PUESTO -->
+                        <div class="grupo-campo">
+                            <label for="puesto">Puesto</label>
+                            <input
+                                type="number"
+                                id="puesto"
+                                name="puesto"
+                                placeholder="Ej: 1. Escribe 0 si solo hay un puesto en esta categoría."
+                                required
+                                min="0"
+                                step="1"
+                            >
+                            <p id="mensaje_puesto"></p>
+                        </div>
 
-        </form>
+                        <!-- DESCRIPCIÓN -->
+                        <div class="grupo-campo">
+                            <label for="descripcion">Descripción</label>
+                            <textarea
+                                id="descripcion"
+                                name="descripcion"
+                                placeholder="Descripción del premio"
+                                required
+                                rows="5"
+                            ></textarea>
+                            <p id="mensaje_descripcion"></p>
+                        </div>
 
-    </main>
+                        <!-- DOTACIÓN -->
+                        <div class="grupo-campo">
+                            <label for="dotacion">Dotación (€)</label>
+                            <input
+                                type="number"
+                                id="dotacion"
+                                name="dotacion"
+                                placeholder="Ej: 300.00. Déjalo vacío si no tiene dotación."
+                                min="0"
+                                step="0.01"
+                            >
+                            <p id="mensaje_dotacion"></p>
+                        </div>
+
+                        <!-- ACTIVA -->
+                        <div class="grupo-campo">
+                            <label for="activa">Estado</label>
+                            <select id="activa" name="activa" required>
+                                <option value="1" selected>Activa</option>
+                                <option value="0">Inactiva</option>
+                            </select>
+                            <p id="mensaje_activa"></p>
+                        </div>
+
+                        <p id="mensaje_formulario"></p>
+
+                        <!-- BOTONES -->
+                        <div class="acciones-formulario">
+                            <button type="reset" class="btn-cancel">Cancelar</button>
+                            <button type="submit" class="btn-save">
+                                Publicar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -166,7 +197,8 @@
             <p>© Todos los derechos reservados.</p>
         </div>
     </footer>
-    <!--Ponemos y quitamos la clase del menú nav de active o no en cada click-->
+
+    <!-- HAMBURGER -->
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
@@ -179,4 +211,5 @@
     <script src="../js/formulario_premio.js"></script>
 
 </body>
+
 </html>

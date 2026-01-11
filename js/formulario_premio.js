@@ -1,7 +1,4 @@
-// formulario_premio.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Guard de sesión + rol admin (como en Sala_Peligro)
   fetch("../php/session_info.php")
     .then((response) => response.json())
     .then((info) => {
@@ -10,13 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Si quieres, aquí puedes pintar "Hola nombre" si existe en el DOM
+      //Para poner el nombre
       const elNombre = document.getElementById("user_nombre");
       if (elNombre) {
         elNombre.textContent = info.nombre;
       }
 
-      // Si quieres, engancha un botón logout si existe
+      // Futuro botón logout
       const btnLogout = document.getElementById("btn_logout");
       if (btnLogout) {
         btnLogout.addEventListener("click", () => {
@@ -36,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // 2) Una vez validado admin, iniciamos validaciones/listeners del formulario
+      //Validaciones/listeners del formulario
       iniciarFormularioPremio();
     })
     .catch((error) => {
@@ -49,14 +46,14 @@ function iniciarFormularioPremio() {
   const form = document.getElementById("formulario-premio");
   if (!form) return;
 
-  // Campos
+  //Inputs
   const campoCategoria = document.getElementById("categoria");
   const campoPuesto = document.getElementById("puesto");
   const campoDescripcion = document.getElementById("descripcion");
   const campoDotacion = document.getElementById("dotacion");
   const campoActiva = document.getElementById("activa");
 
-  // Mensajes
+  // Mensajes validaciones
   const msgCategoria = document.getElementById("mensaje_categoria");
   const msgPuesto = document.getElementById("mensaje_puesto");
   const msgDescripcion = document.getElementById("mensaje_descripcion");
@@ -64,7 +61,7 @@ function iniciarFormularioPremio() {
   const msgActiva = document.getElementById("mensaje_activa");
   const msgFormulario = document.getElementById("mensaje_formulario");
 
-  // Limpia mensajes
+  //Función para limpiar mensajes
   function limpiarMensajes() {
     if (msgCategoria) msgCategoria.textContent = "";
     if (msgPuesto) msgPuesto.textContent = "";
@@ -74,12 +71,12 @@ function iniciarFormularioPremio() {
     if (msgFormulario) msgFormulario.textContent = "";
   }
 
-  // Helper: validar vacío en blur (estilo Sala_Peligro)
+  //Función para validacion de campo vacío en blur
   function validarCampoVacio(campo, mensaje, elMsg) {
     if (!campo) return true;
 
     if (campo.value.trim() === "") {
-      campo.classList.add("error"); // si luego quieres CSS para borde rojo
+      campo.classList.add("error"); //CSS para borde rojo
       campo.setCustomValidity(mensaje);
       if (elMsg) elMsg.textContent = mensaje;
       return false;
@@ -91,11 +88,11 @@ function iniciarFormularioPremio() {
     }
   }
 
-  // Validaciones específicas (sin inventar reglas raras)
+  // Validaciones específicas
   function validarCategoria() {
     return validarCampoVacio(
       campoCategoria,
-      "Debes indicar una categoría",
+      "*Debes indicar una categoría",
       msgCategoria
     );
   }
@@ -104,7 +101,7 @@ function iniciarFormularioPremio() {
     if (!campoPuesto) return true;
 
     // vacío
-    if (!validarCampoVacio(campoPuesto, "Debes indicar un puesto", msgPuesto)) {
+    if (!validarCampoVacio(campoPuesto, "*Debes indicar un puesto", msgPuesto)) {
       return false;
     }
 
@@ -126,7 +123,7 @@ function iniciarFormularioPremio() {
   function validarDescripcion() {
     return validarCampoVacio(
       campoDescripcion,
-      "Debes indicar una descripción",
+      "*Debes indicar una descripción",
       msgDescripcion
     );
   }
@@ -161,7 +158,7 @@ function iniciarFormularioPremio() {
   function validarActiva() {
     if (!campoActiva) return true;
 
-    // required en HTML, pero por si acaso:
+    // es required en HTML, pero por si acaso:
     const v = campoActiva.value;
     if (v !== "0" && v !== "1") {
       const m = "Debes seleccionar un estado válido";
@@ -177,14 +174,14 @@ function iniciarFormularioPremio() {
     return true;
   }
 
-  // Listeners blur (como en tu ejemplo)
+  // Listeners blur 
   if (campoCategoria) campoCategoria.addEventListener("blur", validarCategoria);
   if (campoPuesto) campoPuesto.addEventListener("blur", validarPuesto);
   if (campoDescripcion) campoDescripcion.addEventListener("blur", validarDescripcion);
   if (campoDotacion) campoDotacion.addEventListener("blur", validarDotacion);
   if (campoActiva) campoActiva.addEventListener("blur", validarActiva);
 
-  // Submit (como en Sala_Peligro)
+  // Submit 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarMensajes();
@@ -209,24 +206,24 @@ function iniciarFormularioPremio() {
 
     // dotacion puede ser "" => enviamos vacío y el servidor lo tratará como NULL
     const dotacion = campoDotacion.value.trim();
-    const activa = campoActiva.value; // "0" | "1"
+    const activa = campoActiva.value; // "0" o "1"
 
     // FormData
     const formData = new FormData();
     formData.append("funcion", "crearPremio");
     formData.append("categoria", categoria);
-    formData.append("puesto", String(puesto));
+    formData.append("puesto", String(puesto)); 
     formData.append("descripcion", descripcion);
     formData.append("dotacion", dotacion); // "" o "123.45"
     formData.append("activa", activa);
 
-    // Debug como tú haces
+    // Debug para ver en consola el JSON
     for (const [k, v] of formData.entries()) {
       console.log(`${k}: ${v}`);
     }
 
-    // Fetch al endpoint (ajusta el nombre del PHP al tuyo real)
-    fetch("../php/premio.php", {
+    // Fetch al back
+    fetch("../php/formulario_premio.php", {
       method: "POST",
       body: formData,
     })

@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Detalle de Candidatura</title>
+    <title>Panel de Administración - Premio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/panel_detalle_candidatura.css">
+    <link rel="stylesheet" href="../css/panel_categoria.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
@@ -40,6 +40,7 @@
         </div>
     </header>
 
+    <!-- PANEL DE ADMINISTRADOR -->
     <div class="admin-layout">
         <!-- SIDEBAR -->
         <aside class="sidebar">
@@ -52,9 +53,8 @@
             </div>
 
             <nav class="menu">
-                <a class="active" href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
-                    Candidaturas</a>
-                <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a class="active" href="#"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
                 <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
@@ -63,86 +63,86 @@
             </nav>
         </aside>
 
-        <!-- CONTENIDO -->
-        <main class="content">
+        <!-- MAIN -->
+        <main class="main">
 
-            <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
-
-            <!-- DATOS PERSONALES -->
-            <section class="card">
-                <h3>👤 Datos Personales</h3>
-
-                <div class="grid">
-                    <div class="field">
-                        <label>Nombre completo</label>
-                        <input type="text" value="Laura García" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>DNI / NIE / Pasaporte</label>
-                        <input type="text" value="Y1234567Z" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>Número de expediente</label>
-                        <input type="text" value="EXP-2025-001" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label>Correo electrónico</label>
-                        <input type="email" value="laura.g@email.com" disabled>
-                    </div>
-                </div>
-            </section>
-
-            <!-- INFORMACIÓN DEL CORTO -->
-            <section class="card">
-                <h3>🎬 Información del Corto</h3>
-
-                <div class="field">
-                    <label>Título del cortometraje</label>
-                    <input type="text" value="La Última Llamada" disabled>
+            <!-- HEADER -->
+            <header class="main-header">
+                <div>
+                    <h1>Panel de Administración</h1>
+                    <p>Gestiona los premios del festival</p>
                 </div>
 
-                <div class="field">
-                    <label>Cartel / Póster</label>
-                    <div class="poster-box">
-                        <img src="../img/banner.png" alt="Cartel del corto">
-                    </div>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar premios..." id="inputBuscarPremios">
+                </div>
+            </header>
+
+            <!-- ACCIONES SUPERIORES -->
+            <div class="category-select" style="display:flex; justify-content:space-between; gap:12px; align-items:end;">
+                <div style="flex:1;">
+                    <label>Categoría</label>
+                    <!-- (Opcional) Si luego quieres filtrar por categoría desde JS -->
+                    <select id="selectCategoria">
+                        <option value="">Todas</option>
+                    </select>
                 </div>
 
-                <div class="field">
-                    <label>Sinopsis</label>
-                    <textarea disabled>
-                    Un drama íntimo que explora la última conversación entre un padre y su hija en una noche decisiva.
-                </textarea>
-                </div>
-
-                <div class="field">
-                    <label>Cortometraje</label>
-                    <div class="video-box">
-                        <div class="play-button">▶</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- MENSAJE DE RECHAZO -->
-            <section class="card">
-                <h3>✉️ Mensaje en caso de rechazo</h3>
-
-                <textarea
-                    placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
-            </section>
-
-            <!-- ACCIONES -->
-            <div class="actions">
-                <button class="btn reject">Rechazar</button>
-                <button class="btn accept">Aceptar</button>
+                <a class="btn-primary" href="formulario_premio.html" style="white-space:nowrap;">
+                    + Crear nuevo premio
+                </a>
             </div>
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <!-- Aquí el JS pintará 1 card por cada categoría -->
+                <div id="categoriasContainer"></div>
+
+                <!-- Plantilla para 1 card de categoría (la clona panel_premios.js) -->
+                <template id="tplCategoriaCard">
+                    <div class="card categoria-card">
+                        <h3>Premios en la categoría:</h3>
+                        <span class="badge js-categoria-nombre">Nombre categoría</span>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Puesto</th>
+                                    <th>Dotación</th>
+                                    <th>Descripción</th>
+                                    <th>Activa</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="js-premios-body">
+                                <!-- filas dinámicas -->
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- Plantilla para 1 fila de premio -->
+                <template id="tplPremioRow">
+                    <tr>
+                        <td class="js-puesto">1</td>
+                        <td class="js-dotacion">600 €</td>
+                        <td class="js-descripcion">Económico</td>
+                        <td class="js-activa">Sí</td>
+                        <td>
+                            <!-- Editar: el JS pondrá el id en el href -->
+                            <a class="js-editar" href="formulario_premio.html">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </template>
+
+            </section>
 
         </main>
     </div>
-
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -205,6 +205,8 @@
             nav.classList.toggle("active");
         });
     </script>
+
+    <script src="../js/panel_premios.js"></script>
 </body>
 
 </html>

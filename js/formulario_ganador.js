@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // FUNCIÓN DEL MODAL
 const modal = document.getElementById("modal_mensaje");
 const modalIcono = document.getElementById("modal_icono");
-const modalTitulo = document.getElementById("modal_titulo");
+const modalnombre = document.getElementById("modal_nombre");
 const modalTexto = document.getElementById("modal_texto");
 const modalBtn = document.getElementById("modalBtn");
 
@@ -59,11 +59,11 @@ function mostrarModal(tipo, mensaje, redirect = null) {
     if (tipo === "success") {
         modal.classList.add("modal_exito");
         modalIcono.classList.add("fa-circle-check");
-        modalTitulo.textContent = "Operación correcta";
+        modalnombre.textContent = "Operación correcta";
     } else {
         modal.classList.add("modal_error");
         modalIcono.classList.add("fa-circle-xmark");
-        modalTitulo.textContent = "Error";
+        modalnombre.textContent = "Error";
     }
 
     modalTexto.textContent = mensaje;
@@ -77,129 +77,75 @@ modalBtn.addEventListener("click", () => {
     }
 });
 
+
+
 // Variables del formulario
-const form_patrocinador = document.getElementById("news-form");
-const input_nombre = document.getElementById("nombre_patrocinador");
-const input_imagen = document.getElementById("image");
+const form_ganador_honorifico = document.getElementById("news-form");
+const input_nombre = document.getElementById("nombre_profesional");
+const input_correo = document.getElementById("correo");
+const input_numero = document.getElementById("numero");
+const input_video = document.getElementById("video");
 // Variables de los mensajes de error
 const mensaje_nombre = document.getElementById("mensaje_nombre");
-const mensaje_imagen = document.getElementById("mensaje_imagen");
+const mensaje_correo = document.getElementById("mensaje_correo");
+const mensaje_numero = document.getElementById("mensaje_numero");
+const mensaje_video = document.getElementById("mensaje_video");
 const mensaje_formulario = document.getElementById("mensaje_formulario");
 
-// Validar el nombre
-input_nombre.addEventListener('blur', function () {
-    if (this.value.trim() === '') {
-        mensaje_nombre.textContent = '*Ingresa el nombre del patrocinador';
-    }
+// Creamos un array de las variables que haremos validaciones
+const campos = [
+    { input: input_nombre, mensaje: mensaje_nombre, texto: "*Escribe un nombre" },
+    { input: input_correo, mensaje: mensaje_correo, texto: "*Escribe un correo" },
+    { input: input_numero, mensaje: mensaje_numero, texto: "*Escribe un número" }
+];
+
+// Validación para algunos campos 
+campos.forEach(c => {
+    c.input.addEventListener("blur", () => {
+        if (
+            c.input.type !== "file" && c.input.value.trim() === ""
+        ) {
+            c.mensaje.textContent = c.texto;
+        }
+    });
+
+    c.input.addEventListener("input", () => {
+        c.mensaje.textContent = "";
+    });
 });
 
-// Limpiar mensaje al escribir
-input_nombre.addEventListener("input", function () {
-    if (this.value.trim() !== "") {
-        mensaje_nombre.textContent = "";
-    }
-});
-
-
-// Validación de imagen
-const MAX_SIZE = 2 * 1024 * 1024; // 2MB
-const TIPOS_PERMITIDOS = ["image/png", "image/jpeg"];
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-
-    // No hay archivo
-    if (!archivo) {
-        mensaje_imagen.textContent = "*Selecciona una imagen";
-        return;
-    }
-
-    // Validar tipo
-    if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
-        mensaje_imagen.textContent = "*Solo se permiten imágenes JPG o PNG";
-        input_imagen.value = ""; // limpia el input
-        return;
-    }
-
-    // Validar tamaño
-    if (archivo.size > MAX_SIZE) {
-        mensaje_imagen.textContent = "*La imagen no puede superar los 2MB";
-        input_imagen.value = "";
-        return;
-    }
-
-    // Si esta TODO OK
-    mensaje_imagen.textContent = "";
-});
-
-input_imagen.addEventListener("change", () => {
-    console.log(input_imagen.files);
-});
-
-const preview = document.getElementById("preview");
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-    if (!archivo) return;
-
-    const reader = new FileReader();
-    reader.onload = e => {
-        preview.src = e.target.result;
-        preview.style.display = "block";
-    };
-    reader.readAsDataURL(archivo);
-});
-
-// Ocultar texto de la imagen
-const uploadBox = document.getElementById("image-upload");
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-
-    if (!archivo) {
-        uploadBox.classList.remove("has-image");
-        return;
-    }
-
-    // Validaciones (tipo y tamaño)
-    if (!["image/png", "image/jpeg"].includes(archivo.type) ||
-        archivo.size > 2 * 1024 * 1024) {
-        uploadBox.classList.remove("has-image");
-        input_imagen.value = "";
-        return;
-    }
-
-    // Imagen correcta → ocultar contenido
-    uploadBox.classList.add("has-image");
-});
 
 // Verificamos cuando se envíe
-if (form_patrocinador) {
-    form_patrocinador.addEventListener("submit", function (event) {
+if (form_ganador_honorifico) {
+    form_ganador_honorifico.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const nombre = input_nombre.value;
-        const imagen = input_imagen.files[0];
+        const correo = input_correo.value;
+        const numero = input_numero.value;
+        const video = input_video.files[0];
 
         // Validaciones
-        if (!nombre || imagen.lenght === 0) {
+        if (!nombre || !correo || !numero || !video) {
             mensaje_formulario.textContent = "*Por favor completa todos los campos";
             return;
         }
 
         // Pasamos todo al PHP
-        agregar_patrocinador(nombre, imagen);
+        publicar_ganador(nombre, correo, numero, video);
     });
 }
 
 // --- Envío al PHP ---
-function agregar_patrocinador(nombre, imagen) {
+function publicar_ganador(nombre, correo, numero, video) {
     let formData = new FormData();
-    formData.append("funcion", "agregar_patrocinador");
+    formData.append("funcion", "publicar_ganador");
     formData.append("nombre", nombre);
-    formData.append("imagen", imagen);
+    formData.append("correo", correo);
+    formData.append("numero", numero);
+    formData.append("video", video);
 
-    fetch("../php/patrocinador.php", {
+    fetch("../php/ganador_honorifico.php", {
         method: "POST",
         body: formData
     })
@@ -214,7 +160,7 @@ function agregar_patrocinador(nombre, imagen) {
                 mostrarModal(
                     "success",
                     data.message,
-                    "../html/panel_patrocinadores.html"
+                    "../html/panel_ganadores.html"
                 );
             } else {
                 mostrarModal(

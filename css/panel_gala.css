@@ -36,7 +36,10 @@ body {
 }
 
 /* INPUTS */
-.news-form input[type="text"] {
+.news-form input[type="text"],
+.news-form input[type="number"],
+.news-form select,
+.news-form textarea {
     width: 100%;
     padding: 12px 14px;
     background: #1f1f1f;
@@ -45,6 +48,14 @@ body {
     color: #fff;
     font-family: inherit;
     font-size: 0.95rem;
+}
+
+.news-form textarea {
+    resize: vertical;
+}
+
+.news-form select {
+    margin-top: 5px;
 }
 
 /* UPLOAD */
@@ -137,8 +148,11 @@ body {
 }
 
 /* Mensajes de error */
-#mensaje_nombre,
+#mensaje_anio,
+#mensaje_descripcion,
 #mensaje_imagen,
+#mensaje_imagen2,
+#mensaje_activa,
 #mensaje_formulario {
     color: #A71D2D;
     font-size: 0.9rem;

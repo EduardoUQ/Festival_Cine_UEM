@@ -41,65 +41,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 });
 
-// FUNCIÓN DEL MODAL
-const modal = document.getElementById("modal_mensaje");
-const modalIcono = document.getElementById("modal_icono");
-const modalTitulo = document.getElementById("modal_titulo");
-const modalTexto = document.getElementById("modal_texto");
-const modalBtn = document.getElementById("modalBtn");
-
-let redireccion = null;
-
-function mostrarModal(tipo, mensaje, redirect = null) {
-    modal.className = "modal mostrar";
-
-    modalIcono.className = "fa-solid";
-    modal.classList.remove("modal_exito", "modal_error");
-
-    if (tipo === "success") {
-        modal.classList.add("modal_exito");
-        modalIcono.classList.add("fa-circle-check");
-        modalTitulo.textContent = "Operación correcta";
-    } else {
-        modal.classList.add("modal_error");
-        modalIcono.classList.add("fa-circle-xmark");
-        modalTitulo.textContent = "Error";
-    }
-
-    modalTexto.textContent = mensaje;
-    redireccion = redirect;
-}
-
-modalBtn.addEventListener("click", () => {
-    modal.classList.remove("mostrar");
-    if (redireccion) {
-        window.location.href = redireccion;
-    }
-});
-
 // Variables del formulario
-const form_patrocinador = document.getElementById("news-form");
-const input_nombre = document.getElementById("nombre_patrocinador");
+const form_gala = document.getElementById("news-form");
+const input_anio = document.getElementById("anio");
+const input_descripcion = document.getElementById("descripcion");
 const input_imagen = document.getElementById("image");
+const input_imagen2 = document.getElementById("image2");
+const select_activa = document.getElementById("activa");
 // Variables de los mensajes de error
-const mensaje_nombre = document.getElementById("mensaje_nombre");
+const mensaje_anio = document.getElementById("mensaje_anio");
+const mensaje_descripcion = document.getElementById("mensaje_descripcion");
 const mensaje_imagen = document.getElementById("mensaje_imagen");
+const mensaje_imagen2 = document.getElementById("mensaje_imagen2");
+const mensaje_activa = document.getElementById("mensaje_activa");
 const mensaje_formulario = document.getElementById("mensaje_formulario");
 
-// Validar el nombre
-input_nombre.addEventListener('blur', function () {
-    if (this.value.trim() === '') {
-        mensaje_nombre.textContent = '*Ingresa el nombre del patrocinador';
-    }
-});
+// Creamos un array de las variables que haremos validaciones
+const campos = [
+    { input: input_anio, mensaje: mensaje_anio, texto: "*Escribe un año" },
+    { input: input_descripcion, mensaje: mensaje_descripcion, texto: "*Escribe una descripción" },
+    { input: select_activa, mensaje: mensaje_activa, texto: "*Selecciona una opción" }
+];
 
-// Limpiar mensaje al escribir
-input_nombre.addEventListener("input", function () {
-    if (this.value.trim() !== "") {
-        mensaje_nombre.textContent = "";
-    }
-});
+// Validación para algunos campos 
+campos.forEach(c => {
+    c.input.addEventListener("blur", () => {
+        if (
+            c.input.type !== "file" && c.input.value.trim() === ""
+        ) {
+            c.mensaje.textContent = c.texto;
+        }
+    });
 
+    c.input.addEventListener("input", () => {
+        c.mensaje.textContent = "";
+    });
+});
 
 // Validación de imagen
 const MAX_SIZE = 2 * 1024 * 1024; // 2MB
@@ -169,37 +146,43 @@ input_imagen.addEventListener("change", () => {
         return;
     }
 
-    // Imagen correcta → ocultar contenido
+    // Imagen correcta → ocultar descripcion
     uploadBox.classList.add("has-image");
 });
 
 // Verificamos cuando se envíe
-if (form_patrocinador) {
-    form_patrocinador.addEventListener("submit", function (event) {
+if (form_gala) {
+    form_gala.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const nombre = input_nombre.value;
+        const anio = input_anio.value;
+        const descripcion = input_descripcion.value;
         const imagen = input_imagen.files[0];
+        const imagen2 = input_imagen2.files[0];
+        const activa = select_activa.value;
 
         // Validaciones
-        if (!nombre || imagen.lenght === 0) {
+        if (!anio || !descripcion || !activa || imagen.lenght === 0 || imagen2.lenght === 0) {
             mensaje_formulario.textContent = "*Por favor completa todos los campos";
             return;
         }
 
         // Pasamos todo al PHP
-        agregar_patrocinador(nombre, imagen);
+        publicar_noticia(anio, descripcion, imagen, imagen2, activa);
     });
 }
 
 // --- Envío al PHP ---
-function agregar_patrocinador(nombre, imagen) {
+function publicar_noticia(anio, descripcion, imagen, imagen2, activa) {
     let formData = new FormData();
-    formData.append("funcion", "agregar_patrocinador");
-    formData.append("nombre", nombre);
+    formData.append("funcion", "publicar_noticia");
+    formData.append("anio", anio);
+    formData.append("descripcion", descripcion);
     formData.append("imagen", imagen);
+    formData.append("imagen2", imagen2);
+    formData.append("activa", activa);
 
-    fetch("../php/patrocinador.php", {
+    fetch("../php/gala.php", {
         method: "POST",
         body: formData
     })
@@ -214,7 +197,7 @@ function agregar_patrocinador(nombre, imagen) {
                 mostrarModal(
                     "success",
                     data.message,
-                    "../html/panel_patrocinadores.html"
+                    "../html/panel_gala.html"
                 );
             } else {
                 mostrarModal(

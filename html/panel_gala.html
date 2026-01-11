@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Evento</title>
+    <link rel="stylesheet" href="../css/panel_noticias.css">
+    <link rel="stylesheet" href="../css/panel_gala.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/panel_calendario.css">
-    <link rel="stylesheet" href="../css/formulario_evento.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <title>Gestión de la Gala</title>
 </head>
 
 <body>
-
     <!-- HEADER -->
     <header class="header">
         <div class="header-container">
@@ -42,8 +41,8 @@
         </div>
     </header>
 
+    <!-- PANEL DE ADMINISTRADOR -->
     <div class="panel">
-
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile">
@@ -59,35 +58,73 @@
                     Candidaturas</a>
                 <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
-                <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i></i>
+                <a class="active" href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i></i>
                     Gala</a>
-                <a class="active" href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i>
-                    Calendario</a>
+                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
             </nav>
         </aside>
 
+        <!-- Contenido -->
+        <main class="content">
 
-        <main class="create-event">
+            <h1>AGREGAR GALA</h1>
 
-            <h1>CREAR EVENTO</h1>
-
-            <form class="event-form" id="news-form">
+            <form class="news-form" id="news-form">
 
                 <!-- TITULAR -->
                 <div class="form-group">
-                    <label for="title">Titulo</label>
-                    <input type="text" id="title" name="title" placeholder="Título del evento">
-                    <p id="mensaje_titulo"></p>
+                    <label for="anio">Año</label>
+                    <input type="number" id="anio" name="anio" placeholder="Año de la gala">
+                    <p id="mensaje_anio"></p>
                 </div>
 
-                <!-- FECHA -->
+                <!-- CUERPO -->
                 <div class="form-group">
-                    <label for="date">Fecha del evento</label>
-                    <input type="date" id="date" name="date">
-                    <p id="mensaje_fecha"></p>
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="8"
+                        placeholder="Describe lo que quieras sobre la gala"></textarea>
+                    <p id="mensaje_descripcion"></p>
+                </div>
+
+                <!-- IMAGEN -->
+                <div class="form-group">
+                    <label>Imagen de Portada</label>
+
+                    <label class="image-upload" id="image-upload">
+                        <input type="file" id="image" accept="image/png, image/jpeg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
+                        <small>JPG o PNG · Máx 2MB</small>
+                        <img id="preview">
+                    </label>
+                    <p id="mensaje_imagen"></p>
+                </div>
+
+                <!-- IMAGEN -->
+                <div class="form-group">
+                    <label>Imagen de Portada</label>
+
+                    <label class="image-upload" id="image-upload">
+                        <input type="file" id="image2" accept="image/png, image/jpeg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
+                        <small>JPG o PNG · Máx 2MB</small>
+                        <img id="preview">
+                    </label>
+                    <p id="mensaje_imagen2"></p>
+                </div>
+
+                <!-- ACTIVA -->
+                <div class="grupo-campo">
+                    <label for="activa">Estado</label>
+                    <select id="activa" name="activa" required>
+                        <option value="1" selected>Activa</option>
+                        <option value="0">Inactiva</option>
+                    </select>
+                    <p id="mensaje_activa"></p>
                 </div>
 
                 <p id="mensaje_formulario"></p>
@@ -102,7 +139,9 @@
             </form>
 
         </main>
+
     </div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
@@ -116,12 +155,6 @@
                     El festival universitario de cortometrajes más importante de la región,
                     promoviendo el talento cinematográfico emergente.
                 </p>
-                <!-- <div class="social-links"> -->
-                <!-- <i class="fa-brands fa-facebook-f"></i> -->
-                <!-- <i class="fa-brands fa-instagram"></i> -->
-                <!-- <i class="fa-brands fa-youtube"></i> -->
-                <!-- <a href="#" aria-label="YouTube">▶</a> -->
-                <!-- </div> -->
             </div>
 
             <!-- FESTIVAL -->
@@ -148,7 +181,6 @@
                     <i class="fa-brands fa-instagram"></i>
                 </div>
             </div>
-
 
         </div>
 
@@ -181,8 +213,7 @@
             nav.classList.toggle("active");
         });
     </script>
-
-    <script src="../js/formulario_evento.js"></script>
+    <script src="../js/formulario_gala.js"></script>
 </body>
 
 </html>

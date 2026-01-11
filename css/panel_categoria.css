@@ -218,13 +218,20 @@ textarea {
 
 /* BUTTONS */
 .btn-primary {
-    background: #f5c542;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
     border: none;
-    padding: 10px;
-    border-radius: 999px;
-    cursor: pointer;
+    padding: 8px 18px;
+    font-size: 1rem;
     font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #ffffff;
+    color: #FF3228;
 }
 
 .btn-secondary {

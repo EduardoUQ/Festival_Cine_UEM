@@ -60,6 +60,7 @@ body {
 .main {
     flex: 1;
     padding: 40px;
+    background: #171719;
 }
 
 .main-header h1 {
@@ -149,20 +150,20 @@ textarea {
 
 /* BUTTON */
 .btn-primary {
-    margin-top: 16px;
-    background: #c9a43b;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
     border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }
 
 .btn-primary:hover {
-    background: #e2bb4c;
+    background: #ffffff;
+    color: #FF3228;
 }
 
 /* RESPONSIVE */

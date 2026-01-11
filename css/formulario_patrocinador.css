@@ -1,0 +1,222 @@
+/* Body */
+body {
+    background: #171719;
+}
+
+.content {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.content h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* FORM */
+.news-form {
+    background: #0b0b0b;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+/* GROUP */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #d1d5db;
+}
+
+/* INPUTS */
+.news-form input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1f1f1f;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+/* UPLOAD */
+.image-upload {
+    border: 2px dashed #2a2a2a;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    color: #9ca3af;
+}
+
+.image-upload input {
+    display: none;
+}
+
+.image-upload i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #6b7280;
+}
+
+.image-upload span {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.image-upload small {
+    font-size: 0.75rem;
+}
+
+.image-upload:hover {
+    border-color: #FF7D78;
+    color: #fff;
+}
+
+/* OCULTAR TEXTO */
+#preview {
+    display: none;
+    max-width: 200px;
+    border-radius: 8px;
+    align-items: center;
+}
+
+/* .image-upload.has-image .preview {
+    display: block;
+} */
+
+#image-upload.has-image i,
+#image-upload.has-image span,
+#image-upload.has-image small {
+    display: none;
+}
+
+/* ACTIONS */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* BUTTONS */
+.btn-cancel {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 10px 18px;
+    border: none;
+    border-color: #FF3228;
+    cursor: pointer;
+}
+
+.btn-save {
+    background: #FF3228;
+    color: #ffff;
+    padding: 10px 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-save i {
+    margin-right: 6px;
+}
+
+.btn-cancel:hover,
+.btn-save:hover {
+    opacity: 0.9;
+}
+
+/* Mensajes de error */
+#mensaje_titulo,
+#mensaje_descripcion,
+#mensaje_imagen,
+#mensaje_fecha,
+#mensaje_formulario {
+    color: #A71D2D;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .news-form {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal.mostrar {
+    display: flex;
+}
+
+.modal_contenido {
+    background: #fff;
+    color: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    animation: aparecer 0.25s ease;
+}
+
+.modal_contenido i {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.modal_exito i {
+    color: #2ecc71;
+}
+
+.modal_error i {
+    color: #e74c3c;
+}
+
+.modal_contenido button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

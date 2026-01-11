@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Patrocinadores</title>
-    <link rel="stylesheet" href="../css/panel_patrocinadores.css">
+    <link rel="stylesheet" href="../css/panel_noticias.css">
+    <link rel="stylesheet" href="../css/formulario_noticia.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <title>Gestión de Patrocinadores</title>
 </head>
 
 <body>
-
     <!-- HEADER -->
     <header class="header">
         <div class="header-container">
@@ -30,8 +30,8 @@
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Galas</a>
                 <a href="calendario.html">Calendario</a>
-                <!-- LOGIN MOBILE -->
-                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+                <!-- BOTÓN LOGOUT -->
+                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
@@ -65,61 +65,48 @@
             </nav>
         </aside>
 
-        <!-- MAIN CONTENT -->
-
+        <!-- Contenido -->
         <main class="content">
 
-            <!-- Cabecera -->
-            <div class="main-header">
-                <div>
-                    <h1>Gestión de Patrocinadores</h1>
-                    <p>Revisa, edita y borra los patrocinadores.</p>
-                </div>
-            </div>
+            <h1>AGREGAR PATROCINADOR</h1>
 
-            <!-- Filtros -->
-            <div class="tabs">
-                <a id="add_patrocinadores" href="../html/formulario_patrocinador.html">+ Agregar patrocinador</a>
-            </div>
+            <form class="news-form" id="news-form">
 
-            <!-- Tabla -->
-            <div class="tabla-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Logo</th>
-                            <th>Nombre</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><img src="../img/canon.png" alt="TechCorp"></td>
-                            <td>Canon</td>
-                            <td>
-                                <i class="fa-solid fa-pen"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Paginación -->
-                <div class="paginacion">
-                    <span>1–1 de 1 patrocinadores</span>
-                    <div>
-                        <button>&lt; Anterior</button>
-                        <button class="active">1</button>
-                        <button>Siguiente &gt;</button>
-                    </div>
+                <!-- NOMBRE -->
+                <div class="form-group">
+                    <label for="nombre">Nombre del Patrocinador</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ingresa el nombre">
+                    <p id="mensaje_nombre"></p>
                 </div>
 
-            </div>
+                <!-- IMAGEN -->
+                <div class="form-group">
+                    <label>Logo</label>
+
+                    <label class="image-upload" id="image-upload">
+                        <input type="file" id="image" accept="image/png, image/jpeg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
+                        <small>JPG o PNG · Máx 2MB</small>
+                        <img id="preview">
+                    </label>
+                    <p id="mensaje_imagen"></p>
+                </div>
+
+                <p id="mensaje_formulario"></p>
+                <!-- BOTONES -->
+                <div class="form-actions">
+                    <button type="reset" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save" id="enviar">
+                        <i class="fa-solid fa-floppy-disk"></i> Agregar
+                    </button>
+                </div>
+
+            </form>
+
 
         </main>
-    </div>
 
-    </main>
     </div>
 
     <!-- FOOTER -->
@@ -175,6 +162,16 @@
         </div>
     </footer>
 
+    <!-- MODAL -->
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h2 id="modal_titulo"></h2>
+            <p id="modal_texto"></p>
+            <button id="modalBtn">Aceptar</button>
+        </div>
+    </div>
+
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
@@ -183,6 +180,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/formulario_patrocinador.js"></script>
 </body>
 
 </html>

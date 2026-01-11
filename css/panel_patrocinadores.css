@@ -1,32 +1,21 @@
-:root {
-    --bg-main: #0b0b0d;
-    --bg-card: #141417;
-    --bg-card-soft: #1b1b1f;
-    --border: #2a2a30;
-    --text-main: #ffffff;
-    --text-muted: #9fa3ad;
-    --accent: #e0b84c;
-    --danger: #e74c3c;
-    --primary: #4f6cff;
-}
-
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background: var(--bg-main);
-    color: var(--text-main);
+    background: #0f0f0f;
+    color: #fff;
 }
 
-.admin-layout {
+/* Layout */
+.panel {
     display: flex;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* Sidebar */
 .sidebar {
     width: 260px;
     background: #111;
@@ -67,137 +56,110 @@ body {
     color: #000;
 }
 
-/* CONTENT */
+/* Content */
 .content {
     flex: 1;
-    padding: 30px;
+    padding: 32px;
+    background: #171719;
 }
 
-.page-header {
-    margin-bottom: 30px;
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
 }
 
-.page-header p {
-    color: var(--text-muted);
-    margin-top: 6px;
+.main-header p {
+    color: #9ca3af;
 }
 
-/* LAYOUT */
-.sponsors-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 25px;
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
+#add_patrocinadores {
+    background: #FF3228;
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+#add_patrocinadores:hover {
+    background: #ffffff;
+    color: #FF3228;
+}
+
+/* Tabla */
+.tabla-container {
+    background: #1c1c1c;
     padding: 20px;
+    border-radius: 12px;
 }
 
-/* TABLE */
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
-th {
-    text-align: left;
-    color: var(--text-muted);
-    font-size: 13px;
-    padding-bottom: 10px;
+thead {
+    background: #202020;
 }
 
+th,
 td {
-    padding: 14px 0;
-    border-top: 1px solid var(--border);
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    color: #aaa;
+    font-weight: normal;
+}
+
+tbody tr {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+tbody tr:hover {
+    background: #222;
 }
 
 td img {
-    width: 140px;
-    height: 42px;
-    /* object-fit: cover; */
+    width: 200px;
+    height: 50px;
 }
 
-.actions {
+/* Paginación */
+.paginacion {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    color: #aaa;
 }
 
-.btn {
+.paginacion button {
+    background: #2a2a2a;
     border: none;
-    padding: 8px 10px;
+    color: #ccc;
+    padding: 6px 10px;
     border-radius: 6px;
+    margin-left: 5px;
     cursor: pointer;
 }
 
-.btn.edit {
-    background: var(--primary);
-    color: white;
-}
-
-.btn.delete {
-    background: var(--danger);
-    color: white;
-}
-
-/* FORM */
-.sponsor-form label {
-    display: block;
-    margin: 15px 0 6px;
-    font-size: 14px;
-}
-
-.sponsor-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    background: var(--bg-card-soft);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: white;
-}
-
-.upload-box {
-    position: relative;
-    border: 2px dashed var(--border);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    color: var(--text-muted);
-    cursor: pointer;
-}
-
-.upload-box span {
-    color: var(--accent);
-}
-
-.upload-box i {
-    font-size: 24px;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.upload-box input {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.btn.primary {
-    width: 100%;
-    margin-top: 20px;
-    background: var(--accent);
+.paginacion button.active {
+    background: #d4af37;
     color: #000;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .sponsors-layout {
-        grid-template-columns: 1fr;
-    }
 }

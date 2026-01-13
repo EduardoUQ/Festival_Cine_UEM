@@ -60,6 +60,7 @@ body {
 .main {
     flex: 1;
     padding: 40px;
+    background: #171719;
 }
 
 .main-header h1 {
@@ -149,20 +150,20 @@ textarea {
 
 /* BUTTON */
 .btn-primary {
-    margin-top: 16px;
-    background: #c9a43b;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
     border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }
 
 .btn-primary:hover {
-    background: #e2bb4c;
+    background: #ffffff;
+    color: #FF3228;
 }
 
 /* RESPONSIVE */
@@ -173,5 +174,78 @@ textarea {
 
     .sidebar {
         display: none;
+    }
+}
+
+/* Mensajes de error */
+#mensaje_categoria,
+#mensaje_puesto,
+#mensaje_descripcion,
+#mensaje_dotacion,
+#mensaje_activa,
+#mensaje_formulario {
+    color: #A71D2D;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal.mostrar {
+    display: flex;
+}
+
+.modal_contenido {
+    background: #fff;
+    color: #1f1f1f;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    animation: aparecer 0.25s ease;
+}
+
+.modal_contenido i {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.modal_exito i {
+    color: #2ecc71;
+}
+
+.modal_error i {
+    color: #e74c3c;
+}
+
+.modal_contenido button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    background: #000;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }

@@ -35,19 +35,20 @@
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
-                <a class="login-btn" href="../html/login.html">Ingresar</a>
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
         </div>
     </header>
 
     <!-- PANEL DE ADMINISTRADOR -->
-    <div class="admin-layout">
+    <div class="panel">
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile">
                 <i class="fa-solid fa-user"></i>
                 <div>
-                    <strong>Carlos Mendoza</strong>
+                    <strong id="nombre"></strong>
                     <span>Administrador</span>
                 </div>
             </div>
@@ -65,80 +66,60 @@
         </aside>
 
         <!-- MAIN CONTENT -->
+
         <main class="content">
 
-            <header class="page-header">
-                <h1>Gestión de Patrocinadores</h1>
-                <p>Administra los patrocinadores del festival.</p>
-            </header>
+            <!-- Cabecera -->
+            <div class="main-header">
+                <div>
+                    <h1>Gestión de Patrocinadores</h1>
+                    <p>Revisa, edita y borra los patrocinadores.</p>
+                </div>
+            </div>
 
-            <div class="sponsors-layout">
+            <!-- Filtros -->
+            <div class="tabs">
+                <a id="add_patrocinadores" href="../html/formulario_patrocinador.html">+ Agregar patrocinador</a>
+            </div>
 
-                <!-- LISTADO -->
-                <section class="card sponsors-list">
-                    <h2>Lista de Patrocinadores</h2>
+            <!-- Tabla -->
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Logo</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="../img/canon.png" alt="TechCorp"></td>
+                            <td>Canon</td>
+                            <td>
+                                <i class="fa-solid fa-pen"></i>
+                                <i class="fa-solid fa-trash"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Logo</th>
-                                <th>Nombre</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><img src="../img/canon.png" alt="TechCorp"></td>
-                                <td>Canon</td>
-                                <td class="actions">
-                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <!-- <tr>
-                                <td><img src="logo2.png" alt="Creative Studio"></td>
-                                <td>Creative Studio</td>
-                                <td class="actions">
-                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img src="logo3.png" alt="Film Productions"></td>
-                                <td>Film Productions</td>
-                                <td class="actions">
-                                    <button class="btn edit"><i class="fa-solid fa-pen"></i></button>
-                                    <button class="btn delete"><i class="fa-solid fa-trash"></i></button>
-                                </td>
-                            </tr> -->
-                        </tbody>
-                    </table>
-                </section>
-
-                <!-- FORMULARIO -->
-                <aside class="card sponsor-form">
-                    <h2>Añadir Patrocinador</h2>
-
-                    <label>Nombre del Patrocinador</label>
-                    <input type="text" placeholder="Ingresa el nombre...">
-
-                    <label>Logo</label>
-                    <div class="upload-box">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <p>Arrastra el logo aquí o<br>
-                            <span>selecciona un archivo</span>
-                        </p>
-                        <input type="file">
+                <!-- Paginación -->
+                <div class="paginacion">
+                    <span>1–1 de 1 patrocinadores</span>
+                    <div>
+                        <button>&lt; Anterior</button>
+                        <button class="active">1</button>
+                        <button>Siguiente &gt;</button>
                     </div>
-
-                    <button class="btn primary">
-                        Añadir
-                    </button>
-                </aside>
+                </div>
 
             </div>
 
         </main>
+    </div>
+
+    </main>
     </div>
 
     <!-- FOOTER -->

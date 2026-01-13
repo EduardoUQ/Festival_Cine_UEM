@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
@@ -61,6 +60,7 @@ body {
 .content {
     flex: 1;
     padding: 32px;
+    background: #171719;
 }
 
 /* Header */
@@ -98,19 +98,21 @@ body {
     margin-bottom: 20px;
 }
 
-.tab {
-    padding: 8px 14px;
-    background: #2a2a2a;
+#create-news {
+    background: #FF3228;
+    color: #ffffff;
     border: none;
-    border-radius: 6px;
-    color: #ccc;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }
 
-.tab.active {
-    background: #d4af37;
-    color: #000;
-    text-decoration: none;
+#create-news:hover {
+    background: #ffffff;
+    color: #FF3228;
 }
 
 /* Tabla */

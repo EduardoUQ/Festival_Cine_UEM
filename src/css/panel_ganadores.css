@@ -178,11 +178,10 @@ textarea {
 }
 
 /* Mensajes de error */
-#mensaje_categoria,
-#mensaje_puesto,
-#mensaje_descripcion,
-#mensaje_dotacion,
-#mensaje_activa,
+#mensaje_nombre,
+#mensaje_correo,
+#mensaje_numero,
+#mensaje_video,
 #mensaje_formulario {
     color: #A71D2D;
     font-size: 0.9rem;

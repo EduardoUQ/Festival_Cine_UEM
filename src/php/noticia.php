@@ -46,7 +46,24 @@ if (isset($_POST['funcion'])) {
     // Crear nombre único
     $extension = pathinfo($imagen['name'], PATHINFO_EXTENSION);
     $nombre_imagen = uniqid("noticia_") . "." . $extension;
-    $ruta_destino = "../uploads/noticias/" . $nombre_imagen;
+
+    // Ruta base donde quieres crear uploads (al nivel de php)
+    $ruta_base = __DIR__ . "/../uploads";
+    $ruta_noticias = $ruta_base . "/noticias";
+
+    // Crear carpeta uploads si no existe
+    if (!is_dir($ruta_base)) {
+        mkdir($ruta_base, 0777, true);
+    }
+
+    // Crear carpeta noticias si no existe
+    if (!is_dir($ruta_noticias)) {
+        mkdir($ruta_noticias, 0777, true);
+    }
+
+    // Ruta final del archivo
+    $ruta_destino = $ruta_noticias . "/" . $nombre_imagen;
+
 
     // Mover imagen
     if (!move_uploaded_file($imagen['tmp_name'], $ruta_destino)) {

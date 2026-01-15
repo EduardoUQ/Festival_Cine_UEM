@@ -35,8 +35,9 @@
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
-                <a class="login-btn" href="../html/login.html">Ingresar</a>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
+
         </div>
     </header>
 
@@ -47,7 +48,7 @@
             <div class="profile">
                 <i class="fa-solid fa-user"></i>
                 <div>
-                    <strong>Carlos Mendoza</strong>
+                    <strong id="user_nombre"></strong>
                     <span>Administrador</span>
                 </div>
             </div>
@@ -74,22 +75,19 @@
                     <h1>Panel de Administración</h1>
                     <p>Gestiona los premios del festival</p>
                 </div>
-
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar premios..." id="inputBuscarPremios">
-                </div>
             </header>
 
             <!-- ACCIONES SUPERIORES -->
             <div class="category-select"
                 style="display:flex; justify-content:space-between; gap:12px; align-items:end;">
                 <div style="flex:1;">
-                    <label>Categoría</label>
-                    <!-- (Opcional) Si luego quieres filtrar por categoría desde JS -->
-                    <select id="selectCategoria">
+                    <label>Estado</label>
+                    <select id="selectActiva">
                         <option value="">Todas</option>
+                        <option value="1">Activos</option>
+                        <option value="0">No activos</option>
                     </select>
+
                 </div>
 
                 <a class="btn-primary" href="formulario_premio.html" style="white-space:nowrap;">

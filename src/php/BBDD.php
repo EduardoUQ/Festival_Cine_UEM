@@ -44,7 +44,6 @@ CREATE TABLE admin (
 CREATE TABLE gala (
     id INT AUTO_INCREMENT PRIMARY KEY,
     anio INT NOT NULL UNIQUE,
-    logo_url VARCHAR(500),
     cartel_url VARCHAR(500),
     descripcion TEXT,
     activa BOOLEAN NOT NULL DEFAULT FALSE
@@ -97,7 +96,9 @@ CREATE TABLE noticia (
 CREATE TABLE evento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
+    localizacion VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
+    hora VARCHAR(20) NOT NULL,
     id_admin INT NOT NULL,
     FOREIGN KEY (id_admin) REFERENCES admin(id)
         ON UPDATE CASCADE

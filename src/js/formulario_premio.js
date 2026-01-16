@@ -7,13 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      //Para poner el nombre
+      // Para poner el nombre
       const elNombre = document.getElementById("user_nombre");
-      if (elNombre) {
-        elNombre.textContent = info.nombre;
-      }
+      if (elNombre) elNombre.textContent = info.nombre;
 
-      // Futuro botón logout
+      // Logout
       const btnLogout = document.getElementById("btn_logout");
       if (btnLogout) {
         btnLogout.addEventListener("click", () => {
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      //Validaciones/listeners del formulario
       iniciarFormularioPremio();
     })
     .catch((error) => {
@@ -42,11 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function getPremioIdFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  return id ? id : null;
+}
+
 function iniciarFormularioPremio() {
   const form = document.getElementById("formulario-premio");
   if (!form) return;
 
-  //Inputs
+  // Inputs
   const campoCategoria = document.getElementById("categoria");
   const campoPuesto = document.getElementById("puesto");
   const campoDescripcion = document.getElementById("descripcion");
@@ -61,7 +64,50 @@ function iniciarFormularioPremio() {
   const msgActiva = document.getElementById("mensaje_activa");
   const msgFormulario = document.getElementById("mensaje_formulario");
 
-  //Función para limpiar mensajes
+  const premioId = getPremioIdFromUrl();
+
+  // Cancelar: volver al panel (crear y editar)
+  const btnCancelar = document.getElementById("btn_cancelar");
+  if (btnCancelar) {
+    btnCancelar.addEventListener("click", () => {
+      window.location.href = "panel_premios.html";
+    });
+  }
+
+  // Si hay id => modo edición: cargamos datos y cambiamos textos
+  if (premioId) {
+    const h1 = document.querySelector(".card h1");
+    if (h1) h1.textContent = "EDITAR PREMIO";
+
+    const btnSubmit = form.querySelector('button[type="submit"]');
+    if (btnSubmit) btnSubmit.textContent = "Guardar cambios";
+
+    fetch(`../php/editar_premio.php?id=${encodeURIComponent(premioId)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status !== "success") {
+          if (msgFormulario)
+            msgFormulario.textContent =
+              data.message || "No se pudo cargar el premio";
+          return;
+        }
+
+        const p = data.premio;
+        campoCategoria.value = p.categoria ?? "";
+        campoPuesto.value = p.puesto ?? "";
+        campoDescripcion.value = p.descripcion ?? "";
+        campoDotacion.value = p.dotacion === null ? "" : p.dotacion;
+        campoActiva.value = String(p.activa ?? "1");
+      })
+      .catch((err) => {
+        console.error("Error cargando premio:", err);
+        if (msgFormulario)
+          msgFormulario.textContent =
+            "Error cargando el premio. Observa la consola.";
+      });
+  }
+
+  // Limpiar mensajes
   function limpiarMensajes() {
     if (msgCategoria) msgCategoria.textContent = "";
     if (msgPuesto) msgPuesto.textContent = "";
@@ -71,12 +117,12 @@ function iniciarFormularioPremio() {
     if (msgFormulario) msgFormulario.textContent = "";
   }
 
-  //Función para validacion de campo vacío en blur
+  // Validación vacío
   function validarCampoVacio(campo, mensaje, elMsg) {
     if (!campo) return true;
 
     if (campo.value.trim() === "") {
-      campo.classList.add("error"); //CSS para borde rojo
+      campo.classList.add("error");
       campo.setCustomValidity(mensaje);
       if (elMsg) elMsg.textContent = mensaje;
       return false;
@@ -88,7 +134,6 @@ function iniciarFormularioPremio() {
     }
   }
 
-  // Validaciones específicas
   function validarCategoria() {
     return validarCampoVacio(
       campoCategoria,
@@ -100,8 +145,9 @@ function iniciarFormularioPremio() {
   function validarPuesto() {
     if (!campoPuesto) return true;
 
-    // vacío
-    if (!validarCampoVacio(campoPuesto, "*Debes indicar un puesto", msgPuesto)) {
+    if (
+      !validarCampoVacio(campoPuesto, "*Debes indicar un puesto", msgPuesto)
+    ) {
       return false;
     }
 
@@ -133,7 +179,6 @@ function iniciarFormularioPremio() {
 
     const v = campoDotacion.value.trim();
     if (v === "") {
-      // dotación es NULL/optional en BD
       campoDotacion.classList.remove("error");
       campoDotacion.setCustomValidity("");
       if (msgDotacion) msgDotacion.textContent = "";
@@ -158,7 +203,6 @@ function iniciarFormularioPremio() {
   function validarActiva() {
     if (!campoActiva) return true;
 
-    // es required en HTML, pero por si acaso:
     const v = campoActiva.value;
     if (v !== "0" && v !== "1") {
       const m = "Debes seleccionar un estado válido";
@@ -174,19 +218,19 @@ function iniciarFormularioPremio() {
     return true;
   }
 
-  // Listeners blur 
+  // Listeners blur
   if (campoCategoria) campoCategoria.addEventListener("blur", validarCategoria);
   if (campoPuesto) campoPuesto.addEventListener("blur", validarPuesto);
-  if (campoDescripcion) campoDescripcion.addEventListener("blur", validarDescripcion);
+  if (campoDescripcion)
+    campoDescripcion.addEventListener("blur", validarDescripcion);
   if (campoDotacion) campoDotacion.addEventListener("blur", validarDotacion);
   if (campoActiva) campoActiva.addEventListener("blur", validarActiva);
 
-  // Submit 
+  // Submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarMensajes();
 
-    // Validaciones
     const ok =
       validarCategoria() &
       validarPuesto() &
@@ -195,7 +239,8 @@ function iniciarFormularioPremio() {
       validarActiva();
 
     if (!ok) {
-      if (msgFormulario) msgFormulario.textContent = "Revisa los campos marcados.";
+      if (msgFormulario)
+        msgFormulario.textContent = "Revisa los campos marcados.";
       return;
     }
 
@@ -203,26 +248,23 @@ function iniciarFormularioPremio() {
     const categoria = campoCategoria.value.trim();
     const puesto = parseInt(campoPuesto.value, 10);
     const descripcion = campoDescripcion.value.trim();
-
-    // dotacion puede ser "" => enviamos vacío y el servidor lo tratará como NULL
-    const dotacion = campoDotacion.value.trim();
+    const dotacion = campoDotacion.value.trim(); // "" o "123.45"
     const activa = campoActiva.value; // "0" o "1"
 
-    // FormData
     const formData = new FormData();
-    formData.append("funcion", "crearPremio");
+
+    // Crear vs editar
+    const idActual = getPremioIdFromUrl();
+    formData.append("funcion", idActual ? "editarPremio" : "crearPremio");
+    if (idActual) formData.append("id", idActual);
+
     formData.append("categoria", categoria);
-    formData.append("puesto", String(puesto)); 
+    formData.append("puesto", String(puesto));
     formData.append("descripcion", descripcion);
-    formData.append("dotacion", dotacion); // "" o "123.45"
+    formData.append("dotacion", dotacion);
     formData.append("activa", activa);
 
-    // Debug para ver en consola el JSON
-    for (const [k, v] of formData.entries()) {
-      console.log(`${k}: ${v}`);
-    }
-
-    // Fetch al back
+    // Fetch
     fetch("../php/formulario_premio.php", {
       method: "POST",
       body: formData,
@@ -230,16 +272,25 @@ function iniciarFormularioPremio() {
       .then((r) => r.json())
       .then((data) => {
         if (data.status === "success") {
-          alert("Premio creado con éxito");
-          form.reset();
+          alert(
+            idActual
+              ? "Premio actualizado con éxito"
+              : "Premio creado con éxito"
+          );
+          // Si estás editando, normalmente interesa volver al panel
+          if (idActual) {
+            window.location.href = "panel_premios.html";
+          } else {
+            form.reset();
+          }
         } else {
-          const m = data.message || "Error al crear el premio";
+          const m = data.message || "Error al guardar el premio";
           if (msgFormulario) msgFormulario.textContent = m;
           console.error("Respuesta servidor:", data);
         }
       })
       .catch((error) => {
-        console.error("Error en el fetch de premio.php", error);
+        console.error("Error en el fetch de formulario_premio.php", error);
         if (msgFormulario) {
           msgFormulario.textContent =
             "Error de comunicación con el servidor. Observa la consola.";

@@ -97,49 +97,8 @@
 
             <!-- CONTENT -->
             <section class="content">
-
                 <!-- Aquí el JS pintará 1 card por cada categoría -->
                 <div id="categoriasContainer"></div>
-
-                <!-- Plantilla para 1 card de categoría (la clona panel_premios.js) -->
-                <template id="tplCategoriaCard">
-                    <div class="card categoria-card">
-                        <h3>Premios en la categoría:</h3>
-                        <span class="badge js-categoria-nombre">Nombre categoría</span>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Puesto</th>
-                                    <th>Dotación</th>
-                                    <th>Descripción</th>
-                                    <th>Activa</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="js-premios-body">
-                                <!-- filas dinámicas -->
-                            </tbody>
-                        </table>
-                    </div>
-                </template>
-
-                <!-- Plantilla para 1 fila de premio -->
-                <template id="tplPremioRow">
-                    <tr>
-                        <td class="js-puesto">1</td>
-                        <td class="js-dotacion">600 €</td>
-                        <td class="js-descripcion">Económico</td>
-                        <td class="js-activa">Sí</td>
-                        <td>
-                            <!-- Editar: el JS pondrá el id en el href -->
-                            <a class="js-editar" href="formulario_premio.html">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                        </td>
-                    </tr>
-                </template>
-
             </section>
 
         </main>

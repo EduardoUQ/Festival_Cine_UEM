@@ -140,6 +140,8 @@ body {
 /* Mensajes de error */
 #mensaje_titulo,
 #mensaje_fecha,
+#mensaje_hora,
+#mensaje_location,
 #mensaje_formulario {
     color: #A71D2D;
     font-size: 0.9rem;
@@ -157,6 +159,28 @@ body {
         align-items: stretch;
     }
 }
+
+/* SELECT */
+.hora-select {
+    margin-bottom: 30px;
+}
+
+.hora-select label {
+    display: block;
+    margin-bottom: 6px;
+    color: #c9a43b;
+}
+
+select {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    width: 280px;
+}
+
+
 
 /* MODAL */
 .modal {

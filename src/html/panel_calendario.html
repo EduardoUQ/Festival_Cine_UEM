@@ -95,36 +95,22 @@
                         <tr>
                             <th>Título</th>
                             <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Localización</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody_eventos">
                         <tr>
-                            <td>Taller de guión cinematografico</td>
-                            <td>5/12/2025</td>
-                            <td><a class="btn" href="#">Ver</a>
-                                <a class="btn" href="#">Editar</a>
-                                <a class="btn" href="#">Borrar</a>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><a class="btn" href="#"></a>
+                                <a class="btn" href="#"></a>
+                                <a class="btn" href="#"></a>
                             </td>
 
-                        </tr>
-
-                        <tr>
-                            <td>Taller de guión cinematografico</td>
-                            <td>5/12/2025</td>
-                            <td><a class="btn" href="#">Ver</a>
-                                <a class="btn" href="#">Editar</a>
-                                <a class="btn" href="#">Borrar</a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Taller de guión cinematografico</td>
-                            <td>5/12/2025</td>
-                            <td><a class="btn" href="#">Ver</a>
-                                <a class="btn" href="#">Editar</a>
-                                <a class="btn" href="#">Borrar</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -198,6 +184,17 @@
         </div>
     </footer>
 
+    <!-- MODAL -->
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h2 id="modal_titulo"></h2>
+            <p id="modal_texto"></p>
+            <button id="modalBtn">Aceptar</button>
+            <button id="modalBtnCancel" type="button">Cancelar</button>
+        </div>
+    </div>
+
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
@@ -206,6 +203,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/panel_calendario.js"></script>
 </body>
 
 </html>

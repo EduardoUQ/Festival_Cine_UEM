@@ -136,7 +136,7 @@ if (patrocinadorId) {
             input_nombre.value = p.nombre ?? "";
 
             // Imagen existente
-            imagen_actual = p.logo_url;
+            imagen_actual = "../" + p.logo_url;
             input_preview.src = imagen_actual;
             input_preview.style.display = "block";
             document.getElementById("image-upload").classList.add("has-image");

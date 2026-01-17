@@ -130,7 +130,7 @@ if (noticiaId) {
             input_fecha.value = n.fecha ?? "";
 
             // Imagen existente
-            imagen_actual = n.imagen_url;
+            imagen_actual = "../" + n.imagen_url;
             input_preview.src = imagen_actual;
             input_preview.style.display = "block";
             document.getElementById("image-upload").classList.add("has-image");

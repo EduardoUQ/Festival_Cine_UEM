@@ -44,7 +44,7 @@ $maxSize = 2 * 1024 * 1024;
 
 // rutas
 $rutaFisica = __DIR__ . "/../uploads/noticias/";
-$rutaWeb    = "/Festival_Cine_UEM/Festival_Cine_UEM/src/uploads/noticias/";
+$rutaWeb    = "uploads/noticias/";
 
 // crear carpeta si no existe
 if (!is_dir($rutaFisica)) {

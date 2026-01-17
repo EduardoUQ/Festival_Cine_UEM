@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const tr = document.createElement("tr");
 
                 tr.innerHTML = `
-                <td><img src="${patrocinador.logo_url}"></td>
+                <td><img src="../${patrocinador.logo_url}"></td>
                 <td>${patrocinador.nombre}</td>
                 <td>
                     <i class="fa-solid fa-pen" data-id="${patrocinador.id}"></i>

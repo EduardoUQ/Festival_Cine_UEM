@@ -77,10 +77,21 @@ modalBtn.addEventListener("click", () => {
     }
 });
 
+// Cancelar: volver al panel (crear y editar)
+const btnCancelar = document.getElementById("btn_cancelar");
+if (btnCancelar) {
+    btnCancelar.addEventListener("click", () => {
+        window.location.href = "panel_patrocinadores.html";
+    });
+}
+
 // Variables del formulario
 const form_patrocinador = document.getElementById("news-form");
 const input_nombre = document.getElementById("nombre_patrocinador");
 const input_imagen = document.getElementById("image");
+const input_preview = document.getElementById("preview");
+let imagen_seleccionada = null; // File
+let imagen_actual = null;      // URL (modo edición)
 // Variables de los mensajes de error
 const mensaje_nombre = document.getElementById("mensaje_nombre");
 const mensaje_imagen = document.getElementById("mensaje_imagen");
@@ -100,78 +111,78 @@ input_nombre.addEventListener("input", function () {
     }
 });
 
+// Obtener 
+function getPatrocinadorIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    return id ? id : null;
+}
+
+
+// EDITAR PATROCINADORES
+const patrocinadorId = getPatrocinadorIdFromUrl();
+
+if (patrocinadorId) {
+    const h1 = document.getElementById("titulo")
+    if (h1) h1.textContent = "EDITAR PATROCINADOR";
+
+    const btnSubmit = document.getElementById("btn_enviar");
+    if (btnSubmit) btnSubmit.textContent = "Guardar cambios";
+
+    fetch(`../php/editar_patrocinador.php?id=${encodeURIComponent(patrocinadorId)}`)
+        .then((r) => r.json())
+        .then((data) => {
+            const p = data.patrocinador;
+            input_nombre.value = p.nombre ?? "";
+
+            // Imagen existente
+            imagen_actual = p.logo_url;
+            input_preview.src = imagen_actual;
+            input_preview.style.display = "block";
+            document.getElementById("image-upload").classList.add("has-image");
+        })
+        .catch((err) => {
+            console.error("Error cargando premio:", err);
+            if (mensaje_formulario)
+                mensaje_formulario.textContent =
+                    "Error cargando el patrocinador. Observa la consola.";
+        });
+}
+
 
 // Validación de imagen
-const MAX_SIZE = 2 * 1024 * 1024; // 2MB
-const TIPOS_PERMITIDOS = ["image/png", "image/jpeg"];
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-
-    // No hay archivo
-    if (!archivo) {
-        mensaje_imagen.textContent = "*Selecciona una imagen";
-        return;
-    }
-
-    // Validar tipo
-    if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
-        mensaje_imagen.textContent = "*Solo se permiten imágenes JPG o PNG";
-        input_imagen.value = ""; // limpia el input
-        return;
-    }
-
-    // Validar tamaño
-    if (archivo.size > MAX_SIZE) {
-        mensaje_imagen.textContent = "*La imagen no puede superar los 2MB";
-        input_imagen.value = "";
-        return;
-    }
-
-    // Si esta TODO OK
-    mensaje_imagen.textContent = "";
-});
-
-input_imagen.addEventListener("change", () => {
-    console.log(input_imagen.files);
-});
-
-const preview = document.getElementById("preview");
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-    if (!archivo) return;
-
-    const reader = new FileReader();
-    reader.onload = e => {
-        preview.src = e.target.result;
-        preview.style.display = "block";
-    };
-    reader.readAsDataURL(archivo);
-});
-
-// Ocultar texto de la imagen
 const uploadBox = document.getElementById("image-upload");
 
 input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
+    const file = input_imagen.files[0];
 
-    if (!archivo) {
-        uploadBox.classList.remove("has-image");
+    if (!file) return;
+
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+        mensaje_imagen.textContent = "Solo JPG o PNG";
         return;
     }
 
-    // Validaciones (tipo y tamaño)
-    if (!["image/png", "image/jpeg"].includes(archivo.type) ||
-        archivo.size > 2 * 1024 * 1024) {
-        uploadBox.classList.remove("has-image");
-        input_imagen.value = "";
+    if (file.size > 2 * 1024 * 1024) {
+        mensaje_imagen.textContent = "Máx 2MB";
         return;
     }
 
-    // Imagen correcta → ocultar contenido
-    uploadBox.classList.add("has-image");
+    imagen_seleccionada = file;
+    mensaje_imagen.textContent = "";
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        input_preview.src = reader.result;
+        input_preview.style.display = "block";
+        uploadBox.classList.add("has-image");
+    };
+    reader.readAsDataURL(file);
+
+    input_imagen.value = "";
+
 });
+
 
 // Verificamos cuando se envíe
 if (form_patrocinador) {
@@ -179,27 +190,35 @@ if (form_patrocinador) {
         event.preventDefault();
 
         const nombre = input_nombre.value;
-        const imagen = input_imagen.files[0];
 
         // Validaciones
-        if (!nombre || imagen.lenght === 0) {
+        if (!nombre || !input_preview.src) {
             mensaje_formulario.textContent = "*Por favor completa todos los campos";
             return;
         }
 
         // Pasamos todo al PHP
-        agregar_patrocinador(nombre, imagen);
+        agregar_patrocinador();
     });
 }
 
 // --- Envío al PHP ---
-function agregar_patrocinador(nombre, imagen) {
+function agregar_patrocinador() {
     let formData = new FormData();
     formData.append("funcion", "agregar_patrocinador");
-    formData.append("nombre", nombre);
-    formData.append("imagen", imagen);
+    formData.append("nombre", input_nombre.value);
+    if (imagen_seleccionada) {
+        formData.append("imagen", imagen_seleccionada);
+    }
 
-    fetch("../php/patrocinador.php", {
+    if (patrocinadorId) {
+        formData.append("id", patrocinadorId);
+        formData.append("accion", "editar");
+    } else {
+        formData.append("accion", "crear");
+    }
+
+    fetch("../php/formulario_patrocinador.php", {
         method: "POST",
         body: formData
     })

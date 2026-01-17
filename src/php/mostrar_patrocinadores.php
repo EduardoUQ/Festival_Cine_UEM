@@ -9,14 +9,14 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
     exit;
 }
 
-// Hacemos la consulta de la información de la noticia
-$sql = "SELECT id, titulo , fecha FROM noticia";
+// Hacemos la consulta de la información del patrocinador
+$sql = "SELECT id, nombre, logo_url FROM patrocinador";
 $result = $conexion->query($sql);
 
 // Lo enviamos con un array al JS
-$noticias = [];
+$patrocinadores = [];
 while ($row = $result->fetch_assoc()) {
-    $noticias[] = $row;
+    $patrocinadores[] = $row;
 }
 
-echo json_encode($noticias);
+echo json_encode($patrocinadores);

@@ -32,7 +32,9 @@ document.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-pen")) {
         const id = e.target.dataset.id;
         console.log("Editar noticia:", id);
-        abrirModalEdicion(id);
+        // abrirModalEdicion(id);
+        window.location.href = `formulario_noticia.html?id=${encodeURIComponent(id)}`;
+
     }
 
     // Evento para BORRAR

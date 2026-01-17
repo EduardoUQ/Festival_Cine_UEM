@@ -21,7 +21,7 @@ if ($id <= 0) {
     exit;
 }
 
-$sql = "DELETE FROM premio WHERE id = ?";
+$sql = "DELETE FROM patrocinador WHERE id = ?";
 $stmt = $conexion->prepare($sql);
 
 if (!$stmt) {
@@ -33,10 +33,9 @@ $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
     if ($stmt->affected_rows > 0) {
-        echo json_encode(["status" => "success", "message" => "Premio eliminado"]);
+        echo json_encode(["status" => "success", "message" => "Patrocinador eliminado"]);
     } else {
-        http_response_code(404);
-        echo json_encode(["status" => "error", "message" => "Premio no encontrado"]);
+        echo json_encode(["status" => "error", "message" => "Patrocinador no encontrado"]);
     }
 } else {
     echo json_encode([

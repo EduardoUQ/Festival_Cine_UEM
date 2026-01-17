@@ -3,9 +3,8 @@ session_start();
 require_once "conexion.php";
 header('Content-Type: application/json; charset=utf-8');
 
-// (Opcional pero recomendado) Solo admin
+// Solo admin
 if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
-    http_response_code(401);
     echo json_encode(["status" => "error", "message" => "No autorizado"]);
     exit;
 }
@@ -32,7 +31,6 @@ $sql .= " ORDER BY categoria ASC, puesto ASC";
 
 $stmt = $conexion->prepare($sql);
 if (!$stmt) {
-    http_response_code(500);
     echo json_encode(["status" => "error", "message" => "Error preparando consulta"]);
     exit;
 }

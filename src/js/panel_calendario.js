@@ -164,8 +164,8 @@ function cargarEventos() {
                     <td>${ev.hora}</td>
                     <td>${ev.localizacion}</td>
                     <td>
-                        <a class="btn" href="#">Ver</a>
-                        <a class="btn" href="#">Editar</a>
+                        
+                        <a class="btn" href="../html/formulario_evento.html?id=${ev.id}">Editar</a>
                         <a class="btn btn-borrar" href="#" data-id="${ev.id}">Borrar</a>
                     </td>
                 `;

@@ -100,6 +100,57 @@ document.addEventListener("DOMContentLoaded", () => {
     // Límite superior (próxima gala)
     const FECHA_MAXIMA_EVENTO = "2026-12-21";
 
+    //--- MODO EDICIÓN (si viene ?id=...) ---
+    const params = new URLSearchParams(window.location.search);
+    const idEvento = params.get("id");
+
+    // Cambiar textos si estamos editando
+    if (idEvento) {
+        const h1 = document.querySelector("main.create-event h1");
+        if (h1) h1.textContent = "EDITAR EVENTO";
+
+        const btnEnviar = document.getElementById("enviar");
+        if (btnEnviar) {
+            btnEnviar.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Guardar cambios`;
+        }
+
+        cargarEvento(idEvento);
+    }
+
+    function cargarEvento(id) {
+        let formData = new FormData();
+        formData.append("funcion", "obtener_evento");
+        formData.append("id", id);
+
+        fetch("../php/formulario_evento.php", {
+            method: "POST",
+            body: formData
+        })
+            .then((response) => {
+                if (!response.ok) throw new Error("Error HTTP");
+                return response.json();
+            })
+            .then((data) => {
+                if (data.status === "success") {
+                    const ev = data.evento;
+
+                    input_titulo.value = ev.titulo || "";
+                    input_fecha.value = ev.fecha || "";
+                    input_location.value = ev.localizacion || "";
+
+                    //La hora debe existir como option
+                    select_hora.value = ev.hora || "";
+
+                } else {
+                    mostrarModal("error", data.message, "./html/panel_calendario.html");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                mostrarModal("error", "Error de conexión con el servidor", "./html/panel_calendario.html");
+            });
+    }
+
     // Fecha de hoy en formato YYYY-MM-DD 
     function obtenerHoyLocal() {
         const hoy = new Date();
@@ -125,43 +176,43 @@ document.addEventListener("DOMContentLoaded", () => {
         { input: input_location, mensaje: mensaje_location, texto: "*Escribe una localización" }
     ];
 
-// Validación para los campos (vacío)
-campos.forEach(c => {
+    // Validación para los campos (vacío)
+    campos.forEach(c => {
 
-    // Si es input (text/date)
-    if (c.input) {
+        // Si es input (text/date)
+        if (c.input) {
 
-        c.input.addEventListener("blur", () => {
-            if (c.input.value.trim() === "") {
-                c.mensaje.textContent = c.texto;
-            }
-        });
+            c.input.addEventListener("blur", () => {
+                if (c.input.value.trim() === "") {
+                    c.mensaje.textContent = c.texto;
+                }
+            });
 
-        c.input.addEventListener("input", () => {
-            c.mensaje.textContent = "";
-            mensaje_formulario.textContent = "";
-        });
+            c.input.addEventListener("input", () => {
+                c.mensaje.textContent = "";
+                mensaje_formulario.textContent = "";
+            });
 
-    }
+        }
 
-    // Si es select (hora)
-    if (c.select) {
+        // Si es select (hora)
+        if (c.select) {
 
-        c.select.addEventListener("blur", () => {
-            if (c.select.value.trim() === "") {
-                c.mensaje.textContent = c.texto;
-            }
-        });
+            c.select.addEventListener("blur", () => {
+                if (c.select.value.trim() === "") {
+                    c.mensaje.textContent = c.texto;
+                }
+            });
 
-        //validar en change en el select d4 hora
-        c.select.addEventListener("change", () => {
-            c.mensaje.textContent = "";
-            mensaje_formulario.textContent = "";
-        });
+            //validar en change en el select d4 hora
+            c.select.addEventListener("change", () => {
+                c.mensaje.textContent = "";
+                mensaje_formulario.textContent = "";
+            });
 
-    }
+        }
 
-});
+    });
 
 
     // Validación de rango de fechas 
@@ -231,12 +282,16 @@ campos.forEach(c => {
             return;
         }
 
-        //Llamamos a la función de publicar (de momento sin fetch)
-        publicar_evento(titulo, location, fecha, hora);
+        //Llamamos a la función de publicar o editar
+        if (idEvento) {
+            editar_evento(idEvento, titulo, location, fecha, hora);
+        } else {
+            publicar_evento(titulo, location, fecha, hora);
+        }
     });
 
 
-    // --- Envío al PHP ---
+    // ---Envío al PHP
     function publicar_evento(titulo, location, fecha, hora) {
         let formData = new FormData();
         formData.append("funcion", "publicar_evento");
@@ -244,7 +299,7 @@ campos.forEach(c => {
         formData.append("localizacion", location);
         formData.append("fecha", fecha);
         formData.append("hora", hora);
-    
+
 
         fetch("../php/formulario_evento.php", {
             method: "POST",
@@ -278,5 +333,40 @@ campos.forEach(c => {
                 console.error(error);
             });
     }
+    
+    function editar_evento(id, titulo, location, fecha, hora) {
+    let formData = new FormData();
+    formData.append("funcion", "editar_evento");
+    formData.append("id", id);
+    formData.append("titulo", titulo);
+    formData.append("localizacion", location);
+    formData.append("fecha", fecha);
+    formData.append("hora", hora);
 
+    fetch("../php/formulario_evento.php", {
+        method: "POST",
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error HTTP");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === "success") {
+                mostrarModal(
+                    "success",
+                    data.message,
+                    "../html/panel_calendario.html"
+                );
+            } else {
+                mostrarModal("error", data.message);
+            }
+        })
+        .catch(error => {
+            mostrarModal("error", "Error de conexión con el servidor");
+            console.error(error);
+        });
+}
 });

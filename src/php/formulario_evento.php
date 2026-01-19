@@ -96,6 +96,61 @@ if (isset($_POST['funcion'])) {
             "message" => "Evento borrado correctamente"
         ]);
         exit;
+    } elseif ($_POST['funcion'] === "obtener_evento") {
+        $id = (int)$_POST['id'];
+
+        if ($id <= 0) {
+            echo json_encode(["status" => "error", "message" => "Id no válido"]);
+            exit;
+        }
+
+        $sql = "SELECT id, titulo, fecha, hora, localizacion
+            FROM evento
+            WHERE id = ?";
+
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
+            echo json_encode(["status" => "error", "message" => "Evento no encontrado"]);
+            exit;
+        }
+
+        $evento = $result->fetch_assoc();
+
+        echo json_encode([
+            "status" => "success",
+            "evento" => $evento
+        ]);
+        exit;
+    } elseif ($_POST['funcion'] === 'editar_evento') {
+        $id = (int)$_POST['id'];
+
+        $titulo = $_POST['titulo'];
+        $fecha = $_POST['fecha'];
+        $location = $_POST['localizacion'];
+        $hora = $_POST['hora'];
+
+        if ($id <= 0 || $titulo === '' || $fecha === '' || $location === '' || $hora === '') {
+            echo json_encode(["status" => "error", "message" => "Todos los campos son obligatorios"]);
+            exit;
+        }
+
+        $sql = "UPDATE evento
+            SET titulo = ?, localizacion = ?, fecha = ?, hora = ?
+            WHERE id = ?";
+
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("ssssi", $titulo, $location, $fecha, $hora, $id);
+        $stmt->execute();
+
+        echo json_encode([
+            "status" => "success",
+            "message" => "Evento actualizado correctamente"
+        ]);
+        exit;
     }
 }
 

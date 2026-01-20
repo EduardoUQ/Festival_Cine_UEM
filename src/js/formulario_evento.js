@@ -290,6 +290,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const btn_cancelar = document.getElementById("btn_cancelar");
+    if (btn_cancelar) {
+        btn_cancelar.addEventListener("click", () => {
+            window.location.href = "panel_calendario.html";
+        });
+    }
+
 
     // ---Envío al PHP
     function publicar_evento(titulo, location, fecha, hora) {
@@ -333,40 +340,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(error);
             });
     }
-    
-    function editar_evento(id, titulo, location, fecha, hora) {
-    let formData = new FormData();
-    formData.append("funcion", "editar_evento");
-    formData.append("id", id);
-    formData.append("titulo", titulo);
-    formData.append("localizacion", location);
-    formData.append("fecha", fecha);
-    formData.append("hora", hora);
 
-    fetch("../php/formulario_evento.php", {
-        method: "POST",
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error HTTP");
-            }
-            return response.json();
+    function editar_evento(id, titulo, location, fecha, hora) {
+        let formData = new FormData();
+        formData.append("funcion", "editar_evento");
+        formData.append("id", id);
+        formData.append("titulo", titulo);
+        formData.append("localizacion", location);
+        formData.append("fecha", fecha);
+        formData.append("hora", hora);
+
+        fetch("../php/formulario_evento.php", {
+            method: "POST",
+            body: formData
         })
-        .then(data => {
-            if (data.status === "success") {
-                mostrarModal(
-                    "success",
-                    data.message,
-                    "../html/panel_calendario.html"
-                );
-            } else {
-                mostrarModal("error", data.message);
-            }
-        })
-        .catch(error => {
-            mostrarModal("error", "Error de conexión con el servidor");
-            console.error(error);
-        });
-}
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error HTTP");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === "success") {
+                    mostrarModal(
+                        "success",
+                        data.message,
+                        "../html/panel_calendario.html"
+                    );
+                } else {
+                    mostrarModal("error", data.message);
+                }
+            })
+            .catch(error => {
+                mostrarModal("error", "Error de conexión con el servidor");
+                console.error(error);
+            });
+    }
 });

@@ -1,3 +1,97 @@
+// =======================
+// MODAL (igual que calendario)
+// =======================
+const modal = document.getElementById("modal_mensaje");
+const modalIcono = document.getElementById("modal_icono");
+const modalTitulo = document.getElementById("modal_titulo");
+const modalTexto = document.getElementById("modal_texto");
+const modalBtn = document.getElementById("modalBtn");
+const modalBtnCancel = document.getElementById("modalBtnCancel");
+
+let accionConfirmada = null;
+let redireccion = null;
+
+const modalDisponible =
+  modal && modalIcono && modalTitulo && modalTexto && modalBtn;
+
+function mostrarModal(tipo, mensaje, redirect = null) {
+  if (!modalDisponible) {
+    console.error("Modal no disponible: falta el HTML del modal en panel_premios.html");
+    if (redirect) window.location.href = redirect;
+    return;
+  }
+
+  modal.className = "modal mostrar";
+
+  modalIcono.className = "fa-solid";
+  modal.classList.remove("modal_exito", "modal_error");
+
+  if (tipo === "success") {
+    modal.classList.add("modal_exito");
+    modalIcono.classList.add("fa-circle-check");
+    modalTitulo.textContent = "Operación correcta";
+  } else {
+    modal.classList.add("modal_error");
+    modalIcono.classList.add("fa-circle-xmark");
+    modalTitulo.textContent = "Error";
+  }
+
+  modalTexto.textContent = mensaje;
+  redireccion = redirect;
+  accionConfirmada = null;
+
+  if (modalBtnCancel) modalBtnCancel.style.display = "none";
+}
+
+function mostrarConfirmacion(mensajeConfirmacion, onConfirm) {
+  if (!modalDisponible) {
+    console.error("Modal no disponible para confirmación.");
+    return;
+  }
+
+  modal.className = "modal mostrar";
+  modalIcono.className = "fa-solid";
+  modal.classList.remove("modal_exito", "modal_error");
+
+  modal.classList.add("modal_error");
+  modalIcono.classList.add("fa-triangle-exclamation");
+  modalTitulo.textContent = "Confirmación";
+  modalTexto.textContent = mensajeConfirmacion;
+
+  redireccion = null;
+  accionConfirmada = onConfirm;
+
+  if (modalBtnCancel) modalBtnCancel.style.display = "inline-block";
+}
+
+if (modalDisponible) {
+  modalBtn.addEventListener("click", () => {
+    modal.classList.remove("mostrar");
+
+    // Si venimos de una confirmación, ejecutamos la acción
+    if (accionConfirmada) {
+      const fn = accionConfirmada;
+      accionConfirmada = null;
+      fn();
+      return;
+    }
+
+    // Si venimos de un mensaje normal con redirección
+    if (redireccion) {
+      window.location.href = redireccion;
+    }
+  });
+
+  if (modalBtnCancel) {
+    modalBtnCancel.addEventListener("click", () => {
+      modal.classList.remove("mostrar");
+      modalBtnCancel.style.display = "none";
+      accionConfirmada = null;
+      redireccion = null;
+    });
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   fetch("../php/session_info.php")
     .then((r) => r.json())
@@ -17,11 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((r) => r.json())
             .then((resp) => {
               if (resp.status === "success") window.location.href = "../html/index.html";
-              else alert("No se pudo cerrar sesión");
+              else mostrarModal("error", "No se pudo cerrar sesión");
             })
             .catch((err) => {
               console.error("Error al cerrar sesión", err);
-              alert("Error al cerrar sesión. Observa la consola.");
+              mostrarModal("error", "Error al cerrar sesión. Observa la consola.");
             });
         });
       }
@@ -60,20 +154,19 @@ function iniciarPanelPremios() {
     if (!btnBorrar) return;
 
     const id = btnBorrar.dataset.id;
-    confirmarBorrado(id);
+    if (!id) return;
+
+    confirmarBorrado(id, cargarYPintarPremios);
   });
 
   function cargarYPintarPremios() {
-    // si "todas" llamamos sin filtro "", si activas 1, si no activa 0
     const activa = selectActiva ? selectActiva.value : "";
 
-    //construimos la url si activa está vacía muestra todos, si no muestra activa como filtro
     const url =
       activa === ""
         ? "../php/mostrar_premios.php"
         : `../php/mostrar_premios.php?activa=${activa}`;
 
-    //llamada al servidor con la url con o sin la información de activa
     fetch(url)
       .then((r) => r.json())
       .then((premios) => {
@@ -86,20 +179,16 @@ function iniciarPanelPremios() {
       });
   }
 
-  //función para pintar los premios a la que se le pasa el array de premios como parámetro
+  // función para pintar los premios agrupados por categoría
   function pintarPorCategoria(premios) {
-    // Agrupar SOLO para mostrar cajas por categoría (usamos un objeto normal)
     const grupos = {};
 
-    //recorremos los premios y guardamos las categorías
     premios.forEach((p) => {
       const cat = p.categoria || "Sin categoría";
-      //si no hay categoría lo mete en un array vacío
       if (!grupos[cat]) grupos[cat] = [];
       grupos[cat].push(p);
     });
 
-    //recorremos cada categoría y pintamos su caja con su tabla
     for (const categoria in grupos) {
       let filas = "";
 
@@ -150,24 +239,29 @@ function iniciarPanelPremios() {
   }
 }
 
-function confirmarBorrado(id) {
-  if (!confirm("¿Seguro que quieres borrar este premio?")) return;
+function confirmarBorrado(id, onDone) {
+  mostrarConfirmacion("¿Seguro que quieres borrar este premio?", function () {
+    const formData = new FormData();
+    formData.append("id", id);
 
-  const formData = new FormData();
-  formData.append("id", id);
-
-  fetch("../php/eliminar_premio.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((r) => r.json())
-    .then((data) => {
-      console.log("Respuesta borrar:", data);
-      if (data.status === "success") location.reload();
-      else alert(data.message || "No se pudo eliminar el premio");
+    fetch("../php/eliminar_premio.php", {
+      method: "POST",
+      body: formData,
     })
-    .catch((err) => {
-      console.error("Error al eliminar:", err);
-      alert("Error al eliminar. Observa la consola.");
-    });
+      .then((r) => r.json())
+      .then((data) => {
+        console.log("Respuesta borrar:", data);
+
+        if (data.status === "success") {
+          mostrarModal("success", data.message || "Premio eliminado correctamente");
+          if (typeof onDone === "function") onDone(); // recarga lista sin reload
+        } else {
+          mostrarModal("error", data.message || "No se pudo eliminar el premio");
+        }
+      })
+      .catch((err) => {
+        console.error("Error al eliminar:", err);
+        mostrarModal("error", "Error al eliminar. Observa la consola.");
+      });
+  });
 }

@@ -60,10 +60,12 @@ if ($dotacionRaw !== "") {
         echo json_encode(["status" => "error", "message" => "Dotación inválida (número >= 0)"]);
         exit;
     }
-    $dotacion = number_format((float)$dotacionRaw, 2, '.', '');
+    $dotacion = (float)$dotacionRaw;
 }
 
-//Modo edición
+// ==============================
+// MODO EDICION
+// ==============================
 if ($funcion === "editarPremio") {
 
     if (!isset($_POST["id"])) {
@@ -77,35 +79,63 @@ if ($funcion === "editarPremio") {
         exit;
     }
 
-    $sql = "UPDATE premio
-            SET categoria = ?, puesto = ?, descripcion = ?, dotacion = ?, activa = ?, id_admin = ?
-            WHERE id = ?";
-
-    $stmt = $conexion->prepare($sql);
-    if (!$stmt) {
-        echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+    // Comprobar duplicado (categoria + puesto) en otro registro
+    $sqlCheck = "SELECT id FROM premio WHERE categoria = ? AND puesto = ? AND id <> ? LIMIT 1";
+    $stmtCheck = $conexion->prepare($sqlCheck);
+    if (!$stmtCheck) {
+        echo json_encode(["status" => "error", "message" => "Error preparando comprobación de duplicado"]);
+        exit;
+    }
+    $stmtCheck->bind_param("sii", $categoria, $puesto, $id);
+    if (!$stmtCheck->execute()) {
+        echo json_encode(["status" => "error", "message" => "Error ejecutando comprobación de duplicado"]);
         exit;
     }
 
-    // categoria(s), puesto(i), descripcion(s), dotacion(s), activa(i), id_admin(i), id(i)
-    $stmt->bind_param("sissiii", $categoria, $puesto, $descripcion, $dotacion, $activa, $id_admin, $id);
-
-    if ($stmt->execute()) {
-        // Si no existía ese id, affected_rows puede ser 0 aunque no haya error.
-        // Aun así lo damos por OK.
+    $resCheck = $stmtCheck->get_result();
+    if ($resCheck && $resCheck->fetch_assoc()) {
         echo json_encode([
-            "status" => "success",
-            "message" => "Premio actualizado",
-            "id" => $id
+            "status" => "error",
+            "message" => "Ya existe un premio con esa categoría y ese puesto (categoría + puesto deben ser únicos)."
         ]);
         exit;
     }
 
-    // Duplicado UNIQUE(categoria, puesto)
-    if ($stmt->errno === 1062) {
+    // UPDATE con dotación NULL o con valor
+    if ($dotacion === null) {
+        $sql = "UPDATE premio
+                SET categoria = ?, puesto = ?, descripcion = ?, dotacion = NULL, activa = ?, id_admin = ?
+                WHERE id = ?";
+
+        $stmt = $conexion->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+            exit;
+        }
+
+        // categoria(s), puesto(i), descripcion(s), activa(i), id_admin(i), id(i)
+        $stmt->bind_param("sisiii", $categoria, $puesto, $descripcion, $activa, $id_admin, $id);
+
+    } else {
+        $sql = "UPDATE premio
+                SET categoria = ?, puesto = ?, descripcion = ?, dotacion = ?, activa = ?, id_admin = ?
+                WHERE id = ?";
+
+        $stmt = $conexion->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+            exit;
+        }
+
+        // categoria(s), puesto(i), descripcion(s), dotacion(d), activa(i), id_admin(i), id(i)
+        $stmt->bind_param("sisdiii", $categoria, $puesto, $descripcion, $dotacion, $activa, $id_admin, $id);
+    }
+
+    if ($stmt->execute()) {
         echo json_encode([
-            "status" => "error",
-            "message" => "Ya existe un premio con esa categoría y ese puesto (categoría + puesto deben ser únicos)."
+            "status" => "success",
+            "message" => "Premio actualizado",
+            "id" => $id
         ]);
         exit;
     }
@@ -118,19 +148,58 @@ if ($funcion === "editarPremio") {
     exit;
 }
 
-//MOdo crear
+// ==============================
+// MODO CREAR
+// ==============================
 
-$sql = "INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin)
-        VALUES (?, ?, ?, ?, ?, ?)";
-
-$stmt = $conexion->prepare($sql);
-if (!$stmt) {
-    echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+// Comprobar duplicado (categoria + puesto) antes de insertar
+$sqlCheck = "SELECT id FROM premio WHERE categoria = ? AND puesto = ? LIMIT 1";
+$stmtCheck = $conexion->prepare($sqlCheck);
+if (!$stmtCheck) {
+    echo json_encode(["status" => "error", "message" => "Error preparando comprobación de duplicado"]);
+    exit;
+}
+$stmtCheck->bind_param("si", $categoria, $puesto);
+if (!$stmtCheck->execute()) {
+    echo json_encode(["status" => "error", "message" => "Error ejecutando comprobación de duplicado"]);
+    exit;
+}
+$resCheck = $stmtCheck->get_result();
+if ($resCheck && $resCheck->fetch_assoc()) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Ya existe un premio con esa categoría y ese puesto (categoría + puesto deben ser únicos)."
+    ]);
     exit;
 }
 
-// categoria(s), puesto(i), descripcion(s), dotacion(s), activa(i), id_admin(i)
-$stmt->bind_param("sissii", $categoria, $puesto, $descripcion, $dotacion, $activa, $id_admin);
+// INSERT con dotación NULL o con valor
+if ($dotacion === null) {
+    $sql = "INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin)
+            VALUES (?, ?, ?, NULL, ?, ?)";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+        exit;
+    }
+
+    // categoria(s), puesto(i), descripcion(s), activa(i), id_admin(i)
+    $stmt->bind_param("sisii", $categoria, $puesto, $descripcion, $activa, $id_admin);
+
+} else {
+    $sql = "INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin)
+            VALUES (?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(["status" => "error", "message" => "Error preparando consulta", "error" => $conexion->error]);
+        exit;
+    }
+
+    // categoria(s), puesto(i), descripcion(s), dotacion(d), activa(i), id_admin(i)
+    $stmt->bind_param("sisdii", $categoria, $puesto, $descripcion, $dotacion, $activa, $id_admin);
+}
 
 if ($stmt->execute()) {
     echo json_encode([
@@ -141,17 +210,9 @@ if ($stmt->execute()) {
     exit;
 }
 
-// Duplicado UNIQUE(categoria, puesto)
-if ($stmt->errno === 1062) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Ya existe un premio con esa categoría y ese puesto (categoría + puesto deben ser únicos)."
-    ]);
-    exit;
-}
-
 echo json_encode([
     "status" => "error",
     "message" => "No se pudo crear el premio",
     "error" => $stmt->error
 ]);
+exit;

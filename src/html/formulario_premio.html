@@ -81,11 +81,22 @@
 
                         <!-- CATEGORÍA -->
                         <div class="grupo-campo">
-                            <label for="categoria">Categoría</label>
-                            <input type="text" id="categoria" name="categoria" placeholder="Categoría del premio"
-                                required maxlength="30">
+                            <label for="categoria_select">Categoría</label>
+
+                            <select id="categoria_select" name="categoria_select" required>
+                                <option value="" selected disabled>Selecciona una categoría...</option>
+                                <!-- aquí cargará JS las existentes -->
+                                <option value="nueva">+ Nueva categoría...</option>
+                            </select>
+
+                            <!-- input oculto para nueva categoría -->
+                            <input type="text" id="categoria_nueva" name="categoria_nueva"
+                                placeholder="Escribe la nueva categoría" maxlength="30"
+                                style="display:none; margin-top:10px;" />
+
                             <p id="mensaje_categoria"></p>
                         </div>
+
 
                         <!-- PUESTO -->
                         <div class="grupo-campo">
@@ -177,6 +188,18 @@
             <p>© Todos los derechos reservados.</p>
         </div>
     </footer>
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h3 id="modal_titulo"></h3>
+            <p id="modal_texto"></p>
+
+            <div class="modal_acciones">
+                <button id="modalBtn" type="button">Aceptar</button>
+                <button id="modalBtnCancel" type="button" style="display:none;">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
     <!-- HAMBURGER -->
     <script>
@@ -189,6 +212,9 @@
     </script>
 
     <script src="../js/formulario_premio.js"></script>
+    <!-- MODAL MENSAJES -->
+
+
 
 </body>
 

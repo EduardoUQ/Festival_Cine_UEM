@@ -36,14 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modalBtn.addEventListener("click", () => {
         modal.classList.remove("mostrar");
 
-        if (modalBtnCancel) {
-            modalBtnCancel.addEventListener("click", () => {
-                modal.classList.remove("mostrar");
-                modalBtnCancel.style.display = "none";
-                accionConfirmada = null;
-                redireccion = null;
-            });
-        }
 
         //Si venimos de una confirmación, ejecutamos la acción
         if (accionConfirmada) {
@@ -58,6 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = redireccion;
         }
     });
+
+    if (modalBtnCancel) {
+        modalBtnCancel.addEventListener("click", () => {
+            modal.classList.remove("mostrar");
+            modalBtnCancel.style.display = "none";
+            accionConfirmada = null;
+            redireccion = null;
+        });
+    }
 
     function mostrarConfirmacion(mensajeConfirmacion, onConfirm) {
         modal.className = "modal mostrar";
@@ -119,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = btn.getAttribute("data-id");
         if (!id) return;
 
-        mostrarConfirmacion("¿Seguro que quieres borrar este evento?", function(){
+        mostrarConfirmacion("¿Seguro que quieres borrar este evento?", function () {
             borrarEvento(id);
         });
         if (!confirmar) return;

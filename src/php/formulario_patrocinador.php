@@ -52,7 +52,7 @@ if (!is_dir($rutaFisica)) {
 /* =========================
    FUNCIÓN SUBIR IMAGEN
 ========================= */
-function subirImagen($file, $tiposPermitidos, $maxSize, $rutaFisica, $rutaWeb)
+function subirImagen($file, $tiposPermitidos, $maxSize, $rutaFisica, $rutaWeb, $nombre)
 {
     if (!in_array($file['type'], $tiposPermitidos)) {
         return ["error" => "Formato de imagen no permitido"];
@@ -63,7 +63,7 @@ function subirImagen($file, $tiposPermitidos, $maxSize, $rutaFisica, $rutaWeb)
     }
 
     $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $nombre = uniqid("patrocinador_") . "." . $ext;
+    $nombre = "patrocinador_" . $nombre . "." . $ext;
 
     if (!move_uploaded_file($file['tmp_name'], $rutaFisica . $nombre)) {
         return ["error" => "Error al subir la imagen"];
@@ -90,7 +90,8 @@ if ($accion === "crear") {
         $tiposPermitidos,
         $maxSize,
         $rutaFisica,
-        $rutaWeb
+        $rutaWeb,
+        $nombre
     );
 
     if (isset($resultado['error'])) {
@@ -149,7 +150,34 @@ if ($accion === "editar") {
         exit;
     }
 
+    // Pasos para obtener el nombre y comparar si se cambia el nombre pero no se sube imagen
+    $logoActual = $patrocinador['logo_url'];
+    $imagenFinal = $logoActual;
+
+    $nombreArchivoActual = basename($logoActual);
+    $ext = pathinfo($nombreArchivoActual, PATHINFO_EXTENSION);
+
+    $nuevoNombreArchivo = "patrocinador_" . $nombre . "." . $ext;
+    $nuevaRutaWeb = $rutaWeb . $nuevoNombreArchivo;
+    $nuevaRutaFisica = $rutaFisica . $nuevoNombreArchivo;
+
     $imagenFinal = $patrocinador['logo_url'];
+
+    // CASO 1: NO hay imagen nueva, pero el nombre cambia
+    if (!isset($_FILES['imagen'])) {
+
+        $rutaFisicaActual = $rutaFisica . basename($imagenFinal);
+
+        if (file_exists($rutaFisicaActual)) {
+
+            // Solo renombrar si el nombre realmente cambia
+            if ($imagenFinal !== $nuevaRutaWeb) {
+
+                rename($rutaFisicaActual, $nuevaRutaFisica);
+                $imagenFinal = $nuevaRutaWeb;
+            }
+        }
+    }
 
     // Si se sube nueva imagen
     if (isset($_FILES['imagen'])) {
@@ -159,7 +187,8 @@ if ($accion === "editar") {
             $tiposPermitidos,
             $maxSize,
             $rutaFisica,
-            $rutaWeb
+            $rutaWeb,
+            $nombre
         );
 
         if (isset($resultado['error'])) {

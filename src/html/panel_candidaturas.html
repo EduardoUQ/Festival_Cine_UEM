@@ -35,7 +35,8 @@
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
-                <a class="login-btn" href="../html/login.html">Ingresar</a>
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
         </div>
     </header>
@@ -83,9 +84,9 @@
 
             <!-- Filtros -->
             <div class="tabs">
-                <button class="tab active">Pendientes</button>
-                <button class="tab">Aceptadas</button>
-                <button class="tab">Rechazadas</button>
+                <button class="tab active" id="pendiente">Pendientes</button>
+                <button class="tab" id="aceptadas">Aceptadas</button>
+                <button class="tab" id="rechazadas">Rechazadas</button>
             </div>
 
             <!-- Tabla -->
@@ -124,6 +125,7 @@
                             <td><span class="estado pendiente">Pendiente</span></td>
                             <td><button class="btn">Ver candidatura</button></td>
                         </tr>
+
                     </tbody>
                 </table>
 
@@ -204,6 +206,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/panel_candidaturas.js"></script>
 </body>
 
 </html>

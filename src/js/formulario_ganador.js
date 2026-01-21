@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // FUNCIÓN DEL MODAL
 const modal = document.getElementById("modal_mensaje");
 const modalIcono = document.getElementById("modal_icono");
-const modalnombre = document.getElementById("modal_nombre");
+const modalTitulo = document.getElementById("modal_titulo");
 const modalTexto = document.getElementById("modal_texto");
 const modalBtn = document.getElementById("modalBtn");
 
@@ -59,11 +59,11 @@ function mostrarModal(tipo, mensaje, redirect = null) {
     if (tipo === "success") {
         modal.classList.add("modal_exito");
         modalIcono.classList.add("fa-circle-check");
-        modalnombre.textContent = "Operación correcta";
+        modalTitulo.textContent = "Operación correcta";
     } else {
         modal.classList.add("modal_error");
         modalIcono.classList.add("fa-circle-xmark");
-        modalnombre.textContent = "Error";
+        modalTitulo.textContent = "Error";
     }
 
     modalTexto.textContent = mensaje;
@@ -114,6 +114,32 @@ campos.forEach(c => {
     });
 });
 
+input_video.addEventListener("change", () => {
+    const file = input_video.files[0];
+
+    if (!file) {
+        mensaje_video.textContent = "Debes seleccionar un vídeo";
+        return;
+    }
+
+    // Tipo
+    const tiposPermitidos = ["video/mp4", "video/mov"];
+    if (!tiposPermitidos.includes(file.type)) {
+        mensaje_video.textContent = "Formato de vídeo no válido";
+        input_video.value = "";
+        return;
+    }
+
+    // Tamaño (50 MB)
+    const maxSize = 50 * 1024 * 1024;
+    if (file.size > maxSize) {
+        mensaje_video.textContent = "El vídeo no puede superar los 50 MB";
+        input_video.value = "";
+        return;
+    }
+
+    mensaje_video.textContent = "";
+});
 
 // Verificamos cuando se envíe
 if (form_ganador_honorifico) {
@@ -140,12 +166,13 @@ if (form_ganador_honorifico) {
 function publicar_ganador(nombre, correo, numero, video) {
     let formData = new FormData();
     formData.append("funcion", "publicar_ganador");
+    // formData.append("accion", "crear");
     formData.append("nombre", nombre);
     formData.append("correo", correo);
     formData.append("numero", numero);
     formData.append("video", video);
 
-    fetch("../php/ganador_honorifico.php", {
+    fetch("../php/formulario_ganador_honorifico.php", {
         method: "POST",
         body: formData
     })

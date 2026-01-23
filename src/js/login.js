@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     const form_login = document.getElementById("formLogin");
     const inputEmail = document.getElementById("email");
     const inputPass = document.getElementById("pass");
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 if (data.status === "success" && data.rol === 'admin') {
                     window.location.href = "../html/panel_noticias.html";
                 } else if (data.status === "success" && data.rol === 'usuario') {
-                    window.location.href = "../html/panel_candidaturas.html";
+                    window.location.href = "../html/panel_usuario_candidatura.html";
                 } else {
                     mensaje.textContent = data.message;
                 }

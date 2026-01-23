@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Candidaturas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/panel_usuario_candidatura.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <!-- LOGO -->
+            <div class="logo">
+                <a href="index.html"><img src="../img/Logo_UEM_Blanco.png" alt=""></a>
+            </div>
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <!-- NAV -->
+            <nav class="nav" id="nav">
+                <a href="subirCorto.html">Sube tu corto</a>
+                <a href="basesLegales.html">Bases legales</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="premios_galas.html">Galas</a>
+                <a href="calendario.html">Calendario</a>
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+            </nav>
+            <!-- ACTIONS -->
+            <div class="actions">
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="panel">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile">
+                <div class="fa-solid fa-user"></div>
+                <div>
+                    <strong>Carlos Mendoza</strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <a href="panel_usuario_perfil.html"><i class="fa-solid fa-user"></i> Datos del Perfil</a>
+                <a class="active" href="panel_usuario_candidatura.html"><i class="fa-solid fa-film"></i>
+                    Candidaturas</a>
+                <a>
+                    <i class="fa-solid fa-bell"></i> Notificaciones
+                    <span class="badge">3</span>
+                </a>
+                <a><i class="fa-solid fa-gear"></i> Configuración</a>
+            </nav>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="content">
+
+            <!-- Cabecera -->
+            <div class="main-header">
+                <div>
+                    <h1>Gestión de Candidaturas</h1>
+                    <p>Aquí podrás gestionar tus candidaturas y ver el avance de tu proceso</p>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <!-- <div class="tabs">
+                <button class="tab active" id="pendiente">Pendientes</button>
+                <button class="tab" id="aceptadas">Aceptadas</button>
+                <button class="tab" id="rechazadas">Rechazadas</button>
+            </div> -->
+
+            <!-- Tabla -->
+            <div class="tabla-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <!-- <th>Participante</th> -->
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>Cortometraje "La Última Llamada"</td>
+                            <td>Mejor cortometraje Alumni</td>
+                            <td><span class="estado pendiente">Pendiente</span></td>
+                            <td><a class="btn" href="../html/panel_detalle_candidatura.html">Ver candidatura</a></td>
+                        </tr> -->
+
+                    </tbody>
+                </table>
+
+                <!-- Paginación -->
+                <div class="paginacion">
+                    <span>1–3 de 3 candidaturas</span>
+                    <div>
+                        <button>&lt; Anterior</button>
+                        <button class="active">1</button>
+                        <button>Siguiente &gt;</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../img/Logo_UEM_Blanco.png" alt="">
+                </div>
+                <p class="footer-description">
+                    El festival universitario de cortometrajes más importante de la región,
+                    promoviendo el talento cinematográfico emergente.
+                </p>
+            </div>
+
+            <!-- FESTIVAL -->
+            <div class="footer-column">
+                <h4>Festival</h4>
+                <ul>
+                    <li><a href="#">Sube tu corto</a></li>
+                    <li><a href="#">Bases legales</a></li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Galas</a></li>
+                    <li><a href="#">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                </ul>
+                <div class="social-links">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const nav = document.getElementById("nav");
+
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
+    <!-- <script src="../js/conexion.js"></script> -->
+    <script src="../js/panel_usuario_candidatura.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+:root {
+    --bg-main: #0e0e0e;
+    --bg-panel: #1a1a1a;
+    --bg-card: #202020;
+    --border-soft: #2e2e2e;
+    --text-main: #ffffff;
+    --text-muted: #b3b3b3;
+    --accent: #FF3228;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle at top, #1b1b1b, #000);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* LAYOUT */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    border-right: 1px solid var(--border-soft);
+    padding: 24px;
+}
+
+.profile {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.profile i {
+    border-radius: 50%;
+}
+
+.profile h3 {
+    font-size: 1rem;
+}
+
+.profile span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu a {
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* transition: all 0.3s; */
+    position: relative;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: var(--accent);
+    color: var(--text-main);
+}
+
+.badge {
+    background: var(--accent);
+    color: #000;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: auto;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    padding: 32px;
+}
+
+.content-header {
+    margin-bottom: 30px;
+}
+
+.content-header h1 {
+    font-size: 28px;
+}
+
+.content-header p {
+    color: var(--text-muted);
+}
+
+/* CARD */
+.card {
+    background: linear-gradient(180deg, #222, #191919);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* FORM */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.full {
+    grid-column: span 2;
+}
+
+label {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+input {
+    background: #111;
+    border: 1px solid var(--border-soft);
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-main);
+}
+
+input:disabled {
+    opacity: 0.6;
+}
+
+/* ACTIONS */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-secondary {
+    background: #2a2a2a;
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #000;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-soft);
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: span 1;
+    }
+}
+
+/* MODAL OVERLAY */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* MODAL BOX */
+.modal {
+    background: #fff;
+    width: 90%;
+    max-width: 420px;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ICONO */
+.modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.modal-icon.success {
+    color: #28a745;
+}
+
+.modal-icon.error {
+    color: #dc3545;
+}
+
+/* TEXTO */
+.modal h3 {
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.modal p {
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.modal button {
+    margin: 1.5rem auto 0;
+}

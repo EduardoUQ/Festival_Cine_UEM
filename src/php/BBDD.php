@@ -23,7 +23,7 @@ if ($comprobar->num_rows > 0) {
 }
 
 // Crear y usar la BD
-$sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"; //utf8mb4 permite tildes, emokis y caracteres especiales. utf8mb4_unicode_ci define cómo se comparan los textos, ignorando mayus/minus y comparando bien acentos y letras internacionales.
+$sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"; //utf8mb4 permite tildes, emojis y caracteres especiales. utf8mb4_unicode_ci define cómo se comparan los textos, ignorando mayus/minus y comparando bien acentos y letras internacionales.
 $conexion->query($sql) or die("Error al crear la base de datos: " . $conexion->error);
 $conexion->select_db($database);
 

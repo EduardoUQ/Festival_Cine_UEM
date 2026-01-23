@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Subir Cortometraje</title>
+    <link rel="stylesheet" href="../css/subirCorto.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <!-- LOGO -->
+            <div class="logo">
+                <a href="index.html"><img src="../img/Logo_UEM_Blanco.png" alt=""></a>
+            </div>
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <!-- NAV -->
+            <nav class="nav" id="nav">
+                <a href="subir_corto.html">Sube tu corto</a>
+                <a href="bases_legales.html">Bases legales</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="premios_galas.html">Galas</a>
+                <a href="calendario.html">Calendario</a>
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+            </nav>
+            <!-- ACTIONS -->
+            <div class="actions">
+                <a class="login-btn" href="../html/login.html">Ingresar</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="upload-page">
+
+        <header class="upload-header">
+            <h1>Subir tu <span>Cortometraje</span></h1>
+            <p>
+                Comparte tu creatividad con el mundo. Completa el formulario para
+                participar en nuestro festival de cortometrajes.
+            </p>
+        </header>
+
+        <form id="formUpload" class="upload-form" enctype="multipart/form-data" novalidate>
+
+            <!-- Datos personales -->
+            <div class="form-card">
+                <h2>Datos Personales</h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre y apellidos</label>
+                        <input id="nombre_apellidos" name="nombre_apellidos" type="text"
+                            placeholder="Ingresa tu nombre completo" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>DNI / NIE</label>
+                        <input id="dni" name="dni" type="text" placeholder="12345678X" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de expediente</label>
+                        <input id="num_expediente" name="num_expediente" type="text" placeholder="11223344" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input id="email" name="email" type="email" placeholder="tucorreo@email.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input id="pass" name="pass" type="password" placeholder="Crea una contraseña segura" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmar contraseña</label>
+                        <input id="pass2" name="pass2" type="password" placeholder="Repite la contraseña" required />
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Año de graduación</label>
+                        <select id="anio_graduacion" name="anio_graduacion" required>
+                            <!-- Opciones por JS -->
+                        </select>
+                        <small style="opacity:.8;">Se usa para determinar si participas como Alumno o Alumni.</small>
+                    </div>
+
+                    <div class="form-group full" id="grupo_categoria_manual" style="display:none;">
+                        <label>Participación (solo para graduación del año pasado)</label>
+                        <select id="categoria_manual" name="categoria_manual">
+                            <!-- Opciones por JS -->
+                        </select>
+                        <small style="opacity:.8;">
+                            Si te graduaste el curso pasado, puedes participar como Alumno o Alumni.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información del cortometraje -->
+            <div class="form-card">
+                <h2>Información del Cortometraje</h2>
+
+                <div class="form-group">
+                    <label>Título del cortometraje</label>
+                    <input id="titulo" name="titulo" type="text" placeholder="El nombre de tu obra maestra" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Cartel / Póster</label>
+
+                    <!-- Input real -->
+                    <input id="cartel" name="cartel" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                        required />
+
+                    <small style="opacity:.8;">JPG o PNG · Máx. 2MB</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Sinopsis</label>
+                    <textarea id="sinopsis" name="sinopsis"
+                        placeholder="Describe tu cortometraje, su historia y mensaje..." maxlength="500"
+                        required></textarea>
+                    <small class="counter" id="counterSinopsis">0 / 500</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Vídeo del cortometraje</label>
+                    <input id="corto" name="corto" type="file" accept=".mp4,.mov,video/mp4,video/quicktime" required />
+                    <small style="opacity:.8;">
+                        Obligatorio: MOV (QuickTime) o MP4. Recomendado: 1920×1080p, 25 fps, 16:9, audio estéreo.
+                        (El navegador no puede verificar códec/fps/audio con total fiabilidad.)
+                    </small>
+                    <small id="videoInfo" style="display:block; margin-top:6px; opacity:.8;"></small>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="form-actions">
+                <button id="btnCancelar" type="button" class="btn-secondary">Cancelar</button>
+                <button id="btnEnviar" type="submit" class="btn-primary">Subir Cortometraje</button>
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../img/Logo_UEM_Blanco.png" alt="">
+                </div>
+                <p class="footer-description">
+                    El festival universitario de cortometrajes más importante de la región,
+                    promoviendo el talento cinematográfico emergente.
+                </p>
+            </div>
+
+            <!-- FESTIVAL -->
+            <div class="footer-column">
+                <h4>Festival</h4>
+                <ul>
+                    <li><a href="#">Sube tu corto</a></li>
+                    <li><a href="#">Bases legales</a></li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Galas</a></li>
+                    <li><a href="#">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                </ul>
+                <div class="social-links">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL MENSAJES (igual que el tuyo) -->
+    <div id="modal_mensaje" class="modal">
+        <div class="modal_contenido">
+            <i id="modal_icono" class="fa-solid"></i>
+            <h3 id="modal_titulo"></h3>
+            <p id="modal_texto"></p>
+
+            <div class="modal_acciones">
+                <button id="modalBtn" type="button">Aceptar</button>
+                <button id="modalBtnCancel" type="button" style="display:none;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const nav = document.getElementById("nav");
+
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
+
+    <script src="../js/subir_corto.js"></script>
+</body>
+
+</html>

@@ -139,6 +139,7 @@ body {
 
 /* Mensajes de error */
 #mensaje_titulo,
+#mensaje_descripcion,
 #mensaje_fecha,
 #mensaje_hora,
 #mensaje_location,
@@ -229,6 +230,14 @@ select {
     color: #fff;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.modal_warning i {
+    color: #FFD80A;
+}
+
+#modal_texto {
+    white-space: pre-line;
 }
 
 @keyframes aparecer {

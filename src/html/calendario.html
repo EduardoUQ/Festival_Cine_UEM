@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/calendario.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-    <script src="../js/calendario.js"></script>
     <title>Calendario</title>
 </head>
 
@@ -53,93 +50,101 @@
 
         <!-- Calendario -->
         <div class="calendar-card">
-            <div id="calendar"></div>
+            <div class="calendario-contenedor">
+
+                <div class="calendario-header">
+                    <button id="mes-anterior" class="nav-mes">&lt;</button>
+                    <span id="titulo-mes" class="titulo-mes"></span>
+                    <button id="mes-siguiente" class="nav-mes">&gt;</button>
+                </div>
+
+                <div class="calendario-grid">
+                    <div class="dia-nombre">L</div>
+                    <div class="dia-nombre">M</div>
+                    <div class="dia-nombre">X</div>
+                    <div class="dia-nombre">J</div>
+                    <div class="dia-nombre">V</div>
+                    <div class="dia-nombre">S</div>
+                    <div class="dia-nombre">D</div>
+
+                    <div id="dias-calendario"></div>
+                </div>
+
+            </div>
         </div>
 
-
-        <!-- Detalles -->
         <div class="calendar-details">
             <div class="details-header">
-                <h4>Detalles de las fechas</h4>
-                <button class="btn-create">+ Crear</button>
+                <h4 id="detalleFecha">Selecciona un día</h4>
             </div>
 
-            <div class="event-item">
-                <div class="event-date">
-                    <span class="day-number">05</span>
-                    <span class="month">DIC</span>
-                </div>
-                <div class="event-info">
-                    <h5>Taller de Guion Cinematográfico</h5>
-                    <p>
-                        Aprende las técnicas fundamentales para escribir guiones efectivos.
+            <div id="listaEventos"></div>
+        </div>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-container">
+
+                <!-- BRAND -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="../img/Logo_UEM_Blanco.png" alt="">
+                    </div>
+                    <p class="footer-description">
+                        El festival universitario de cortometrajes más importante de la región,
+                        promoviendo el talento cinematográfico emergente.
                     </p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-container">
-
-            <!-- BRAND -->
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <img src="../img/Logo_UEM_Blanco.png" alt="">
+                <!-- FESTIVAL -->
+                <div class="footer-column">
+                    <h4>Festival</h4>
+                    <ul>
+                        <li><a href="#">Sube tu corto</a></li>
+                        <li><a href="#">Bases legales</a></li>
+                        <li><a href="#">Noticias</a></li>
+                        <li><a href="#">Galas</a></li>
+                        <li><a href="#">Calendario</a></li>
+                    </ul>
                 </div>
-                <p class="footer-description">
-                    El festival universitario de cortometrajes más importante de la región,
-                    promoviendo el talento cinematográfico emergente.
-                </p>
+
+                <!-- CONTACTO -->
+                <div class="footer-column">
+                    <h4>Contacto</h4>
+                    <ul class="contact-list">
+                        <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                        <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                    </ul>
+                    <div class="social-links">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- FESTIVAL -->
-            <div class="footer-column">
-                <h4>Festival</h4>
-                <ul>
-                    <li><a href="#">Sube tu corto</a></li>
-                    <li><a href="#">Bases legales</a></li>
-                    <li><a href="#">Noticias</a></li>
-                    <li><a href="#">Galas</a></li>
-                    <li><a href="#">Calendario</a></li>
-                </ul>
-            </div>
-
-            <!-- CONTACTO -->
-            <div class="footer-column">
-                <h4>Contacto</h4>
-                <ul class="contact-list">
-                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
-                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
-                </ul>
-                <div class="social-links">
-                    <i class="fa-brands fa-instagram"></i>
+            <!-- BOTTOM -->
+            <div class="footer-bottom">
+                <p>© Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Privacidad</a>
+                    <a href="#">Términos</a>
+                    <a href="#">Cookies</a>
                 </div>
             </div>
+        </footer>
 
-        </div>
+        <script src="../js/calendario.js"></script>
 
-        <!-- BOTTOM -->
-        <div class="footer-bottom">
-            <p>© Todos los derechos reservados.</p>
-            <div class="footer-links">
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
-                <a href="#">Cookies</a>
-            </div>
-        </div>
-    </footer>
+        <script>
+            const hamburger = document.getElementById("hamburger");
+            const nav = document.getElementById("nav");
 
-    <script>
-        const hamburger = document.getElementById("hamburger");
-        const nav = document.getElementById("nav");
-
-        hamburger.addEventListener("click", () => {
-            nav.classList.toggle("active");
-        });
-    </script>
+            hamburger.addEventListener("click", () => {
+                nav.classList.toggle("active");
+            });
+        </script>
 </body>
 
 </html>

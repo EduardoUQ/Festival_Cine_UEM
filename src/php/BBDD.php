@@ -96,6 +96,7 @@ CREATE TABLE noticia (
 CREATE TABLE evento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(500) NOT NULL,
     localizacion VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
     hora VARCHAR(20) NOT NULL,

@@ -112,20 +112,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!tbody) return;
 
     tbody.addEventListener("click", function (e) {
-        const btn = e.target.closest(".btn-borrar");
-        if (!btn) return;
+        const iconTrash = e.target.closest(".fa-trash");
+        if (iconTrash) {
+            e.preventDefault();
 
-        e.preventDefault();
+            const id = iconTrash.getAttribute("data-id");
+            if (!id) return;
 
-        const id = btn.getAttribute("data-id");
-        if (!id) return;
+            mostrarConfirmacion("¿Seguro que quieres borrar este evento?", function () {
+                borrarEvento(id);
+            });
+            return;
+        }
 
-        mostrarConfirmacion("¿Seguro que quieres borrar este evento?", function () {
-            borrarEvento(id);
-        });
-        if (!confirmar) return;
+        const iconEdit = e.target.closest(".fa-pen");
+        if (iconEdit) {
+            e.preventDefault();
 
-        //borrarEvento(id);
+            const id = iconEdit.getAttribute("data-id");
+            if (!id) return;
+
+            window.location.href = `formulario_evento.html?id=${id}`;
+            return;
+        }
+
     });
 });
 
@@ -165,9 +175,8 @@ function cargarEventos() {
                     <td>${ev.hora}</td>
                     <td>${ev.localizacion}</td>
                     <td>
-                        
-                        <a class="btn" href="../html/formulario_evento.html?id=${ev.id}">Editar</a>
-                        <a class="btn btn-borrar" href="#" data-id="${ev.id}">Borrar</a>
+                     <i class="fa-solid fa-pen" data-id="${ev.id}"></i>
+                     <i class="fa-solid fa-trash" data-id="${ev.id}"></i>
                     </td>
                 `;
 

@@ -46,8 +46,8 @@ document.addEventListener("click", (e) => {
 });
 
 function abrirModalEdicion(id) {
-    // Aquí puedes hacer un fetch para obtener la noticia por ID
-    // y abrir tu modal con los datos cargados
+    // Aquí puedemos hacer un fetch para obtener la noticia por ID
+    // y abrir el modal con los datos cargados
     console.log("Abriendo modal para editar noticia", id);
 }
 

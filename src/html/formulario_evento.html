@@ -76,11 +76,18 @@
 
             <form class="event-form" id="news-form">
 
-                <!-- TITULAR -->
+                <!-- TITULO -->
                 <div class="form-group">
                     <label for="title">Titulo</label>
                     <input type="text" id="title" name="title" placeholder="Título del evento">
                     <p id="mensaje_titulo"></p>
+                </div>
+
+                <!-- DESCRIPCION -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" id="descripcion" name="descripcion" placeholder="Breve descripción del evento">
+                    <p id="mensaje_descripcion"></p>
                 </div>
 
                 <!-- FECHA -->
@@ -197,7 +204,7 @@
             nav.classList.toggle("active");
         });
     </script>
-
+    <script src="../js/conexion.js"></script>
     <script src="../js/formulario_evento.js"></script>
 </body>
 

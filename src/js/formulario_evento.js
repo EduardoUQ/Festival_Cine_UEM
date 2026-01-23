@@ -56,16 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.className = "modal mostrar";
 
         modalIcono.className = "fa-solid";
-        modal.classList.remove("modal_exito", "modal_error");
+        modal.classList.remove("modal_exito", "modal_error", "modal_warning");
 
         if (tipo === "success") {
             modal.classList.add("modal_exito");
             modalIcono.classList.add("fa-circle-check");
             modalTitulo.textContent = "Operación correcta";
+        } else if (tipo === "warning") {
+            modal.classList.add("modal_warning");
+            modalIcono.classList.add("fa-triangle-exclamation");
+            modalTitulo.textContent = "Aviso";
         } else {
             modal.classList.add("modal_error");
-            modalIcono.classList.add("fa-circle-xmark");
-            modalTitulo.textContent = "Error";
+            modalIcono.classList.add("fa-triangle-exclamation");
+            modalTitulo.textContent = "Aviso";
         }
 
         modalTexto.textContent = mensaje;
@@ -75,6 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
     modalBtn.addEventListener("click", () => {
         modal.classList.remove("mostrar");
         if (redireccion) {
+            if (typeof redireccion === "function") {
+                const fn = redireccion;
+                redireccion = null;
+                fn();
+                return;
+            }
             window.location.href = redireccion;
         }
     });
@@ -84,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Variables del formulario
     const form_eventos = document.getElementById("news-form");
     const input_titulo = document.getElementById("title");
+    const input_descripcion = document.getElementById("descripcion")
     const input_fecha = document.getElementById("date");
     const input_location = document.getElementById("location");
     const select_hora = document.getElementById("hora-select");
@@ -92,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Variables de los mensajes de error
     const mensaje_titulo = document.getElementById("mensaje_titulo");
+    const mensaje_descripcion = document.getElementById("mensaje_descripcion");
     const mensaje_fecha = document.getElementById("mensaje_fecha");
     const mensaje_hora = document.getElementById("mensaje_hora");
     const mensaje_location = document.getElementById("mensaje_location");
@@ -135,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const ev = data.evento;
 
                     input_titulo.value = ev.titulo || "";
+                    input_descripcion.value = ev.descripcion || "";
                     input_fecha.value = ev.fecha || "";
                     input_location.value = ev.localizacion || "";
 
@@ -168,9 +181,30 @@ document.addEventListener("DOMContentLoaded", () => {
         input_fecha.max = FECHA_MAXIMA_EVENTO;
     }
 
+    function comprobarEvento(fecha, hora, location, id = null, modo = "completo") {
+        let formDataCheck = new FormData();
+        formDataCheck.append("funcion", "comprobar_evento");
+        formDataCheck.append("fecha", fecha);
+        formDataCheck.append("hora", hora);
+        formDataCheck.append("localizacion", location);
+        formDataCheck.append("modo", modo);
+        if (id) formDataCheck.append("id", id);
+
+        return fetch("../php/formulario_evento.php", {
+            method: "POST",
+            body: formDataCheck
+        })
+            .then(response => {
+                if (!response.ok) throw new Error("Error HTTP");
+                return response.json();
+            });
+
+    }
+
     //Creamos un array de las variables que haremos validaciones
     const campos = [
         { input: input_titulo, mensaje: mensaje_titulo, texto: "*Escribe un titulo" },
+        { input: input_descripcion, mensaje: mensaje_descripcion, texto: "*Escribe una descripción" },
         { input: input_fecha, mensaje: mensaje_fecha, texto: "*Selecciona una fecha" },
         { select: select_hora, mensaje: mensaje_hora, texto: "*Selecciona una hora" },
         { input: input_location, mensaje: mensaje_location, texto: "*Escribe una localización" }
@@ -266,12 +300,13 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const titulo = input_titulo.value.trim();
+        const descripcion = input_descripcion.value.trim();
         const fecha = input_fecha.value.trim();
         const hora = select_hora.value.trim();
         const location = input_location.value.trim();
 
         // Validaciones
-        if (titulo === "" || fecha === "" || hora === "" || location === "") {
+        if (titulo === "" || descripcion === "" || fecha === "" || hora === "" || location === "") {
             mensaje_formulario.textContent = "*Por favor completa todos los campos";
             return;
         }
@@ -283,12 +318,64 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         //Llamamos a la función de publicar o editar
-        if (idEvento) {
-            editar_evento(idEvento, titulo, location, fecha, hora);
-        } else {
-            publicar_evento(titulo, location, fecha, hora);
-        }
+        const guardar = () => {
+            if (idEvento) {
+                editar_evento(idEvento, titulo, descripcion, location, fecha, hora);
+            } else {
+                publicar_evento(titulo, descripcion, location, fecha, hora);
+            }
+        };
+
+        //Comprobación de conflictos antes de guardar
+        comprobarEvento(fecha, hora, location, idEvento, "completo")
+            .then(data => {
+                if (data.status === "error" && data.tipo === "exacto") {
+                    // Bloquea
+                    mostrarModal("error", data.message);
+                    return;
+                }
+
+                if (data.status === "warning" && data.tipo === "fecha") {
+                    //Aviso pero permite continuar
+                    let lista = "Existen los siguientes eventos en la fecha marcada:\n";
+
+                    (data.eventos || []).forEach(ev => {
+                        lista += `- ${ev.hora} | ${ev.localizacion} | ${ev.titulo}\n`;
+                    });
+
+                    mostrarModal("warning", lista, guardar); //al aceptar, guarda
+                    return;
+                }
+
+                //OK => guarda directamente
+                guardar();
+            })
+            .catch(error => {
+                console.error(error);
+                mostrarModal("error", "Error de conexión con el servidor");
+            });
     });
+
+    function comprobarExactoSiHayDatos() {
+        const fecha = input_fecha.value.trim();
+        const hora = select_hora.value.trim();
+        const location = input_location.value.trim();
+
+        if (fecha === "" || hora === "" || location === "") return;
+        if (!validarRangoFecha()) return;
+
+        comprobarEvento(fecha, hora, location, idEvento, "exacto")
+            .then(data => {
+                if (data.status === "error" && data.tipo === "exacto") {
+                    mostrarModal("error", data.message);
+                }
+            })
+            .catch(() => { /* sin modal para no ser cansinooo */ });
+    }
+
+    input_fecha.addEventListener("change", comprobarExactoSiHayDatos);
+    select_hora.addEventListener("change", comprobarExactoSiHayDatos);
+    input_location.addEventListener("blur", comprobarExactoSiHayDatos);
 
     const btn_cancelar = document.getElementById("btn_cancelar");
     if (btn_cancelar) {
@@ -299,10 +386,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ---Envío al PHP
-    function publicar_evento(titulo, location, fecha, hora) {
+    function publicar_evento(titulo, descripcion, location, fecha, hora) {
         let formData = new FormData();
         formData.append("funcion", "publicar_evento");
         formData.append("titulo", titulo);
+        formData.append("descripcion", descripcion);
         formData.append("localizacion", location);
         formData.append("fecha", fecha);
         formData.append("hora", hora);
@@ -341,11 +429,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    function editar_evento(id, titulo, location, fecha, hora) {
+    function editar_evento(id, titulo, descripcion, location, fecha, hora) {
         let formData = new FormData();
         formData.append("funcion", "editar_evento");
         formData.append("id", id);
         formData.append("titulo", titulo);
+        formData.append("descripcion", descripcion);
         formData.append("localizacion", location);
         formData.append("fecha", fecha);
         formData.append("hora", hora);

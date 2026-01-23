@@ -10,7 +10,7 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
 }
 
 // Hacemos la consulta de la información del patrocinador
-$sql = "SELECT id, nombre, logo_url FROM patrocinador";
+$sql = "SELECT id, nombre, logo_url, color_hex, web_url FROM patrocinador";
 $result = $conexion->query($sql);
 
 // Lo enviamos con un array al JS

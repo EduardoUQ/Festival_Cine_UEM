@@ -30,8 +30,6 @@
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Galas</a>
                 <a href="calendario.html">Calendario</a>
-                <!-- BOTÓN LOGOUT -->
-                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
             </nav>
             <!-- ACTIONS -->
             <div class="actions">
@@ -58,7 +56,7 @@
                     Candidaturas</a>
                 <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
                 <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
-                <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i></i>
+                <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i>
                     Gala</a>
                 <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
@@ -70,15 +68,29 @@
         <!-- Contenido -->
         <main class="content">
 
-            <h1>AGREGAR PATROCINADOR</h1>
+            <h1 id="titulo">AGREGAR PATROCINADOR</h1>
 
             <form class="news-form" id="news-form">
 
                 <!-- NOMBRE -->
                 <div class="form-group">
-                    <label for="nombre">Nombre del Patrocinador</label>
+                    <label for="nombre_patrocinador">Nombre del Patrocinador</label>
                     <input type="text" id="nombre_patrocinador" name="nombre" placeholder="Ingresa el nombre">
                     <p id="mensaje_nombre"></p>
+                </div>
+
+                <!-- COLOR HEX (REQUIRED) -->
+                <div class="form-group">
+                    <label for="color_hex">Color de fondo (HEX sin #)</label>
+                    <input type="text" id="color_hex" name="color_hex" placeholder="Ej: FFAACC" maxlength="6" required>
+                    <p id="mensaje_color"></p>
+                </div>
+
+                <!-- WEB (OPCIONAL) -->
+                <div class="form-group">
+                    <label for="web_url">Web del patrocinador (opcional)</label>
+                    <input type="text" id="web_url" name="web_url" placeholder="Ej: https://marca.com o marca.com">
+                    <p id="mensaje_web"></p>
                 </div>
 
                 <!-- IMAGEN -->
@@ -96,16 +108,16 @@
                 </div>
 
                 <p id="mensaje_formulario"></p>
+
                 <!-- BOTONES -->
                 <div class="form-actions">
                     <button type="reset" class="btn-cancel" id="btn_cancelar">Cancelar</button>
-                    <button type="submit" class="btn-save" id="enviar">
+                    <button type="submit" class="btn-save" id="btn_enviar">
                         <i class="fa-solid fa-floppy-disk"></i> Agregar
                     </button>
                 </div>
 
             </form>
-
 
         </main>
 

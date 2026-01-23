@@ -110,11 +110,14 @@ CREATE TABLE patrocinador (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     logo_url VARCHAR(500),
+    color_hex VARCHAR(6) NULL,
+    web_url VARCHAR(500) NULL,
     id_admin INT NOT NULL,
     FOREIGN KEY (id_admin) REFERENCES admin(id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE premio (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -182,6 +185,9 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ('ALUMNI', 1, 'Mejor Corto (Alumni) - 1º Premio', 500.00, TRUE, 1),
 ('ALUMNI', 2, 'Mejor Corto (Alumni) - 2º Premio', 300.00, TRUE, 1),
 ('ESPECIAL', 1, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
+
+INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
+('Canon','img/canon.png','FFFFFF','https://www.canon.es',1);
 ";
 
 if ($conexion->multi_query($sql)) {

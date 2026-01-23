@@ -76,6 +76,7 @@ if (isset($_POST['funcion'])) {
             $_SESSION['id']  = (int)$user['id'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['nombre_apellidos'] = $user['nombre_apellidos'];
+            $_SESSION['anio_graduacion'] = $user['anio_graduacion'];
 
 
             echo json_encode([

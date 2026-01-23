@@ -215,3 +215,4 @@ function formatearYYYYMMDD(dateObj) {
     const dd = String(dateObj.getDate()).padStart(2, "0");
     return `${yyyy}-${mm}-${dd}`;
 }
+//prueba de commit

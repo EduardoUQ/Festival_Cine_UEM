@@ -138,7 +138,7 @@ function inicializarNavegacionMeses() {
     }
 }
 
-//---------- LISTA DE EVENTOS DEL DÍA ----------
+//LISTA DE EVENTOS DEL DÍA 
 
 function pintarEventosDia(fecha) {
     const detalleFecha = document.getElementById("detalleFecha");
@@ -170,7 +170,7 @@ function pintarEventosDia(fecha) {
 }
 
 function seleccionarDiaPorFecha(fecha) {
-    //si el mes actual no coincide, lo movemos
+    //si el mes actual no coincide lo movemos
     const [y, m] = fecha.split("-").map(x => parseInt(x, 10));
     fechaActual = new Date(y, m - 1, 1);
     generarCalendario();
@@ -186,7 +186,7 @@ function seleccionarDiaPorFecha(fecha) {
     pintarEventosDia(fecha);
 }
 
-// ---------- HELPERS ----------
+//Ayudas para dar formato
 
 function construirFecha(ano, mesIndex, dia) {
     const mes = String(mesIndex + 1).padStart(2, "0");

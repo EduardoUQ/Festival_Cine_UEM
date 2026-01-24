@@ -88,74 +88,127 @@ if (btnCancelar) {
 // Variables del formulario
 const form_patrocinador = document.getElementById("news-form");
 const input_nombre = document.getElementById("nombre_patrocinador");
+const input_color = document.getElementById("color_hex");
+const input_web = document.getElementById("web_url");
+
 const input_imagen = document.getElementById("image");
 const input_preview = document.getElementById("preview");
+const uploadBox = document.getElementById("image-upload");
+
 let imagen_seleccionada = null; // File
 let imagen_actual = null;      // URL (modo edición)
+
 // Variables de los mensajes de error
 const mensaje_nombre = document.getElementById("mensaje_nombre");
+const mensaje_color = document.getElementById("mensaje_color");
+const mensaje_web = document.getElementById("mensaje_web");
 const mensaje_imagen = document.getElementById("mensaje_imagen");
 const mensaje_formulario = document.getElementById("mensaje_formulario");
 
+// Helpers
+function esHex6(valor) {
+    return /^[0-9a-fA-F]{6}$/.test(valor);
+}
+
+function validarWebOpcional(url) {
+    const v = url.trim();
+    if (v === "") return true;
+    // Acepta con o sin http(s), pero con dominio válido
+    return /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(v);
+}
+
 // Validar el nombre
-input_nombre.addEventListener('blur', function () {
-    if (this.value.trim() === '') {
-        mensaje_nombre.textContent = '*Ingresa el nombre del patrocinador';
+input_nombre.addEventListener("blur", function () {
+    if (this.value.trim() === "") {
+        mensaje_nombre.textContent = "*Ingresa el nombre del patrocinador";
     }
 });
-
-// Limpiar mensaje al escribir
 input_nombre.addEventListener("input", function () {
-    if (this.value.trim() !== "") {
-        mensaje_nombre.textContent = "";
-    }
+    if (this.value.trim() !== "") mensaje_nombre.textContent = "";
 });
 
-// Obtener 
+// Validar color (required)
+input_color.addEventListener("blur", function () {
+    const v = this.value.trim();
+    if (v === "") {
+        mensaje_color.textContent = "*El color es obligatorio";
+        return;
+    }
+    if (!esHex6(v)) {
+        mensaje_color.textContent = "*Debe tener 6 caracteres HEX (sin #). Ej: FFAACC";
+        return;
+    }
+    mensaje_color.textContent = "";
+});
+input_color.addEventListener("input", function () {
+    // Limpiar mientras escribe si va bien
+    const v = this.value.trim();
+    if (v !== "" && esHex6(v)) mensaje_color.textContent = "";
+});
+
+// Validar web (opcional)
+input_web.addEventListener("blur", function () {
+    const v = this.value.trim();
+    if (v === "") {
+        mensaje_web.textContent = "";
+        return;
+    }
+    if (!validarWebOpcional(v)) {
+        mensaje_web.textContent = "*URL no válida. Ej: marca.com o https://marca.com";
+        return;
+    }
+    mensaje_web.textContent = "";
+});
+input_web.addEventListener("input", function () {
+    const v = this.value.trim();
+    if (v === "" || validarWebOpcional(v)) mensaje_web.textContent = "";
+});
+
+// Obtener ID por URL
 function getPatrocinadorIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     return id ? id : null;
 }
 
-
 // EDITAR PATROCINADORES
 const patrocinadorId = getPatrocinadorIdFromUrl();
 
 if (patrocinadorId) {
-    const h1 = document.getElementById("titulo")
+    const h1 = document.getElementById("titulo");
     if (h1) h1.textContent = "EDITAR PATROCINADOR";
 
     const btnSubmit = document.getElementById("btn_enviar");
-    if (btnSubmit) btnSubmit.textContent = "Guardar cambios";
+    if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar cambios';
 
     fetch(`../php/editar_patrocinador.php?id=${encodeURIComponent(patrocinadorId)}`)
         .then((r) => r.json())
         .then((data) => {
             const p = data.patrocinador;
+
             input_nombre.value = p.nombre ?? "";
+            input_color.value = p.color_hex ?? "";
+            input_web.value = p.web_url ?? "";
 
             // Imagen existente
-            imagen_actual = "../" + p.logo_url;
-            input_preview.src = imagen_actual;
-            input_preview.style.display = "block";
-            document.getElementById("image-upload").classList.add("has-image");
+            if (p.logo_url) {
+                imagen_actual = "../" + p.logo_url;
+                input_preview.src = imagen_actual;
+                input_preview.style.display = "block";
+                uploadBox.classList.add("has-image");
+            }
         })
         .catch((err) => {
-            console.error("Error cargando premio:", err);
-            if (mensaje_formulario)
-                mensaje_formulario.textContent =
-                    "Error cargando el patrocinador. Observa la consola.";
+            console.error("Error cargando patrocinador:", err);
+            if (mensaje_formulario) {
+                mensaje_formulario.textContent = "Error cargando el patrocinador. Observa la consola.";
+            }
         });
 }
 
-
 // Validación de imagen
-const uploadBox = document.getElementById("image-upload");
-
 input_imagen.addEventListener("change", () => {
     const file = input_imagen.files[0];
-
     if (!file) return;
 
     if (!["image/jpeg", "image/png"].includes(file.type)) {
@@ -179,34 +232,76 @@ input_imagen.addEventListener("change", () => {
     };
     reader.readAsDataURL(file);
 
+    // Importante: si vuelves a elegir el mismo archivo, algunos navegadores no disparan change
     input_imagen.value = "";
-
 });
 
-
-// Verificamos cuando se envíe
+// Submit
 if (form_patrocinador) {
     form_patrocinador.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        const nombre = input_nombre.value;
+        mensaje_formulario.textContent = "";
+
+        const nombre = input_nombre.value.trim();
+        const color = input_color.value.trim();
+        const web = input_web.value.trim();
 
         // Validaciones
-        if (!nombre || !input_preview.src) {
-            mensaje_formulario.textContent = "*Por favor completa todos los campos";
+        let ok = true;
+
+        if (nombre === "") {
+            mensaje_nombre.textContent = "*Ingresa el nombre del patrocinador";
+            ok = false;
+        }
+
+        if (color === "") {
+            mensaje_color.textContent = "*El color es obligatorio";
+            ok = false;
+        } else if (!esHex6(color)) {
+            mensaje_color.textContent = "*Debe tener 6 caracteres HEX (sin #). Ej: FFAACC";
+            ok = false;
+        }
+
+        if (web !== "" && !validarWebOpcional(web)) {
+            mensaje_web.textContent = "*URL no válida. Ej: marca.com o https://marca.com";
+            ok = false;
+        }
+
+        // Imagen:
+        // - Crear: obligatoria
+        // - Editar: vale con la existente o con una nueva
+        if (!patrocinadorId) {
+            if (!imagen_seleccionada) {
+                mensaje_imagen.textContent = "*La imagen es obligatoria";
+                ok = false;
+            }
+        } else {
+            if (!imagen_seleccionada && !imagen_actual) {
+                mensaje_imagen.textContent = "*La imagen es obligatoria";
+                ok = false;
+            }
+        }
+
+        if (!ok) {
+            mensaje_formulario.textContent = "*Por favor revisa los campos marcados";
             return;
         }
 
         // Pasamos todo al PHP
-        agregar_patrocinador();
+        enviarFormulario();
     });
 }
 
 // --- Envío al PHP ---
-function agregar_patrocinador() {
+function enviarFormulario() {
     let formData = new FormData();
-    formData.append("funcion", "agregar_patrocinador");
-    formData.append("nombre", input_nombre.value);
+
+    // Si tu PHP usa "accion" (crear/editar), esto es lo importante:
+    formData.append("nombre", input_nombre.value.trim());
+    formData.append("color_hex", input_color.value.trim());
+    formData.append("web_url", input_web.value.trim()); // opcional, puede ir vacío
+
     if (imagen_seleccionada) {
         formData.append("imagen", imagen_seleccionada);
     }
@@ -236,17 +331,11 @@ function agregar_patrocinador() {
                     "../html/panel_patrocinadores.html"
                 );
             } else {
-                mostrarModal(
-                    "error",
-                    data.message
-                );
+                mostrarModal("error", data.message);
             }
         })
         .catch(error => {
-            mostrarModal(
-                "error",
-                "Error de conexión con el servidor"
-            );
+            mostrarModal("error", "Error de conexión con el servidor");
             console.error(error);
         });
 }

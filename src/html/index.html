@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Inicio</title>
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/index.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
 
@@ -39,32 +40,62 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- HERO (MODIFICADO A SLIDER DE 3 VÍDEOS) -->
     <section class="hero">
 
-        <!-- OVERLAY -->
-        <div class="hero-overlay"></div>
+        <div class="hero-slider">
 
-        <!-- CONTENT -->
-        <div class="hero-content">
-            <h1>Festival Universitario<br>de Cortometrajes</h1>
+            <!-- SLIDE 1 -->
+            <a href="subir_corto.html" class="hero-slide active">
+                <video src="../videos/video_1.mp4" autoplay muted loop playsinline></video>
+                <div class="hero-overlay"></div>
 
-            <p>
-                Descubre el talento emergente del cine universitario.
-                Participa, compite y deja tu huella en la industria cinematográfica.
-            </p>
+                <div class="hero-content">
+                    <h1>Sube tu corto</h1>
+                    <p>Participa en el festival universitario y compite por los premios.</p>
 
-            <a href="subir_corto.html" class="hero-btn">
-                Participa <i class="fa-solid fa-play"></i>
+                    <span class="hero-btn">
+                        Ver bases <i class="fa-solid fa-play"></i>
+                    </span>
+                </div>
             </a>
+
+            <!-- SLIDE 2 -->
+            <a href="bases_legales.html" class="hero-slide">
+                <video src="../videos/video_2.mp4" autoplay muted loop playsinline></video>
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+                    <h1>Bases legales</h1>
+                    <p>Consulta las normas del festival y los requisitos de participación.</p>
+                    <span class="hero-btn">
+                        Participa <i class="fa-solid fa-play"></i>
+                    </span>
+                </div>
+            </a>
+
+            <!-- SLIDE 3 -->
+            <a href="calendario.html" class="hero-slide">
+                <video src="../videos/video_3.mp4" autoplay muted loop playsinline></video>
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+                    <h1>Calendario</h1>
+                    <p>Revisa las fechas clave: inscripciones, galas y entregas.</p>
+                    <span class="hero-btn">
+                        Ver calendario <i class="fa-solid fa-play"></i>
+                    </span>
+                </div>
+            </a>
+
         </div>
 
         <!-- ARROWS -->
-        <button class="hero-arrow left">
+        <button class="hero-arrow left" type="button">
             <i class="fa-solid fa-chevron-left"></i>
         </button>
 
-        <button class="hero-arrow right">
+        <button class="hero-arrow right" type="button">
             <i class="fa-solid fa-chevron-right"></i>
         </button>
 
@@ -289,6 +320,8 @@
             </a>
         </div>
     </section>
+    <!--PATROCINADOR-->
+    <section id="banda_patrocinadores" class="banda-patrocinadores"></section>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -344,6 +377,7 @@
     </footer>
 
     <script>
+        // HAMBURGUESA
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
 
@@ -351,6 +385,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>

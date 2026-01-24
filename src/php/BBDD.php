@@ -173,10 +173,24 @@ INSERT INTO gala (anio, cartel_url, descripcion, activa) VALUES
 (2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026', TRUE);
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
-('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026);
+('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026),
+('Edu Utrilla', '23456789A', 'edu@correo.es', '$hash', NOW(), '22441925', 2026),
+('Toby Alonso', '34567890B', 'toby@correo.es', '$hash', NOW(), '22441926', 2026);
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
-(1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Corto de ejemplo 2: La venganza', 'Un corto sobre el esfuerzo y la superación en el entorno académico.', 'uploads/carteles/sombras_en_el_aula.jpg', 'uploads/cortos/sombras_en_el_aula.mp4');
+(1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
+(2, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
+(3, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4');
+
+INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
+('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'uploads/noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
+('Nuevas proyecciones y charlas para participantes', 'Se anuncian sesiones informativas sobre guion, montaje y presentación de candidaturas.', 'uploads/noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
+('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'uploads/noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1);
+
+INSERT INTO evento (titulo, descripcion, localizacion, fecha, hora, id_admin) VALUES
+('Taller de Pitch para Cortos', 'Sesión práctica para preparar la presentación del corto ante jurado y público.', 'Edificio A', '2026-01-05', '18:00', 1),
+('Masterclass: Montaje y Ritmo Narrativo', 'Claves de edición para mejorar ritmo, tensión y coherencia en cortometrajes.', 'Edificio B', '2026-01-06', '19:30', 1),
+('Encuentro Online de Preguntas y Respuestas', 'Resolución de dudas sobre entregas, formatos y evaluación del Festival de Cortos UEM.', 'Online', '2026-01-07', '17:00', 1);
 
 INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) VALUES
 ('ALUMNO', 1, 'Mejor Corto (Alumno) - 1º Premio', 500.00, TRUE, 1),

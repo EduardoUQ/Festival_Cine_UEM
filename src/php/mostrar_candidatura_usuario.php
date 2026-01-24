@@ -17,7 +17,7 @@ $sql = "SELECT * FROM candidatura WHERE id_usuario = $id_usuario";
 $result = $conexion->query($sql);
 
 // Lo enviamos con un array al JS
-$canditaruas = [];
+$candidaturas = [];
 while ($row = $result->fetch_assoc()) {
     $candidaturas[] = $row;
 }

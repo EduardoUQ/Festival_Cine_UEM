@@ -66,7 +66,7 @@
         <!-- CONTENIDO -->
         <main class="content">
 
-            <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
+            <a href="../html/panel_usuario_candidatura.html" class="back-link">← Volver al listado</a>
 
             <!-- DATOS PERSONALES -->
             <section class="card">
@@ -74,8 +74,8 @@
 
                 <div class="grid">
                     <div class="field">
-                        <h4>En proceso</h4>
-                        <p>Tu candidatura está siendo revisada por nuestro equipo</p>
+                        <h4 id="h4">En proceso</h4>
+                        <p id="parrafo">Tu candidatura está siendo revisada por nuestro equipo</p>
                     </div>
                 </div>
             </section>
@@ -83,47 +83,50 @@
             <!-- INFORMACIÓN DEL CORTO -->
             <section class="card">
                 <h3>🎬 Información del Corto</h3>
-
-                <div class="field">
-                    <label for="tituloCortometraje">Título del cortometraje</label>
-                    <input type="text" id="tituloCortometraje" disabled>
-                </div>
-
-                <div class="field">
-                    <label>Cartel / Póster</label>
-                    <div class="poster-box">
-                        <img src="../img/banner.png" alt="Cartel del corto" id="cartel">
+                <form id="formCandidatura">
+                    <div class="field">
+                        <label for="tituloCortometraje">Título del cortometraje</label>
+                        <input type="text" id="tituloCortometraje" disabled>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label for="sinopsis">Sinopsis</label>
-                    <textarea disabled id="sinopsis">
+                    <div class="field">
+                        <label for="imagen">Cartel / Póster
+                            <div class="poster-box" id="imagenBox">
+                                <input type="file" id="imagen" accept="image/png, image/jpeg" disabled>
+                                <img alt="Cartel del corto" id="cartel">
+                                <p id="mensaje_imagen"></p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="field">
+                        <label for="sinopsis">Sinopsis</label>
+                        <textarea disabled id="sinopsis">
                 </textarea>
-                </div>
-
-                <div class="field">
-                    <label>Cortometraje</label>
-                    <div class="video-box">
-                        <div class="play-button">▶</div>
                     </div>
-                </div>
+
+                    <div class="field">
+                        <label>Cortometraje</label>
+                        <div class="video-box">
+                            <video controls id="video"></video>
+                        </div>
+                    </div>
             </section>
 
             <!-- MENSAJE DE RECHAZO -->
-            <section class="card">
+            <!-- <section class="card">
                 <h3>✉️ Mensaje en caso de rechazo</h3>
 
                 <textarea
                     placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
-            </section>
+            </section> -->
 
             <!-- ACCIONES -->
             <div class="actions">
-                <button class="btn reject">Rechazar</button>
-                <button class="btn accept">Aceptar</button>
+                <button type="button" class="btn reject" id="editar">Editar</button>
+                <button type="submit" class="btn accept" id="enviar">Enviar Cambios</button>
             </div>
-
+            </form>
         </main>
     </div>
 
@@ -181,6 +184,24 @@
         </div>
     </footer>
 
+    <!-- MODAL CONFIRMACIÓN -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-icon success" id="modalIcon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <h3 id="modalTitle">Cambios guardados</h3>
+            <p id="modalMessage">
+                Tus candidatura se ha actualizado correctamente.
+            </p>
+
+            <button class="btn btn-primary" id="modalCloseBtn">
+                Aceptar
+            </button>
+        </div>
+    </div>
+
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
@@ -189,6 +210,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/panel_usuario_detalle_candidatura.js"></script>
 </body>
 
 </html>

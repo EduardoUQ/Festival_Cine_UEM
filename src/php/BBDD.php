@@ -77,7 +77,7 @@ CREATE TABLE candidatura (
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT,
-    CHECK (estado IN ('PENDIENTE','ACEPTADA','RECHAZADA','NOMINADA','PREMIADA')),
+    CHECK (estado IN ('PENDIENTE','ACEPTADA','RECHAZADA','NOMINADA','PREMIADA','SUBSANAR')),
     CHECK (categoria IN ('ALUMNO','ALUMNI'))
 ) ENGINE=InnoDB;
 
@@ -179,7 +179,7 @@ INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
 (1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
-(2, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
+(2, 1, 'SUBSANAR', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
 (3, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES

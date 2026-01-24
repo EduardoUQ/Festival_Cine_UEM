@@ -3,12 +3,14 @@ session_start();
 require_once "conexion.php";
 header('Content-Type: application/json; charset=utf-8');
 
-function respuesta_error($msg) {
+function respuesta_error($msg)
+{
     echo json_encode(["status" => "error", "message" => $msg]);
     exit;
 }
 
-function limpiar($s) {
+function limpiar($s)
+{
     return trim((string)$s);
 }
 
@@ -308,6 +310,8 @@ try {
     $_SESSION["id"] = $id_usuario;
     $_SESSION["email"] = $email;
     $_SESSION["nombre_apellidos"] = $nombre_apellidos;
+    $_SESSION["anio_graduacion"] = $anio_graduacion;
+
 
     /* ====== Commit ====== */
     $conexion->commit();
@@ -318,7 +322,6 @@ try {
         "id_candidatura" => $id_candidatura
     ]);
     exit;
-
 } catch (Exception $e) {
     $conexion->rollback();
     respuesta_error($e->getMessage());

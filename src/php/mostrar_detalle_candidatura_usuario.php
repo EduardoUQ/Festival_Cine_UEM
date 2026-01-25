@@ -4,8 +4,6 @@ include("conexion.php");
 header('Content-Type: application/json; charset=utf-8');
 
 // Solo usuarios
-
-
 if (
     !isset($_SESSION["rol"]) ||
     ($_SESSION["rol"] !== "usuario" && $_SESSION["rol"] !== "admin")
@@ -14,6 +12,7 @@ if (
     echo json_encode(["status" => "error", "message" => "No autorizado"]);
     exit;
 }
+
 if (!isset($_GET["id"])) {
     echo json_encode(["status" => "error", "message" => "Falta el id"]);
     exit;

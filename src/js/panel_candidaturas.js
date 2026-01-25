@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab");
     const filas = document.querySelectorAll("tbody tr");
 
+
+
+
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
             // 1. Activar pestaña seleccionada
@@ -80,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tr.innerHTML = `
                 <td>${candidatura.titulo}</td>
                 <td>${candidatura.categoria}</td>
-                <td>${candidatura.estado}</td>
+                <td>${candidatura.participante}</td>
                 <td>${candidatura.estado}</td>
                 <td>
                 <a class="btn" href="panel_detalle_candidatura.html?id=${encodeURIComponent(candidatura.id)}">Ver candidatura</a>

@@ -14,32 +14,69 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-$id_admin = (int) $_SESSION['id'];
+/* =========================
+   HELPERS
+========================= */
+function json_error($msg)
+{
+    echo json_encode(["status" => "error", "message" => $msg]);
+    exit;
+}
+
+function getGalaActivaId($conexion)
+{
+    $res = $conexion->query("SELECT id FROM gala WHERE activa = TRUE LIMIT 1");
+    if (!$res || $res->num_rows === 0) return null;
+    $row = $res->fetch_assoc();
+    return (int) $row["id"];
+}
 
 /* =========================
    DATOS COMUNES
 ========================= */
-// $accion    = $_POST['accion'] ?? null;
-$nombre    = trim($_POST['nombre'] ?? "");
+$nombre = trim($_POST['nombre'] ?? "");
 $correo = trim($_POST['correo'] ?? "");
-$numero     = $_POST['numero'] ?? "";
-// $id        = isset($_POST['id']) ? (int) $_POST['id'] : null;s
+$numero = trim($_POST['numero'] ?? "");
+$id_premio = (int) ($_POST['id_premio'] ?? 0);
 
 /* =========================
    VALIDACIONES GENERALES
 ========================= */
+if ($id_premio <= 0) {
+    json_error("Premio honorífico inválido");
+}
+
 if ($nombre === "" || $correo === "" || $numero === "") {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Todos los campos son obligatorios"
-    ]);
-    exit;
+    json_error("Todos los campos son obligatorios");
+}
+
+$id_gala = getGalaActivaId($conexion);
+if (!$id_gala) {
+    json_error("No hay gala activa");
+}
+
+// Validar que el premio es honorífico (puesto=0) y activo
+$stmtP = $conexion->prepare("SELECT 1 FROM premio WHERE id = ? AND activa = TRUE AND puesto = 0 LIMIT 1");
+$stmtP->bind_param("i", $id_premio);
+$stmtP->execute();
+$resP = $stmtP->get_result();
+if (!$resP || $resP->num_rows === 0) {
+    json_error("El premio no es honorífico o no está activo");
+}
+
+// Validar que no existe ya (id_gala,id_premio)
+$stmtChk = $conexion->prepare("SELECT 1 FROM ganador_honorifico WHERE id_gala = ? AND id_premio = ? LIMIT 1");
+$stmtChk->bind_param("ii", $id_gala, $id_premio);
+$stmtChk->execute();
+$resChk = $stmtChk->get_result();
+if ($resChk && $resChk->num_rows > 0) {
+    json_error("Este premio honorífico ya tiene un ganador asignado.");
 }
 
 /* =========================
-   CONFIG IMÁGENES
+   CONFIG VÍDEO
 ========================= */
-$tiposPermitidos = ["video/mp4", "video/omv"];
+$tiposPermitidos = ["video/mp4", "video/quicktime"];
 $maxSize = 50 * 1024 * 1024;
 
 // rutas
@@ -57,34 +94,28 @@ if (!is_dir($rutaFisica)) {
 function subir_video($file, $tiposPermitidos, $maxSize, $rutaFisica, $rutaWeb)
 {
     if (!in_array($file['type'], $tiposPermitidos)) {
-        return ["error" => "Formato de video no permitido"];
+        return ["error" => "Formato de vídeo no permitido (solo MP4 o MOV)"];
     }
 
     if ($file['size'] > $maxSize) {
-        return ["error" => "La imagen supera los 50MB"];
+        return ["error" => "El vídeo supera los 50MB"];
     }
 
     $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $nombre = uniqid("video_") . "." . $ext;
+    $nombre = uniqid("video_") . "." . ($ext ? $ext : "mp4");
 
     if (!move_uploaded_file($file['tmp_name'], $rutaFisica . $nombre)) {
-        return ["error" => "Error al subir el video"];
+        return ["error" => "Error al subir el vídeo"];
     }
 
     return ["ok" => $rutaWeb . $nombre];
 }
 
 /* =========================
-   CREAR NOTICIA
+   CREAR GANADOR HONORÍFICO
 ========================= */
-// if ($accion === "crear") {
-
 if (!isset($_FILES['video'])) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "El video es obligatorio"
-    ]);
-    exit;
+    json_error("El vídeo es obligatorio");
 }
 
 $resultado = subir_video(
@@ -96,122 +127,29 @@ $resultado = subir_video(
 );
 
 if (isset($resultado['error'])) {
-    echo json_encode([
-        "status" => "error",
-        "message" => $resultado['error']
-    ]);
-    exit;
+    json_error($resultado['error']);
 }
-$var1 = 1;
-$var2 = 6;
+
 $sql = "INSERT INTO ganador_honorifico (id_gala, id_premio, nombre_apellidos, email, telefono, video_url)
-            VALUES (?, ?, ?, ?, ?, ?)";
+        VALUES (?, ?, ?, ?, ?, ?)";
 
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param(
     "iissss",
-    $var1,
-    $var2,
+    $id_gala,
+    $id_premio,
     $nombre,
     $correo,
     $numero,
-    $resultado['ok'],
+    $resultado['ok']
 );
 
-$stmt->execute();
+if (!$stmt->execute()) {
+    json_error("Error guardando el ganador honorífico");
+}
 
 echo json_encode([
     "status" => "success",
-    "message" => "Ganador asignado correctamente"
+    "message" => "Ganador honorífico asignado correctamente"
 ]);
 exit;
-// }
-
-/* =========================
-   EDITAR NOTICIA
-========================= */
-// if ($accion === "editar") {
-
-//     if (!$id) {
-//         echo json_encode([
-//             "status" => "error",
-//             "message" => "ID inválido"
-//         ]);
-//         exit;
-//     }
-
-//     // Obtener imagen actual
-//     $stmt = $conexion->prepare("SELECT imagen_url FROM noticia WHERE id = ?");
-//     $stmt->bind_param("i", $id);
-//     $stmt->execute();
-//     $res = $stmt->get_result();
-//     $noticia = $res->fetch_assoc();
-
-//     if (!$noticia) {
-//         echo json_encode([
-//             "status" => "error",
-//             "message" => "Noticia no encontrada"
-//         ]);
-//         exit;
-//     }
-
-//     $imagenFinal = $noticia['imagen_url'];
-
-//     // Si se sube nueva imagen
-//     if (isset($_FILES['imagen'])) {
-
-//         $resultado = subir_video(
-//             $_FILES['imagen'],
-//             $tiposPermitidos,
-//             $maxSize,
-//             $rutaFisica,
-//             $rutaWeb
-//         );
-
-//         if (isset($resultado['error'])) {
-//             echo json_encode([
-//                 "status" => "error",
-//                 "message" => $resultado['error']
-//             ]);
-//             exit;
-//         }
-
-//         // Borrar imagen anterior
-//         $rutaAntigua = $_SERVER['DOCUMENT_ROOT'] . $imagenFinal;
-//         if (file_exists($rutaAntigua)) {
-//             unlink($rutaAntigua);
-//         }
-
-//         $imagenFinal = $resultado['ok'];
-//     }
-
-//     $sql = "UPDATE noticia 
-//             SET nombre = ?, correo = ?, imagen_url = ?, numero = ?
-//             WHERE id = ?";
-
-//     $stmt = $conexion->prepare($sql);
-//     $stmt->bind_param(
-//         "ssssi",
-//         $nombre,
-//         $correo,
-//         $imagenFinal,
-//         $numero,
-//         $id
-//     );
-
-//     $stmt->execute();
-
-//     echo json_encode([
-//         "status" => "success",
-//         "message" => "Noticia actualizada correctamente"
-//     ]);
-//     exit;
-// }
-
-/* =========================
-   ACCIÓN NO VÁLIDA
-========================= */
-echo json_encode([
-    "status" => "error",
-    "message" => "Acción no válida"
-]);

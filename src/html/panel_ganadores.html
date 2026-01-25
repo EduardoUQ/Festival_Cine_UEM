@@ -48,7 +48,8 @@
             <div class="profile">
                 <i class="fa-solid fa-user"></i>
                 <div>
-                    <strong>Carlos Mendoza</strong>
+                    <!-- OJO: este id lo usa el JS -->
+                    <strong id="nombre">Carlos Mendoza</strong>
                     <span>Administrador</span>
                 </div>
             </div>
@@ -77,13 +78,8 @@
             <!-- SELECTOR CATEGORÍA -->
             <div class="category-select">
                 <label>Categoría</label>
-                <select>
-                    <option>Mejor cortometraje UE - 1º</option>
-                    <option>Mejor cortometraje UE - 2º</option>
-                    <option>Mejor cortometraje UE - 3º</option>
-                    <option>Mejor cortometraje Alumni - 1º</option>
-                    <option>Mejor cortometraje Alumni - 2º</option>
-                    <!-- <option>Premio Honorífico</option> -->
+                <select id="select_categoria">
+                    <option value="">Cargando categorías...</option>
                 </select>
             </div>
 
@@ -91,49 +87,24 @@
 
                 <!-- GANADOR POR CATEGORÍA -->
                 <section class="card">
-                    <h3>Premio: Primer premio (600 €)</h3>
-                    <span class="subtitle">Nominados</span>
+                    <h3>Ganadores por categoría</h3>
+                    <span class="subtitle">Selecciona un nominado por cada puesto (puedes dejar desierto)</span>
 
-                    <div class="radio-group">
-                        <label><input type="radio" name="ganador"> Cortometraje “Sombras”</label>
-                        <label><input type="radio" name="ganador"> Cortometraje “Luz Roja”</label>
-                        <label><input type="radio" name="ganador"> Cortometraje “Destino Final”</label>
-                    </div>
+                    <!-- YA OTORGADOS (se pinta al seleccionar categoría) -->
+                    <div id="contenedor_ya_otorgados" style="margin-top:16px;"></div>
 
-                    <button class="btn-primary">Guardar ganador</button>
+                    <!-- SELECTS POR PUESTO -->
+                    <div id="contenedor_puestos" style="margin-top:16px;"></div>
+
+                    <button class="btn-primary" id="btn_guardar_ganadores">Guardar ganadores</button>
                 </section>
 
                 <!-- PREMIO HONORÍFICO -->
                 <section class="card">
-                    <h3>Premio Honorífico – Ganador</h3>
-                    <form class="news-form" id="news-form">
-                        <div class="form-group">
-                            <label>Nombre completo</label>
-                            <input type="text" id="nombre_profesional" placeholder="Nombre del profesional">
-                            <p id="mensaje_nombre"></p>
-                        </div>
+                    <h3>Premios Honoríficos</h3>
+                    <span class="subtitle">Se genera un formulario por cada premio especial activo (puesto 0)</span>
 
-                        <div class="form-group">
-                            <label>Correo electrónico</label>
-                            <input type="text" id="correo" placeholder="ganador@gmail.com">
-                            <p id="mensaje_correo"></p>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Teléfono de contacto</label>
-                            <input type="number" id="numero" placeholder="987654321"></input>
-                            <p id="mensaje_numero"></p>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Video de recorrido profesional</label>
-                            <input type="file" id="video">
-                            <p id="mensaje_video"></p>
-                        </div>
-
-                        <p id="mensaje_formulario"></p>
-                        <button type="submit" id="enviar" class="btn-primary">Guardar ganador</button>
-                    </form>
+                    <div id="contenedor_honorificos" style="margin-top:16px;"></div>
                 </section>
             </div>
         </main>
@@ -192,13 +163,17 @@
         </div>
     </footer>
 
-    <!-- MODAL -->
+    <!-- MODAL MENSAJES -->
     <div id="modal_mensaje" class="modal">
         <div class="modal_contenido">
             <i id="modal_icono" class="fa-solid"></i>
-            <h2 id="modal_titulo"></h2>
+            <h3 id="modal_titulo"></h3>
             <p id="modal_texto"></p>
-            <button id="modalBtn">Aceptar</button>
+
+            <div class="modal_acciones">
+                <button id="modalBtn" type="button">Aceptar</button>
+                <button id="modalBtnCancel" type="button" style="display:none;">Cancelar</button>
+            </div>
         </div>
     </div>
 

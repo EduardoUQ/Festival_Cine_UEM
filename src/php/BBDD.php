@@ -175,12 +175,15 @@ INSERT INTO gala (anio, cartel_url, descripcion, activa) VALUES
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
 ('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026),
 ('Edu Utrilla', '23456789A', 'edu@correo.es', '$hash', NOW(), '22441925', 2026),
-('Toby Alonso', '34567890B', 'toby@correo.es', '$hash', NOW(), '22441926', 2026);
+('Toby Alonso', '34567890B', 'toby@correo.es', '$hash', NOW(), '22441926', 2026),
+('Irene del Rincón', '45678901C', 'irene@correo.es', '$hash', NOW(), '22441927', 2024);
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
 (1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
 (2, 1, 'SUBSANAR', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
-(3, 1, 'ACEPTADA', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4');
+(3, 1, 'ACEPTADA', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4'),
+(4, 1, 'NOMINADA', 'ALUMNI', NULL, 'Eco de Pantalla', 'Una antigua grabación reabre un recuerdo que parecía cerrado.', 'uploads/candidaturas/4/4/cartel.jpg', 'uploads/candidaturas/4/4/corto.mp4'),
+(1, 1, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
 ('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'uploads/noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
@@ -198,7 +201,7 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ('ALUMNO', 3, 'Mejor Corto (Alumno) - 3º Premio', 150.00, TRUE, 1),
 ('ALUMNI', 1, 'Mejor Corto (Alumni) - 1º Premio', 500.00, TRUE, 1),
 ('ALUMNI', 2, 'Mejor Corto (Alumni) - 2º Premio', 300.00, TRUE, 1),
-('ESPECIAL', 1, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
+('ESPECIAL', 0, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
 ('Canon','img/canon.png','FFFFFF','https://www.canon.es',1);

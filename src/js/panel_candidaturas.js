@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab");
     const filas = document.querySelectorAll("tbody tr");
 
+
+
+
     tabs.forEach(tab => {
         tab.addEventListener("click", () => {
             // 1. Activar pestaña seleccionada

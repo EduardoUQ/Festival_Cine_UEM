@@ -53,9 +53,24 @@
             <div class="calendario-contenedor">
 
                 <div class="calendario-header">
-                    <button id="mes-anterior" class="nav-mes">&lt;</button>
-                    <span id="titulo-mes" class="titulo-mes"></span>
-                    <button id="mes-siguiente" class="nav-mes">&gt;</button>
+                    <div class="calendario-header-spacer"></div>
+
+                    <div class="calendario-header-center">
+                        <button id="mes-anterior" class="nav-mes">&lt;</button>
+                        <span id="titulo-mes" class="titulo-mes"></span>
+                        <button id="mes-siguiente" class="nav-mes">&gt;</button>
+                    </div>
+
+                    <div class="calendar-legend" aria-label="Leyenda del calendario">
+                        <div class="legend-item">
+                            <span class="legend-swatch legend-evento" aria-hidden="true"></span>
+                            <span>Día con evento</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-swatch legend-seleccion" aria-hidden="true"></span>
+                            <span>Día seleccionado</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="calendario-grid">
@@ -75,7 +90,7 @@
 
         <div class="calendar-details">
             <div class="details-header">
-                <h4 id="detalleFecha">Selecciona un día</h4>  
+                <h4 id="detalleFecha">Selecciona un día</h4>
             </div>
 
             <div id="listaEventos"></div>

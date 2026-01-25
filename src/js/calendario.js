@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((err) => {
             console.error("Error cargando eventos:", err);
 
-            // Para que al menos se pinte el calendario aunque falle el fetch
+            //Para que al menos se pinte el calendario aunque falle el fetch
             generarCalendario();
             inicializarNavegacionMeses();
         });

@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tr.innerHTML = `
                 <td>${candidatura.titulo}</td>
                 <td>${candidatura.categoria}</td>
-                <td>${candidatura.estado}</td>
+                <td>${candidatura.participante}</td>
                 <td>${candidatura.estado}</td>
                 <td>
                 <a class="btn" href="panel_detalle_candidatura.html?id=${encodeURIComponent(candidatura.id)}">Ver candidatura</a>

@@ -1,10 +1,11 @@
 // Variables del formulario de datos
-const nombreForm = document.getElementById("nombreForm");
+const nombreUsuario = document.getElementById("nombreForm");
 const dni = document.getElementById("dni");
 const expediente = document.getElementById("expediente");
 const email = document.getElementById("email")
 
 // Variables del corto
+const tituloCorto = document.getElementById("tituloCortometraje");
 const cartel = document.getElementById("cartel");
 const sinopsis = document.getElementById("sinopsis");
 const video = document.getElementById("video");
@@ -28,13 +29,12 @@ const candidaturaId = getCandidaturaIdFromUrl();
 // Cargar los datos del usuario
 document.addEventListener("DOMContentLoaded", () => {
     // Cargamos los datos del perfil del usuario
-    fetch("../php/mostrar_usuario_datos.php")
+    fetch(`../php/mostrar_usuario_datos.php?id=${encodeURIComponent(candidaturaId)}`)
         .then(res => res.json())
         .then((data) => {
-            console.log(data);
             const d = data.datos;
             console.log(d)
-            nombreForm.value = d.nombre_apellidos ?? "";
+            nombreUsuario.value = d.nombre_apellidos ?? "";
             dni.value = d.dni ?? "";
             expediente.value = d.num_expediente ?? "";
             email.value = d.email ?? "";

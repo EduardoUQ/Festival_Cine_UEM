@@ -1,3 +1,28 @@
+let fechaActual = new Date();
+let fechaSeleccionadaActual = null;
+
+let eventosBD = [];
+let mapaEventosPorFecha = {};
+
+document.addEventListener("DOMContentLoaded", function () {
+    cargarEventosBD()
+        .then(() => {
+            generarCalendario();
+            inicializarNavegacionMeses();
+
+            const hoyStr = formatearYYYYMMDD(new Date());
+            seleccionarDiaPorFecha(hoyStr);
+        })
+        .catch((err) => {
+            console.error("Error cargando eventos:", err);
+
+            // Para que al menos se pinte el calendario aunque falle el fetch
+            generarCalendario();
+            inicializarNavegacionMeses();
+        });
+});
+
+
 function cargarEventosBD() {
     let formData = new FormData();
     formData.append("funcion", "listar_eventos");

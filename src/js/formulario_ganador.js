@@ -50,14 +50,20 @@ const modalIcono = document.getElementById("modal_icono");
 const modalTitulo = document.getElementById("modal_titulo");
 const modalTexto = document.getElementById("modal_texto");
 const modalBtn = document.getElementById("modalBtn");
+const modalBtnCancel = document.getElementById("modalBtnCancel");
 
 let redireccion = null;
+let onConfirm = null;
 
 function mostrarModal(tipo, mensaje, redirect = null) {
   modal.className = "modal mostrar";
 
   modalIcono.className = "fa-solid";
   modal.classList.remove("modal_exito", "modal_error");
+
+  // Ocultamos cancel por defecto
+  if (modalBtnCancel) modalBtnCancel.style.display = "none";
+  onConfirm = null;
 
   if (tipo === "success") {
     modal.classList.add("modal_exito");
@@ -73,12 +79,46 @@ function mostrarModal(tipo, mensaje, redirect = null) {
   redireccion = redirect;
 }
 
+// Modal de confirmación (con Cancelar)
+function mostrarModalConfirmacion(mensaje, callbackConfirm) {
+  modal.className = "modal mostrar";
+
+  modalIcono.className = "fa-solid";
+  modal.classList.remove("modal_exito", "modal_error");
+  modal.classList.add("modal_error"); // visual rojo típico de “acción peligrosa”
+
+  modalIcono.classList.add("fa-triangle-exclamation");
+  modalTitulo.textContent = "Confirmación";
+  modalTexto.textContent = mensaje;
+
+  redireccion = null;
+  onConfirm = callbackConfirm;
+
+  if (modalBtnCancel) modalBtnCancel.style.display = "inline-block";
+}
+
 if (modalBtn) {
   modalBtn.addEventListener("click", () => {
     modal.classList.remove("mostrar");
+
+    if (onConfirm) {
+      const fn = onConfirm;
+      onConfirm = null;
+      fn();
+      return;
+    }
+
     if (redireccion) {
       window.location.href = redireccion;
     }
+  });
+}
+
+if (modalBtnCancel) {
+  modalBtnCancel.addEventListener("click", () => {
+    modal.classList.remove("mostrar");
+    onConfirm = null;
+    redireccion = null;
   });
 }
 
@@ -102,6 +142,24 @@ let ganadoresOtorgados = []; // [{id_premio, puesto, nombre, titulo}]
 function inicializarPanelGanadores() {
   cargarCategoriasPremios();
   cargarHonorificos();
+
+  // Delegación para borrar ganador desde “ya otorgados”
+  if (contenedorYaOtorgados) {
+    contenedorYaOtorgados.addEventListener("click", (e) => {
+      const icon = e.target.closest(".js-borrar");
+      if (!icon) return;
+
+      const idPremio = icon.getAttribute("data-id-premio");
+      const categoria = selectCategoria ? selectCategoria.value : "";
+
+      if (!idPremio || !categoria) return;
+
+      mostrarModalConfirmacion(
+        "¿Seguro que quieres borrar este ganador? Se eliminará el registro y la candidatura volverá a NOMINADA.",
+        () => borrarGanador(idPremio, categoria)
+      );
+    });
+  }
 
   if (selectCategoria) {
     selectCategoria.addEventListener("change", () => {
@@ -210,7 +268,7 @@ function cargarDatosCategoria(categoria) {
 }
 
 // =======================
-// Pintar ya otorgados
+// Pintar ya otorgados + papelera
 // =======================
 function pintarYaOtorgados() {
   if (!contenedorYaOtorgados) return;
@@ -227,7 +285,12 @@ function pintarYaOtorgados() {
 
   ganadoresOtorgados.forEach((g) => {
     const txt = `Puesto ${g.puesto}: ${g.titulo} — ${g.nombre}`;
-    html += `<div style="margin:6px 0;color:#e5e5e5;">${escapeHtml(txt)}</div>`;
+    html += `
+      <div style="margin:6px 0;color:#e5e5e5;display:flex;justify-content:space-between;gap:12px;align-items:center;">
+        <span>${escapeHtml(txt)}</span>
+        <i class="fa-solid fa-trash js-borrar" data-id-premio="${g.id_premio}" style="cursor:pointer;"></i>
+      </div>
+    `;
   });
 
   html += `</div>`;
@@ -245,7 +308,7 @@ function pintarSelectsPorPuesto() {
     return;
   }
 
-  // Opciones de nominados iguales para todos los selects (como quieres)
+  // Opciones de nominados iguales para todos los selects
   let options = `<option value="">(Dejar desierto)</option>`;
   if (!nominadosCategoria.length) {
     options += `<option value="" disabled>No hay nominados en esta categoría</option>`;
@@ -288,7 +351,6 @@ function guardarGanadores() {
     return;
   }
 
-  // Recogemos selecciones (permitiendo vacío)
   const payload = [];
   const usados = new Set();
 
@@ -300,7 +362,6 @@ function guardarGanadores() {
 
     if (!idPremio || !puesto) continue;
 
-    // Validación cliente: no misma candidatura en dos puestos (si no está vacío)
     if (idCandidatura) {
       if (usados.has(idCandidatura)) {
         mostrarModal("error", "No puedes premiar la misma candidatura en dos puestos distintos.");
@@ -323,7 +384,6 @@ function guardarGanadores() {
   })
     .then((data) => {
       if (data.status === "success") {
-        // Recargar página al aceptar
         mostrarModal("success", data.message || "Ganadores guardados correctamente", "../html/panel_ganadores.html");
       } else {
         mostrarModal("error", data.message || "No se pudieron guardar los ganadores");
@@ -336,7 +396,29 @@ function guardarGanadores() {
 }
 
 // =======================
-// HONORÍFICOS: un formulario por cada premio puesto=0 activo
+// Borrar ganador
+// =======================
+function borrarGanador(idPremio, categoria) {
+  postJSON("../php/panel_ganadores.php", {
+    funcion: "borrar_ganador",
+    id_premio: idPremio,
+    categoria: categoria
+  })
+    .then((data) => {
+      if (data.status === "success") {
+        mostrarModal("success", data.message || "Ganador borrado correctamente", "../html/panel_ganadores.html");
+      } else {
+        mostrarModal("error", data.message || "No se pudo borrar el ganador");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      mostrarModal("error", "Error de conexión con el servidor");
+    });
+}
+
+// =======================
+// HONORÍFICOS (igual que antes)
 // =======================
 function cargarHonorificos() {
   if (!contenedorHonorificos) return;
@@ -392,7 +474,6 @@ function cargarHonorificos() {
 
       contenedorHonorificos.innerHTML = html;
 
-      // Bind submit por cada formulario
       const forms = document.querySelectorAll(".form-honorifico");
       for (let i = 0; i < forms.length; i++) {
         forms[i].addEventListener("submit", function (e) {
@@ -421,7 +502,6 @@ function enviarHonorifico(formEl) {
     return;
   }
 
-  // Validación mínima de video (tipo/tamaño)
   const tiposPermitidos = ["video/mp4", "video/quicktime"];
   if (!tiposPermitidos.includes(video.type)) {
     mostrarModal("error", "Formato de vídeo no válido (solo MP4 o MOV).");

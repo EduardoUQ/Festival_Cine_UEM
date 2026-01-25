@@ -38,6 +38,25 @@ function getGalaActivaId($conexion)
     return (int) $row["id"];
 }
 
+/* =========================
+   BORRADO RECURSIVO DE CARPETA (ganadores)
+========================= */
+function borrar_directorio($dir)
+{
+    if (!is_dir($dir)) return;
+    $items = scandir($dir);
+    foreach ($items as $item) {
+        if ($item === "." || $item === "..") continue;
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+        if (is_dir($path)) {
+            borrar_directorio($path);
+        } else {
+            @unlink($path);
+        }
+    }
+    @rmdir($dir);
+}
+
 $funcion = $_POST["funcion"] ?? "";
 
 /* =========================
@@ -85,9 +104,6 @@ if ($funcion === "get_honorificos") {
 
 /* =========================
    GET DATOS CATEGORÍA
-   - Premios (puesto>0 activos)
-   - Nominados (estado NOMINADA)
-   - Ganadores ya otorgados (ganador_corto)
 ========================= */
 if ($funcion === "get_datos_categoria") {
 
@@ -170,8 +186,6 @@ if ($funcion === "get_datos_categoria") {
 
 /* =========================
    GUARDAR GANADORES (ganador_corto)
-   - Copia archivos a ganadores/(id_gala)/(categoria)/premioX/
-   - Cambia candidatura a PREMIADA
 ========================= */
 if ($funcion === "guardar_ganadores") {
 
@@ -187,7 +201,7 @@ if ($funcion === "guardar_ganadores") {
     $datos = json_decode($datosJson, true);
     if (!is_array($datos)) json_error("Datos inválidos");
 
-    // 1) Validación: no duplicar candidatura entre puestos (solo no vacías)
+    // 1) Validación: no duplicar candidatura entre puestos
     $seen = [];
     foreach ($datos as $d) {
         $idC = trim($d["id_candidatura"] ?? "");
@@ -212,12 +226,12 @@ if ($funcion === "guardar_ganadores") {
     }
     if (!count($premiosValidos)) json_error("No hay premios válidos para esa categoría.");
 
-    // 3) Antes de insertar: validar que (id_gala,id_premio) no exista ya (si se intenta premiar)
+    // 3) Validar que (id_gala,id_premio) no exista ya (si se intenta premiar)
     foreach ($datos as $d) {
         $idPremio = (int) ($d["id_premio"] ?? 0);
         $idC = trim($d["id_candidatura"] ?? "");
 
-        if ($idC === "") continue; // desierto
+        if ($idC === "") continue;
         if (!isset($premiosValidos[$idPremio])) json_error("Premio inválido para la categoría seleccionada.");
 
         $stmtChk = $conexion->prepare("SELECT 1 FROM ganador_corto WHERE id_gala = ? AND id_premio = ? LIMIT 1");
@@ -236,7 +250,7 @@ if ($funcion === "guardar_ganadores") {
         $puesto   = (int) ($d["puesto"] ?? 0);
         $idC      = trim($d["id_candidatura"] ?? "");
 
-        if ($idC === "") continue; // desierto
+        if ($idC === "") continue;
         if (!isset($premiosValidos[$idPremio])) json_error("Premio inválido para la categoría seleccionada.");
 
         // Validar candidatura y obtener datos completos
@@ -262,13 +276,9 @@ if ($funcion === "guardar_ganadores") {
         $cortoUrl  = $rowC["corto_url"];
         $nombreGanador = $rowC["nombre_apellidos"];
 
-        // Creamos carpeta destino: ganadores/(id_gala)/(categoria)/premioX/
+        // Carpeta destino: ganadores/(id_gala)/(categoria)/premioX/
         $categoriaClean = preg_replace('/[^A-Za-z0-9_\-]/', '', $categoria);
-
-        // web path (lo que se guarda en DB)
         $destWebDir = "ganadores/" . $idGala . "/" . $categoriaClean . "/premio" . $puesto . "/";
-
-        // ruta física real
         $destFisDir = __DIR__ . "/../" . $destWebDir;
 
         if (!is_dir($destFisDir)) {
@@ -331,13 +341,95 @@ if ($funcion === "guardar_ganadores") {
             json_error("Error guardando ganador en BBDD.");
         }
 
-        // Cambiar candidatura a PREMIADA (importantísimo para que no vuelva a salir)
+        // Cambiar candidatura a PREMIADA
         $stmtUpd = $conexion->prepare("UPDATE candidatura SET estado = 'PREMIADA' WHERE id = ? LIMIT 1");
         $stmtUpd->bind_param("i", $idCint);
         $stmtUpd->execute();
     }
 
     json_ok(["message" => "Ganadores guardados correctamente"]);
+}
+
+/* =========================
+   BORRAR GANADOR (ganador_corto)
+   - Borra de ganador_corto
+   - Revierte candidatura a NOMINADA
+   - Borra carpeta ganadores/.../premioX/
+========================= */
+if ($funcion === "borrar_ganador") {
+
+    $idPremio = (int) ($_POST["id_premio"] ?? 0);
+    $categoria = trim($_POST["categoria"] ?? "");
+
+    if ($idPremio <= 0) json_error("Premio inválido");
+    if ($categoria === "") json_error("Categoría inválida");
+
+    $idGala = getGalaActivaId($conexion);
+    if (!$idGala) json_error("No hay gala activa");
+
+    // 1) Obtener info del ganador (titulo/nombre) + puesto del premio
+    $stmt = $conexion->prepare("
+        SELECT g.titulo, g.nombre, p.puesto
+        FROM ganador_corto g
+        INNER JOIN premio p ON p.id = g.id_premio
+        WHERE g.id_gala = ? AND g.id_premio = ?
+        LIMIT 1
+    ");
+    $stmt->bind_param("ii", $idGala, $idPremio);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    if (!$res || $res->num_rows === 0) {
+        json_error("No existe ese ganador para este premio en la gala activa.");
+    }
+
+    $row = $res->fetch_assoc();
+    $tituloGanador = $row["titulo"];
+    $nombreGanador = $row["nombre"];
+    $puesto = (int) $row["puesto"];
+
+    // 2) Borrar carpeta de ganadores (opcional, pero recomendado)
+    $categoriaClean = preg_replace('/[^A-Za-z0-9_\-]/', '', $categoria);
+    $dirFis = __DIR__ . "/../ganadores/" . $idGala . "/" . $categoriaClean . "/premio" . $puesto . "/";
+    borrar_directorio($dirFis);
+
+    // 3) Borrar registro de ganador_corto
+    $stmtDel = $conexion->prepare("DELETE FROM ganador_corto WHERE id_gala = ? AND id_premio = ? LIMIT 1");
+    $stmtDel->bind_param("ii", $idGala, $idPremio);
+    if (!$stmtDel->execute()) {
+        json_error("No se pudo borrar el ganador de la tabla.");
+    }
+
+    // 4) Revertir candidatura a NOMINADA sin id_candidatura:
+    //    Buscamos la candidatura PREMIADA que coincida por titulo + nombre + gala + categoria
+    $stmtFind = $conexion->prepare("
+        SELECT c.id
+        FROM candidatura c
+        INNER JOIN usuario u ON u.id = c.id_usuario
+        WHERE c.id_gala = ?
+          AND c.categoria = ?
+          AND c.estado = 'PREMIADA'
+          AND c.titulo = ?
+          AND u.nombre_apellidos = ?
+        LIMIT 1
+    ");
+    $stmtFind->bind_param("isss", $idGala, $categoria, $tituloGanador, $nombreGanador);
+    $stmtFind->execute();
+    $resFind = $stmtFind->get_result();
+
+    if ($resFind && $resFind->num_rows > 0) {
+        $rowFind = $resFind->fetch_assoc();
+        $idCandidatura = (int) $rowFind["id"];
+
+        $stmtUpd = $conexion->prepare("UPDATE candidatura SET estado = 'NOMINADA' WHERE id = ? LIMIT 1");
+        $stmtUpd->bind_param("i", $idCandidatura);
+        $stmtUpd->execute();
+    } else {
+        // Aquí no rompo el borrado, pero aviso
+        json_error("Se borró el ganador, pero NO se pudo localizar la candidatura a revertir (posible título/nombre duplicado).");
+    }
+
+    json_ok(["message" => "Ganador borrado y candidatura revertida a NOMINADA"]);
 }
 
 /* =========================

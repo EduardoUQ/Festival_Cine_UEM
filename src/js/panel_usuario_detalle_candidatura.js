@@ -125,14 +125,17 @@ if (candidaturaId) {
             if (estadoCandidatura == "SUBSANAR") {
                 editar.style.display = "block";
                 enviar.style.display = "block";
-                titulo.textContent = "Pendiente de subsanación"
+                titulo.textContent = "Pendiente de subsanación";
                 parrafo.textContent = c.comentarios
-            } else if (estadoCandidatura == "RECHAZAR") {
-                titulo.textContent = "Rechazado"
+            } else if (estadoCandidatura == "RECHAZADA") {
+                titulo.textContent = "Rechazado";
                 parrafo.textContent = c.comentarios
-            } else if (estadoCandidatura == "ACEPTAR") {
-                titulo.textContent = "Aceptado"
+            } else if (estadoCandidatura == "ACEPTADA") {
+                titulo.textContent = "Aceptado";
                 parrafo.textContent = "Tu candidatura ha sido aceptada"
+            } else if (estadoCandidatura == "NOMINADA") {
+                titulo.textContent = "Nominado";
+                parrafo.textContent = "Tu candidatura ha sido nominada"
             }
         })
         .catch(err => console.error("Error cargando candidaturas:", err));

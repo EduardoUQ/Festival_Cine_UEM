@@ -147,11 +147,9 @@ tbody tr:hover {
 }
 
 /* Estados */
-.estado {
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.8em;
-}
+/* .estado {
+    background: #FF3228;
+} */
 
 .estado.pendiente {
     background: #d4af37;

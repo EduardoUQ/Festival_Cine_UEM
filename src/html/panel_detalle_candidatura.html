@@ -128,19 +128,12 @@
                 </div>
             </section>
 
-            <!-- MENSAJE DE RECHAZO -->
-            <section class="card">
-                <h3>✉️ Mensaje en caso de rechazo</h3>
-
-                <textarea
-                    placeholder="Escribe aquí el motivo del rechazo para que el participante pueda subsanar los errores..."></textarea>
-            </section>
-
             <!-- ACCIONES -->
             <div class="actions">
-                <button class="btn reject" id="rechazar">Rechazar</button>
-                <button class="btn accept" id="subsanar">subsanar</button>
-                <button class="btn accept" id="aceptar">Aceptar</button>
+                <button class="btn reject" id="btnRechazar">Rechazar</button>
+                <button class="btn accept" id="btnSubsanar">Subsanar</button>
+                <button class="btn accept" id="btnNominar">Nominar</button>
+                <button class="btn accept" id="btnAceptar">Aceptar</button>
             </div>
 
         </main>
@@ -199,6 +192,21 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de mensaje-->
+    <div class="modal hidden" id="modalAccion">
+        <div class="modal-content">
+            <h3 id="modalTitulo"></h3>
+            <p id="modalTexto"></p>
+
+            <textarea id="modalMensaje" placeholder="Escribe el mensaje..." class="hidden"></textarea>
+
+            <div class="modal-actions">
+                <button id="modalCancelar" class="btn">Cancelar</button>
+                <button id="modalConfirmar" class="btn accept">Confirmar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const hamburger = document.getElementById("hamburger");

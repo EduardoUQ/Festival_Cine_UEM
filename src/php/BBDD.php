@@ -171,30 +171,79 @@ INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
 ('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash', 'Sara Del Castillo');
 
 INSERT INTO gala (anio, cartel_url, descripcion, fecha_evento, activa) VALUES
-(2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026',2026-12-11, TRUE);
+(2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026','2026-12-11', TRUE);
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
 ('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026),
 ('Edu Utrilla', '23456789A', 'edu@correo.es', '$hash', NOW(), '22441925', 2026),
 ('Toby Alonso', '34567890B', 'toby@correo.es', '$hash', NOW(), '22441926', 2026),
-('Irene del Rincón', '45678901C', 'irene@correo.es', '$hash', NOW(), '22441927', 2024);
+('Irene del Rincón', '45678901C', 'irene@correo.es', '$hash', NOW(), '22441927', 2024),
+('Lucía Martín', '56789012D', 'lucia.martin@correo.es', '$hash', NOW(), '22441928', 2026),
+('Diego Serrano', '67890123E', 'diego.serrano@correo.es', '$hash', NOW(), '22441929', 2026),
+('Clara Vega', '78901234F', 'clara.vega@correo.es', '$hash', NOW(), '22441930', 2026),
+('Sergio Ramos', '89012345G', 'sergio.ramos@correo.es', '$hash', NOW(), '22441931', 2026),
+('Paula Ortiz', '90123456H', 'paula.ortiz@correo.es', '$hash', NOW(), '22441932', 2026),
+('Álvaro Núñez', '01234567J', 'alvaro.nunez@correo.es', '$hash', NOW(), '22441933', 2026),
+('Nerea Blanco', '11223344K', 'nerea.blanco@correo.es', '$hash', NOW(), '22441934', 2026),
+('Javier Prieto', '22334455L', 'javier.prieto@correo.es', '$hash', NOW(), '22441935', 2026),
+('Marina Soler', '33445566M', 'marina.soler@correo.es', '$hash', NOW(), '22441936', 2026),
+('Iván Cabrera', '44556677N', 'ivan.cabrera@correo.es', '$hash', NOW(), '22441937', 2026);
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
 (1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
 (2, 1, 'SUBSANAR', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
 (3, 1, 'ACEPTADA', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4'),
 (4, 1, 'NOMINADA', 'ALUMNI', NULL, 'Eco de Pantalla', 'Una antigua grabación reabre un recuerdo que parecía cerrado.', 'uploads/candidaturas/4/4/cartel.jpg', 'uploads/candidaturas/4/4/corto.mp4'),
-(1, 1, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4');
+(1, 1, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4'),
+
+(5, 1, 'PENDIENTE', 'ALUMNO', NULL, 'A Contraluz', 'Un proyecto nocturno revela la verdadera amistad del equipo.', 'uploads/candidaturas/5/6/cartel.jpg', 'uploads/candidaturas/5/6/corto.mp4'),
+(6, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg', 'uploads/candidaturas/6/7/corto.mp4'),
+(7, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Silencio en Set', 'El sonido desaparece y el equipo improvisa una solución.', 'uploads/candidaturas/7/8/cartel.jpg', 'uploads/candidaturas/7/8/corto.mp4'),
+(8, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Storyboard', 'Un cuaderno perdido cambia el rumbo del rodaje.', 'uploads/candidaturas/8/9/cartel.jpg', 'uploads/candidaturas/8/9/corto.mp4'),
+(9, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Foco', 'Una luz fundida desencadena un efecto inesperado en la escena.', 'uploads/candidaturas/9/10/cartel.jpg', 'uploads/candidaturas/9/10/corto.mp4'),
+(10, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Toma Dos', 'Repetir la escena se convierte en la clave para mejorar el corto.', 'uploads/candidaturas/10/11/cartel.jpg', 'uploads/candidaturas/10/11/corto.mp4'),
+(11, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Plano Perdido', 'Aparece una grabación que nadie recuerda haber hecho.', 'uploads/candidaturas/11/12/cartel.jpg', 'uploads/candidaturas/11/12/corto.mp4'),
+(12, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cinta Roja', 'Un simple marcador de escena se vuelve imprescindible.', 'uploads/candidaturas/12/13/cartel.jpg', 'uploads/candidaturas/12/13/corto.mp4'),
+(13, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Días de Montaje', 'Las prisas y el cansancio ponen a prueba al editor.', 'uploads/candidaturas/13/14/cartel.jpg', 'uploads/candidaturas/13/14/corto.mp4'),
+(14, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
 ('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'uploads/noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
 ('Nuevas proyecciones y charlas para participantes', 'Se anuncian sesiones informativas sobre guion, montaje y presentación de candidaturas.', 'uploads/noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
-('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'uploads/noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1);
+('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'uploads/noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1),
+
+('Se amplía el horario de asesorías de guion', 'Durante esta semana habrá tutorías extra para pulir sinopsis y estructura narrativa.', 'uploads/noticias/noticia_extra_01.png', '2026-01-26', 1),
+('Nueva tanda de revisiones técnicas de vídeo', 'El equipo técnico revisará formatos y códecs para evitar rechazos por incompatibilidad.', 'uploads/noticias/noticia_extra_02.png', '2026-01-25', 1),
+('Publicada la guía rápida de entrega de archivos', 'Recuerda nombrar correctamente el cartel y el corto y respetar las rutas de subida.', 'uploads/noticias/noticia_extra_03.png', '2026-01-24', 1),
+('Arrancan las sesiones de visionado interno', 'Se inicia el visionado previo para organizar la programación de proyecciones.', 'uploads/noticias/noticia_extra_04.png', '2026-01-23', 1),
+('Consejos de sonido para cortometrajes', 'Recomendaciones para limpiar ruido, niveles y exportar audio sin distorsión.', 'uploads/noticias/noticia_extra_05.png', '2026-01-22', 1),
+('Carteles: tamaño y proporciones recomendadas', 'Se recuerdan las proporciones y peso máximo para que se vean bien en la web.', 'uploads/noticias/noticia_extra_06.png', '2026-01-21', 1),
+('Recordatorio: categorías ALUMNO y ALUMNI', 'Comprueba tu año de graduación antes de enviar para evitar incidencias.', 'uploads/noticias/noticia_extra_07.png', '2026-01-20', 1),
+('FAQ actualizado con dudas frecuentes', 'Se actualiza el apartado de preguntas frecuentes sobre candidaturas y estados.', 'uploads/noticias/noticia_extra_08.png', '2026-01-19', 1),
+('Convocatoria de voluntariado para el festival', 'Se abre inscripción para apoyar en sala, acreditaciones y coordinación.', 'uploads/noticias/noticia_extra_09.png', '2026-01-24', 1),
+('Avance del programa de actividades', 'Se adelantan algunas masterclass y encuentros previstos para los participantes.', 'uploads/noticias/noticia_extra_10.png', '2026-01-25', 1);
 
 INSERT INTO evento (titulo, descripcion, localizacion, fecha, hora, id_admin) VALUES
 ('Taller de Pitch para Cortos', 'Sesión práctica para preparar la presentación del corto ante jurado y público.', 'Edificio A', '2026-01-05', '18:00', 1),
 ('Masterclass: Montaje y Ritmo Narrativo', 'Claves de edición para mejorar ritmo, tensión y coherencia en cortometrajes.', 'Edificio B', '2026-01-06', '19:30', 1),
-('Encuentro Online de Preguntas y Respuestas', 'Resolución de dudas sobre entregas, formatos y evaluación del Festival de Cortos UEM.', 'Online', '2026-01-07', '17:00', 1);
+('Encuentro Online de Preguntas y Respuestas', 'Resolución de dudas sobre entregas, formatos y evaluación del Festival de Cortos UEM.', 'Online', '2026-01-07', '17:00', 1),
+
+('Apertura de acreditaciones', 'Recogida de acreditaciones y pulseras de acceso para asistentes.', 'Hall Principal', '2026-12-11', '09:00', 1),
+('Ensayo técnico de proyección', 'Pruebas de vídeo, audio y subtítulos en sala antes de la gala.', 'Sala de Proyecciones', '2026-12-11', '10:00', 1),
+('Photocall y prensa', 'Paso por photocall y atención a medios y entrevistas.', 'Entrada Auditorio', '2026-12-11', '11:00', 1),
+('Mesa redonda: Producción de cortos', 'Charla con invitados sobre producción y distribución de cortometrajes.', 'Edificio A', '2026-12-11', '12:00', 1),
+('Pausa networking', 'Encuentro informal entre equipos, jurado e invitados.', 'Zona Café', '2026-12-11', '13:00', 1),
+('Comida de equipos finalistas', 'Comida organizada para finalistas y coordinación del festival.', 'Comedor Campus', '2026-12-11', '14:30', 1),
+('Apertura de puertas Gala', 'Acceso del público y acomodación en butacas.', 'Auditorio', '2026-12-11', '16:30', 1),
+('Proyección de finalistas', 'Bloque de proyección de cortometrajes finalistas.', 'Auditorio', '2026-12-11', '17:00', 1),
+('Entrega de premios', 'Ceremonia de entrega de premios por categorías.', 'Auditorio', '2026-12-11', '19:00', 1),
+('Cierre y cóctel', 'Cierre del evento con cóctel de despedida.', 'Hall Principal', '2026-12-11', '20:30', 1),
+
+('Sesión informativa: normas de entrega', 'Revisión de requisitos, formatos y fechas del festival.', 'Online', '2026-02-03', '18:00', 1),
+('Taller básico de iluminación', 'Práctica con esquemas de luz para interiores y exteriores.', 'Edificio B', '2026-02-10', '17:30', 1),
+('Clínica de montaje', 'Consejos de edición y ritmo con ejemplos de cortos.', 'Edificio A', '2026-02-17', '19:00', 1),
+('Revisión de sonido y mezcla', 'Buenas prácticas para niveles y exportación final.', 'Edificio B', '2026-02-24', '18:30', 1),
+('Q&A con coordinación del festival', 'Dudas abiertas sobre candidaturas, categorías y estados.', 'Online', '2026-02-28', '12:00', 1);
 
 INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) VALUES
 ('ALUMNO', 1, 'Mejor Corto (Alumno) - 1º Premio', 500.00, TRUE, 1),

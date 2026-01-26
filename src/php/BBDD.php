@@ -46,6 +46,7 @@ CREATE TABLE gala (
     anio INT NOT NULL UNIQUE,
     cartel_url VARCHAR(500),
     descripcion TEXT,
+    fecha_evento DATE NOT NULL,
     activa BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB;
 
@@ -169,8 +170,8 @@ CREATE TABLE ganador_honorifico (
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
 ('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash', 'Sara Del Castillo');
 
-INSERT INTO gala (anio, cartel_url, descripcion, activa) VALUES
-(2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026', TRUE);
+INSERT INTO gala (anio, cartel_url, descripcion, fecha_evento, activa) VALUES
+(2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026',2026-12-11, TRUE);
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
 ('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026),

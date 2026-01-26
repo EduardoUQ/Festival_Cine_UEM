@@ -208,20 +208,20 @@ INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, ti
 (14, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
-('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'uploads/noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
-('Nuevas proyecciones y charlas para participantes', 'Se anuncian sesiones informativas sobre guion, montaje y presentación de candidaturas.', 'uploads/noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
-('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'uploads/noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1),
+('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
+('Nuevas proyecciones y charlas para participantes', 'Se anuncian sesiones informativas sobre guion, montaje y presentación de candidaturas.', 'noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
+('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1),
 
-('Se amplía el horario de asesorías de guion', 'Durante esta semana habrá tutorías extra para pulir sinopsis y estructura narrativa.', 'uploads/noticias/noticia_extra_01.png', '2026-01-26', 1),
-('Nueva tanda de revisiones técnicas de vídeo', 'El equipo técnico revisará formatos y códecs para evitar rechazos por incompatibilidad.', 'uploads/noticias/noticia_extra_02.png', '2026-01-25', 1),
-('Publicada la guía rápida de entrega de archivos', 'Recuerda nombrar correctamente el cartel y el corto y respetar las rutas de subida.', 'uploads/noticias/noticia_extra_03.png', '2026-01-24', 1),
-('Arrancan las sesiones de visionado interno', 'Se inicia el visionado previo para organizar la programación de proyecciones.', 'uploads/noticias/noticia_extra_04.png', '2026-01-23', 1),
-('Consejos de sonido para cortometrajes', 'Recomendaciones para limpiar ruido, niveles y exportar audio sin distorsión.', 'uploads/noticias/noticia_extra_05.png', '2026-01-22', 1),
-('Carteles: tamaño y proporciones recomendadas', 'Se recuerdan las proporciones y peso máximo para que se vean bien en la web.', 'uploads/noticias/noticia_extra_06.png', '2026-01-21', 1),
-('Recordatorio: categorías ALUMNO y ALUMNI', 'Comprueba tu año de graduación antes de enviar para evitar incidencias.', 'uploads/noticias/noticia_extra_07.png', '2026-01-20', 1),
-('FAQ actualizado con dudas frecuentes', 'Se actualiza el apartado de preguntas frecuentes sobre candidaturas y estados.', 'uploads/noticias/noticia_extra_08.png', '2026-01-19', 1),
-('Convocatoria de voluntariado para el festival', 'Se abre inscripción para apoyar en sala, acreditaciones y coordinación.', 'uploads/noticias/noticia_extra_09.png', '2026-01-24', 1),
-('Avance del programa de actividades', 'Se adelantan algunas masterclass y encuentros previstos para los participantes.', 'uploads/noticias/noticia_extra_10.png', '2026-01-25', 1);
+('Se amplía el horario de asesorías de guion', 'Durante esta semana habrá tutorías extra para pulir sinopsis y estructura narrativa.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-26', 1),
+('Nueva tanda de revisiones técnicas de vídeo', 'El equipo técnico revisará formatos y códecs para evitar rechazos por incompatibilidad.', 'noticias/noticia_696f49f10b86c.png', '2026-01-25', 1),
+('Publicada la guía rápida de entrega de archivos', 'Recuerda nombrar correctamente el cartel y el corto y respetar las rutas de subida.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
+('Arrancan las sesiones de visionado interno', 'Se inicia el visionado previo para organizar la programación de proyecciones.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-23', 1),
+('Consejos de sonido para cortometrajes', 'Recomendaciones para limpiar ruido, niveles y exportar audio sin distorsión.', 'noticias/noticia_696f49f10b86c.png', '2026-01-22', 1),
+('Carteles: tamaño y proporciones recomendadas', 'Se recuerdan las proporciones y peso máximo para que se vean bien en la web.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-21', 1),
+('Recordatorio: categorías ALUMNO y ALUMNI', 'Comprueba tu año de graduación antes de enviar para evitar incidencias.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
+('FAQ actualizado con dudas frecuentes', 'Se actualiza el apartado de preguntas frecuentes sobre candidaturas y estados.', 'noticias/noticia_696f49f10b86c.png', '2026-01-19', 1),
+('Convocatoria de voluntariado para el festival', 'Se abre inscripción para apoyar en sala, acreditaciones y coordinación.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
+('Avance del programa de actividades', 'Se adelantan algunas masterclass y encuentros previstos para los participantes.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-25', 1);
 
 INSERT INTO evento (titulo, descripcion, localizacion, fecha, hora, id_admin) VALUES
 ('Taller de Pitch para Cortos', 'Sesión práctica para preparar la presentación del corto ante jurado y público.', 'Edificio A', '2026-01-05', '18:00', 1),
@@ -254,7 +254,7 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ('ESPECIAL', 0, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
-('Canon','img/canon.png','FFFFFF','https://www.canon.es',1);
+('Canon','patrocinadores/canon.png','FFFFFF','https://www.canon.es',1);
 ";
 
 if ($conexion->multi_query($sql)) {

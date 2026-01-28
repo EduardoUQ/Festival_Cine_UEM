@@ -1,216 +1,193 @@
-// Cargar la cabecera
 document.addEventListener("DOMContentLoaded", () => {
-    // 1) Cargar los datos del usuario
-    fetch("../php/session_info.php")
-        .then((response) => response.json())
-        .then((info) => {
-            if (!info.logged || info.rol !== "admin") {
-                window.location.href = "../html/login.html";
+
+    //FORM
+    const form = document.getElementById("news-form");
+
+    //INPUTS
+    const inputAnio = document.getElementById("anio");
+    const inputDescripcion = document.getElementById("descripcion");
+    const inputFechaEvento = document.getElementById("fecha_evento");
+
+    const inputLugarNombre = document.getElementById("lugar_nombre");
+    const inputLugarSubtitulo = document.getElementById("lugar_subtitulo");
+    const inputDireccion = document.getElementById("direccion");
+    const inputCapacidad = document.getElementById("capacidad");
+    const inputEstacionamiento = document.getElementById("estacionamiento");
+
+    const inputImage = document.getElementById("image");
+    const selectActiva = document.getElementById("activa");
+
+    //MENSAJES
+    const mensajeFormulario = document.getElementById("mensaje_formulario");
+    const mensajeAnio = document.getElementById("mensaje_anio");
+    const mensajeDescripcion = document.getElementById("mensaje_descripcion");
+    const mensajeFechaEvento = document.getElementById("mensaje_fecha_evento");
+    const mensajeLugarNombre = document.getElementById("mensaje_lugar_nombre");
+
+    //MODAL
+    const modal = document.getElementById("modal_mensaje");
+    const modalIcono = document.getElementById("modal_icono");
+    const modalTitulo = document.getElementById("modal_titulo");
+    const modalTexto = document.getElementById("modal_texto");
+    const modalBtn = document.getElementById("modalBtn");
+
+    let idGala = null;
+
+    function mostrarModal(tipo, mensaje) {
+        modal.className = "modal mostrar";
+        modalIcono.className = "fa-solid";
+
+        if (tipo === "success") {
+            modalIcono.classList.add("fa-circle-check");
+            modalTitulo.textContent = "Operación correcta";
+        } else {
+            modalIcono.classList.add("fa-circle-xmark");
+            modalTitulo.textContent = "Error";
+        }
+
+        modalTexto.textContent = mensaje;
+    }
+
+    modalBtn.addEventListener("click", () => {
+        modal.classList.remove("mostrar");
+    });
+
+    function limpiarMensajes() {
+        if (mensajeFormulario) mensajeFormulario.textContent = "";
+        if (mensajeAnio) mensajeAnio.textContent = "";
+        if (mensajeDescripcion) mensajeDescripcion.textContent = "";
+        if (mensajeFechaEvento) mensajeFechaEvento.textContent = "";
+        if (mensajeLugarNombre) mensajeLugarNombre.textContent = "";
+    }
+
+    //CARGAR GALA ACTIVA Y PINTAR EN EL FORM 
+    function cargarGalaActiva() {
+        let formData = new FormData();
+        formData.append("funcion", "obtener_gala_activa");
+
+        fetch("../php/formulario_gala.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status !== "success" || !data.gala) return;
+
+                const g = data.gala;
+                idGala = g.id;
+
+                inputAnio.value = g.anio || "";
+                inputDescripcion.value = g.descripcion || "";
+                inputFechaEvento.value = g.fecha_evento || "";
+
+                inputLugarNombre.value = g.lugar_nombre || "";
+                inputLugarSubtitulo.value = g.lugar_subtitulo || "";
+                inputDireccion.value = g.direccion || "";
+                inputCapacidad.value = (g.capacidad !== null && g.capacidad !== undefined) ? g.capacidad : "";
+                inputEstacionamiento.value = g.estacionamiento || "";
+
+                selectActiva.value = (g.activa == 1) ? "1" : "0";
+            })
+            .catch(() => {
+                // no bloqueamos el panel, solo no se precarga
+            });
+    }
+
+    cargarGalaActiva();
+
+    //VALIDACIÓN SIMPLE (solo vacío)
+    const campos = [
+        { input: inputAnio, mensaje: mensajeAnio, texto: "*Escribe el año" },
+        { input: inputDescripcion, mensaje: mensajeDescripcion, texto: "*Escribe la descripción" },
+        { input: inputFechaEvento, mensaje: mensajeFechaEvento, texto: "*Selecciona la fecha del evento" },
+        { input: inputLugarNombre, mensaje: mensajeLugarNombre, texto: "*Escribe el lugar" }
+    ];
+
+    campos.forEach(c => {
+        c.input.addEventListener("blur", () => {
+            if (c.input.value.trim() === "") {
+                c.mensaje.textContent = c.texto;
+                c.mensaje.style.color = "#A71D2D";
+            }
+        });
+
+        c.input.addEventListener("input", () => {
+            c.mensaje.textContent = "";
+            if (mensajeFormulario) mensajeFormulario.textContent = "";
+        });
+    });
+
+    // SUBMIT
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            limpiarMensajes();
+
+            const anio = inputAnio.value.trim();
+            const descripcion = inputDescripcion.value.trim();
+            const fecha_evento = inputFechaEvento.value;
+            const lugar_nombre = inputLugarNombre.value.trim();
+
+            //Validación mínima (solo vacío)
+            let hayError = false;
+
+            if (!anio) { mensajeAnio.textContent = "*Escribe el año"; mensajeAnio.style.color = "#A71D2D"; hayError = true; }
+            if (!descripcion) { mensajeDescripcion.textContent = "*Escribe la descripción"; mensajeDescripcion.style.color = "#A71D2D"; hayError = true; }
+            if (!fecha_evento) { mensajeFechaEvento.textContent = "*Selecciona la fecha del evento"; mensajeFechaEvento.style.color = "#A71D2D"; hayError = true; }
+            if (!lugar_nombre) { mensajeLugarNombre.textContent = "*Escribe el lugar"; mensajeLugarNombre.style.color = "#A71D2D"; hayError = true; }
+
+            if (hayError) {
+                if (mensajeFormulario) {
+                    mensajeFormulario.textContent = "Por favor completa los campos obligatorios";
+                    mensajeFormulario.style.color = "#A71D2D";
+                }
                 return;
             }
 
-            // Cargamos el nombre del Admin en el panel
-            const elNombre = document.getElementById("nombre");
-            if (elNombre) {
-                elNombre.textContent = info.nombre;
-            }
+            let formData = new FormData();
 
-            // Botón para cerrar sesión
-            const btnLogout = document.getElementById("btn_logout");
-            if (btnLogout) {
-                btnLogout.addEventListener("click", () => {
-                    fetch("../php/logout.php", { method: "POST" })
-                        .then((r) => r.json())
-                        .then((resp) => {
-                            if (resp.status === "success") {
-                                window.location.href = "../html/login.html";
-                            } else {
-                                alert("No se pudo cerrar sesión");
-                            }
-                        })
-                        .catch((err) => {
-                            console.error("Error al cerrar sesión", err);
-                            alert("Error al cerrar sesión. Observa la consola.");
-                        });
-                });
-            }
-        })
-        .catch((error) => {
-            console.error("No se pudo comprobar la sesión:", error);
-            window.location.href = "../html/login.html";
-        });
-});
-
-// Variables del formulario
-const form_gala = document.getElementById("news-form");
-const input_anio = document.getElementById("anio");
-const input_descripcion = document.getElementById("descripcion");
-const input_imagen = document.getElementById("image");
-const input_imagen2 = document.getElementById("image2");
-const select_activa = document.getElementById("activa");
-// Variables de los mensajes de error
-const mensaje_anio = document.getElementById("mensaje_anio");
-const mensaje_descripcion = document.getElementById("mensaje_descripcion");
-const mensaje_imagen = document.getElementById("mensaje_imagen");
-const mensaje_imagen2 = document.getElementById("mensaje_imagen2");
-const mensaje_activa = document.getElementById("mensaje_activa");
-const mensaje_formulario = document.getElementById("mensaje_formulario");
-
-// Creamos un array de las variables que haremos validaciones
-const campos = [
-    { input: input_anio, mensaje: mensaje_anio, texto: "*Escribe un año" },
-    { input: input_descripcion, mensaje: mensaje_descripcion, texto: "*Escribe una descripción" },
-    { input: select_activa, mensaje: mensaje_activa, texto: "*Selecciona una opción" }
-];
-
-// Validación para algunos campos 
-campos.forEach(c => {
-    c.input.addEventListener("blur", () => {
-        if (
-            c.input.type !== "file" && c.input.value.trim() === ""
-        ) {
-            c.mensaje.textContent = c.texto;
-        }
-    });
-
-    c.input.addEventListener("input", () => {
-        c.mensaje.textContent = "";
-    });
-});
-
-// Validación de imagen
-const MAX_SIZE = 2 * 1024 * 1024; // 2MB
-const TIPOS_PERMITIDOS = ["image/png", "image/jpeg"];
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-
-    // No hay archivo
-    if (!archivo) {
-        mensaje_imagen.textContent = "*Selecciona una imagen";
-        return;
-    }
-
-    // Validar tipo
-    if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
-        mensaje_imagen.textContent = "*Solo se permiten imágenes JPG o PNG";
-        input_imagen.value = ""; // limpia el input
-        return;
-    }
-
-    // Validar tamaño
-    if (archivo.size > MAX_SIZE) {
-        mensaje_imagen.textContent = "*La imagen no puede superar los 2MB";
-        input_imagen.value = "";
-        return;
-    }
-
-    // Si esta TODO OK
-    mensaje_imagen.textContent = "";
-});
-
-input_imagen.addEventListener("change", () => {
-    console.log(input_imagen.files);
-});
-
-const preview = document.getElementById("preview");
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-    if (!archivo) return;
-
-    const reader = new FileReader();
-    reader.onload = e => {
-        preview.src = e.target.result;
-        preview.style.display = "block";
-    };
-    reader.readAsDataURL(archivo);
-});
-
-// Ocultar texto de la imagen
-const uploadBox = document.getElementById("image-upload");
-
-input_imagen.addEventListener("change", () => {
-    const archivo = input_imagen.files[0];
-
-    if (!archivo) {
-        uploadBox.classList.remove("has-image");
-        return;
-    }
-
-    // Validaciones (tipo y tamaño)
-    if (!["image/png", "image/jpeg"].includes(archivo.type) ||
-        archivo.size > 2 * 1024 * 1024) {
-        uploadBox.classList.remove("has-image");
-        input_imagen.value = "";
-        return;
-    }
-
-    // Imagen correcta → ocultar descripcion
-    uploadBox.classList.add("has-image");
-});
-
-// Verificamos cuando se envíe
-if (form_gala) {
-    form_gala.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const anio = input_anio.value;
-        const descripcion = input_descripcion.value;
-        const imagen = input_imagen.files[0];
-        const imagen2 = input_imagen2.files[0];
-        const activa = select_activa.value;
-
-        // Validaciones
-        if (!anio || !descripcion || !activa || imagen.lenght === 0 || imagen2.lenght === 0) {
-            mensaje_formulario.textContent = "*Por favor completa todos los campos";
-            return;
-        }
-
-        // Pasamos todo al PHP
-        publicar_noticia(anio, descripcion, imagen, imagen2, activa);
-    });
-}
-
-// --- Envío al PHP ---
-function publicar_noticia(anio, descripcion, imagen, imagen2, activa) {
-    let formData = new FormData();
-    formData.append("funcion", "publicar_noticia");
-    formData.append("anio", anio);
-    formData.append("descripcion", descripcion);
-    formData.append("imagen", imagen);
-    formData.append("imagen2", imagen2);
-    formData.append("activa", activa);
-
-    fetch("../php/gala.php", {
-        method: "POST",
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error HTTP");
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status === "success") {
-                mostrarModal(
-                    "success",
-                    data.message,
-                    "../html/panel_gala.html"
-                );
+            if (idGala) {
+                formData.append("funcion", "actualizar_gala");
+                formData.append("id", idGala);
             } else {
-                mostrarModal(
-                    "error",
-                    data.message
-                );
+                formData.append("funcion", "crear_gala");
             }
-        })
-        .catch(error => {
-            mostrarModal(
-                "error",
-                "Error de conexión con el servidor"
-            );
-            console.error(error);
+
+            formData.append("anio", anio);
+            formData.append("descripcion", descripcion);
+            formData.append("fecha_evento", fecha_evento);
+
+            formData.append("lugar_nombre", lugar_nombre);
+            formData.append("lugar_subtitulo", inputLugarSubtitulo.value.trim());
+            formData.append("direccion", inputDireccion.value.trim());
+            formData.append("capacidad", inputCapacidad.value.trim());
+            formData.append("estacionamiento", inputEstacionamiento.value.trim());
+
+            formData.append("activa", selectActiva.value);
+
+            // Imagen opcional
+            if (inputImage && inputImage.files && inputImage.files[0]) {
+                formData.append("image", inputImage.files[0]);
+            }
+
+            fetch("../php/formulario_gala.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        mostrarModal("success", data.message || "Guardado correctamente");
+                        // recargamos datos para fijar idGala si era creación
+                        cargarGalaActiva();
+                    } else {
+                        mostrarModal("error", data.message || "No se pudo guardar");
+                    }
+                })
+                .catch(() => {
+                    mostrarModal("error", "Error de conexión con el servidor");
+                });
         });
-}
+    }
+
+});

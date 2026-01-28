@@ -46,7 +46,6 @@
 .award-card {
     position: relative;
     padding: 30px 25px;
-    border-radius: 18px;
     background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     text-align: center;
@@ -113,7 +112,6 @@
     margin-top: 80px;
     padding: 40px;
     text-align: center;
-    border-radius: 20px;
     background: linear-gradient(135deg, #2b1640, #160c25);
     /* box-shadow: 0 20px 50px rgba(120, 60, 200, 0.35); */
 }
@@ -138,7 +136,6 @@
 .honorary-badge {
     display: inline-block;
     padding: 6px 14px;
-    border-radius: 14px;
     background: rgba(255, 255, 255, 0.08);
     font-size: 0.75rem;
 }
@@ -173,7 +170,6 @@
 
 .gala-card {
     background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-    border-radius: 18px;
     padding: 30px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
@@ -192,7 +188,6 @@
     height: 42px;
     display: grid;
     place-items: center;
-    border-radius: 12px;
     font-size: 1.2rem;
 }
 
@@ -283,7 +278,6 @@
     background: rgba(212, 175, 55, 0.15);
     color: #d4af37;
     padding: 6px 14px;
-    border-radius: 20px;
     font-size: 0.7rem;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -309,7 +303,6 @@
 /* Card */
 .gala-card {
     background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
-    border-radius: 22px;
     overflow: hidden;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
     display: flex;
@@ -344,7 +337,6 @@
     color: #000;
     font-size: 0.7rem;
     padding: 6px 14px;
-    border-radius: 20px;
     font-weight: 600;
     z-index: 2;
 }
@@ -375,7 +367,6 @@
     text-align: center;
     padding: 14px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
     color: #fff;
     font-size: 0.85rem;
     text-decoration: none;

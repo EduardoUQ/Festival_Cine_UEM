@@ -115,7 +115,7 @@
             <p>Detalles sobre la ceremonia de entrega de premios y programa del evento</p>
         </div>
 
-        <div class="gala-grid">
+        <div class="gala-grid" id="">
             <!-- Localización -->
             <article class="gala-card">
                 <div class="gala-card-header">
@@ -123,27 +123,8 @@
                     <h3>Localización</h3>
                 </div>
 
-                <ul class="gala-list">
-                    <li>
-                        <strong>Auditorio Principal</strong>
-                        <span>Universidad Central · Campus Principal</span>
-                    </li>
-
-                    <li>
-                        <strong>Dirección</strong>
-                        <span>Av. Universitaria 1234, Edificio Cultural</span>
-                    </li>
-
-                    <li>
-                        <strong>Capacidad</strong>
-                        <span>500 personas</span>
-                    </li>
-
-                    <li>
-                        <strong>Estacionamiento</strong>
-                        <span>Disponible en el campus</span>
-                    </li>
-                </ul>
+                <ul class="gala-list" id="gala_localizacion">
+                    
             </article>
 
             <!-- Programa del Día -->
@@ -153,69 +134,8 @@
                     <h3>Programa del Día</h3>
                 </div>
 
-                <ul class="schedule">
-                    <li class="schedule-item">
-                        <span class="time">16:00</span>
-                        <div>
-                            <strong>Charla: El Futuro del Cine Universitario</strong>
-                            <p>Mesa redonda con profesionales del sector</p>
-                            <span class="place">Sala de Conferencias</span>
-                        </div>
-                    </li>
+                <ul class="schedule" id="schedule_gala">
 
-                    <li class="schedule-item">
-                        <span class="time">17:30</span>
-                        <div>
-                            <strong>Visionado: Cortometrajes Finalistas UE</strong>
-                            <p>Proyección de los 10 cortometrajes seleccionados</p>
-                            <span class="place">Auditorio Principal</span>
-                        </div>
-                    </li>
-
-                    <li class="schedule-item">
-                        <span class="time">18:30</span>
-                        <div>
-                            <strong>Apertura de Puertas · Gala</strong>
-                            <p>Recepción de invitados y alfombra roja</p>
-                            <span class="place">Hall Principal</span>
-                        </div>
-                    </li>
-
-                    <li class="schedule-item">
-                        <span class="time">19:30</span>
-                        <div>
-                            <strong>Ceremonia de Inauguración</strong>
-                            <p>Palabras del rector y presentación del jurado</p>
-                            <span class="place">Escenario Principal</span>
-                        </div>
-                    </li>
-
-                    <li class="schedule-item">
-                        <span class="time">20:00</span>
-                        <div>
-                            <strong>Visionado: Finalistas Alumni</strong>
-                            <p>Exhibición de trabajos de antiguos estudiantes</p>
-                            <span class="place">Auditorio Principal</span>
-                        </div>
-                    </li>
-
-                    <li class="schedule-item">
-                        <span class="time">21:00</span>
-                        <div>
-                            <strong>Gala de Entrega de Premios</strong>
-                            <p>Anuncio de ganadores y ceremonia oficial</p>
-                            <span class="place">Escenario Principal</span>
-                        </div>
-                    </li>
-
-                    <li class="schedule-item">
-                        <span class="time">22:30</span>
-                        <div>
-                            <strong>Cóctel de Clausura</strong>
-                            <p>Networking y celebración con los premiados</p>
-                            <span class="place">Terraza del Edificio Cultural</span>
-                        </div>
-                    </li>
                 </ul>
             </article>
         </div>
@@ -331,6 +251,8 @@
             nav.classList.toggle("active");
         });
     </script>
+
+    <script src="../js/gala.js"></script>
 </body>
 
 </html>

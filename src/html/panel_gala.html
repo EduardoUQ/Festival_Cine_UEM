@@ -74,19 +74,60 @@
 
             <form class="news-form" id="news-form">
 
-                <!-- TITULAR -->
+                <!-- Año -->
                 <div class="form-group">
                     <label for="anio">Año</label>
                     <input type="number" id="anio" name="anio" placeholder="Año de la gala">
                     <p id="mensaje_anio"></p>
                 </div>
 
-                <!-- CUERPO -->
+                <!-- descripcion-->
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
                     <textarea id="descripcion" name="descripcion" rows="8"
                         placeholder="Describe lo que quieras sobre la gala"></textarea>
                     <p id="mensaje_descripcion"></p>
+                </div>
+
+                <!--Fecha evento-->
+                <div class="form-group">
+                    <label for="fecha_evento">Fecha del evento</label>
+                    <input type="date" id="fecha_evento" name="fecha_evento">
+                    <p id="mensaje_fecha_evento"></p>
+                </div>
+
+                <!-- LOCALIZACIÓN -->
+                <div class="form-group">
+                    <label for="lugar_nombre">Lugar (nombre)</label>
+                    <input type="text" id="lugar_nombre" name="lugar_nombre" placeholder="Ej: Auditorio Principal">
+                    <p id="mensaje_lugar_nombre"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="lugar_subtitulo">Subtítulo</label>
+                    <input type="text" id="lugar_subtitulo" name="lugar_subtitulo"
+                        placeholder="Ej: Universidad · Campus Principal">
+                    <p id="mensaje_lugar_subtitulo"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion"
+                        placeholder="Ej: Av. Universitaria 1234, Edificio Cultural">
+                    <p id="mensaje_direccion"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="capacidad">Capacidad</label>
+                    <input type="number" id="capacidad" name="capacidad" placeholder="Ej: 500">
+                    <p id="mensaje_capacidad"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="estacionamiento">Estacionamiento</label>
+                    <input type="text" id="estacionamiento" name="estacionamiento"
+                        placeholder="Ej: Disponible en el campus">
+                    <p id="mensaje_estacionamiento"></p>
                 </div>
 
                 <!-- IMAGEN -->
@@ -101,20 +142,6 @@
                         <img id="preview">
                     </label>
                     <p id="mensaje_imagen"></p>
-                </div>
-
-                <!-- IMAGEN -->
-                <div class="form-group">
-                    <label>Imagen de Portada</label>
-
-                    <label class="image-upload" id="image-upload">
-                        <input type="file" id="image2" accept="image/png, image/jpeg">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
-                        <small>JPG o PNG · Máx 2MB</small>
-                        <img id="preview">
-                    </label>
-                    <p id="mensaje_imagen2"></p>
                 </div>
 
                 <!-- ACTIVA -->

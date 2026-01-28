@@ -254,7 +254,7 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ('ESPECIAL', 0, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
-('Canon','patrocinadores/canon.png','FFFFFF','https://www.canon.es',1);
+('Canon','patrocinadores/patrocinador_Canon.png','FFFFFF','https://www.canon.es',1);
 ";
 
 if ($conexion->multi_query($sql)) {

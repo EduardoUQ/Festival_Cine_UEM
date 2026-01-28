@@ -141,6 +141,21 @@ if ($accion === "crear") {
         exit;
     }
 
+    // --- DUPLICADO (CREAR) ---
+    $chk = $conexion->prepare("SELECT id FROM patrocinador WHERE LOWER(nombre) = LOWER(?) LIMIT 1");
+    if (!$chk) {
+        echo json_encode(["status" => "error", "message" => "Error preparando la comprobación"]);
+        exit;
+    }
+    $chk->bind_param("s", $nombre);
+    $chk->execute();
+    $rchk = $chk->get_result();
+    if ($rchk->fetch_assoc()) {
+        echo json_encode(["status" => "error", "message" => "Ya existe un patrocinador con ese nombre"]);
+        exit;
+    }
+
+
     $sql = "INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin)
             VALUES (?, ?, ?, ?, ?)";
 

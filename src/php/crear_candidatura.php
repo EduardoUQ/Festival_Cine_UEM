@@ -36,9 +36,8 @@ if ($titulo === "" || $sinopsis === "") {
     respuesta_error("Faltan datos del cortometraje");
 }
 
-/* ====== Validación EMAIL: letras/números + @ + letras/números + . + letras ====== */
-/* Ejemplos válidos: a1@b2.com, hector123@uem.es, nombre.apellido@dominio.com (OJO: este regex NO permite puntos antes de @) */
-$emailRegex = '/^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/';
+/* ====== Validación EMAIL: letras/números/simbolos + @ + letras/números/./- + . + letras (minimo 2)====== */
+$emailRegex = '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/';
 if (!preg_match($emailRegex, $email)) {
     respuesta_error("Email inválido. Formato esperado: letras/números@letras/números.letras");
 }

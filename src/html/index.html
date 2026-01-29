@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Inicio</title>
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/index.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
 
@@ -173,58 +172,8 @@
             </a>
         </div>
 
-        <div class="news-grid">
-
-            <!-- Card -->
-            <article class="news-card">
-                <span class="news-badge premios">Premios</span>
-                <img src="../img/noticia1.png" alt="Premios Festival">
-                <div class="news-content">
-                    <h3>Anunciados los Premios de este Año</h3>
-                    <p>
-                        Conoce las nuevas categorías y los increíbles premios que esperan a los
-                        ganadores del festival 2024.
-                    </p>
-                </div>
-            </article>
-
-            <article class="news-card">
-                <span class="news-badge talleres">Talleres</span>
-                <img src="../img/noticia2.png" alt="Talleres">
-                <div class="news-content">
-                    <h3>Talleres Gratuitos de Cinematografía</h3>
-                    <p>
-                        Inscríbete en nuestros talleres impartidos por profesionales de la
-                        industria cinematográfica.
-                    </p>
-                </div>
-            </article>
-
-            <article class="news-card">
-                <span class="news-badge jurado">Jurado</span>
-                <img src="../img/noticia3.png" alt="Jurado">
-                <div class="news-content">
-                    <h3>Presentamos al Jurado 2024</h3>
-                    <p>
-                        Reconocidos directores y productores evaluarán los cortometrajes
-                        participantes.
-                    </p>
-                </div>
-            </article>
-
-            <article class="news-card">
-                <span class="news-badge urgente">Urgente</span>
-                <img src="../img/noticia4.png" alt="Fecha límite">
-                <div class="news-content">
-                    <h3>Fecha Límite de Inscripción</h3>
-                    <p>
-                        Quedan solo 15 días para enviar tu cortometraje. No pierdas esta
-                        oportunidad única.
-                    </p>
-                </div>
-            </article>
-
-        </div>
+        <!-- AQUÍ SE PINTAN DESDE BBDD -->
+        <div class="news-grid" id="news_grid"></div>
     </section>
 
     <!-- PREMIOS Y GALAS -->
@@ -240,43 +189,8 @@
             </p>
         </div>
 
-        <!-- PREMIOS -->
-        <div class="awards-cards">
-
-            <article class="award-card">
-                <div class="award-icon gold">
-                    <i class="fa-solid fa-trophy"></i>
-                </div>
-                <h3>Mejor Cortometraje UE</h3>
-                <span class="award-amount">€600</span>
-                <p>
-                    Premio mayor para el ganador del concurso de la categoría alumno
-                </p>
-            </article>
-
-            <article class="award-card">
-                <div class="award-icon silver">
-                    <i class="fa-solid fa-medal"></i>
-                </div>
-                <h3>Mejor Cortometraje Alumni</h3>
-                <span class="award-amount">€700 </span>
-                <p>
-                    Premio mayor para el ganador del concurso de la categoría alumni
-                </p>
-            </article>
-
-            <article class="award-card">
-                <div class="award-icon bronze">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <h3>Premio a la Trayectoria Profesional</h3>
-                <p>
-                    Reconocimiento sobre un profesional del sector audiovisual de
-                    gran trayectoria que será el padrino del concurso
-                </p>
-            </article>
-
-        </div>
+        <!-- PREMIOS (AQUÍ SE PINTAN DESDE BBDD: una categoría por línea) -->
+        <div id="awards_by_category"></div>
 
         <!-- GALAS -->
         <h3 class="galas-title">Galas Anteriores</h3>
@@ -320,6 +234,7 @@
             </a>
         </div>
     </section>
+
     <!--PATROCINADOR-->
     <section id="banda_patrocinadores" class="banda-patrocinadores"></section>
 
@@ -376,15 +291,6 @@
         </div>
     </footer>
 
-    <script>
-        // HAMBURGUESA
-        const hamburger = document.getElementById("hamburger");
-        const nav = document.getElementById("nav");
-
-        hamburger.addEventListener("click", () => {
-            nav.classList.toggle("active");
-        });
-    </script>
     <script src="../js/index.js"></script>
 </body>
 

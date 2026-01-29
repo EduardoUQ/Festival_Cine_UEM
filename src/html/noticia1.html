@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller gratuito </title>
+    <title>Noticia</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/noticia1.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
@@ -40,69 +40,37 @@
         </div>
     </header>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="news-detail">
-
-        <!-- BREADCRUMB -->
-        <nav class="breadcrumb">
-            <a href="#">Inicio</a>
-            <span>›</span>
-            <a href="#">Noticias</a>
-            <span>›</span>
-            <span>Talleres Gratuitos de Cinematografía</span>
-        </nav>
 
         <!-- HEADER NOTICIA -->
         <header class="news-header">
-            <span class="news-tag">TALLERES</span>
-            <h1>Talleres Gratuitos de<br>Cinematografía Avanzada</h1>
+            <span class="news-tag">NOTICIA</span>
+
+            <h1 id="noticia_titulo">Cargando noticia...</h1>
+
             <div class="news-meta">
                 <i class="fa-regular fa-calendar"></i>
-                <span>10 de Noviembre, 2024</span>
+                <span id="noticia_fecha">—</span>
             </div>
         </header>
 
         <!-- IMAGEN -->
         <div class="news-image">
-            <img src="../img/taller_gratuito.png" alt="Talleres de cinematografía">
+            <img id="noticia_img" src="../img/noticia1.png" alt="Noticia">
         </div>
 
         <!-- CONTENIDO -->
         <article class="news-content">
-            <p>
-                El festival CINEFEST se complace en anunciar una serie de talleres gratuitos de
-                cinematografía avanzada, diseñados para potenciar el talento de jóvenes cineastas.
-            </p>
-
-            <blockquote>
-                “Nuestro objetivo es proporcionar herramientas y conocimientos que permitan a la
-                próxima generación de cineastas contar sus historias con una voz visual propia.”
-                <span>— Dirección del Festival</span>
-            </blockquote>
-
-            <p>
-                Los participantes tendrán acceso a equipos de última generación y trabajarán en
-                proyectos prácticos que cubrirán desde la dirección de fotografía hasta la postproducción.
-            </p>
-
-            <ul>
-                <li>Iluminación cinematográfica y narrativa visual</li>
-                <li>Dirección de fotografía para distintos géneros</li>
-                <li>Edición y corrección de color en postproducción</li>
-            </ul>
-
-            <p>
-                Para más información sobre el proceso de inscripción y requisitos, visita la sección
-                de Bases del Concurso en nuestro sitio web.
+            <p id="noticia_contenido">
+                Cargando contenido...
             </p>
         </article>
 
         <!-- ACCIONES -->
         <div class="news-actions">
-            <a href="#" class="btn btn-secondary">
-                <i class="fa-solid fa-pen"></i> Editar
-            </a>
-            <a href="#" class="btn btn-danger">
-                <i class="fa-solid fa-trash"></i> Borrar
+            <a href="noticias.html" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Volver a Noticias
             </a>
         </div>
 
@@ -121,37 +89,19 @@
                     El festival universitario de cortometrajes más importante de la región,
                     promoviendo el talento cinematográfico emergente.
                 </p>
-                <!-- <div class="social-links"> -->
-                <!-- <i class="fa-brands fa-facebook-f"></i> -->
-                <!-- <i class="fa-brands fa-instagram"></i> -->
-                <!-- <i class="fa-brands fa-youtube"></i> -->
-                <!-- <a href="#" aria-label="YouTube">▶</a> -->
-                <!-- </div> -->
             </div>
 
             <!-- FESTIVAL -->
             <div class="footer-column">
                 <h4>Festival</h4>
                 <ul>
-                    <li><a href="#">Sube tu corto</a></li>
-                    <li><a href="#">Bases legales</a></li>
-                    <li><a href="#">Noticias</a></li>
+                    <li><a href="subir_corto.html">Sube tu corto</a></li>
+                    <li><a href="bases_legales.html">Bases legales</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
                     <li><a href="#">Galas</a></li>
-                    <li><a href="#">Calendario</a></li>
+                    <li><a href="calendario.html">Calendario</a></li>
                 </ul>
             </div>
-
-            <!-- PARTICIPANTES -->
-            <!-- <div class="footer-column">
-                <h4>Participantes</h4>
-                <ul>
-                    <li><a href="#">Subir Cortometraje</a></li>
-                    <li><a href="#">Crear Cuenta</a></li>
-                    <li><a href="#">Iniciar Sesión</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Soporte</a></li>
-                </ul>
-            </div> -->
 
             <!-- CONTACTO -->
             <div class="footer-column">
@@ -162,13 +112,9 @@
                     <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
                 </ul>
                 <div class="social-links">
-                    <!-- <i class="fa-brands fa-facebook-f"></i> -->
                     <i class="fa-brands fa-instagram"></i>
-                    <!-- <i class="fa-brands fa-youtube"></i> -->
-                    <!-- <a href="#" aria-label="YouTube">▶</a> -->
                 </div>
             </div>
-
 
         </div>
 
@@ -184,13 +130,20 @@
     </footer>
 
     <script>
+        // HAMBURGUESA
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
 
-        hamburger.addEventListener("click", () => {
-            nav.classList.toggle("active");
-        });
+        if (hamburger && nav) {
+            hamburger.addEventListener("click", () => {
+                nav.classList.toggle("active");
+            });
+        }
     </script>
+
+    <!-- JS DETALLE NOTICIA -->
+    <script src="../js/noticia1.js"></script>
+
 </body>
 
 </html>

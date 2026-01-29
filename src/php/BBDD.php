@@ -213,20 +213,57 @@ INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, ti
 (14, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
-('Arranca la semana del Festival de Cortos UEM', 'Ya están abiertas las actividades previas y la cuenta atrás para la gala de 2026.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
-('Nuevas proyecciones y charlas para participantes', 'Se anuncian sesiones informativas sobre guion, montaje y presentación de candidaturas.', 'noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
-('Publicadas las bases definitivas y fechas clave', 'Consulta el calendario oficial, requisitos de entrega y criterios de evaluación del jurado.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1),
+('Arranca la semana del Festival de Cortos UEM',
+'Arranca la semana del Festival de Cortos UEM con actividades previas y acciones de apoyo a participantes. Durante estos días se habilitan puntos de información, se amplían horarios de consulta y se publican recordatorios con fechas clave del proceso. Si todavía no has revisado tu candidatura, este es el mejor momento para comprobar que cartel y vídeo cumplen las especificaciones. Además, el equipo de organización compartirá consejos prácticos para evitar errores habituales en la subida de archivos y en la cumplimentación del formulario. La cuenta atrás para la gala de 2026 ya está en marcha y queremos que llegues a tiempo con todo correcto.',
+'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
 
-('Se amplía el horario de asesorías de guion', 'Durante esta semana habrá tutorías extra para pulir sinopsis y estructura narrativa.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-26', 1),
-('Nueva tanda de revisiones técnicas de vídeo', 'El equipo técnico revisará formatos y códecs para evitar rechazos por incompatibilidad.', 'noticias/noticia_696f49f10b86c.png', '2026-01-25', 1),
-('Publicada la guía rápida de entrega de archivos', 'Recuerda nombrar correctamente el cartel y el corto y respetar las rutas de subida.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
-('Arrancan las sesiones de visionado interno', 'Se inicia el visionado previo para organizar la programación de proyecciones.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-23', 1),
-('Consejos de sonido para cortometrajes', 'Recomendaciones para limpiar ruido, niveles y exportar audio sin distorsión.', 'noticias/noticia_696f49f10b86c.png', '2026-01-22', 1),
-('Carteles: tamaño y proporciones recomendadas', 'Se recuerdan las proporciones y peso máximo para que se vean bien en la web.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-21', 1),
-('Recordatorio: categorías ALUMNO y ALUMNI', 'Comprueba tu año de graduación antes de enviar para evitar incidencias.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
-('FAQ actualizado con dudas frecuentes', 'Se actualiza el apartado de preguntas frecuentes sobre candidaturas y estados.', 'noticias/noticia_696f49f10b86c.png', '2026-01-19', 1),
-('Convocatoria de voluntariado para el festival', 'Se abre inscripción para apoyar en sala, acreditaciones y coordinación.', 'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
-('Avance del programa de actividades', 'Se adelantan algunas masterclass y encuentros previstos para los participantes.', 'noticias/noticia_6970a6fad3d56.png', '2026-01-25', 1);
+('Nuevas proyecciones y charlas para participantes',
+'Se anuncian nuevas proyecciones y charlas para participantes centradas en guion, montaje, distribución y preparación de candidaturas. Estas sesiones están pensadas para resolver dudas típicas: cómo presentar una sinopsis clara, cómo recortar metraje sin perder ritmo y qué aspectos técnicos revisa el jurado cuando evalúa la calidad final. Habrá turnos de preguntas, ejemplos prácticos y recomendaciones para exportar el vídeo con parámetros compatibles. También se darán pautas para preparar una presentación breve del proyecto por si tu corto pasa a una fase de exhibición o encuentro con profesionales.',
+'noticias/noticia_696f49f10b86c.png', '2026-01-21', 1),
+
+('Publicadas las bases definitivas y fechas clave',
+'Ya están publicadas las bases definitivas con el calendario oficial del festival y las fechas clave del proceso. En ellas encontrarás requisitos de entrega, criterios de evaluación del jurado y recomendaciones para que la candidatura esté completa desde el primer intento. Se recuerda revisar el nombre de archivos, el peso máximo permitido y el formato del cartel para asegurar una correcta visualización en la web. También se han añadido aclaraciones sobre categorías, elegibilidad y documentación necesaria. Si tienes dudas, consulta la sección de preguntas frecuentes y los avisos de la organización para evitar incidencias de última hora.',
+'noticias/noticia_696ba785bbcd2.png', '2026-01-22', 1),
+
+('Se amplía el horario de asesorías de guion',
+'Durante esta semana se amplía el horario de asesorías de guion para quienes quieran mejorar sinopsis, estructura narrativa y ritmo del cortometraje. En estas tutorías se trabajarán elementos como el conflicto principal, el arco del personaje, la claridad de escenas y la coherencia del tono. También se revisarán loglines y descripciones cortas para que comuniquen de forma directa el corazón de la historia. La organización recomienda acudir con una versión resumida del guion o un esquema de secuencias para aprovechar mejor el tiempo. Es una oportunidad para pulir el proyecto antes del cierre de candidaturas.',
+'noticias/noticia_6970a6fad3d56.png', '2026-01-26', 1),
+
+('Nueva tanda de revisiones técnicas de vídeo',
+'El equipo técnico realizará una nueva tanda de revisiones técnicas de vídeo con el objetivo de evitar rechazos por incompatibilidad. Se comprobarán aspectos como códec, resolución, audio, tasa de bits y sincronía. También se recordará cómo exportar en configuraciones recomendadas y cómo detectar errores comunes: audio saturado, clips con saltos, desajustes de color o pistas de sonido mal normalizadas. Si tu archivo se reproduce bien en tu ordenador, eso no garantiza que se vea igual en todos los dispositivos: por eso es importante seguir las recomendaciones de exportación y validar el resultado final antes de subirlo.',
+'noticias/noticia_696f49f10b86c.png', '2026-01-25', 1),
+
+('Publicada la guía rápida de entrega de archivos',
+'Se publica una guía rápida para la entrega de archivos con un checklist sencillo para evitar fallos. Incluye cómo nombrar correctamente el cartel y el corto, límites de peso, formatos admitidos y rutas de subida. Además, explica qué hacer si tu conexión falla durante la subida y cómo comprobar que el archivo ha quedado guardado correctamente. La guía también añade consejos para exportar el cartel con buena calidad sin que ocupe demasiado y recomendaciones para evitar texto ilegible en miniaturas. Si sigues estos pasos, tu candidatura tendrá menos riesgo de incidencias y podrás centrarte en lo importante: tu historia.',
+'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
+
+('Arrancan las sesiones de visionado interno',
+'Comienzan las sesiones de visionado interno para organizar la programación de proyecciones y coordinar los pases. Este proceso sirve para clasificar obras por temática, duración y necesidades técnicas, y para preparar la logística de exhibición. La organización revisará también que la ficha del corto esté completa, que el cartel tenga buena visibilidad y que no falten datos relevantes. Estas sesiones permiten detectar incidencias con antelación y asegurar que cada obra se proyecte en las mejores condiciones posibles. Si te contactan para una revisión, responde cuanto antes para no retrasar el proceso.',
+'noticias/noticia_6970a6fad3d56.png', '2026-01-23', 1),
+
+('Consejos de sonido para cortometrajes',
+'Compartimos una lista de consejos de sonido para cortometrajes que mejoran mucho la percepción de calidad final. Se recomienda grabar diálogos con micro adecuado, evitar reverberaciones en interiores y cuidar el nivel de la música para que no tape las voces. También es importante limpiar ruido de fondo, recortar frecuencias molestas y normalizar el volumen de forma coherente entre escenas. Un audio estable y claro hace que el espectador se meta en la historia sin distracciones. Además, antes de exportar, prueba tu corto con auriculares y altavoces distintos para detectar problemas que pasan desapercibidos en una sola escucha.',
+'noticias/noticia_696f49f10b86c.png', '2026-01-22', 1),
+
+('Carteles: tamaño y proporciones recomendadas',
+'Recordatorio sobre carteles: se recomiendan proporciones que funcionen bien en móvil y escritorio, con tipografías legibles y buen contraste. Evita saturar el cartel con demasiado texto y asegúrate de que el título se lea incluso en miniatura. También se aconseja mantener una composición limpia y usar imágenes con buena resolución sin exceder el peso máximo permitido. La organización revisará que el cartel cumpla requisitos para que se muestre correctamente en la web y en posibles materiales de difusión. Un buen cartel no solo cumple norma: también ayuda a que tu corto destaque desde el primer vistazo.',
+'noticias/noticia_696ba785bbcd2.png', '2026-01-21', 1),
+
+('Recordatorio: categorías ALUMNO y ALUMNI',
+'Se recuerda a los participantes revisar con atención las categorías ALUMNO y ALUMNI antes de enviar la candidatura. Comprueba tu año de graduación y tu situación académica para evitar incidencias y posibles cambios de categoría que ralenticen la validación. Si tienes dudas, consulta bases y preguntas frecuentes. Una candidatura bien clasificada acelera el proceso y ayuda a que el jurado evalúe tu obra en el marco correcto. También se recomienda revisar que los datos de contacto estén actualizados, ya que la organización podría necesitar confirmar información durante las fases de selección.',
+'noticias/noticia_6970a6fad3d56.png', '2026-01-20', 1),
+
+('FAQ actualizado con dudas frecuentes',
+'Se actualiza el apartado de preguntas frecuentes con dudas habituales sobre candidaturas, estados y validaciones. Entre las novedades se incluyen aclaraciones sobre tiempos de revisión, causas de rechazo técnico y recomendaciones para corregir errores sin repetir todo el proceso. También se explica qué hacer si subes un archivo equivocado, cómo verificar la subida del cartel y cómo interpretar los mensajes del sistema. Antes de contactar con soporte, revisa este apartado: puede ahorrarte tiempo y ayudarte a resolver el problema en pocos minutos. La idea es que el proceso sea claro y que todos puedan participar sin fricción.',
+'noticias/noticia_696f49f10b86c.png', '2026-01-19', 1),
+
+('Convocatoria de voluntariado para el festival',
+'Se abre la convocatoria de voluntariado para apoyar en sala, acreditaciones y coordinación. Se buscan perfiles responsables y con ganas de participar en un evento cultural con ambiente universitario. Las tareas incluyen recepción de invitados, control de accesos, apoyo en proyecciones y asistencia al equipo de producción durante actividades. A cambio, el voluntariado recibirá acreditación, acceso a sesiones y experiencia práctica en organización de eventos audiovisuales. Si te interesa, revisa el formulario y la disponibilidad de horarios. Es una forma genial de vivir el festival desde dentro y aprender cómo se mueve un evento real.',
+'noticias/noticia_696ba785bbcd2.png', '2026-01-24', 1),
+
+('Avance del programa de actividades',
+'Se publica un avance del programa de actividades con algunas masterclass y encuentros previstos para participantes. Habrá sesiones orientadas a dirección, montaje, sonido, pitching y preparación de materiales de difusión. El objetivo es que puedas mejorar tu corto y también aprender a presentarlo: una buena historia necesita una buena comunicación. Próximamente se confirmarán horarios, aforos y registro para cada actividad. Mientras tanto, se recomienda reservar tiempo en agenda y seguir los avisos oficiales. Este avance es un primer vistazo a una semana llena de cine, aprendizaje y networking.',
+'noticias/noticia_6970a6fad3d56.png', '2026-01-25', 1);
 
 INSERT INTO evento (titulo, descripcion, localizacion, fecha, hora, id_admin) VALUES
 ('Taller de Pitch para Cortos', 'Sesión práctica para preparar la presentación del corto ante jurado y público.', 'Edificio A', '2026-01-05', '18:00', 1),
@@ -259,7 +296,7 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 ('ESPECIAL', 0, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
-('Canon','patrocinadores/patrocinador_Canon.png','FFFFFF','https://www.canon.es',1);
+('Canon','uploads/patrocinadores/patrocinador_Canon.png','FFFFFF','https://www.canon.es',1);
 ";
 
 if ($conexion->multi_query($sql)) {

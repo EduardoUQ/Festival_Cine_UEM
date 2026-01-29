@@ -78,7 +78,7 @@
 
                 <div class="search">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar candidatura...">
+                    <input id="buscar_input" type="text" placeholder="Buscar candidatura...">
                 </div>
             </div>
 
@@ -90,6 +90,15 @@
                 <button class="tab" id="nominada">Nominadas</button>
                 <button class="tab" id="subsanar">Subsanar</button>
             </div>
+
+            <!-- Filtro por categoría (solo categorías con puestos > 0) -->
+            <div class="filtro-categoria" style="margin: 12px 0;">
+                <label for="filtro_categoria" style="margin-right:8px;">Categoría:</label>
+                <select id="filtro_categoria">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+
 
             <!-- Tabla -->
             <div class="tabla-container">
@@ -110,13 +119,10 @@
 
                 <!-- Paginación -->
                 <div class="paginacion">
-                    <span>1–3 de 3 candidaturas</span>
-                    <div>
-                        <button>&lt; Anterior</button>
-                        <button class="active">1</button>
-                        <button>Siguiente &gt;</button>
-                    </div>
+                    <span id="paginacion_info">Mostrando 0–0 de 0 candidaturas</span>
+                    <div id="paginacion_botones"></div>
                 </div>
+
 
             </div>
 

@@ -135,6 +135,10 @@ body {
     opacity: 0.9;
 }
 
+#noticia_contenido {
+  white-space: pre-line;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
 

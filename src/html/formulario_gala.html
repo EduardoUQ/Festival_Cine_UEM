@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/panel_noticias.css">
-    <link rel="stylesheet" href="../css/panel_gala.css">
+    <link rel="stylesheet" href="../css/formulario_gala.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Gestión de la Gala</title>
@@ -70,73 +70,100 @@
         <!-- Contenido -->
         <main class="content">
 
-            <!-- Cabecera -->
-            <div class="main-header">
-                <div>
-                    <h1>Gestión de la Gala</h1>
-                    <p>Revisa, edita o borra los eventos del día de la gala</p>
-                </div>
-            </div>
+            <h1>AGREGAR GALA</h1>
 
-            <!-- Modo de la gala -->
-            <div class="modo-info">
-                <div class="mode-buttons-container">
-                    <div class="active" class="mode-button active" id="preEventoBtn">Pre-evento</div>
-                    <div class="mode-button" id="postEventoBtn">Post-evento</div>
-                    <div class="mode-button" id="eidicionesAnterioresBtn">Ediciones anteriores</div>
-                </div>
-            </div>
+            <form class="news-form" id="news-form">
 
-            <!-- Agreagar evento -->
-            <div class="tabs">
-                <a id="create-news" href="formulario_evento.html">+ Crear evento</a>
-            </div>
-
-            <!-- Filtro por tipo de evento -->
-            <div style="margin:12px 0;">
-                <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
-                <select id="filtro_eventos">
-                    <option value="todos">Todos los eventos</option>
-                    <option value="gala">Eventos del día de la gala</option>
-                    <option value="otros">Otros días</option>
-                </select>
-            </div>
-
-
-            <!-- Tabla -->
-            <div class="tabla-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Localización</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_eventos">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="paginacion">
-                    <span id="paginacion_info">Mostrando 0–0 de 0 eventos</span>
-                    <div id="paginacion_botones"></div>
+                <!-- Año -->
+                <div class="form-group">
+                    <label for="anio">Año</label>
+                    <input type="number" id="anio" name="anio" placeholder="Año de la gala">
+                    <p id="mensaje_anio"></p>
                 </div>
 
+                <!-- descripcion-->
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="8"
+                        placeholder="Describe lo que quieras sobre la gala"></textarea>
+                    <p id="mensaje_descripcion"></p>
+                </div>
 
-            </div>
+                <!--Fecha evento-->
+                <div class="form-group">
+                    <label for="fecha_evento">Fecha del evento</label>
+                    <input type="date" id="fecha_evento" name="fecha_evento">
+                    <p id="mensaje_fecha_evento"></p>
+                </div>
+
+                <!-- LOCALIZACIÓN -->
+                <div class="form-group">
+                    <label for="lugar_nombre">Lugar (nombre)</label>
+                    <input type="text" id="lugar_nombre" name="lugar_nombre" placeholder="Ej: Auditorio Principal">
+                    <p id="mensaje_lugar_nombre"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="lugar_subtitulo">Subtítulo</label>
+                    <input type="text" id="lugar_subtitulo" name="lugar_subtitulo"
+                        placeholder="Ej: Universidad · Campus Principal">
+                    <p id="mensaje_lugar_subtitulo"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion"
+                        placeholder="Ej: Av. Universitaria 1234, Edificio Cultural">
+                    <p id="mensaje_direccion"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="capacidad">Capacidad</label>
+                    <input type="number" id="capacidad" name="capacidad" placeholder="Ej: 500">
+                    <p id="mensaje_capacidad"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="estacionamiento">Estacionamiento</label>
+                    <input type="text" id="estacionamiento" name="estacionamiento"
+                        placeholder="Ej: Disponible en el campus">
+                    <p id="mensaje_estacionamiento"></p>
+                </div>
+
+                <!-- IMAGEN -->
+                <div class="form-group">
+                    <label>Imagen de Portada</label>
+
+                    <label class="image-upload" id="image-upload">
+                        <input type="file" id="image" accept="image/png, image/jpeg">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Arrastra tu imagen aquí o <strong>haz click para seleccionar</strong></span>
+                        <small>JPG o PNG · Máx 2MB</small>
+                        <img id="preview">
+                    </label>
+                    <p id="mensaje_imagen"></p>
+                </div>
+
+                <!-- ACTIVA -->
+                <div class="grupo-campo">
+                    <label for="activa">Estado</label>
+                    <select id="activa" name="activa" required>
+                        <option value="1" selected>Activa</option>
+                        <option value="0">Inactiva</option>
+                    </select>
+                    <p id="mensaje_activa"></p>
+                </div>
+
+                <p id="mensaje_formulario"></p>
+                <!-- BOTONES -->
+                <div class="form-actions">
+                    <button type="reset" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-save" id="enviar">
+                        <i class="fa-solid fa-floppy-disk"></i> Publicar
+                    </button>
+                </div>
+
+            </form>
 
         </main>
 
@@ -213,7 +240,7 @@
             nav.classList.toggle("active");
         });
     </script>
-    <script src="../js/panel_gala.js"></script>
+    <script src="../js/formulario_gala.js"></script>
 </body>
 
 </html>

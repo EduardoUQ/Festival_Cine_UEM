@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   expediente.addEventListener("blur", () => {
     const v = expediente.value.trim();
-    const expRegex = /^[A-Za-z0-9]{8}$/; 
+    const expRegex = /^[A-Za-z0-9]{8}$/;
 
     if (!expRegex.test(v))
       ponerMensajeError(
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Candidatura creada",
           "Tu candidatura se ha registrado correctamente.",
           () => {
-            window.location.href = "panel_usuario_candidaturas.html";
+            window.location.href = "panel_usuario_candidatura.html";
           },
         );
       })

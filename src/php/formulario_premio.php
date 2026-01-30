@@ -63,9 +63,7 @@ if ($dotacionRaw !== "") {
     $dotacion = (float)$dotacionRaw;
 }
 
-// ==============================
 // MODO EDICION
-// ==============================
 if ($funcion === "editarPremio") {
 
     if (!isset($_POST["id"])) {
@@ -148,9 +146,7 @@ if ($funcion === "editarPremio") {
     exit;
 }
 
-// ==============================
 // MODO CREAR
-// ==============================
 
 // Comprobar duplicado (categoria + puesto) antes de insertar
 $sqlCheck = "SELECT id FROM premio WHERE categoria = ? AND puesto = ? LIMIT 1";

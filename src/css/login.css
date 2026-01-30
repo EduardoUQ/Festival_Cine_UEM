@@ -56,7 +56,6 @@ label {
     display: flex;
     align-items: center;
     background: #1a1a1a;
-    /* border-radius: 10px; */
     padding: 10px 12px;
     margin-bottom: 16px;
     border: 1px solid #262626;
@@ -97,7 +96,6 @@ label {
     align-items: center;
     color: #9ca3af;
     font-size: 0.75rem;
-
 }
 
 .forgot {
@@ -121,7 +119,6 @@ label {
     margin-bottom: 24px;
     font-size: 1rem;
     transition: background 0.3s ease;
-
 }
 
 .login-btn:hover {
@@ -156,7 +153,8 @@ label {
 /* MENSAJE DE ERROR */
 #mensaje_mail,
 #mensaje_contrasena,
-#mensaje_formulario, #mensaje {
+#mensaje_formulario,
+#mensaje {
     color: #A71D2D;
     font-size: 1rem;
     margin-top: 6px;
@@ -165,6 +163,103 @@ label {
 }
 
 .input-group {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
+/* ===========================
+   MODAL CAMBIO CONTRASEÑA
+=========================== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 999;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+    transform: translateY(8px);
+    z-index: 1000;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.modal-card {
+    width: min(520px, calc(100vw - 40px));
+    background: linear-gradient(180deg, #111, #0a0a0a);
+    border: 1px solid #262626;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.modal-card h2 {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.modal-subtitle {
+    margin: 0 0 16px;
+    color: #9ca3af;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-primary,
+.btn-secondary {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background: #FF3228;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #fff;
+    color: #FF3228;
+}
+
+.btn-secondary {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #262626;
+}
+
+#modal_msg {
+    color: #A71D2D;
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    min-height: 20px;
+}

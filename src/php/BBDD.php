@@ -29,6 +29,7 @@ $conexion->select_db($database);
 
 // Cifrar la contraseña del admin
 $hash = password_hash(1234, PASSWORD_DEFAULT);
+$hash2 = password_hash(12345, PASSWORD_DEFAULT);
 
 // Crear tablas + inserts
 $sql = "
@@ -173,7 +174,7 @@ CREATE TABLE ganador_honorifico (
 ) ENGINE=InnoDB;
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
-('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash', 'Sara Del Castillo');
+('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo');
 
 INSERT INTO gala (anio, cartel_url, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
 (2026, 'uploads/carteles/cartel_gala_2026.jpg', 'Gala del Festival de Cine UEM 2026','2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);

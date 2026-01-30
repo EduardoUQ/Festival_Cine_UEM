@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/login.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Iniciar Sesión</title>
-
 </head>
 
 <body>
@@ -48,7 +47,6 @@ Detalles%20del%20problema:%0D%0A%0D%0A
 Gracias,%20un%20saludo.">
                         ¿Problemas para acceder?
                     </a>
-
                 </div>
 
                 <p id="mensaje"></p>
@@ -72,6 +70,36 @@ Gracias,%20un%20saludo.">
 
         </div>
     </div>
+
+    <!-- MODAL CAMBIO CONTRASEÑA (solo para admin si entra con 12345) -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal" id="modalCambioPass" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card">
+            <h2>Cambia tu contraseña</h2>
+            <p class="modal-subtitle">Por seguridad, debes cambiar la contraseña inicial.</p>
+
+            <label>Nueva contraseña</label>
+            <div class="input-group modal-input">
+                <i class="fa-solid fa-lock" id="icon"></i>
+                <input type="password" id="new_pass" placeholder="Mínimo 4 caracteres">
+            </div>
+
+            <label>Confirmar nueva contraseña</label>
+            <div class="input-group modal-input">
+                <i class="fa-solid fa-lock" id="icon"></i>
+                <input type="password" id="new_pass2" placeholder="Repite la contraseña">
+            </div>
+
+            <p id="modal_msg"></p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="btnCerrarModal">Cancelar</button>
+                <button type="button" class="btn-primary" id="btnGuardarPass">Guardar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/login.js"></script>
 </body>
 

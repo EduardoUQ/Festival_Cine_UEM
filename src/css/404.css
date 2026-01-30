@@ -1,0 +1,23 @@
+#img-404{
+    background-color: #000;
+     display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;     /* Centrado vertical */
+    height: 100vh; 
+}
+
+#img-404 img{
+    align-items: center;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Opcional pero ayuda a la estructura */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/panel_administrador.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <!-- LOGO -->
+            <div class="logo">
+                <a href="index.html"><img src="../img/Logo_UEM_Blanco.png" alt=""></a>
+            </div>
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <!-- NAV -->
+            <nav class="nav" id="nav">
+                <a href="subir_corto.html">Sube tu corto</a>
+                <a href="bases_legales.html">Bases legales</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="premios_galas.html">Premios y Galas</a>
+                <a href="calendario.html">Calendario</a>
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+            </nav>
+            <!-- ACTIONS -->
+            <div class="actions">
+                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="panel">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="profile" id="go_admin_panel" title="Panel administrador">
+                <div class="fa-solid fa-user"></div>
+                <div>
+                    <strong id="nombre"></strong>
+                    <span>Administrador</span>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <a href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i> Candidaturas</a>
+                <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
+                <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+                <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i> Gala</a>
+                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
+                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i> Noticias</a>
+                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i> Patrocinadores</a>
+                <a class="active" href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i> Administrador</a>
+            </nav>
+        </aside>
+
+        <!-- Contenido -->
+        <main class="content">
+
+            <!-- Cabecera -->
+            <div class="main-header">
+                <div>
+                    <h1>Panel Administrador</h1>
+                    <p>Gestiona tu contraseña y, si eres super_admin, administra el resto de administradores.</p>
+                </div>
+            </div>
+
+            <!-- CAMBIAR CONTRASEÑA -->
+            <section class="section">
+                <h2>Cambiar contraseña</h2>
+                <p class="help">Introduce tu contraseña actual y establece la nueva.</p>
+
+                <div class="form-grid">
+                    <div class="full">
+                        <label for="current_pass">Contraseña actual</label>
+                        <input type="password" id="current_pass" autocomplete="current-password">
+                        <small class="error-msg" id="err_current_pass"></small>
+                    </div>
+
+                    <div>
+                        <label for="new_pass">Nueva contraseña</label>
+                        <input type="password" id="new_pass" autocomplete="new-password">
+                        <small class="error-msg" id="err_new_pass"></small>
+                    </div>
+
+                    <div>
+                        <label for="confirm_pass">Confirmar nueva contraseña</label>
+                        <input type="password" id="confirm_pass" autocomplete="new-password">
+                        <small class="error-msg" id="err_confirm_pass"></small>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button class="btn" id="btn_cambiar_pass">Guardar contraseña</button>
+                    <button class="btn secondary" id="btn_limpiar_pass">Limpiar</button>
+                </div>
+            </section>
+
+            <!-- GESTIÓN ADMINS (SOLO SUPER_ADMIN) -->
+            <section class="section" id="sec_superadmin" style="display:none;">
+                <h2>Gestión de administradores</h2>
+                <p class="help">Crear y eliminar administradores (no se muestra tu propio usuario).</p>
+
+                <!-- Alta -->
+                <div class="form-grid">
+                    <div>
+                        <label for="dni">DNI</label>
+                        <input type="text" id="dni" placeholder="12345678A">
+                        <small class="error-msg" id="err_dni"></small>
+                    </div>
+
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="admin@correo.com">
+                        <small class="error-msg" id="err_email"></small>
+                    </div>
+
+                    <div class="full">
+                        <label for="nombre_apellidos">Nombre y apellidos</label>
+                        <input type="text" id="nombre_apellidos" placeholder="Nombre Apellidos">
+                        <small class="error-msg" id="err_nombre"></small>
+                    </div>
+
+                    <div class="full checkbox">
+                        <input type="checkbox" id="super_admin_checkbox">
+                        <label for="super_admin_checkbox" style="margin:0;">Crear como super_admin</label>
+                        <span class="muted">Contraseña inicial: <b>12345</b> (se fuerza el cambio al entrar).</span>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <button class="btn" id="btn_crear_admin">
+                        <i class="fa-solid fa-user-plus"></i> Crear admin
+                    </button>
+                </div>
+
+                <!-- Tabla admins -->
+                <div class="tabla-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>DNI</th>
+                                <th>Permisos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_admins">
+                            <tr>
+                                <td colspan="5" style="text-align:center;">Cargando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL (confirmación / info) -->
+    <div class="modal-overlay" id="modal_overlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal_title">Confirmación</h3>
+                <button class="modal-close" id="modal_close" aria-label="Cerrar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modal_message"></p>
+            </div>
+            <div class="modal-actions" id="modal_actions">
+                <button class="btn secondary" id="modal_cancel">Cancelar</button>
+                <button class="btn" id="modal_confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../img/Logo_UEM_Blanco.png" alt="">
+                </div>
+                <p class="footer-description">
+                    El festival universitario de cortometrajes más importante de la región,
+                    promoviendo el talento cinematográfico emergente.
+                </p>
+            </div>
+
+            <!-- FESTIVAL -->
+            <div class="footer-column">
+                <h4>Festival</h4>
+                <ul>
+                    <li><a href="#">Sube tu corto</a></li>
+                    <li><a href="#">Bases legales</a></li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Galas</a></li>
+                    <li><a href="#">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                </ul>
+                <div class="social-links">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const nav = document.getElementById("nav");
+
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
+
+    <script src="../js/panel_administrador.js"></script>
+</body>
+
+</html>

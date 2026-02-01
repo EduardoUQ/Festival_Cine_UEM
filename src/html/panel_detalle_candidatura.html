@@ -43,100 +43,101 @@
     <div class="admin-layout">
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="profile">
+            <<div class="profile" onclick="window.location.href='panel_administrador.html'" style="cursor:pointer;">
                 <i class="fa-solid fa-user"></i>
                 <div>
                     <strong>Carlos Mendoza</strong>
                     <span>Administrador</span>
                 </div>
+    </div>
+
+    <nav class="menu">
+        <a class="active" href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
+            Candidaturas</a>
+        <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
+        <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
+        <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i></i>
+            Gala</a>
+        <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
+        <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
+        <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
+            Patrocinadores</a>
+        <a class="active" href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i> Administrador</a>
+    </nav>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="content">
+
+        <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
+
+        <!-- DATOS PERSONALES -->
+        <section class="card">
+            <h3>👤 Datos Personales</h3>
+
+            <div class="grid">
+                <div class="field">
+                    <label for="nombreForm">Nombre completo</label>
+                    <input type="text" id="nombreForm" disabled>
+                </div>
+
+                <div class="field">
+                    <label for="dni">DNI / NIE</label>
+                    <input type="text" id="dni" disabled>
+                </div>
+
+                <div class="field">
+                    <label for="expediente">Número de expediente</label>
+                    <input type="text" id="expediente" disabled>
+                </div>
+
+                <div class="field">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" disabled>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFORMACIÓN DEL CORTO -->
+        <section class="card">
+            <h3>🎬 Información del Corto</h3>
+
+            <div class="field">
+                <label for="tituloCortometraje">Título del cortometraje</label>
+                <input type="text" id="tituloCortometraje" disabled>
             </div>
 
-            <nav class="menu">
-                <a class="active" href="../html/panel_candidaturas.html"><i class="fa-solid fa-file-lines"></i>
-                    Candidaturas</a>
-                <a href="../html/panel_premios.html"><i class="fa-solid fa-trophy"></i> Premios</a>
-                <a href="../html/panel_ganadores.html"><i class="fa-solid fa-chart-simple"></i> Ganadores</a>
-                <a href="../html/panel_gala.html"><i class="fa-solid fa-champagne-glasses"></i></i>
-                    Gala</a>
-                <a href="../html/panel_calendario.html"><i class="fa-solid fa-calendar"></i> Calendario</a>
-                <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
-                <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
-                    Patrocinadores</a>
-            </nav>
-        </aside>
-
-        <!-- CONTENIDO -->
-        <main class="content">
-
-            <a href="../html/panel_candidaturas.html" class="back-link">← Volver al listado</a>
-
-            <!-- DATOS PERSONALES -->
-            <section class="card">
-                <h3>👤 Datos Personales</h3>
-
-                <div class="grid">
-                    <div class="field">
-                        <label for="nombreForm">Nombre completo</label>
-                        <input type="text" id="nombreForm" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label for="dni">DNI / NIE</label>
-                        <input type="text" id="dni" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label for="expediente">Número de expediente</label>
-                        <input type="text" id="expediente" disabled>
-                    </div>
-
-                    <div class="field">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" disabled>
-                    </div>
+            <div class="field">
+                <label for="imagen">Cartel / Póster</label>
+                <div class="poster-box">
+                    <!-- <input type="file" id="imagen" accept="image/png, image/jpeg" disabled> -->
+                    <img alt="Cartel del corto" id="cartel">
                 </div>
-            </section>
+            </div>
 
-            <!-- INFORMACIÓN DEL CORTO -->
-            <section class="card">
-                <h3>🎬 Información del Corto</h3>
-
-                <div class="field">
-                    <label for="tituloCortometraje">Título del cortometraje</label>
-                    <input type="text" id="tituloCortometraje" disabled>
-                </div>
-
-                <div class="field">
-                    <label for="imagen">Cartel / Póster</label>
-                    <div class="poster-box">
-                        <!-- <input type="file" id="imagen" accept="image/png, image/jpeg" disabled> -->
-                        <img alt="Cartel del corto" id="cartel">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label for="sinopsis">Sinopsis</label>
-                    <textarea disabled id="sinopsis">
+            <div class="field">
+                <label for="sinopsis">Sinopsis</label>
+                <textarea disabled id="sinopsis">
                 </textarea>
-                </div>
-
-                <div class="field">
-                    <label>Cortometraje</label>
-                    <div class="video-box">
-                        <video controls id="video"></video>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ACCIONES -->
-            <div class="actions">
-                <button class="btn reject" id="btnRechazar">Rechazar</button>
-                <button class="btn accept" id="btnSubsanar">Subsanar</button>
-                <button class="btn accept" id="btnNominar">Nominar</button>
-                <button class="btn accept" id="btnAceptar">Aceptar</button>
             </div>
 
-        </main>
+            <div class="field">
+                <label>Cortometraje</label>
+                <div class="video-box">
+                    <video controls id="video"></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACCIONES -->
+        <div class="actions">
+            <button class="btn reject" id="btnRechazar">Rechazar</button>
+            <button class="btn accept" id="btnSubsanar">Subsanar</button>
+            <button class="btn accept" id="btnNominar">Nominar</button>
+            <button class="btn accept" id="btnAceptar">Aceptar</button>
+        </div>
+
+    </main>
     </div>
 
 

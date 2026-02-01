@@ -3,153 +3,105 @@ session_start();
 header('Content-Type: application/json; charset=utf-8');
 require_once "conexion.php";
 
-/* =========================
-   SEGURIDAD BÁSICA
-========================= */
 if (!isset($_SESSION['id'])) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Sesión no válida"
-    ]);
-    exit;
+  echo json_encode(["status" => "error", "message" => "Sesión no válida"]);
+  exit;
+}
+if (isset($_SESSION["rol"]) && $_SESSION["rol"] !== "admin") {
+  echo json_encode(["status" => "error", "message" => "No autorizado"]);
+  exit;
 }
 
-/* =========================
-   HELPERS
-========================= */
-function json_error($msg)
-{
-    echo json_encode(["status" => "error", "message" => $msg]);
-    exit;
+function json_error($msg) {
+  echo json_encode(["status" => "error", "message" => $msg]);
+  exit;
+}
+function json_success($msg) {
+  echo json_encode(["status" => "success", "message" => $msg]);
+  exit;
 }
 
-function getGalaActivaId($conexion)
-{
-    $res = $conexion->query("SELECT id FROM gala WHERE activa = TRUE LIMIT 1");
-    if (!$res || $res->num_rows === 0) return null;
-    $row = $res->fetch_assoc();
-    return (int) $row["id"];
+// Gala activa
+$res = $conexion->query("SELECT id FROM gala WHERE activa = TRUE LIMIT 1");
+if (!$res || $res->num_rows === 0) json_error("No hay gala activa");
+$row = $res->fetch_assoc();
+$idGala = (int)$row["id"];
+
+// Datos
+$idPremio = isset($_POST["id_premio"]) ? (int)$_POST["id_premio"] : 0;
+$nombre = isset($_POST["nombre"]) ? trim($_POST["nombre"]) : "";
+$correo = isset($_POST["correo"]) ? trim($_POST["correo"]) : "";
+$numero = isset($_POST["numero"]) ? trim($_POST["numero"]) : "";
+
+if ($idPremio <= 0 || $nombre === "" || $correo === "" || $numero === "") {
+  json_error("Faltan datos del formulario");
 }
 
-/* =========================
-   DATOS COMUNES
-========================= */
-$nombre = trim($_POST['nombre'] ?? "");
-$correo = trim($_POST['correo'] ?? "");
-$numero = trim($_POST['numero'] ?? "");
-$id_premio = (int) ($_POST['id_premio'] ?? 0);
-
-/* =========================
-   VALIDACIONES GENERALES
-========================= */
-if ($id_premio <= 0) {
-    json_error("Premio honorífico inválido");
+if (!isset($_FILES["video"]) || $_FILES["video"]["error"] !== UPLOAD_ERR_OK) {
+  json_error("No se ha subido ningún vídeo válido");
 }
 
-if ($nombre === "" || $correo === "" || $numero === "") {
-    json_error("Todos los campos son obligatorios");
+// No permitir duplicar el honorífico para ese premio en gala activa
+$stmt = $conexion->prepare("SELECT 1 FROM ganador_honorifico WHERE id_gala = ? AND id_premio = ? LIMIT 1");
+if (!$stmt) json_error("Error preparando comprobación");
+$stmt->bind_param("ii", $idGala, $idPremio);
+$stmt->execute();
+$existe = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+if ($existe) {
+  json_error("Ya existe un ganador honorífico asignado para este premio en la gala activa.");
 }
 
-$id_gala = getGalaActivaId($conexion);
-if (!$id_gala) {
-    json_error("No hay gala activa");
+// Validación vídeo
+$video = $_FILES["video"];
+$mime = mime_content_type($video["tmp_name"]);
+$permitidos = ["video/mp4", "video/quicktime"];
+if (!in_array($mime, $permitidos, true)) {
+  json_error("Formato de vídeo no válido (solo MP4 o MOV).");
 }
 
-// Validar que el premio es honorífico (puesto=0) y activo
-$stmtP = $conexion->prepare("SELECT 1 FROM premio WHERE id = ? AND activa = TRUE AND puesto = 0 LIMIT 1");
-$stmtP->bind_param("i", $id_premio);
-$stmtP->execute();
-$resP = $stmtP->get_result();
-if (!$resP || $resP->num_rows === 0) {
-    json_error("El premio no es honorífico o no está activo");
-}
-
-// Validar que no existe ya (id_gala,id_premio)
-$stmtChk = $conexion->prepare("SELECT 1 FROM ganador_honorifico WHERE id_gala = ? AND id_premio = ? LIMIT 1");
-$stmtChk->bind_param("ii", $id_gala, $id_premio);
-$stmtChk->execute();
-$resChk = $stmtChk->get_result();
-if ($resChk && $resChk->num_rows > 0) {
-    json_error("Este premio honorífico ya tiene un ganador asignado.");
-}
-
-/* =========================
-   CONFIG VÍDEO
-========================= */
-$tiposPermitidos = ["video/mp4", "video/quicktime"];
 $maxSize = 50 * 1024 * 1024;
-
-// rutas
-$rutaFisica = __DIR__ . "/../uploads/ganador_honorifico/";
-$rutaWeb    = "uploads/ganador_honorifico/";
-
-// crear carpeta si no existe
-if (!is_dir($rutaFisica)) {
-    mkdir($rutaFisica, 0777, true);
+if ((int)$video["size"] > $maxSize) {
+  json_error("El vídeo no puede superar los 50 MB.");
 }
 
-/* =========================
-   FUNCIÓN SUBIR VIDEO
-========================= */
-function subir_video($file, $tiposPermitidos, $maxSize, $rutaFisica, $rutaWeb)
-{
-    if (!in_array($file['type'], $tiposPermitidos)) {
-        return ["error" => "Formato de vídeo no permitido (solo MP4 o MOV)"];
-    }
+// Destino: ganadores/{id_gala}/honorifico/
+$destWebDir = "ganadores/" . $idGala . "/honorifico/";
+$destFisDir = __DIR__ . "/../" . $destWebDir;
 
-    if ($file['size'] > $maxSize) {
-        return ["error" => "El vídeo supera los 50MB"];
-    }
-
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-    $nombre = uniqid("video_") . "." . ($ext ? $ext : "mp4");
-
-    if (!move_uploaded_file($file['tmp_name'], $rutaFisica . $nombre)) {
-        return ["error" => "Error al subir el vídeo"];
-    }
-
-    return ["ok" => $rutaWeb . $nombre];
+if (!is_dir($destFisDir)) {
+  if (!mkdir($destFisDir, 0777, true)) {
+    json_error("No se pudo crear la carpeta de subida");
+  }
 }
 
-/* =========================
-   CREAR GANADOR HONORÍFICO
-========================= */
-if (!isset($_FILES['video'])) {
-    json_error("El vídeo es obligatorio");
+$ext = ($mime === "video/quicktime") ? "mov" : "mp4";
+$nombreFich = "honorifico_" . time() . "." . $ext;
+
+$rutaFis = $destFisDir . $nombreFich;
+$rutaBd  = $destWebDir . $nombreFich;
+
+if (!move_uploaded_file($video["tmp_name"], $rutaFis)) {
+  json_error("No se pudo guardar el vídeo en el servidor");
 }
 
-$resultado = subir_video(
-    $_FILES['video'],
-    $tiposPermitidos,
-    $maxSize,
-    $rutaFisica,
-    $rutaWeb
-);
-
-if (isset($resultado['error'])) {
-    json_error($resultado['error']);
+// Insert
+$stmt = $conexion->prepare("
+  INSERT INTO ganador_honorifico (id_gala, id_premio, nombre_apellidos, email, telefono, video_url)
+  VALUES (?, ?, ?, ?, ?, ?)
+");
+if (!$stmt) {
+  if (file_exists($rutaFis)) @unlink($rutaFis);
+  json_error("Error preparando inserción");
 }
-
-$sql = "INSERT INTO ganador_honorifico (id_gala, id_premio, nombre_apellidos, email, telefono, video_url)
-        VALUES (?, ?, ?, ?, ?, ?)";
-
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param(
-    "iissss",
-    $id_gala,
-    $id_premio,
-    $nombre,
-    $correo,
-    $numero,
-    $resultado['ok']
-);
+$stmt->bind_param("iissss", $idGala, $idPremio, $nombre, $correo, $numero, $rutaBd);
 
 if (!$stmt->execute()) {
-    json_error("Error guardando el ganador honorífico");
+  $stmt->close();
+  if (file_exists($rutaFis)) @unlink($rutaFis);
+  json_error("Error insertando en base de datos");
 }
+$stmt->close();
 
-echo json_encode([
-    "status" => "success",
-    "message" => "Ganador honorífico asignado correctamente"
-]);
-exit;
+json_success("Honorífico guardado correctamente");

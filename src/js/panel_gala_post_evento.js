@@ -160,3 +160,34 @@ function borrarImagen(e) {
 }
 
 galleryAdd.addEventListener("click", () => galleryInput.click());
+
+// Archivar una edición 
+const archivarBtn = document.getElementById("archivar");
+const confirmacion = document.getElementById("confirmacion");
+
+archivarBtn.disabled = true;
+if (confirmacion.checked) {
+    archivarBtn.disabled = false;
+}
+
+archivarBtn.addEventListener("click", () => {
+
+    if (!confirmacion.checked) {
+        alert("Debes confirmar antes de archivar la edición.");
+        return;
+    }
+
+    fetch("../php/archivar_gala.php", {
+        method: "POST"
+    })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("La gala ha sido archivada correctamente.");
+                window.location.href = data.redirect;
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(err => console.error("Error archivando gala:", err));
+});

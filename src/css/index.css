@@ -182,7 +182,6 @@ body {
   align-items: center;
   gap: 10px;
   padding: 12px 26px;
-  border-radius: 30px;
   border: 1px solid #fff;
   color: #fff;
   font-weight: 600;
@@ -292,7 +291,6 @@ body {
 
 .bases-image img {
   width: 100%;
-  border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
@@ -332,7 +330,6 @@ body {
 
 .news-card {
   background: #111;
-  border-radius: 16px;
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease;
@@ -376,7 +373,6 @@ body {
   left: 12px;
   padding: 5px 10px;
   font-size: 0.65rem;
-  border-radius: 12px;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -421,7 +417,6 @@ body {
 
 .award-card {
   background: linear-gradient(180deg, #1b1b1b, #111);
-  border-radius: 18px;
   padding: 36px 24px;
   transition: transform 0.3s ease;
 }
@@ -476,7 +471,6 @@ body {
 
 .gala-card {
   position: relative;
-  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
 }
@@ -548,7 +542,6 @@ body {
   align-items: center;
   gap: 10px;
   padding: 12px 26px;
-  border-radius: 30px;
   border: 1px solid #fff;
   color: #fff;
   text-decoration: none;
@@ -733,7 +726,6 @@ body {
     padding: 10px 24px;
     background: #FF3228;
     color: #fff;
-    border-radius: 4px;
     font-weight: 600;
     text-align: center;
     width: fit-content;

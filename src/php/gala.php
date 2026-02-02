@@ -10,7 +10,7 @@ if (!isset($_POST["funcion"])) {
 
 if ($_POST["funcion"] === "obtener_gala_activa") {
 
-    $sql = "SELECT id, anio, cartel_url, descripcion, fecha_evento,
+    $sql = "SELECT id, anio, descripcion, fecha_evento,
                    lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento
             FROM gala
             WHERE activa = 1

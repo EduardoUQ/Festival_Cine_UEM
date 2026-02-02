@@ -14,7 +14,7 @@ $funcion = $_POST["funcion"];
 ========================= */
 if ($funcion === "obtener_gala_activa") {
 
-    $sql = "SELECT id, anio, cartel_url, descripcion, fecha_evento,
+    $sql = "SELECT id, anio, descripcion, fecha_evento,
                    lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento,
                    activa
             FROM gala
@@ -64,27 +64,11 @@ elseif ($funcion === "crear_gala") {
         $stmtOff->execute();
     }
 
-    // Cartel (opcional)
-    $cartel_url = null;
-    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-        $tmpName = $_FILES["image"]["tmp_name"];
-        $fileName = basename($_FILES["image"]["name"]);
 
-        $carpeta = "../uploads/carteles/";
-        if (!is_dir($carpeta)) {
-            mkdir($carpeta, 0777, true);
-        }
-
-        $destino = $carpeta . time() . "_" . $fileName;
-        if (move_uploaded_file($tmpName, $destino)) {
-            $cartel_url = "uploads/carteles/" . basename($destino);
-        }
-    }
-
-    $sql = "INSERT INTO gala (anio, cartel_url, descripcion, fecha_evento,
+    $sql = "INSERT INTO gala (anio, descripcion, fecha_evento,
                               lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento,
                               activa)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conexion->prepare($sql);
 
@@ -93,9 +77,8 @@ elseif ($funcion === "crear_gala") {
     $capacidadBind = ($capacidad === null) ? 0 : $capacidad;
 
     $stmt->bind_param(
-        "issssssisi",
+        "isssssisi",
         $anio,
-        $cartel_url,
         $descripcion,
         $fecha_evento,
         $lugar_nombre,
@@ -145,25 +128,8 @@ elseif ($funcion === "actualizar_gala") {
 
     $capacidadBind = ($capacidad === null) ? 0 : $capacidad;
 
-    //Imagen opcional
-    $cartel_url = null;
-    $hayImagen = false;
 
-    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-        $tmpName = $_FILES["image"]["tmp_name"];
-        $fileName = basename($_FILES["image"]["name"]);
-
-        $carpeta = "../uploads/carteles/";
-        if (!is_dir($carpeta)) {
-            mkdir($carpeta, 0777, true);
-        }
-
-        $destino = $carpeta . time() . "_" . $fileName;
-        if (move_uploaded_file($tmpName, $destino)) {
-            $cartel_url = "uploads/carteles/" . basename($destino);
-            $hayImagen = true;
-        }
-    }
+    
 
     if ($hayImagen) {
         $sql = "UPDATE gala

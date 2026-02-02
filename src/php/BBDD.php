@@ -181,7 +181,7 @@ CREATE TABLE gala_media (
         ON DELETE CASCADE
 );
 
-INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
+INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos,super_admin) VALUES
 ('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo', TRUE);
 
 INSERT INTO gala (anio, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES

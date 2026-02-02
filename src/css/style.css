@@ -77,6 +77,24 @@ body {
     align-items: center;
 }
 
+/* ICONOS CUANDO HAY SESIÓN */
+.actions i {
+    color: #ffffff;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* separación entre iconos */
+.actions i + i {
+    margin-left: 14px;
+}
+
+/* hover */
+.actions i:hover {
+    color: #FF3228;
+}
+
+
 /* LOGIN BUTTON */
 .login-btn {
     background: #FF3228;

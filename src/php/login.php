@@ -26,10 +26,11 @@ if ($funcion === "procesarLogin") {
     }
 
     /* ========= 1) PROBAR ADMIN ========= */
-    $sqlAdmin = "SELECT id, email, passwd_hash, nombre_apellidos
-                 FROM admin
-                 WHERE email = ?
-                 LIMIT 1";
+    $sqlAdmin = "SELECT id, email, passwd_hash, nombre_apellidos, super_admin
+             FROM admin
+             WHERE email = ?
+             LIMIT 1";
+
 
     $stmt = $conexion->prepare($sqlAdmin);
     if (!$stmt) {
@@ -51,6 +52,8 @@ if ($funcion === "procesarLogin") {
             $_SESSION['id']  = (int)$admin['id'];
             $_SESSION['email'] = $admin['email'];
             $_SESSION['nombre_apellidos'] = $admin['nombre_apellidos'];
+            $_SESSION['super_admin'] = (bool)$admin['super_admin'];
+
 
             // Si ha escrito 12345 => forzar cambio
             $forceChange = ($pass === "12345");
@@ -141,6 +144,93 @@ if ($funcion === "cambiarPassAdmin") {
 
     $sql = "UPDATE admin SET passwd_hash = ? WHERE id = ? LIMIT 1";
     $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'message' => 'Error interno (prepare update)']);
+        $conexion->close();
+        exit;
+    }
+
+    $stmt->bind_param("si", $hash, $adminId);
+    $ok = $stmt->execute();
+
+    $stmt->close();
+    $conexion->close();
+
+    if (!$ok) {
+        echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la contraseña']);
+        exit;
+    }
+
+    echo json_encode(['status' => 'success', 'message' => 'Contraseña actualizada']);
+    exit;
+}
+
+/* =========================================================
+   2B) CAMBIAR PASSWORD ADMIN DESDE PANEL (pide pass actual)
+========================================================= */
+if ($funcion === "cambiarPassAdminPanel") {
+
+    if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin" || !isset($_SESSION["id"])) {
+        echo json_encode(['status' => 'error', 'message' => 'No autorizado']);
+        $conexion->close();
+        exit;
+    }
+
+    $currentPass = isset($_POST["current_pass"]) ? $_POST["current_pass"] : "";
+    $newPass     = isset($_POST["new_pass"]) ? $_POST["new_pass"] : "";
+    $confirmPass = isset($_POST["confirm_pass"]) ? $_POST["confirm_pass"] : "";
+
+    if ($currentPass === "" || $newPass === "" || $confirmPass === "") {
+        echo json_encode(['status' => 'error', 'message' => 'Faltan campos']);
+        $conexion->close();
+        exit;
+    }
+
+    if (strlen($newPass) < 4) {
+        echo json_encode(['status' => 'error', 'message' => 'La nueva contraseña debe tener mínimo 4 caracteres']);
+        $conexion->close();
+        exit;
+    }
+
+    if ($newPass !== $confirmPass) {
+        echo json_encode(['status' => 'error', 'message' => 'Las contraseñas no coinciden']);
+        $conexion->close();
+        exit;
+    }
+
+    $adminId = (int)$_SESSION["id"];
+
+    // 1) Leer hash actual del admin
+    $stmt0 = $conexion->prepare("SELECT passwd_hash FROM admin WHERE id = ? LIMIT 1");
+    if (!$stmt0) {
+        echo json_encode(['status' => 'error', 'message' => 'Error interno (prepare select)']);
+        $conexion->close();
+        exit;
+    }
+
+    $stmt0->bind_param("i", $adminId);
+    $stmt0->execute();
+    $res0 = $stmt0->get_result();
+    $row0 = $res0->fetch_assoc();
+    $stmt0->close();
+
+    if (!$row0) {
+        echo json_encode(['status' => 'error', 'message' => 'Admin no encontrado']);
+        $conexion->close();
+        exit;
+    }
+
+    // 2) Verificar contraseña actual
+    if (!password_verify($currentPass, $row0["passwd_hash"])) {
+        echo json_encode(['status' => 'error', 'message' => 'La contraseña actual no es correcta']);
+        $conexion->close();
+        exit;
+    }
+
+    // 3) Actualizar
+    $hash = password_hash($newPass, PASSWORD_DEFAULT);
+
+    $stmt = $conexion->prepare("UPDATE admin SET passwd_hash = ? WHERE id = ? LIMIT 1");
     if (!$stmt) {
         echo json_encode(['status' => 'error', 'message' => 'Error interno (prepare update)']);
         $conexion->close();

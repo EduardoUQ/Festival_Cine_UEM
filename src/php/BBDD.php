@@ -27,7 +27,7 @@ $sql = "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_
 $conexion->query($sql) or die("Error al crear la base de datos: " . $conexion->error);
 $conexion->select_db($database);
 
-// Cifrar la contraseña del admin
+// Cifrar la contraseña del user y admin
 $hash = password_hash(1234, PASSWORD_DEFAULT);
 $hash2 = password_hash(12345, PASSWORD_DEFAULT);
 
@@ -38,7 +38,8 @@ CREATE TABLE admin (
     dni VARCHAR(9) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     passwd_hash VARCHAR(255) NOT NULL,
-    nombre_apellidos VARCHAR(255) NOT NULL
+    nombre_apellidos VARCHAR(255) NOT NULL,
+    super_admin BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB;
 -- Hace que el motor de MySQL sea InnoDB forzadamente.
 
@@ -125,7 +126,6 @@ CREATE TABLE patrocinador (
         ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
-
 CREATE TABLE premio (
     id INT AUTO_INCREMENT PRIMARY KEY,
     categoria VARCHAR(30) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE gala_media (
 );
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos) VALUES
-('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo');
+('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo', TRUE);
 
 INSERT INTO gala (anio, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
 (2026, 'Gala del Festival de Cine UEM 2026','2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
@@ -211,7 +211,7 @@ INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, ti
 (1, 1, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4'),
 
 (5, 1, 'PENDIENTE', 'ALUMNO', NULL, 'A Contraluz', 'Un proyecto nocturno revela la verdadera amistad del equipo.', 'uploads/candidaturas/5/6/cartel.jpg', 'uploads/candidaturas/5/6/corto.mp4'),
-(6, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg', 'uploads/candidaturas/6/7/corto.mp4'),
+(6, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg','uploads/candidaturas/6/7/corto.mp4'),
 (7, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Silencio en Set', 'El sonido desaparece y el equipo improvisa una solución.', 'uploads/candidaturas/7/8/cartel.jpg', 'uploads/candidaturas/7/8/corto.mp4'),
 (8, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Storyboard', 'Un cuaderno perdido cambia el rumbo del rodaje.', 'uploads/candidaturas/8/9/cartel.jpg', 'uploads/candidaturas/8/9/corto.mp4'),
 (9, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Foco', 'Una luz fundida desencadena un efecto inesperado en la escena.', 'uploads/candidaturas/9/10/cartel.jpg', 'uploads/candidaturas/9/10/corto.mp4'),
@@ -312,6 +312,8 @@ if ($conexion->multi_query($sql)) {
     while ($conexion->next_result()) {;
     }
 } else {
+    // Si quieres, aquí puedes sacar error de multi_query
+    // echo "Error ejecutando multi_query: " . $conexion->error;
 }
 
 $conexion->close();

@@ -1,6 +1,7 @@
-// Cargar la cabecera
+// =======================
+// SESIÓN + INIT
+// =======================
 document.addEventListener("DOMContentLoaded", () => {
-  // 1) Cargar los datos del usuario
   fetch("../php/session_info.php")
     .then((response) => response.json())
     .then((info) => {
@@ -9,13 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Cargamos el nombre del Admin en el panel
       const elNombre = document.getElementById("nombre");
-      if (elNombre) {
-        elNombre.textContent = info.nombre;
-      }
+      if (elNombre) elNombre.textContent = info.nombre;
 
-      // Botón para cerrar sesión
       const btnLogout = document.getElementById("btn_logout");
       if (btnLogout) {
         btnLogout.addEventListener("click", () => {
@@ -35,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Iniciamos el panel cuando la sesión es válida
       inicializarPanelGanadores();
     })
     .catch((error) => {
@@ -44,7 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// FUNCIÓN DEL MODAL
+// =======================
+// MODAL
+// =======================
 const modal = document.getElementById("modal_mensaje");
 const modalIcono = document.getElementById("modal_icono");
 const modalTitulo = document.getElementById("modal_titulo");
@@ -57,11 +55,9 @@ let onConfirm = null;
 
 function mostrarModal(tipo, mensaje, redirect = null) {
   modal.className = "modal mostrar";
-
   modalIcono.className = "fa-solid";
   modal.classList.remove("modal_exito", "modal_error");
 
-  // Ocultamos cancel por defecto
   if (modalBtnCancel) modalBtnCancel.style.display = "none";
   onConfirm = null;
 
@@ -79,13 +75,11 @@ function mostrarModal(tipo, mensaje, redirect = null) {
   redireccion = redirect;
 }
 
-// Modal de confirmación (con Cancelar)
 function mostrarModalConfirmacion(mensaje, callbackConfirm) {
   modal.className = "modal mostrar";
-
   modalIcono.className = "fa-solid";
   modal.classList.remove("modal_exito", "modal_error");
-  modal.classList.add("modal_error"); // visual rojo típico de “acción peligrosa”
+  modal.classList.add("modal_error");
 
   modalIcono.classList.add("fa-triangle-exclamation");
   modalTitulo.textContent = "Confirmación";
@@ -108,9 +102,7 @@ if (modalBtn) {
       return;
     }
 
-    if (redireccion) {
-      window.location.href = redireccion;
-    }
+    if (redireccion) window.location.href = redireccion;
   });
 }
 
@@ -123,7 +115,7 @@ if (modalBtnCancel) {
 }
 
 // =======================
-// ELEMENTOS UI
+// UI
 // =======================
 const selectCategoria = document.getElementById("select_categoria");
 const contenedorPuestos = document.getElementById("contenedor_puestos");
@@ -132,9 +124,25 @@ const btnGuardarGanadores = document.getElementById("btn_guardar_ganadores");
 const contenedorHonorificos = document.getElementById("contenedor_honorificos");
 
 // Cache
-let premiosCategoria = []; // [{id_premio, puesto, descripcion, dotacion}]
-let nominadosCategoria = []; // [{id_candidatura, titulo, nombre_apellidos}]
-let ganadoresOtorgados = []; // [{id_premio, puesto, nombre, titulo}]
+let premiosCategoria = [];
+let nominadosCategoria = [];
+let ganadoresOtorgados = [];
+
+// =======================
+// FETCH HELPERS
+// =======================
+function fetchPOSTForm(url, dataObj) {
+  const fd = new FormData();
+  Object.keys(dataObj).forEach((k) => fd.append(k, dataObj[k]));
+
+  return fetch(url, {
+    method: "POST",
+    body: fd
+  }).then((r) => {
+    if (!r.ok) throw new Error("Error HTTP");
+    return r.json();
+  });
+}
 
 // =======================
 // INIT
@@ -143,7 +151,7 @@ function inicializarPanelGanadores() {
   cargarCategoriasPremios();
   cargarHonorificos();
 
-  // Delegación para borrar ganador desde “ya otorgados”
+  // Borrar ganador corto desde “ya otorgados”
   if (contenedorYaOtorgados) {
     contenedorYaOtorgados.addEventListener("click", (e) => {
       const icon = e.target.closest(".js-borrar");
@@ -151,7 +159,6 @@ function inicializarPanelGanadores() {
 
       const idPremio = icon.getAttribute("data-id-premio");
       const categoria = selectCategoria ? selectCategoria.value : "";
-
       if (!idPremio || !categoria) return;
 
       mostrarModalConfirmacion(
@@ -161,11 +168,26 @@ function inicializarPanelGanadores() {
     });
   }
 
+  // Borrar honorífico (delegación)
+  if (contenedorHonorificos) {
+    contenedorHonorificos.addEventListener("click", (e) => {
+      const icon = e.target.closest(".js-borrar-honorifico");
+      if (!icon) return;
+
+      const idPremio = icon.getAttribute("data-id-premio");
+      if (!idPremio) return;
+
+      mostrarModalConfirmacion(
+        "¿Seguro que quieres borrar el ganador honorífico de la gala activa? Se eliminará el registro y el vídeo.",
+        () => borrarHonorifico(idPremio)
+      );
+    });
+  }
+
   if (selectCategoria) {
     selectCategoria.addEventListener("change", () => {
       const categoria = selectCategoria.value;
 
-      // Limpieza visual
       contenedorPuestos.innerHTML = "";
       contenedorYaOtorgados.innerHTML = "";
       premiosCategoria = [];
@@ -173,41 +195,24 @@ function inicializarPanelGanadores() {
       ganadoresOtorgados = [];
 
       if (!categoria) return;
-
       cargarDatosCategoria(categoria);
     });
   }
 
   if (btnGuardarGanadores) {
-    btnGuardarGanadores.addEventListener("click", () => {
-      guardarGanadores();
-    });
+    btnGuardarGanadores.addEventListener("click", () => guardarGanadores());
   }
 }
 
 // =======================
-// Helper POST (FormData)
-// =======================
-function postJSON(url, dataObj) {
-  const formData = new FormData();
-  Object.keys(dataObj).forEach((k) => formData.append(k, dataObj[k]));
-
-  return fetch(url, { method: "POST", body: formData })
-    .then((r) => {
-      if (!r.ok) throw new Error("Error HTTP");
-      return r.json();
-    });
-}
-
-// =======================
-// CATEGORÍAS (premios con puesto>0 y activos)
+// CATEGORÍAS
 // =======================
 function cargarCategoriasPremios() {
   if (!selectCategoria) return;
 
   selectCategoria.innerHTML = `<option value="">Cargando...</option>`;
 
-  postJSON("../php/panel_ganadores.php", { funcion: "get_categorias" })
+  fetchPOSTForm("../php/panel_ganadores.php", { funcion: "get_categorias" })
     .then((data) => {
       if (data.status !== "success") {
         selectCategoria.innerHTML = `<option value="">(Error al cargar)</option>`;
@@ -236,13 +241,13 @@ function cargarCategoriasPremios() {
 }
 
 // =======================
-// Cargar puestos + nominados + ya otorgados
+// Datos categoría
 // =======================
 function cargarDatosCategoria(categoria) {
   contenedorPuestos.innerHTML = "Cargando...";
   contenedorYaOtorgados.innerHTML = "";
 
-  postJSON("../php/panel_ganadores.php", {
+  fetchPOSTForm("../php/panel_ganadores.php", {
     funcion: "get_datos_categoria",
     categoria: categoria
   })
@@ -267,9 +272,6 @@ function cargarDatosCategoria(categoria) {
     });
 }
 
-// =======================
-// Pintar ya otorgados + papelera
-// =======================
 function pintarYaOtorgados() {
   if (!contenedorYaOtorgados) return;
 
@@ -297,9 +299,6 @@ function pintarYaOtorgados() {
   contenedorYaOtorgados.innerHTML = html;
 }
 
-// =======================
-// Pintar selects por puesto (permitiendo desiertos)
-// =======================
 function pintarSelectsPorPuesto() {
   if (!contenedorPuestos) return;
 
@@ -308,7 +307,6 @@ function pintarSelectsPorPuesto() {
     return;
   }
 
-  // Opciones de nominados iguales para todos los selects
   let options = `<option value="">(Dejar desierto)</option>`;
   if (!nominadosCategoria.length) {
     options += `<option value="" disabled>No hay nominados en esta categoría</option>`;
@@ -377,7 +375,7 @@ function guardarGanadores() {
     });
   }
 
-  postJSON("../php/panel_ganadores.php", {
+  fetchPOSTForm("../php/panel_ganadores.php", {
     funcion: "guardar_ganadores",
     categoria: categoria,
     datos: JSON.stringify(payload)
@@ -396,10 +394,10 @@ function guardarGanadores() {
 }
 
 // =======================
-// Borrar ganador
+// Borrar ganador corto
 // =======================
 function borrarGanador(idPremio, categoria) {
-  postJSON("../php/panel_ganadores.php", {
+  fetchPOSTForm("../php/panel_ganadores.php", {
     funcion: "borrar_ganador",
     id_premio: idPremio,
     categoria: categoria
@@ -418,14 +416,14 @@ function borrarGanador(idPremio, categoria) {
 }
 
 // =======================
-// HONORÍFICOS (igual que antes)
+// HONORÍFICOS (hide si asignado + trash)
 // =======================
 function cargarHonorificos() {
   if (!contenedorHonorificos) return;
 
   contenedorHonorificos.innerHTML = "Cargando...";
 
-  postJSON("../php/panel_ganadores.php", { funcion: "get_honorificos" })
+  fetchPOSTForm("../php/panel_ganadores.php", { funcion: "get_honorificos" })
     .then((data) => {
       if (data.status !== "success") {
         contenedorHonorificos.innerHTML = "";
@@ -440,7 +438,28 @@ function cargarHonorificos() {
       }
 
       let html = "";
+
       honorificos.forEach((h) => {
+        if (h.asignado) {
+          const g = h.ganador || {};
+          html += `
+            <div style="border:1px solid #1f1f1f;border-radius:12px;padding:14px;margin-top:14px;background:#101010;">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                <h4 style="margin:0;">${escapeHtml(h.descripcion || ("Premio Honorífico " + h.id_premio))}</h4>
+                <i class="fa-solid fa-trash js-borrar-honorifico" data-id-premio="${h.id_premio}" style="cursor:pointer;"></i>
+              </div>
+
+              <p style="color:#c9a43b;margin:10px 0 6px 0;"><strong>Ya hay un ganador asignado para la gala activa.</strong></p>
+              <p style="color:#e5e5e5;margin:0;">${escapeHtml(g.nombre_apellidos || "-")}</p>
+              <p style="color:#aaa;margin:6px 0 0 0;">
+                ${escapeHtml(g.email || "")}${g.telefono ? " · " + escapeHtml(g.telefono) : ""}
+              </p>
+              ${g.video_url ? `<p style="margin:10px 0 0 0;"><a href="../${escapeHtml(g.video_url)}" target="_blank" style="color:#c9a43b;">Ver vídeo</a></p>` : ""}
+            </div>
+          `;
+          return;
+        }
+
         html += `
           <div style="border:1px solid #1f1f1f;border-radius:12px;padding:14px;margin-top:14px;">
             <h4 style="margin-bottom:10px;">${escapeHtml(h.descripcion || ("Premio Honorífico " + h.id_premio))}</h4>
@@ -507,6 +526,7 @@ function enviarHonorifico(formEl) {
     mostrarModal("error", "Formato de vídeo no válido (solo MP4 o MOV).");
     return;
   }
+
   const maxSize = 50 * 1024 * 1024;
   if (video.size > maxSize) {
     mostrarModal("error", "El vídeo no puede superar los 50 MB.");
@@ -533,6 +553,24 @@ function enviarHonorifico(formEl) {
         mostrarModal("success", data.message || "Honorífico guardado correctamente", "../html/panel_ganadores.html");
       } else {
         mostrarModal("error", data.message || "No se pudo guardar el honorífico");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      mostrarModal("error", "Error de conexión con el servidor");
+    });
+}
+
+function borrarHonorifico(idPremio) {
+  fetchPOSTForm("../php/panel_ganadores.php", {
+    funcion: "borrar_honorifico",
+    id_premio: idPremio
+  })
+    .then((data) => {
+      if (data.status === "success") {
+        mostrarModal("success", data.message || "Honorífico borrado correctamente", "../html/panel_ganadores.html");
+      } else {
+        mostrarModal("error", data.message || "No se pudo borrar el honorífico");
       }
     })
     .catch((err) => {

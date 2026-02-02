@@ -34,7 +34,6 @@ body {
 /* Card calendario */
 .calendar-card {
     background: linear-gradient(180deg, #1c1d20, #16171a);
-    border-radius: 0px;
     padding: 24px;
     margin-bottom: 40px;
 }
@@ -42,7 +41,6 @@ body {
 /* Detalles */
 .calendar-details {
     background: linear-gradient(180deg, #1c1d20, #16171a);
-    border-radius: 0px;
     padding: 24px;
 }
 
@@ -58,7 +56,6 @@ body {
     color: #000;
     border: none;
     padding: 8px 16px;
-    border-radius: 0px;
     cursor: pointer;
 }
 
@@ -67,12 +64,10 @@ body {
     gap: 16px;
     background: #1f2024;
     padding: 16px;
-    border-radius: 0px;
 }
 
 .event-date {
     background: #2a2b2f;
-    border-radius: 0px;
     padding: 10px;
     text-align: center;
     min-width: 60px;
@@ -166,7 +161,6 @@ body {
   border: 1px solid #262626;
   color: #fff;
   padding: 8px 12px;
-  border-radius: 0px;
   cursor: pointer;
 }
 
@@ -199,7 +193,6 @@ body {
 .dia-calendario {
   background: #1a1a1a;
   border: 1px solid #262626;
-  border-radius: 0px;
   text-align: center;
   padding: 12px 0;
   cursor: pointer;

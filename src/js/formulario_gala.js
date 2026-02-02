@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputCapacidad = document.getElementById("capacidad");
     const inputEstacionamiento = document.getElementById("estacionamiento");
 
-    const inputImage = document.getElementById("image");
-    const selectActiva = document.getElementById("activa");
+
 
     //MENSAJES
     const mensajeFormulario = document.getElementById("mensaje_formulario");
@@ -86,7 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 inputCapacidad.value = (g.capacidad !== null && g.capacidad !== undefined) ? g.capacidad : "";
                 inputEstacionamiento.value = g.estacionamiento || "";
 
-                selectActiva.value = (g.activa == 1) ? "1" : "0";
+                
+                //No hay select de activa en el panel, es activa por defecto
             })
             .catch(() => {
                 // no bloqueamos el panel, solo no se precarga
@@ -163,12 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append("capacidad", inputCapacidad.value.trim());
             formData.append("estacionamiento", inputEstacionamiento.value.trim());
 
-            formData.append("activa", selectActiva.value);
-
-            // Imagen opcional
-            if (inputImage && inputImage.files && inputImage.files[0]) {
-                formData.append("image", inputImage.files[0]);
-            }
+            formData.append("activa", "1");
 
             fetch("../php/formulario_gala.php", {
                 method: "POST",

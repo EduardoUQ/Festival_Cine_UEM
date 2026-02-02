@@ -140,7 +140,7 @@
     font-size: 0.75rem;
 }
 
-.gala-section {
+.pre-gala-section {
     padding: 80px 6%;
     background: radial-gradient(circle at top, #111 0%, #000 70%);
     color: #fff;
@@ -194,6 +194,8 @@
 .gala-card h3 {
     font-size: 1.3rem;
 }
+
+/* POST GALA */
 
 /* Localización */
 .gala-list {

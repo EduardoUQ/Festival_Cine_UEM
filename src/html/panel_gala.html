@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/panel_noticias.css">
-    <link rel="stylesheet" href="../css/panel_gala.css">
+    <link rel="stylesheet" href="../css/panel_gala_pre_evento.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/panel_gala_post_evento.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Gestión de la Gala</title>
 </head>
@@ -79,65 +80,194 @@
             </div>
 
             <!-- Modo de la gala -->
-            <div class="modo-info">
-                <div class="mode-buttons-container">
-                    <div class="active" class="mode-button active" id="preEventoBtn">Pre-evento</div>
-                    <div class="mode-button" id="postEventoBtn">Post-evento</div>
-                    <div class="mode-button" id="eidicionesAnterioresBtn">Ediciones anteriores</div>
-                </div>
-            </div>
-
-            <!-- Agreagar evento -->
             <div class="tabs">
-                <a id="create-news" href="formulario_evento.html">+ Crear evento</a>
+                <button class="tab active" id="preEventoBtn">Pre-evento</button>
+                <button class="tab" id="postEventoBtn">Post-evento</button>
+                <button class="tab" id="edicionesAnterioresBtn">Ediciones anteriores</button>
             </div>
+            <!-- Pre evento -->
+            <div class="preEvento">
+                <!-- Agregar evento -->
+                <div class="eventoBtn">
+                    <a id="create-news" href="formulario_evento.html">+ Crear evento</a>
+                    <button id="activarPre">Activar Pre Gala</button>
+                </div>
 
-            <!-- Filtro por tipo de evento -->
-            <div style="margin:12px 0;">
-                <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
-                <select id="filtro_eventos">
-                    <option value="todos">Todos los eventos</option>
-                    <option value="gala">Eventos del día de la gala</option>
-                    <option value="otros">Otros días</option>
-                </select>
-            </div>
-
-
-            <!-- Tabla -->
-            <div class="tabla-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Localización</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_eventos">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="paginacion">
-                    <span id="paginacion_info">Mostrando 0–0 de 0 eventos</span>
-                    <div id="paginacion_botones"></div>
+                <!-- Filtro por tipo de evento -->
+                <div style="margin:12px 0;">
+                    <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
+                    <select id="filtro_eventos">
+                        <option value="todos">Todos los eventos</option>
+                        <option value="gala">Eventos del día de la gala</option>
+                        <option value="otros">Otros días</option>
+                    </select>
                 </div>
 
 
+                <!-- Tabla -->
+                <div class="tabla-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Localización</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_eventos">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><a class="btn" href="#"></a>
+                                    <a class="btn" href="#"></a>
+                                    <a class="btn" href="#"></a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="paginacion">
+                        <span id="paginacion_info">Mostrando 0–0 de 0 eventos</span>
+                        <div id="paginacion_botones"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Post Evento -->
+            <div class="postEvento">
+                <div class="postBtn">
+                    <button id="activarPost">Activar Post Gala</button>
+                </div>
+
+                <!-- Resumen -->
+                <section class="summary-section">
+                    <h2>Resumen de la Edición Actual</h2>
+
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <i class="fa-solid fa-calendar"></i>
+                            <h3 id="yearEdicion"></h3>
+                            <p>Año de edición</p>
+                        </div>
+
+                        <div class="summary-card">
+                            <i class="fa-solid fa-film"></i>
+                            <h3 id="totalCortos"></h3>
+                            <p>Cortometrajes</p>
+                        </div>
+
+                        <div class="summary-card">
+                            <i class="fa-solid fa-award"></i>
+                            <h3 id="totalPremios"></h3>
+                            <p>Premios</p>
+                        </div>
+
+                        <div class="summary-card">
+                            <i class="fa-solid fa-trophy"></i>
+                            <h3 id="totalGanadores"></h3>
+                            <p>Ganadores</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ganadores -->
+                <section class="winners-section" id="winnersSection">
+                    <h2>Ganadores de la edición</h2>
+                </section>
+
+                <!-- Imagenes de la gala -->
+                <section class="images-section">
+                    <h2>Imágenes de la Gala</h2>
+                    <!-- Galería adicional -->
+                    <div class="gallery">
+                        <div class="gallery-header">
+                            <span>🖼️ Galería adicional</span>
+                        </div>
+
+                        <div id="galleryGrid" class="gallery-grid">
+                            <!-- Imágenes dinámicas -->
+                            <div class="gallery-add" id="galleryAdd">
+                                <span>+</span>
+                                <small>Añadir más</small>
+                            </div>
+                        </div>
+
+                        <input type="file" id="galleryInput" accept="image/*" hidden>
+                    </div>
+                </section>
+
+                <!-- Archivar edciones anteriores -->
+                <section class="save-section">
+                    <h2>Añadir a ediciones anteriores</h2>
+
+                    <div class="alerta">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <strong>Acción Importante:</strong>
+                        <p>
+                            Al archivar esta edición, se enviará una notificación a todos los participantes
+                            informándoles que sus datos serán eliminados en un plazo de 30 días. Los cortometrajes
+                            ganadores se conservarán para el archivo histórico del festival.
+                        </p>
+                    </div>
+
+                    <div class="confirmacion">
+                        <input type="checkbox" id="confirmacion" />
+                        <label for="confirmacion">
+                            Confirmo que he leído toda la información<br />
+                            <small>
+                                Entiendo que esta acción archivará la edición actual, enviará notificaciones a los
+                                participantes y eliminará los datos no ganadores en 30 días
+                            </small>
+                        </label>
+                    </div>
+
+                    <button class="btn-archivar" id="archivar">Archivar</button>
+                </section>
+
             </div>
 
+            <!-- Ediciones anteriores -->
+            <div class="edicionesAnteriores">
+                <!-- Ediciones anteriores -->
+                <section class="previous-editions">
+                    <h2><i class="fa-solid fa-rotate-left"></i> Ediciones Anteriores</h2>
+
+                    <!-- Edición 2025 -->
+                    <div class="edition-card">
+                        <div class="edition-year">2025</div>
+
+                        <div class="edition-stats">
+                            <div class="stat">
+                                <i class="fa-solid fa-users"></i>
+                                <span>98</span>
+                                <p>participantes</p>
+                            </div>
+
+                            <div class="stat">
+                                <i class="fa-solid fa-film"></i>
+                                <span>67</span>
+                                <p>cortometrajes</p>
+                            </div>
+
+                            <div class="stat">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>5</span>
+                                <p>ganadores</p>
+                            </div>
+                        </div>
+
+                        <a href="#" class="btn-details">
+                            <i class="fa-solid fa-eye"></i>
+                            Ver<br>detalles
+                        </a>
+                    </div>
+
+                </section>
+            </div>
         </main>
 
     </div>
@@ -214,6 +344,8 @@
         });
     </script>
     <script src="../js/panel_gala.js"></script>
+    <script src="../js/panel_gala_pre_evento.js"></script>
+    <script src="../js/panel_gala_post_evento.js"></script>
 </body>
 
 </html>

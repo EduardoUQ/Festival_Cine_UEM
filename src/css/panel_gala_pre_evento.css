@@ -64,7 +64,30 @@
     color: #9ca3af;
 }
 
-/* Agregar evento */
+/* Modo de la gala */
+.tabs {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #202020;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    width: 400px;
+}
+
+.tab {
+    padding: 8px 14px;
+    background: #2a2a2a;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #FF3228;
+    color: #ffff;
+}
+
 .modo-info {
     display: flex;
 }
@@ -79,10 +102,11 @@
 }
 
 /* Tabs */
-.tabs {
+
+.eventoBtn {
     display: flex;
-    gap: 10px;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 #create-news {
@@ -97,6 +121,7 @@
     transition: background 0.3s ease;
 }
 
+/* Crear evento */
 #create-news:hover {
     background: #ffffff;
     color: #FF3228;

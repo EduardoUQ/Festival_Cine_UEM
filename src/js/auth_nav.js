@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (data.rol === "admin") {
                                 window.location.href = "panel_candidaturas.html";
                             } else {
-                                window.location.href = "panel_candidaturas.html";
+                                window.location.href = "panel_usuario_candidatura.html";
                             }
                         });
                     }

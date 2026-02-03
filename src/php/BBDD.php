@@ -188,7 +188,7 @@ INSERT INTO gala (anio, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo,
 (2026, 'Gala del Festival de Cine UEM 2026','2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
-('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2026),
+('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2025),
 ('Edu Utrilla', '23456789A', 'edu@correo.es', '$hash', NOW(), '22441925', 2026),
 ('Toby Alonso', '34567890B', 'toby@correo.es', '$hash', NOW(), '22441926', 2026),
 ('Irene del Rincón', '45678901C', 'irene@correo.es', '$hash', NOW(), '22441927', 2024),

@@ -362,7 +362,7 @@ if (isset($_POST['funcion'])) {
         FROM evento
         WHERE fecha = ?
         ORDER BY hora ASC
-    ";
+     ";
 
         $stmt = $conexion->prepare($sql);
         if (!$stmt) {
@@ -385,7 +385,33 @@ if (isset($_POST['funcion'])) {
             "eventos" => $eventos
         ]);
         exit;
+    }elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
+
+    $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
+            FROM evento
+            ORDER BY fecha ASC, hora ASC";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+        exit;
     }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $eventos = [];
+    while ($fila = $result->fetch_assoc()) {
+        $eventos[] = $fila;
+    }
+
+    echo json_encode([
+        "status" => "success",
+        "eventos" => $eventos
+    ]);
+    exit;
+ 
+ }
 }
 
 $conexion->close();

@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cargarEventosBD() {
     let formData = new FormData();
-    formData.append("funcion", "listar_eventos");
+    formData.append("funcion", "listar_eventos_calendario");
 
     return fetch("../php/formulario_evento.php", {
         method: "POST",

@@ -64,7 +64,7 @@ fetch("../php/mostrar_ganadores.php")
 
                 const tr = document.createElement("tr");
 
-                if (nombreCategoria === "Premio Honorífico") {
+                if (nombreCategoria === "ESPECIAL") {
                     tr.innerHTML = `
                         <td>${g.puesto}</td>
                         <td>${g.nombre}</td>
@@ -166,16 +166,13 @@ const archivarBtn = document.getElementById("archivar");
 const confirmacion = document.getElementById("confirmacion");
 
 archivarBtn.disabled = true;
-if (confirmacion.checked) {
-    archivarBtn.disabled = false;
-}
+
+// Escuchar cambios del checkbox
+confirmacion.addEventListener("change", () => {
+    archivarBtn.disabled = !confirmacion.checked;
+});
 
 archivarBtn.addEventListener("click", () => {
-
-    if (!confirmacion.checked) {
-        alert("Debes confirmar antes de archivar la edición.");
-        return;
-    }
 
     fetch("../php/archivar_gala.php", {
         method: "POST"

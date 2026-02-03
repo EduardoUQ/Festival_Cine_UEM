@@ -9,19 +9,28 @@ if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
     exit;
 }
 
+// 0. Obtener gala activa
+$sql = "SELECT id, anio FROM gala WHERE activa = 1";
+$stmt = $conexion->prepare($sql);
+$stmt->execute();
+$res = $stmt->get_result();
+$gala = $res->fetch_assoc();
+
+if (!$gala) {
+    echo json_encode(["status" => "error", "message" => "No hay gala activa"]);
+    exit;
+}
+
+$id_gala = $gala["id"];
+
 /* ============================================================
-   1. Guardar total participantes y cerrar gala
+   1. Guardar total participantes
    ============================================================ */
 $sqlCount = "SELECT COUNT(*) AS total FROM candidatura WHERE id_gala = ?";
 $stmtCount = $conexion->prepare($sqlCount);
 $stmtCount->bind_param("i", $id_gala);
 $stmtCount->execute();
 $total = $stmtCount->get_result()->fetch_assoc()["total"];
-
-$sqlUpdate = "UPDATE gala SET total_participantes = ?, activa = FALSE WHERE id = ?";
-$stmtUpdate = $conexion->prepare($sqlUpdate);
-$stmtUpdate->bind_param("ii", $total, $id_gala);
-$stmtUpdate->execute();
 
 
 /* ============================================================
@@ -80,7 +89,18 @@ $stmtDelete->bind_param("i", $id_gala);
 $stmtDelete->execute();
 
 /* ============================================================
-   5. Crear nueva gala vacía
+   5. Cerrar gala
+   ============================================================ */
+
+$sqlUpdate = "UPDATE gala SET total_participantes = ?, activa = FALSE WHERE id = ?";
+$stmtUpdate = $conexion->prepare($sqlUpdate);
+$stmtUpdate->bind_param("ii", $total, $id_gala);
+$stmtUpdate->execute();
+
+
+
+/* ============================================================
+   6. Crear nueva gala vacía
    ============================================================ */
 $sqlNew = "INSERT INTO gala (anio, fecha_evento, lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa)
            VALUES (YEAR(CURDATE()) + 1, CURDATE(), '', '', '', 0, '', TRUE)";
@@ -93,6 +113,6 @@ $stmtNew->execute();
 echo json_encode([
     "status" => "success",
     "message" => "Gala archivada correctamente",
-    "redirect" => "../formulario_gala.html"
+    "redirect" => "../html/formulario_gala.html"
 ]);
 exit;

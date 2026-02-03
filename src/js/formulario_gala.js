@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 inputCapacidad.value = (g.capacidad !== null && g.capacidad !== undefined) ? g.capacidad : "";
                 inputEstacionamiento.value = g.estacionamiento || "";
 
-                
+
                 //No hay select de activa en el panel, es activa por defecto
             })
             .catch(() => {
@@ -163,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formData.append("capacidad", inputCapacidad.value.trim());
             formData.append("estacionamiento", inputEstacionamiento.value.trim());
 
-            formData.append("activa", "1");
 
             fetch("../php/formulario_gala.php", {
                 method: "POST",

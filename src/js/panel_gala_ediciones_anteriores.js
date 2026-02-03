@@ -20,19 +20,13 @@ fetch("../php/cargar_ediciones.php")
                     </div>
 
                     <div class="stat">
-                        <i class="fa-solid fa-film"></i>
-                        <span>${ed.total_cortos}</span>
-                        <p>cortometrajes</p>
-                    </div>
-
-                    <div class="stat">
                         <i class="fa-solid fa-trophy"></i>
                         <span>${ed.total_ganadores}</span>
                         <p>ganadores</p>
                     </div>
                 </div>
 
-                <a href="detalle_gala.html?id=${ed.id}" class="btn-details">
+                <a href="edicion_anterior.html?id=${ed.id}" class="btn-details">
                     <i class="fa-solid fa-eye"></i>
                     Ver<br>detalles
                 </a>

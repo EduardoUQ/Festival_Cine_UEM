@@ -108,6 +108,7 @@ body {
     background: linear-gradient(180deg, #222, #191919);
     border: 1px solid var(--border-soft);
     padding: 30px;
+    width: 100%;
 }
 
 .card h2 {

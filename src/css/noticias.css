@@ -17,6 +17,11 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: 24px;
+}
+
+.news-header-text {
+    max-width: 720px;
 }
 
 .news-tag {
@@ -35,6 +40,42 @@
     color: #9ca3af;
     font-size: 0.9rem;
     line-height: 1.6;
+}
+
+/* BUSCADOR (arriba a la derecha) */
+.search {
+    position: relative;
+    min-width: 280px;
+    margin-left: auto;
+}
+
+.search i {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.search input {
+    width: 100%;
+    padding: 10px 14px 10px 40px;
+    background: #111;
+    border: 1px solid #1f1f1f;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.search input::placeholder {
+    color: #6b7280;
+}
+
+.search input:focus {
+    outline: none;
+    border-color: #FF3228;
 }
 
 /* CREAR NOTICIA */
@@ -60,6 +101,15 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+}
+
+/* MENSAJE SIN RESULTADOS */
+.no-results {
+    grid-column: 1 / -1;
+    color: #9ca3af;
+    font-size: 1rem;
+    padding: 40px 0;
+    text-align: center;
 }
 
 /* CARD */
@@ -119,10 +169,17 @@
     font-size: 1rem;
 }
 
+/* 2 líneas + … */
 .news-content p {
     font-size: 0.85rem;
     color: #9ca3af;
     margin-bottom: 12px;
+    line-height: 1.4;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .news-content a {
@@ -131,10 +188,10 @@
     text-decoration: none;
 }
 
-/* PAGINATION */
+/* PAGINATION (abajo a la derecha) */
 .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 10px;
     margin-top: 50px;
 }
@@ -172,6 +229,10 @@
     .news-header h1 {
         font-size: 1.7rem;
     }
+
+    .search {
+        min-width: 240px;
+    }
 }
 
 /* MOBILE */
@@ -185,11 +246,22 @@
         margin: 0 auto 40px;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 14px;
+    }
+
+    .news-header-text {
+        max-width: 100%;
     }
 
     .news-header p {
         margin: 0 auto;
+    }
+
+    .search {
+        width: 100%;
+        max-width: 420px;
+        min-width: auto;
+        margin-left: 0;
     }
 
     .news-card img {
@@ -198,6 +270,7 @@
 
     .pagination {
         margin-top: 40px;
+        justify-content: center;
     }
 }
 

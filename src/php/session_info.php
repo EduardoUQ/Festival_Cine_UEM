@@ -1,12 +1,12 @@
 <?php
-// Evitar que warnings/notices rompan el JSON en producción
 ini_set('display_errors', '0');
 error_reporting(E_ALL);
 
 session_start();
 header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 
-// Si hubiera cualquier salida previa (BOM/espacios), la limpiamos
 if (ob_get_length()) {
     ob_clean();
 }
@@ -24,5 +24,6 @@ echo json_encode([
     'id' => (int)$_SESSION['id'],
     'email' => $_SESSION['email'],
     'nombre' => $_SESSION['nombre_apellidos'] ?? $_SESSION['email'],
-    'super_admin' => !empty($_SESSION['super_admin']) // true si existe y es truthy
+    'anio_graduacion' => isset($_SESSION['anio_graduacion']) ? (int)$_SESSION['anio_graduacion'] : null,
+    'super_admin' => !empty($_SESSION['super_admin'])
 ]);

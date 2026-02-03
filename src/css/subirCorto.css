@@ -51,7 +51,6 @@ body {
 /* Cards */
 .form-card {
     background: linear-gradient(180deg, #1d1f24, #17191d);
-    border-radius: var(--radius);
     padding: 28px;
     margin-bottom: 28px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
@@ -87,7 +86,6 @@ textarea {
     width: 100%;
     background: var(--bg-input);
     border: 1px solid transparent;
-    border-radius: 10px;
     padding: 12px 14px;
     color: var(--text-main);
     outline: none;
@@ -114,7 +112,6 @@ textarea {
 /* Upload box */
 .upload-box {
     border: 2px dashed #3a3d44;
-    border-radius: 12px;
     padding: 30px;
     text-align: center;
     cursor: pointer;
@@ -143,7 +140,6 @@ textarea {
 
 button {
     border: none;
-    border-radius: 12px;
     padding: 14px 28px;
     font-weight: 600;
     cursor: pointer;
@@ -204,7 +200,6 @@ button {
   background: #fff;
   color: #1f1f1f;
   padding: 30px;
-  border-radius: 12px;
   text-align: center;
   width: 90%;
   max-width: 420px;
@@ -225,7 +220,6 @@ button {
   border: none;
   background: #000;
   color: #fff;
-  border-radius: 6px;
   cursor: pointer;
 }
 #modal_icono.modal-ok {
@@ -252,7 +246,6 @@ select {
     width: 100%;
     background: var(--bg-input);
     border: 1px solid transparent;
-    border-radius: 10px;
     padding: 12px 14px;
     color: var(--text-main);
     outline: none;

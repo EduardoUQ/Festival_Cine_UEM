@@ -31,9 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalBtn = document.getElementById("modalBtn");
   const modalBtnCancel = document.getElementById("modalBtnCancel");
 
+  // ====== MODO PANEL ======
+  const params = new URLSearchParams(window.location.search);
+  const modoPanel = params.get("modo") === "panel";
+
+  // Localiza el bloque “Datos personales” (primer .form-card)
+  const cards = document.querySelectorAll(".form-card");
+  const cardDatosPersonales = cards.length ? cards[0] : null;
+
+  // ====== VALIDACIÓN RESOLUCIÓN VÍDEO ======
+  // Ajusta aquí si cambias la resolución “oficial”
+  const RES_W = 1000;
+  const RES_H = 500;
+  // true por defecto para NO bloquear si el navegador no puede leer metadata
+  let resolucionOk = true;
+
   // ====== MODAL ======
   function abrirModal(tipo, tituloTxt, textoTxt, onAceptar) {
-    // limpiar clases de color
     modalIcono.classList.remove("modal-ok", "modal-error", "modal-warn");
 
     modalIcono.className = "fa-solid";
@@ -59,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ====== MENSAJES BAJO INPUT ======
   function ponerMensajeError(el, msg) {
+    if (!el) return;
+
     let cont = el.closest(".form-group");
     if (!cont) return;
 
@@ -89,35 +105,72 @@ document.addEventListener("DOMContentLoaded", () => {
     return ok;
   }
 
-  // ====== SELECT AÑO GRADUACIÓN (dinámico) ======
-  const anioActual = new Date().getFullYear();
+  // ====== DESACTIVAR DATOS PERSONALES EN MODO PANEL (SIN OCULTAR LA CARD ENTERA) ======
+  function desactivarDatosPersonales() {
+    // NO ocultamos toda la tarjeta porque dentro vive grupo_categoria_manual
+    if (cardDatosPersonales) {
+      const h2 = cardDatosPersonales.querySelector("h2");
+      if (h2) h2.textContent = "Participación";
+    }
 
-  // Poblar select año
-  selAnio.innerHTML = "";
+    const ocultarGrupo = (el) => {
+      if (!el) return;
+      const g = el.closest(".form-group");
+      if (g) g.style.display = "none";
+      el.required = false;
+      el.disabled = true;
+      el.value = "";
+      ponerMensajeError(el, "");
+    };
 
-  let opt0 = document.createElement("option");
-  opt0.value = "";
-  opt0.textContent = "Selecciona una opción";
-  selAnio.appendChild(opt0);
+    ocultarGrupo(nombre);
+    ocultarGrupo(dni);
+    ocultarGrupo(expediente);
+    ocultarGrupo(email);
+    ocultarGrupo(pass);
+    ocultarGrupo(pass2);
+    ocultarGrupo(selAnio);
 
-  for (let y = anioActual - 5; y <= anioActual - 1; y++) {
-    let opt = document.createElement("option");
-    opt.value = String(y);
-    opt.textContent = String(y);
-    selAnio.appendChild(opt);
+    // el manual se mostrará solo si aplica (según BBDD)
+    if (grupoCatManual) grupoCatManual.style.display = "none";
+    if (selCatManual) {
+      selCatManual.disabled = true;
+      selCatManual.required = false;
+      selCatManual.value = "";
+      ponerMensajeError(selCatManual, "");
+    }
   }
 
-  let optCurso = document.createElement("option");
-  optCurso.value = "CURSO";
-  optCurso.textContent = "Me gradúo este curso";
-  selAnio.appendChild(optCurso);
+  // ====== SELECT AÑO GRADUACIÓN (solo modo público) ======
+  const anioActual = new Date().getFullYear();
 
-  let optFuturo = document.createElement("option");
-  optFuturo.value = "FUTURO";
-  optFuturo.textContent = "Aún no me gradúo (más de un curso)";
-  selAnio.appendChild(optFuturo);
+  if (!modoPanel) {
+    selAnio.innerHTML = "";
 
-  // Poblar select manual categoría
+    let opt0 = document.createElement("option");
+    opt0.value = "";
+    opt0.textContent = "Selecciona una opción";
+    selAnio.appendChild(opt0);
+
+    for (let y = anioActual - 5; y <= anioActual - 1; y++) {
+      let opt = document.createElement("option");
+      opt.value = String(y);
+      opt.textContent = String(y);
+      selAnio.appendChild(opt);
+    }
+
+    let optCurso = document.createElement("option");
+    optCurso.value = "CURSO";
+    optCurso.textContent = "Me gradúo este curso";
+    selAnio.appendChild(optCurso);
+
+    let optFuturo = document.createElement("option");
+    optFuturo.value = "FUTURO";
+    optFuturo.textContent = "Aún no me gradúo (más de un curso)";
+    selAnio.appendChild(optFuturo);
+  }
+
+  // Poblar select manual categoría (vale para ambos modos)
   selCatManual.innerHTML = "";
   let m0 = document.createElement("option");
   m0.value = "";
@@ -134,10 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
   m2.textContent = "Alumni";
   selCatManual.appendChild(m2);
 
-  function refrescarCategoriaManual() {
+  function refrescarCategoriaManualPublico() {
     const v = selAnio.value;
 
-    // Si selecciona anioActual-1 => mostrar selector manual
     if (v !== "" && !isNaN(Number(v)) && Number(v) === anioActual - 1) {
       grupoCatManual.style.display = "block";
     } else {
@@ -147,11 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  selAnio.addEventListener("change", () => {
-    refrescarCategoriaManual();
-    // no bloqueamos, solo mensaje en blur o en submit
-  });
-
   // ====== CONTADOR SINOPSIS ======
   function pintarCounter() {
     counterSinopsis.textContent = `${sinopsis.value.length} / 500`;
@@ -159,76 +206,82 @@ document.addEventListener("DOMContentLoaded", () => {
   sinopsis.addEventListener("input", pintarCounter);
   pintarCounter();
 
-  // ====== VALIDACIONES EN BLUR ======
-  nombre.addEventListener("blur", () => {
-    if (nombre.value.trim().length < 3)
-      ponerMensajeError(
-        nombre,
-        "Introduce nombre y apellidos (mínimo 3 caracteres)",
-      );
-    else ponerMensajeError(nombre, "");
-  });
+  // ====== LISTENERS PERSONALES (solo modo público) ======
+  if (!modoPanel) {
+    selAnio.addEventListener("change", () => {
+      refrescarCategoriaManualPublico();
+    });
 
-  dni.addEventListener("blur", () => {
-    const v = dni.value.trim().toUpperCase();
-    if (v.length < 9 || v.length > 9)
-      ponerMensajeError(dni, "DNI/NIE inválido");
-    else ponerMensajeError(dni, "");
-  });
+    nombre.addEventListener("blur", () => {
+      if (nombre.value.trim().length < 3)
+        ponerMensajeError(
+          nombre,
+          "Introduce nombre y apellidos (mínimo 3 caracteres)",
+        );
+      else ponerMensajeError(nombre, "");
+    });
 
-  expediente.addEventListener("blur", () => {
-    const v = expediente.value.trim();
-    const expRegex = /^[A-Za-z0-9]{8}$/;
+    dni.addEventListener("blur", () => {
+      const v = dni.value.trim().toUpperCase();
+      if (v.length < 9 || v.length > 9)
+        ponerMensajeError(dni, "DNI/NIE inválido");
+      else ponerMensajeError(dni, "");
+    });
 
-    if (!expRegex.test(v))
-      ponerMensajeError(
-        expediente,
-        "Expediente inválido. Debe tener 8 dígitos.",
-      );
-    else ponerMensajeError(expediente, "");
-  });
+    expediente.addEventListener("blur", () => {
+      const v = expediente.value.trim();
+      const expRegex = /^[A-Za-z0-9]{8}$/;
 
-  email.addEventListener("blur", () => {
-    if (!email.value.trim())
-      ponerMensajeError(email, "El email es obligatorio");
-    else ponerMensajeError(email, "");
-  });
+      if (!expRegex.test(v))
+        ponerMensajeError(
+          expediente,
+          "Expediente inválido. Debe tener 8 dígitos.",
+        );
+      else ponerMensajeError(expediente, "");
+    });
 
-  pass.addEventListener("blur", () => {
-    if (pass.value.length < 4)
-      ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
-    else ponerMensajeError(pass, "");
-  });
+    email.addEventListener("blur", () => {
+      if (!email.value.trim())
+        ponerMensajeError(email, "El email es obligatorio");
+      else ponerMensajeError(email, "");
+    });
 
-  // Confirmar contraseña
-  pass2.addEventListener("blur", () => {
-    if (!pass2.value) {
-      ponerMensajeError(pass2, "Confirma la contraseña");
-    } else if (pass.value !== pass2.value) {
-      ponerMensajeError(pass2, "Las contraseñas no coinciden");
-    } else {
-      ponerMensajeError(pass2, "");
-    }
-  });
+    pass.addEventListener("blur", () => {
+      if (pass.value.length < 4)
+        ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
+      else ponerMensajeError(pass, "");
+    });
 
-  selAnio.addEventListener("blur", () => {
-    if (!selAnio.value)
-      ponerMensajeError(selAnio, "Selecciona tu año de graduación");
-    else ponerMensajeError(selAnio, "");
-    refrescarCategoriaManual();
-  });
+    pass2.addEventListener("blur", () => {
+      if (!pass2.value) {
+        ponerMensajeError(pass2, "Confirma la contraseña");
+      } else if (pass.value !== pass2.value) {
+        ponerMensajeError(pass2, "Las contraseñas no coinciden");
+      } else {
+        ponerMensajeError(pass2, "");
+      }
+    });
 
-  selCatManual.addEventListener("blur", () => {
-    const v = selAnio.value;
-    if (v !== "" && !isNaN(Number(v)) && Number(v) === anioActual - 1) {
-      if (!selCatManual.value)
-        ponerMensajeError(selCatManual, "Selecciona Alumno o Alumni");
-      else ponerMensajeError(selCatManual, "");
-    } else {
-      ponerMensajeError(selCatManual, "");
-    }
-  });
+    selAnio.addEventListener("blur", () => {
+      if (!selAnio.value)
+        ponerMensajeError(selAnio, "Selecciona tu año de graduación");
+      else ponerMensajeError(selAnio, "");
+      refrescarCategoriaManualPublico();
+    });
 
+    selCatManual.addEventListener("blur", () => {
+      const v = selAnio.value;
+      if (v !== "" && !isNaN(Number(v)) && Number(v) === anioActual - 1) {
+        if (!selCatManual.value)
+          ponerMensajeError(selCatManual, "Selecciona Alumno o Alumni");
+        else ponerMensajeError(selCatManual, "");
+      } else {
+        ponerMensajeError(selCatManual, "");
+      }
+    });
+  }
+
+  // ====== LISTENERS DEL CORTO (ambos modos) ======
   titulo.addEventListener("blur", () => {
     if (titulo.value.trim().length < 2)
       ponerMensajeError(titulo, "El título es obligatorio");
@@ -241,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else ponerMensajeError(sinopsis, "");
   });
 
-  // ====== ARCHIVOS (validación en change; blur en file no funcaba bien) ======
+  // ====== ARCHIVOS ======
   cartel.addEventListener("change", () => {
     if (!cartel.files || !cartel.files[0]) {
       ponerMensajeError(cartel, "El cartel es obligatorio");
@@ -259,12 +312,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   corto.addEventListener("change", () => {
     videoInfo.textContent = "";
+    resolucionOk = true; // reseteo
 
     if (!corto.files || !corto.files[0]) {
       ponerMensajeError(corto, "El vídeo es obligatorio");
       return;
     }
-    //formato quicktime, no mov.
+
     const f = corto.files[0];
     const okType = f.type === "video/mp4" || f.type === "video/quicktime";
     if (!okType) {
@@ -272,13 +326,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // límite lógico A AJUSTAR: 2GB
-    const maxBytes = 2 * 1024 * 1024 * 1024;
+    const maxBytes = 2 * 1024 * 1024 * 1024; // 2GB
     if (f.size > maxBytes) {
       ponerMensajeError(corto, "El vídeo es demasiado grande (máx. 2GB)");
       return;
     }
 
+    // Limpio errores previos de tipo/tamaño
     ponerMensajeError(corto, "");
 
     // Intento de lectura de resolución (si se puede)
@@ -289,13 +343,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     v.onloadedmetadata = () => {
       URL.revokeObjectURL(url);
+
       const w = v.videoWidth;
       const h = v.videoHeight;
 
       if (w && h) {
         videoInfo.textContent = `Resolución detectada: ${w}×${h}`;
-        // AHORA MISMO NO OBLIGATORIO, descomentar para hacerlo obligatorio:
-        // if (!(w === 1920 && h === 1080)) ponerMensajeError(corto, "Resolución no válida: debe ser 1920×1080");
+
+        if (!(w === RES_W && h === RES_H)) {
+          resolucionOk = false;
+          ponerMensajeError(
+            corto,
+            `Resolución no válida: debe ser ${RES_W}×${RES_H}`,
+          );
+        } else {
+          resolucionOk = true;
+          ponerMensajeError(corto, "");
+        }
+      } else {
+        // No se pudo leer => no bloqueamos (limitación conocida)
+        resolucionOk = true;
       }
     };
 
@@ -303,81 +370,163 @@ document.addEventListener("DOMContentLoaded", () => {
       URL.revokeObjectURL(url);
       videoInfo.textContent =
         "No se pudo leer la resolución del vídeo en este navegador.";
+      // No bloqueamos
+      resolucionOk = true;
     };
   });
 
   // ====== CANCELAR ======
   btnCancelar.addEventListener("click", () => {
-    window.location.href = "index.html";
+    if (modoPanel) window.location.href = "panel_usuario_candidatura.html";
+    else window.location.href = "index.html";
   });
+
+  // ====== ARRANQUE SEGÚN MODO ======
+  if (modoPanel) {
+    desactivarDatosPersonales();
+
+    // Cargar año graduación real desde BBDD
+    fetch("../php/usuario_info.php")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status !== "success") {
+          abrirModal(
+            "error",
+            "Sesión",
+            data.message || "No autorizado",
+            () => {
+              window.location.href = "../html/login.html";
+            },
+          );
+          return;
+        }
+
+        const anioUser = Number(data.anio_graduacion);
+
+        if (anioUser === anioActual - 1) {
+          grupoCatManual.style.display = "block";
+          selCatManual.disabled = false;
+          selCatManual.required = true;
+        } else {
+          grupoCatManual.style.display = "none";
+          selCatManual.value = "";
+          selCatManual.disabled = true;
+          selCatManual.required = false;
+          ponerMensajeError(selCatManual, "");
+        }
+      })
+      .catch(() => {
+        abrirModal(
+          "error",
+          "Error",
+          "No se pudo cargar la información del usuario.",
+          () => {
+            window.location.href = "../html/login.html";
+          },
+        );
+      });
+  } else {
+    refrescarCategoriaManualPublico();
+  }
 
   // ====== SUBMIT ======
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Forzamos validación (repitiendo condiciones, sin bloquear el foco)
-    if (nombre.value.trim().length < 3)
-      ponerMensajeError(
-        nombre,
-        "Introduce nombre y apellidos (mínimo 3 caracteres)",
-      );
-    else ponerMensajeError(nombre, "");
+    if (!modoPanel) {
+      // ====== VALIDACIÓN COMPLETA (MODO PÚBLICO) ======
+      if (nombre.value.trim().length < 3)
+        ponerMensajeError(
+          nombre,
+          "Introduce nombre y apellidos (mínimo 3 caracteres)",
+        );
+      else ponerMensajeError(nombre, "");
 
-    const vDni = dni.value.trim().toUpperCase();
-    if (vDni.length !== 9)
-      ponerMensajeError(dni, "DNI/NIE inválido");
-    else ponerMensajeError(dni, "");
+      const vDni = dni.value.trim().toUpperCase();
+      if (vDni.length !== 9) ponerMensajeError(dni, "DNI/NIE inválido");
+      else ponerMensajeError(dni, "");
 
-    if (expediente.value.trim().length !== 8)
-      ponerMensajeError(expediente, "Número de expediente inválido");
-    else ponerMensajeError(expediente, "");
+      if (expediente.value.trim().length !== 8)
+        ponerMensajeError(expediente, "Número de expediente inválido");
+      else ponerMensajeError(expediente, "");
 
-    if (!email.value.trim())
-      ponerMensajeError(email, "El email es obligatorio");
-    else ponerMensajeError(email, "");
+      if (!email.value.trim())
+        ponerMensajeError(email, "El email es obligatorio");
+      else ponerMensajeError(email, "");
 
-    if (pass.value.length < 4)
-      ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
-    else ponerMensajeError(pass, "");
+      if (pass.value.length < 4)
+        ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
+      else ponerMensajeError(pass, "");
 
-    if (!pass2.value) ponerMensajeError(pass2, "Confirma la contraseña");
-    else if (pass.value !== pass2.value)
-      ponerMensajeError(pass2, "Las contraseñas no coinciden");
-    else ponerMensajeError(pass2, "");
+      if (!pass2.value) ponerMensajeError(pass2, "Confirma la contraseña");
+      else if (pass.value !== pass2.value)
+        ponerMensajeError(pass2, "Las contraseñas no coinciden");
+      else ponerMensajeError(pass2, "");
 
-    if (!selAnio.value)
-      ponerMensajeError(selAnio, "Selecciona tu año de graduación");
-    else ponerMensajeError(selAnio, "");
+      if (!selAnio.value)
+        ponerMensajeError(selAnio, "Selecciona tu año de graduación");
+      else ponerMensajeError(selAnio, "");
 
-    refrescarCategoriaManual();
-    const vAnio = selAnio.value;
-    if (
-      vAnio !== "" &&
-      !isNaN(Number(vAnio)) &&
-      Number(vAnio) === anioActual - 1
-    ) {
-      if (!selCatManual.value)
-        ponerMensajeError(selCatManual, "Selecciona Alumno o Alumni");
-      else ponerMensajeError(selCatManual, "");
+      refrescarCategoriaManualPublico();
+      const vAnio = selAnio.value;
+      if (
+        vAnio !== "" &&
+        !isNaN(Number(vAnio)) &&
+        Number(vAnio) === anioActual - 1
+      ) {
+        if (!selCatManual.value)
+          ponerMensajeError(selCatManual, "Selecciona Alumno o Alumni");
+        else ponerMensajeError(selCatManual, "");
+      } else {
+        ponerMensajeError(selCatManual, "");
+      }
+
+      if (titulo.value.trim().length < 2)
+        ponerMensajeError(titulo, "El título es obligatorio");
+      else ponerMensajeError(titulo, "");
+
+      if (sinopsis.value.trim().length === 0)
+        ponerMensajeError(sinopsis, "La sinopsis es obligatoria");
+      else ponerMensajeError(sinopsis, "");
+
+      if (!cartel.files || !cartel.files[0])
+        ponerMensajeError(cartel, "El cartel es obligatorio");
+      if (!corto.files || !corto.files[0])
+        ponerMensajeError(corto, "El vídeo es obligatorio");
     } else {
-      ponerMensajeError(selCatManual, "");
+      // ====== VALIDACIÓN (MODO PANEL) SOLO DATOS DEL CORTO ======
+      if (titulo.value.trim().length < 2)
+        ponerMensajeError(titulo, "El título es obligatorio");
+      else ponerMensajeError(titulo, "");
+
+      if (sinopsis.value.trim().length === 0)
+        ponerMensajeError(sinopsis, "La sinopsis es obligatoria");
+      else ponerMensajeError(sinopsis, "");
+
+      if (!cartel.files || !cartel.files[0])
+        ponerMensajeError(cartel, "El cartel es obligatorio");
+      if (!corto.files || !corto.files[0])
+        ponerMensajeError(corto, "El vídeo es obligatorio");
+
+      if (grupoCatManual && grupoCatManual.style.display !== "none") {
+        if (!selCatManual.value)
+          ponerMensajeError(selCatManual, "Selecciona Alumno o Alumni");
+        else ponerMensajeError(selCatManual, "");
+      } else {
+        ponerMensajeError(selCatManual, "");
+      }
     }
 
-    if (titulo.value.trim().length < 2)
-      ponerMensajeError(titulo, "El título es obligatorio");
-    else ponerMensajeError(titulo, "");
+    // Bloqueo por resolución SI se detectó y no es válida
+    if (!resolucionOk) {
+      abrirModal(
+        "warn",
+        "Vídeo inválido",
+        `La resolución del vídeo debe ser ${RES_W}×${RES_H}.`,
+      );
+      return;
+    }
 
-    if (sinopsis.value.trim().length === 0)
-      ponerMensajeError(sinopsis, "La sinopsis es obligatoria");
-    else ponerMensajeError(sinopsis, "");
-
-    // Archivos: si no han pasado por change
-    if (!cartel.files || !cartel.files[0])
-      ponerMensajeError(cartel, "El cartel es obligatorio");
-    if (!corto.files || !corto.files[0])
-      ponerMensajeError(corto, "El vídeo es obligatorio");
-
-    // Si hay errores, no enviamos
     if (hayErroresEnPantalla()) {
       abrirModal(
         "warn",
@@ -389,6 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Enviar a PHP
     const fd = new FormData(form);
+    fd.append("modo", modoPanel ? "panel" : "publico");
 
     fetch("../php/crear_candidatura.php", {
       method: "POST",
@@ -410,7 +560,9 @@ document.addEventListener("DOMContentLoaded", () => {
           "Candidatura creada",
           "Tu candidatura se ha registrado correctamente.",
           () => {
-            window.location.href = "panel_usuario_candidatura.html";
+            window.location.href = modoPanel
+              ? "panel_usuario_candidatura.html"
+              : "panel_usuario_candidatura.html";
           },
         );
       })
@@ -418,7 +570,4 @@ document.addEventListener("DOMContentLoaded", () => {
         abrirModal("error", "Error", "Error de conexión con el servidor.");
       });
   });
-
-  // Arranque
-  refrescarCategoriaManual();
 });

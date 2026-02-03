@@ -30,9 +30,7 @@ body {
     margin-bottom: 32px;
 }
 
-.profile i {
-    border-radius: 50%;
-}
+
 
 .profile span {
     font-size: 0.8rem;
@@ -46,7 +44,6 @@ body {
     padding: 12px;
     color: #cfcfcf;
     text-decoration: none;
-    border-radius: 8px;
     margin-bottom: 6px;
 }
 
@@ -78,7 +75,6 @@ body {
 .search {
     background: #1a1a1a;
     padding: 10px 14px;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -119,7 +115,6 @@ body {
 .tabla-container {
     background: #1c1c1c;
     padding: 20px;
-    border-radius: 12px;
 }
 
 table {
@@ -153,7 +148,6 @@ tbody tr:hover {
 /* Estados */
 .estado {
     padding: 4px 10px;
-    border-radius: 12px;
     font-size: 0.8em;
 }
 
@@ -167,7 +161,6 @@ tbody tr:hover {
     padding: 6px 12px;
     background: #d4af37;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
     color: #000;
     text-decoration: none;
@@ -189,7 +182,6 @@ tbody tr:hover {
     border: none;
     color: #ccc;
     padding: 6px 10px;
-    border-radius: 6px;
     margin-left: 5px;
     cursor: pointer;
 }

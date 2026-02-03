@@ -353,7 +353,65 @@ if (isset($_POST['funcion'])) {
             "tipo" => "ok"
         ]);
         exit;
+    } elseif ($_POST['funcion'] === 'listar_eventos_gala') {
+
+        $fechaGala = "2026-12-11";
+
+        $sql = "
+        SELECT id, titulo, descripcion, fecha, hora, localizacion
+        FROM evento
+        WHERE fecha = ?
+        ORDER BY hora ASC
+     ";
+
+        $stmt = $conexion->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+            exit;
+        }
+
+        $stmt->bind_param("s", $fechaGala);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $eventos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $eventos[] = $fila;
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "fecha_gala" => $fechaGala,
+            "eventos" => $eventos
+        ]);
+        exit;
+    }elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
+
+    $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
+            FROM evento
+            ORDER BY fecha ASC, hora ASC";
+
+    $stmt = $conexion->prepare($sql);
+    if (!$stmt) {
+        echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+        exit;
     }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $eventos = [];
+    while ($fila = $result->fetch_assoc()) {
+        $eventos[] = $fila;
+    }
+
+    echo json_encode([
+        "status" => "success",
+        "eventos" => $eventos
+    ]);
+    exit;
+ 
+ }
 }
 
 $conexion->close();

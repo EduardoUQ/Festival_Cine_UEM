@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
 </head>
-
+<script src="../js/auth_nav.js"></script>
 <body>
 
     <!-- HEADER -->
@@ -34,7 +34,7 @@
                 <a href="../html/login.html" class="login-mobile">Ingresar</a>
             </nav>
             <!-- ACTIONS -->
-            <div class="actions">
+            <div class="actions" id="auth_actions">
                 <a class="login-btn" href="../html/login.html">Ingresar</a>
             </div>
         </div>
@@ -46,8 +46,8 @@
             <div class="profile">
                 <div class="fa-solid fa-user"></div>
                 <div>
-                    <strong>Carlos Mendoza</strong>
-                    <span>Administrador</span>
+                    <strong id="nombre">Usuario</strong>
+                    <span>Candidato</span>
                 </div>
             </div>
 
@@ -56,11 +56,6 @@
                 <a class="active" href="panel_usuario_candidatura.html"><i class="fa-solid fa-film"></i>
                     Candidaturas</a>
                 <a>
-                    <i class="fa-solid fa-bell"></i> Notificaciones
-                    <span class="badge">3</span>
-                </a>
-                <a><i class="fa-solid fa-gear"></i> Configuración</a>
-            </nav>
         </aside>
 
         <!-- CONTENIDO -->
@@ -150,11 +145,11 @@
             <div class="footer-column">
                 <h4>Festival</h4>
                 <ul>
-                    <li><a href="#">Sube tu corto</a></li>
-                    <li><a href="#">Bases legales</a></li>
-                    <li><a href="#">Noticias</a></li>
-                    <li><a href="#">Galas</a></li>
-                    <li><a href="#">Calendario</a></li>
+                    <li><a href="subir_corto.html">Sube tu corto</a></li>
+                    <li><a href="bases_legales.html">Bases legales</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="premios_galas.html">Galas</a></li>
+                    <li><a href="calendario.html">Calendario</a></li>
                 </ul>
             </div>
 

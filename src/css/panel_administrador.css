@@ -47,7 +47,6 @@ body {
     padding: 12px;
     color: #cfcfcf;
     text-decoration: none;
-    border-radius: 8px;
     margin-bottom: 6px;
 }
 
@@ -79,7 +78,6 @@ body {
 .section {
     background: #1c1c1c;
     padding: 20px;
-    border-radius: 12px;
     margin-bottom: 18px;
 }
 
@@ -117,7 +115,6 @@ input[type="password"] {
     width: 100%;
     background: #1a1a1a;
     border: 1px solid #2a2a2a;
-    border-radius: 10px;
     padding: 10px 12px;
     color: #fff;
     outline: none;
@@ -154,7 +151,6 @@ input.invalid {
     padding: 8px 14px;
     background: #d4af37;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
     color: #000;
     text-decoration: none;
@@ -181,7 +177,6 @@ input.invalid {
 .tabla-container {
     background: #1c1c1c;
     padding: 20px;
-    border-radius: 12px;
     margin-top: 12px;
 }
 
@@ -221,7 +216,6 @@ tbody tr:hover {
 .badge {
     display: inline-block;
     padding: 4px 8px;
-    border-radius: 999px;
     background: #2a2a2a;
     color: #fff;
     font-size: 0.8rem;
@@ -260,7 +254,6 @@ tbody tr:hover {
     max-width: 520px;
     background: #141414;
     border: 1px solid #2a2a2a;
-    border-radius: 14px;
     overflow: hidden;
 }
 

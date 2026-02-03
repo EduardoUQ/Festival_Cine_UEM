@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calendario.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Calendario</title>
 </head>
 <script src="../js/auth_nav.js"></script>
+
 <body>
 
     <!-- HEADER -->
@@ -97,69 +99,71 @@
         </div>
 
 
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="footer-container">
+    </section>
 
-                <!-- BRAND -->
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="../img/Logo_UEM_Blanco.png" alt="">
-                    </div>
-                    <p class="footer-description">
-                        El festival universitario de cortometrajes más importante de la región,
-                        promoviendo el talento cinematográfico emergente.
-                    </p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../img/Logo_UEM_Blanco.png" alt="">
                 </div>
-
-                <!-- FESTIVAL -->
-                <div class="footer-column">
-                    <h4>Festival</h4>
-                    <ul>
-                        <li><a href="#">Sube tu corto</a></li>
-                        <li><a href="#">Bases legales</a></li>
-                        <li><a href="#">Noticias</a></li>
-                        <li><a href="#">Galas</a></li>
-                        <li><a href="#">Calendario</a></li>
-                    </ul>
-                </div>
-
-                <!-- CONTACTO -->
-                <div class="footer-column">
-                    <h4>Contacto</h4>
-                    <ul class="contact-list">
-                        <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
-                        <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
-                    </ul>
-                    <div class="social-links">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                </div>
-
+                <p class="footer-description">
+                    El festival universitario de cortometrajes más importante de la región,
+                    promoviendo el talento cinematográfico emergente.
+                </p>
             </div>
 
-            <!-- BOTTOM -->
-            <div class="footer-bottom">
-                <p>© Todos los derechos reservados.</p>
-                <div class="footer-links">
-                    <a href="#">Privacidad</a>
-                    <a href="#">Términos</a>
-                    <a href="#">Cookies</a>
+            <!-- FESTIVAL -->
+            <div class="footer-column">
+                <h4>Festival</h4>
+                <ul>
+                    <li><a href="subir_corto.html">Sube tu corto</a></li>
+                    <li><a href="bases_legales.html">Bases legales</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="premios_galas.html">Galas</a></li>
+                    <li><a href="calendario.html">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                </ul>
+                <div class="social-links">
+                    <i class="fa-brands fa-instagram"></i>
                 </div>
             </div>
-        </footer>
 
-        <script src="../js/calendario.js"></script>
+        </div>
 
-        <script>
-            const hamburger = document.getElementById("hamburger");
-            const nav = document.getElementById("nav");
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
 
-            hamburger.addEventListener("click", () => {
-                nav.classList.toggle("active");
-            });
-        </script>
+    <script src="../js/calendario.js"></script>
+
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const nav = document.getElementById("nav");
+
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
 </body>
 
 </html>

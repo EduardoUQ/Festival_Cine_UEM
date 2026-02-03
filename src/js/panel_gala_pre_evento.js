@@ -153,10 +153,10 @@ function cargarEventos() {
     tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Cargando...</td></tr>`;
 
     let formData = new FormData();
-    formData.append("funcion", "listar_eventos");
-    formData.append("page", paginaActual);
-    formData.append("per_page", POR_PAGINA);
-    formData.append("filtro", filtroActual);
+    formData.append("funcion", "listar_eventos_gala");
+    // formData.append("page", paginaActual);
+    // formData.append("per_page", POR_PAGINA);
+    // formData.append("filtro", filtroActual);
 
     fetch("../php/formulario_evento.php", {
         method: "POST",
@@ -170,8 +170,10 @@ function cargarEventos() {
             }
 
             pintarTabla(data.eventos);
-            pintarInfo(data.from, data.to, data.total);
-            pintarBotones(data.total, data.per_page, data.page);
+            if (typeof pintarInfo === "function") {
+                pintarInfo(1, data.eventos.length, data.eventos.length);
+            }
+            //pintarBotones(data.total, data.per_page, data.page);
         })
         .catch((err) => {
             console.error("Error cargando eventos:", err);

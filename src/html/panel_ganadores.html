@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Panel de Administración - ganadores</title>
 </head>
-
+<script src="../js/auth_nav.js"></script>
 <body>
 
     <!-- HEADER -->
@@ -34,7 +34,7 @@
                 <a href="../html/login.html" class="login-mobile">Ingresar</a>
             </nav>
             <!-- ACTIONS -->
-            <div class="actions">
+            <div class="actions" id="auth_actions">
                 <i class="fa-solid fa-user"></i>
                 <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
@@ -49,7 +49,7 @@
                 <i class="fa-solid fa-user"></i>
                 <div>
                     <!-- OJO: este id lo usa el JS -->
-                    <strong id="nombre">Carlos Mendoza</strong>
+                    <strong id="nombre"></strong>
                     <span>Administrador</span>
                 </div>
             </div>
@@ -131,11 +131,11 @@
             <div class="footer-column">
                 <h4>Festival</h4>
                 <ul>
-                    <li><a href="#">Sube tu corto</a></li>
-                    <li><a href="#">Bases legales</a></li>
-                    <li><a href="#">Noticias</a></li>
-                    <li><a href="#">Galas</a></li>
-                    <li><a href="#">Calendario</a></li>
+                    <li><a href="subir_corto.html">Sube tu corto</a></li>
+                    <li><a href="bases_legales.html">Bases legales</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="premios_galas.html">Galas</a></li>
+                    <li><a href="calendario.html">Calendario</a></li>
                 </ul>
             </div>
 

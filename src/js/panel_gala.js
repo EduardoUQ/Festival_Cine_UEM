@@ -1,18 +1,18 @@
-// Botones
+//Botones
 const btnPre = document.getElementById("preEventoBtn");
 const btnPost = document.getElementById("postEventoBtn");
 const btnEdiciones = document.getElementById("edicionesAnterioresBtn");
 
-// Secciones
+//Secciones
 const preEvento = document.querySelector(".preEvento");
 const postEvento = document.querySelector(".postEvento");
 const edicionesAnteriores = document.querySelector(".edicionesAnteriores");
 
-// Agrupamos para simplificar
+//Agrupamos para simplificar
 const secciones = [preEvento, postEvento, edicionesAnteriores];
 const botones = [btnPre, btnPost, btnEdiciones];
 
-// Función para mostrar solo una sección
+//Función para mostrar solo una sección
 function mostrarSeccion(seccionActiva, botonActivo) {
     // Ocultar todas las secciones
     secciones.forEach(sec => sec.hidden = true);

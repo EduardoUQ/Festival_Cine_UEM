@@ -62,7 +62,6 @@ body {
 
 .menu a {
     padding: 12px;
-    border-radius: 8px;
     color: var(--text-muted);
     text-decoration: none;
     display: flex;
@@ -83,7 +82,6 @@ body {
     color: #000;
     font-size: 12px;
     padding: 2px 6px;
-    border-radius: 6px;
     margin-left: auto;
 }
 
@@ -109,7 +107,6 @@ body {
 .card {
     background: linear-gradient(180deg, #222, #191919);
     border: 1px solid var(--border-soft);
-    border-radius: 16px;
     padding: 30px;
 }
 
@@ -153,7 +150,6 @@ input {
     background: #111;
     border: 1px solid var(--border-soft);
     padding: 12px;
-    border-radius: 8px;
     color: var(--text-main);
 }
 
@@ -170,7 +166,6 @@ input:disabled {
 
 .btn {
     padding: 12px 20px;
-    border-radius: 10px;
     border: none;
     cursor: pointer;
     font-weight: 600;
@@ -243,7 +238,6 @@ input:disabled {
     width: 90%;
     max-width: 420px;
     padding: 2rem;
-    border-radius: 12px;
     text-align: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }

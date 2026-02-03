@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
     <title>Gestión de la Gala</title>
 </head>
-
+<script src="../js/auth_nav.js"></script>
 <body>
     <!-- HEADER -->
     <header class="header">
@@ -31,11 +31,11 @@
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Premios y Galas</a>
                 <a href="calendario.html">Calendario</a>
-                <!-- BOTÓN LOGOUT -->
-                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
             </nav>
             <!-- ACTIONS -->
-            <div class="actions">
+            <div class="actions" id="auth_actions">
                 <i class="fa-solid fa-user"></i>
                 <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
@@ -96,14 +96,14 @@
                 </div>
 
                 <!-- Filtro por tipo de evento -->
-                <div style="margin:12px 0;">
+                <!-- <div style="margin:12px 0;">
                     <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
                     <select id="filtro_eventos">
                         <option value="todos">Todos los eventos</option>
                         <option value="gala">Eventos del día de la gala</option>
                         <option value="otros">Otros días</option>
                     </select>
-                </div>
+                </div> -->
 
 
                 <!-- Tabla -->
@@ -345,6 +345,7 @@
             nav.classList.toggle("active");
         });
     </script>
+    <script src="../js/conexion.js"></script>
     <script src="../js/panel_gala.js"></script>
     <script src="../js/panel_gala_pre_evento.js"></script>
     <script src="../js/panel_gala_post_evento.js"></script>

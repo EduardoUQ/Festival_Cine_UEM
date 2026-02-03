@@ -256,7 +256,6 @@ body {
         padding: 10px 24px;
         background: #FF3228;
         color: #fff;
-        border-radius: 4px;
         font-weight: 600;
         text-align: center;
         width: fit-content;
@@ -266,6 +265,10 @@ body {
         background: #fff;
         color: #FF3228;
     }
+
+    .nav a.login-mobile:hover {
+    color: #000;
+}
 }
 
 /* ----------------- RESPONSIVE ------------------ */

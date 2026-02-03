@@ -46,7 +46,6 @@ body {
     padding: 12px;
     color: #cfcfcf;
     text-decoration: none;
-    border-radius: 8px;
     margin-bottom: 6px;
 }
 
@@ -104,7 +103,7 @@ body {
 .tabla-container {
     background: #1c1c1c;
     padding: 20px;
-    border-radius: 12px;
+
 }
 
 table {
@@ -154,7 +153,6 @@ td img {
     border: none;
     color: #ccc;
     padding: 6px 10px;
-    border-radius: 6px;
     margin-left: 5px;
     cursor: pointer;
 }
@@ -183,7 +181,6 @@ td img {
     background: #fff;
     color: #1f1f1f;
     padding: 30px;
-    border-radius: 12px;
     text-align: center;
     width: 90%;
     max-width: 420px;
@@ -209,7 +206,6 @@ td img {
     border: none;
     background: #000;
     color: #fff;
-    border-radius: 6px;
     cursor: pointer;
 }
 

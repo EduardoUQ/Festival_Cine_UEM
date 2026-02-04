@@ -12,6 +12,7 @@ $sql = "
     FROM gala
     WHERE activa = FALSE
     ORDER BY anio DESC
+    LIMIT 2;
 ";
 
 $res = $conexion->query($sql);

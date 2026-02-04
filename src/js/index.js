@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const p = video.play();
       if (p && typeof p.catch === "function") {
-        p.catch(() => {});
+        p.catch(() => { });
       }
     }
   }
@@ -340,4 +340,34 @@ document.addEventListener("DOMContentLoaded", () => {
     prevSlide();
     startAuto();
   });
+
+
+  /*=================================
+GALAS ANTERIORES
+===================================*/
+  const previousSection = document.querySelector(".galas-grid");
+
+  fetch("../php/mostrar_ediciones_anteriores.php")
+    .then(r => r.json())
+    .then(data => {
+      if (data.status !== "success") return;
+
+      data.ediciones.forEach(ed => {
+        const card = document.createElement("div");
+        card.classList.add("gala-card");
+
+        card.innerHTML = `
+                <div class="gala-image"><img src="${ed.media_url}"></div>
+
+                <div class="gala-content"> <h3>Gala ${ed.anio}</h3></div>
+                    
+                <div class="gala-footer"><a href="edicion_anterior.html?id=${ed.id}" class="btn-secondary">
+                    Ver Gala completa →
+                </a>
+                </div>
+            `;
+
+        previousSection.appendChild(card);
+      });
+    });
 });

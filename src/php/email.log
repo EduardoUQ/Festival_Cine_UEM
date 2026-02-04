@@ -1,1 +1,4 @@
 [2026-02-02 14:01:19] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-03 13:00:34] EMAIL | destino=hugo@correo.es | estado=RECHAZADA | resultado=FALLO
+[2026-02-03 13:01:16] EMAIL | destino=hugo@correo.es | estado=SUBSANAR | resultado=FALLO
+[2026-02-03 13:03:36] EMAIL | destino=hugo@correo.es | estado=ACEPTADA | resultado=FALLO

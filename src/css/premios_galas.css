@@ -633,3 +633,75 @@ body {
 .gallery-item:hover::after {
     opacity: 1;
 }
+
+.awards {
+  background: #171719;
+  padding: 90px 6%;
+  color: #fff;
+  text-align: center;
+}
+
+.awards-header {
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.awards-header h2 {
+  font-size: 2.6rem;
+  margin: 12px 0;
+}
+
+.awards-header p {
+  color: #bdbdbd;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.awards-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 80px;
+}
+
+.award-card {
+  background: linear-gradient(180deg, #1b1b1b, #111);
+  padding: 36px 24px;
+  transition: transform 0.3s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-8px);
+}
+
+.award-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  font-size: 1.6rem;
+}
+
+.gold { background: #f5c542; color: #000; }
+.silver { background: #9ca3af; color: #000; }
+.bronze { background: #c56a1a; color: #fff; }
+
+.award-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.award-amount {
+  display: block;
+  color: #f5c542;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.award-card p {
+  font-size: 0.85rem;
+  color: #bdbdbd;
+  line-height: 1.5;
+}

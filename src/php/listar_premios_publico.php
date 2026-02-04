@@ -7,7 +7,7 @@ require_once "conexion.php";
 $sql = "SELECT id, categoria, puesto, descripcion, dotacion
         FROM premio
         WHERE activa = 1
-        ORDER BY categoria ASC, puesto ASC";
+        ORDER BY puesto ASC";
 
 $res = $conexion->query($sql);
 

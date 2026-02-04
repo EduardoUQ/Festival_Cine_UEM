@@ -24,7 +24,10 @@ function pintarGala() {
       }
 
       const g = data.gala;
-
+      const h2Info = document.getElementById("titulo_info_gala");
+      if(h2Info){
+        h2Info.textContent = `Información de la gala ${g.anio || ""}`;
+      }
       contLocalizacion.innerHTML = `
         <li>
           <strong>${g.lugar_nombre || ""}</strong>
@@ -202,6 +205,7 @@ function mostrar_post_evento() {
       grid.appendChild(div);
     });
   }
+<<<<<<< HEAD
 
   /*=================================
 GALAS ANTERIORES
@@ -231,5 +235,145 @@ GALAS ANTERIORES
         previousSection.appendChild(card);
       });
     });
+=======
+}
+
+function pintarPremiosEnPremiosGalas() {
+  const cont = document.getElementById("premios_container");
+  if (!cont) return;
+
+  fetch("../php/listar_premios_publico.php")
+    .then(r => r.json())
+    .then(lista => {
+      cont.innerHTML = "";
+      if (!Array.isArray(lista) || lista.length === 0) return;
+
+      // Agrupar por categoria
+      const grupos = {};
+      lista.forEach(p => {
+        const cat = (p.categoria || "").trim().toUpperCase();
+        if (!grupos[cat]) grupos[cat] = [];
+        grupos[cat].push(p);
+      });
+
+      // Helper: crea una card con el formato index
+      const crearCard = (p, tituloOverride = null) => {
+        const card = document.createElement("article");
+        card.className = "award-card";
+
+        const iconWrap = document.createElement("div");
+        iconWrap.className = "award-icon " + claseIcono(p.puesto);
+
+        const icon = document.createElement("i");
+        icon.className = iconoFa(p.puesto);
+        iconWrap.appendChild(icon);
+
+        const title = document.createElement("h3");
+        title.textContent = (tituloOverride ?? (((p.titulo || "").trim()) || puestoTexto(p.puesto)));
+
+        const dot = document.createElement("span");
+        dot.className = "award-amount";
+        const d = p.dotacion;
+
+        if (d !== null && d !== undefined && d !== "" && !isNaN(Number(d))) {
+          dot.textContent = "€" + Number(d).toFixed(2).replace(".00", "");
+        } else {
+          dot.style.display = "none";
+        }
+
+        const desc = document.createElement("p");
+        desc.textContent = (p.descripcion || "").trim();
+
+        card.appendChild(iconWrap);
+        card.appendChild(title);
+        card.appendChild(dot);
+        card.appendChild(desc);
+
+        return card;
+      };
+
+      // Helper: render sección con título + fila
+      const renderSeccion = (titulo, premios, cardsPorFila = null) => {
+        if (!premios || premios.length === 0) return;
+
+        // título sección (si lo quieres igual que en tu HTML hardcode)
+        const h = document.createElement("h3");
+        h.textContent = titulo;
+        h.style.color = "#fff";
+        h.style.margin = "40px 0 16px";
+        h.style.textAlign = "center";
+
+        const fila = document.createElement("div");
+        fila.className = "awards-cards";
+
+        // si quieres forzar nº de columnas por fila (3/2), puedes hacerlo inline
+        if (cardsPorFila) {
+          fila.style.display = "grid";
+          fila.style.gridTemplateColumns = `repeat(${cardsPorFila}, minmax(0, 1fr))`;
+          fila.style.gap = "16px";
+        }
+
+        premios.forEach(p => fila.appendChild(crearCard(p)));
+
+        cont.appendChild(h);
+        cont.appendChild(fila);
+      };
+
+      // Orden por puesto dentro de cada categoría
+      Object.keys(grupos).forEach(cat => {
+        grupos[cat].sort((a,b) => (a.puesto || 0) - (b.puesto || 0));
+      });
+
+      // 1) ALUMNO: 3 tarjetas en una fila
+      renderSeccion("Mejor Cortometraje UE", grupos["ALUMNO"], 3);
+
+      // 2) ALUMNI: 2 tarjetas en una fila
+      renderSeccion("Mejor Cortometraje Alumni", grupos["ALUMNI"], 2);
+
+      // 3) ESPECIAL/HONORIFICO: 1 tarjeta (ancha)
+      const especiales = grupos["ESPECIAL"] || grupos["HONORIFICO"] || grupos["HONORÍFICO"] || [];
+      if (especiales.length) {
+        const h = document.createElement("h3");
+        h.textContent = "Premio a la Trayectoria Profesional";
+        h.style.color = "#fff";
+        h.style.margin = "40px 0 16px";
+        h.style.textAlign = "center";
+
+        const wrap = document.createElement("div");
+        wrap.className = "awards-cards";
+        wrap.style.display = "grid";
+        wrap.style.gridTemplateColumns = "1fr";
+
+        const card = crearCard(especiales[0], "Premio a la Trayectoria Profesional");
+        wrap.appendChild(card);
+
+        cont.appendChild(h);
+        cont.appendChild(wrap);
+      }
+    })
+    .catch(err => console.error("Error cargando premios:", err));
+
+  function claseIcono(puesto) {
+    const n = Number(puesto);
+    if (n === 1) return "gold";
+    if (n === 2) return "silver";
+    return "bronze";
+  }
+
+  function iconoFa(puesto) {
+    const n = Number(puesto);
+    if (n === 1) return "fa-solid fa-trophy";
+    if (n === 2) return "fa-solid fa-medal";
+    return "fa-solid fa-star";
+  }
+
+  function puestoTexto(puesto) {
+    const n = Number(puesto);
+    if (n === 1) return "Primer Premio";
+    if (n === 2) return "Segundo Premio";
+    if (n === 3) return "Tercer Premio";
+    return "Premio";
+  }
+>>>>>>> f05abc5dd2bbc3e4c6e69c75d75767b4ab680fbb
 }
 

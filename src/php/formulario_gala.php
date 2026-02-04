@@ -37,8 +37,7 @@ if ($funcion === "obtener_gala_activa") {
 
 /* =========================
    CREAR GALA
-========================= */
-elseif ($funcion === "crear_gala") {
+========================= */ elseif ($funcion === "crear_gala") {
 
     $anio = isset($_POST["anio"]) ? (int)$_POST["anio"] : 0;
     $descripcion = isset($_POST["descripcion"]) ? trim($_POST["descripcion"]) : "";
@@ -50,25 +49,18 @@ elseif ($funcion === "crear_gala") {
     $capacidad = isset($_POST["capacidad"]) && $_POST["capacidad"] !== "" ? (int)$_POST["capacidad"] : null;
     $estacionamiento = isset($_POST["estacionamiento"]) ? trim($_POST["estacionamiento"]) : "";
 
-    $activa = isset($_POST["activa"]) ? (int)$_POST["activa"] : 0;
 
     if ($anio <= 0 || $descripcion === "" || $fecha_evento === "" || $lugar_nombre === "") {
         echo json_encode(["status" => "error", "message" => "Completa los campos obligatorios"]);
         exit;
     }
 
-    // Si esta gala será activa, desactivamos la anterior activa
-    if ($activa === 1) {
-        $sqlOff = "UPDATE gala SET activa = 0 WHERE activa = 1";
-        $stmtOff = $conexion->prepare($sqlOff);
-        $stmtOff->execute();
-    }
+
 
 
     $sql = "INSERT INTO gala (anio, descripcion, fecha_evento,
-                              lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento,
-                              activa)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                              lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, )";
 
     $stmt = $conexion->prepare($sql);
 
@@ -77,7 +69,7 @@ elseif ($funcion === "crear_gala") {
     $capacidadBind = ($capacidad === null) ? 0 : $capacidad;
 
     $stmt->bind_param(
-        "isssssisi",
+        "isssssii",
         $anio,
         $descripcion,
         $fecha_evento,
@@ -85,8 +77,7 @@ elseif ($funcion === "crear_gala") {
         $lugar_subtitulo,
         $direccion,
         $capacidadBind,
-        $estacionamiento,
-        $activa
+        $estacionamiento
     );
 
     $stmt->execute();
@@ -97,8 +88,7 @@ elseif ($funcion === "crear_gala") {
 
 /* =========================
    ACTUALIZAR GALA
-========================= */
-elseif ($funcion === "actualizar_gala") {
+========================= */ elseif ($funcion === "actualizar_gala") {
 
     $id = isset($_POST["id"]) ? (int)$_POST["id"] : 0;
 
@@ -112,69 +102,34 @@ elseif ($funcion === "actualizar_gala") {
     $capacidad = isset($_POST["capacidad"]) && $_POST["capacidad"] !== "" ? (int)$_POST["capacidad"] : null;
     $estacionamiento = isset($_POST["estacionamiento"]) ? trim($_POST["estacionamiento"]) : "";
 
-    $activa = isset($_POST["activa"]) ? (int)$_POST["activa"] : 0;
-
     if ($id <= 0 || $anio <= 0 || $descripcion === "" || $fecha_evento === "" || $lugar_nombre === "") {
         echo json_encode(["status" => "error", "message" => "Completa los campos obligatorios"]);
         exit;
     }
 
-    //Si activa, apagamos el resto
-    if ($activa === 1) {
-        $sqlOff = "UPDATE gala SET activa = 0 WHERE activa = 1";
-        $stmtOff = $conexion->prepare($sqlOff);
-        $stmtOff->execute();
-    }
-
     $capacidadBind = ($capacidad === null) ? 0 : $capacidad;
 
 
-    
 
-    if ($hayImagen) {
-        $sql = "UPDATE gala
+    $sql = "UPDATE gala
                 SET anio = ?, descripcion = ?, fecha_evento = ?,
-                    lugar_nombre = ?, lugar_subtitulo = ?, direccion = ?, capacidad = ?, estacionamiento = ?,
-                    activa = ?, cartel_url = ?
+                    lugar_nombre = ?, lugar_subtitulo = ?, direccion = ?, capacidad = ?, estacionamiento = ?
                 WHERE id = ?";
 
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param(
-            "isssssisisi",
-            $anio,
-            $descripcion,
-            $fecha_evento,
-            $lugar_nombre,
-            $lugar_subtitulo,
-            $direccion,
-            $capacidadBind,
-            $estacionamiento,
-            $activa,
-            $cartel_url,
-            $id
-        );
-    } else {
-        $sql = "UPDATE gala
-                SET anio = ?, descripcion = ?, fecha_evento = ?,
-                    lugar_nombre = ?, lugar_subtitulo = ?, direccion = ?, capacidad = ?, estacionamiento = ?,
-                    activa = ?
-                WHERE id = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param(
+        "isssssiii",
+        $anio,
+        $descripcion,
+        $fecha_evento,
+        $lugar_nombre,
+        $lugar_subtitulo,
+        $direccion,
+        $capacidadBind,
+        $estacionamiento,
+        $id
+    );
 
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param(
-            "isssssisii", 
-            $anio,
-            $descripcion,
-            $fecha_evento,
-            $lugar_nombre,
-            $lugar_subtitulo,
-            $direccion,
-            $capacidadBind,
-            $estacionamiento,
-            $activa,
-            $id
-        );
-    }
 
     $stmt->execute();
 

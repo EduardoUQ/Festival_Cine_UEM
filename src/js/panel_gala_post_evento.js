@@ -64,7 +64,7 @@ fetch("../php/mostrar_ganadores.php")
 
                 const tr = document.createElement("tr");
 
-                if (nombreCategoria === "Premio Honorífico") {
+                if (nombreCategoria === "ESPECIAL") {
                     tr.innerHTML = `
                         <td>${g.puesto}</td>
                         <td>${g.nombre}</td>
@@ -160,3 +160,31 @@ function borrarImagen(e) {
 }
 
 galleryAdd.addEventListener("click", () => galleryInput.click());
+
+// Archivar una edición 
+const archivarBtn = document.getElementById("archivar");
+const confirmacion = document.getElementById("confirmacion");
+
+archivarBtn.disabled = true;
+
+// Escuchar cambios del checkbox
+confirmacion.addEventListener("change", () => {
+    archivarBtn.disabled = !confirmacion.checked;
+});
+
+archivarBtn.addEventListener("click", () => {
+
+    fetch("../php/archivar_gala.php", {
+        method: "POST"
+    })
+        .then(r => r.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("La gala ha sido archivada correctamente.");
+                window.location.href = data.redirect;
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(err => console.error("Error archivando gala:", err));
+});

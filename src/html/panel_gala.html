@@ -12,6 +12,7 @@
     <title>Gestión de la Gala</title>
 </head>
 <script src="../js/auth_nav.js"></script>
+
 <body>
     <!-- HEADER -->
     <header class="header">
@@ -91,7 +92,7 @@
             <div class="preEvento">
                 <!-- Agregar evento -->
                 <div class="eventoBtn">
-                    <a id="create-news" href="formulario_evento.html">+ Crear evento</a>
+                    <a id="create-news" href="formulario_gala.html">Editar gala</a>
                     <button id="activarPre">Activar Pre Gala</button>
                 </div>
 
@@ -238,36 +239,6 @@
                 <section class="previous-editions">
                     <h2><i class="fa-solid fa-rotate-left"></i> Ediciones Anteriores</h2>
 
-                    <!-- Edición 2025 -->
-                    <div class="edition-card">
-                        <div class="edition-year">2025</div>
-
-                        <div class="edition-stats">
-                            <div class="stat">
-                                <i class="fa-solid fa-users"></i>
-                                <span>98</span>
-                                <p>participantes</p>
-                            </div>
-
-                            <div class="stat">
-                                <i class="fa-solid fa-film"></i>
-                                <span>67</span>
-                                <p>cortometrajes</p>
-                            </div>
-
-                            <div class="stat">
-                                <i class="fa-solid fa-trophy"></i>
-                                <span>5</span>
-                                <p>ganadores</p>
-                            </div>
-                        </div>
-
-                        <a href="#" class="btn-details">
-                            <i class="fa-solid fa-eye"></i>
-                            Ver<br>detalles
-                        </a>
-                    </div>
-
                 </section>
             </div>
         </main>
@@ -336,7 +307,11 @@
             <button id="modalBtn">Aceptar</button>
         </div>
     </div>
-
+    <!-- WIDGET AYUDA (STICKY) -->
+    <a href="../html/ayuda.html" class="help-btn">
+        <span class="help-icon">?</span>
+        <span class="help-text">Ayuda</span>
+    </a>
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");
@@ -349,6 +324,7 @@
     <script src="../js/panel_gala.js"></script>
     <script src="../js/panel_gala_pre_evento.js"></script>
     <script src="../js/panel_gala_post_evento.js"></script>
+    <script src="../js/panel_gala_ediciones_anteriores.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,131 @@
+:root {
+  --bg: #0f0f1a;
+  --text: #ffffff;
+  --text-soft: #F5F5F5;
+  --accent: #FF3228;
+}
+
+/* Fondo general */
+body {
+  background: radial-gradient(circle at top, #171719, var(--bg));
+  color: var(--text);
+}
+
+/* Contenedor principal */
+.ayuda-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+/* Títulos principales */
+#ayudaAdmin h1,
+#ayudaUser h1 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: 0.5rem;
+}
+
+#ayudaAdmin > p,
+#ayudaUser > p {
+  color: var(--text-soft);
+  margin-bottom: 2.5rem;
+}
+
+/* Lista vertical */
+.help-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Bloque acordeón */
+.help-acc {
+  background: transparent;
+  border: 0;
+  position: relative;
+  padding-bottom: 18px; /* espacio para la línea */
+}
+
+/* Línea punteada al FINAL del details (siempre visible) */
+.help-acc::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9) 0 2px,   /* tamaño del punto */
+    transparent 2px 14px              /* separación entre puntos */
+  );
+}
+
+/* Summary / título */
+.help-acc__title {
+  list-style: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 20px 0 14px 0;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--text);
+
+  position: relative;
+}
+
+/* Quitar marker nativo */
+.help-acc__title::-webkit-details-marker {
+  display: none;
+}
+
+/* Icono FontAwesome */
+.help-acc__title i {
+  color: var(--accent);
+}
+
+/* Chevron rojo (solo V) */
+.help-acc__title::after {
+  content: "";
+  margin-left: auto;
+
+  width: 10px;
+  height: 10px;
+
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Al abrir: gira */
+.help-acc[open] .help-acc__title::after {
+  transform: rotate(-135deg);
+}
+
+/* Contenido desplegable */
+.help-acc__content {
+  padding: 0 0 10px 0;
+}
+
+.help-acc__content p {
+  color: var(--text-soft);
+  margin-top: 12px;
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ayuda-container {
+    padding: 2rem 1.2rem 4rem;
+  }
+
+  .help-acc__title {
+    font-size: 1.05rem;
+  }
+}

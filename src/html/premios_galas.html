@@ -64,7 +64,7 @@
             <!-- Localización -->
             <article class="gala-card">
                 <div class="gala-card-header">
-                    <span class="gala-icon">📍</span>
+                    <span class="gala-icon"><i class="fa-solid fa-map-pin"></i></span>
                     <h3>Localización</h3>
                 </div>
 
@@ -76,7 +76,7 @@
             <!-- Programa del Día -->
             <article class="gala-card">
                 <div class="gala-card-header">
-                    <span class="gala-icon">📅</span>
+                    <span class="gala-icon"><i class="fa-solid fa-calendar"></i></span>
                     <h3>Programa del Día</h3>
                 </div>
 
@@ -90,8 +90,20 @@
     <section class="post-gala-section">
         <div class="gala-header">
             <span class="section-tag">Evento Principal</span>
-            <h2>Información de la Gala 2025</h2>
+            <h2 id="h2"></h2>
             <p>Detalles de lo que fue la ceremonia</p>
+        </div>
+
+        <!-- Winners Grid -->
+        <h2 class="section-title"><i class="fa-solid fa-award"></i> Ganadores de la Edición</h2>
+        <div class="winners-grid">
+
+        </div>
+
+        <div class="gallery-section">
+            <h2 class="gallery-title"><i class="fa-solid fa-images"></i> Galería de la Edición</h2>
+
+            <div class="gallery-grid"></div>
         </div>
     </section>
 
@@ -141,6 +153,7 @@
                     </a>
                 </div>
             </article>
+
         </div>
     </section>
 
@@ -197,7 +210,11 @@
             </div>
         </div>
     </footer>
-
+    <!-- WIDGET AYUDA (STICKY) -->
+    <a href="../html/ayuda.html" class="help-btn">
+        <span class="help-icon">?</span>
+        <span class="help-text">Ayuda</span>
+    </a>
     <script>
         const hamburger = document.getElementById("hamburger");
         const nav = document.getElementById("nav");

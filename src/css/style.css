@@ -342,3 +342,53 @@ body {
         text-align: center;
     }
 }
+
+/* ===== BOTÓN AYUDA ===== */
+.help-btn {
+    position: fixed;
+    right: 0;
+    bottom: 50px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+
+    background-color: #FF3228;
+    color: white;
+    text-decoration: none;
+
+    padding: 6px 15px 6px 15px;
+
+    /* ✨ transición simple */
+    transition: padding 0.5s ease;
+}
+
+/* Icono ? */
+.help-icon {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Texto oculto por defecto */
+.help-text {
+    display: none;
+    margin-left: 16px;
+    margin-right: 15px;
+    font-weight: bold;
+
+    /* ✨ para suavizar aparición */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Al pasar el ratón */
+.help-btn:hover {
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+.help-btn:hover .help-text {
+    display: block;
+    opacity: 1;
+}
+

@@ -109,3 +109,7 @@ function mostrarEvento() {
   }
 
 }
+
+function mostrar_post_evento() {
+
+}

@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (data.status === "success") {
                         mostrarModal("success", data.message || "Guardado correctamente");
                         // recargamos datos para fijar idGala si era creación
+                        window.location.href= "panel_gala.html";
                         cargarGalaActiva();
                     } else {
                         mostrarModal("error", data.message || "No se pudo guardar");

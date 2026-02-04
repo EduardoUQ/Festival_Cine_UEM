@@ -842,3 +842,20 @@ body {
   max-width: 70%;
   object-fit: contain;
 }
+
+.awards-more{
+  display:flex;
+  justify-content:center;
+  margin-top: 24px;
+}
+.btn-ver-mas{
+  padding: 12px 28px;
+  background:#FF3228;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+}
+.btn-ver-mas:hover{
+  background:#fff;
+  color:#FF3228;
+}

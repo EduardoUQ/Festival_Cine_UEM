@@ -2,12 +2,20 @@
 require_once "conexion.php";
 header("Content-Type: application/json; charset=utf-8");
 
-$id_gala = $_GET["id"] ?? null;
 
-if (!$id_gala || !ctype_digit($id_gala)) {
-    echo json_encode(["status" => "error", "message" => "ID inválido"]);
+// 0. Obtener gala activa
+$sql = "SELECT id, anio FROM gala WHERE activa = 1";
+$stmt = $conexion->prepare($sql);
+$stmt->execute();
+$res = $stmt->get_result();
+$gala = $res->fetch_assoc();
+
+if (!$gala) {
+    echo json_encode(["status" => "error", "message" => "No hay gala activa"]);
     exit;
 }
+
+$id_gala = $gala["id"];
 
 /* ============================
    1. Datos generales de la gala

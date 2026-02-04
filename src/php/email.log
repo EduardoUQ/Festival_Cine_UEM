@@ -1,1 +1,9 @@
 [2026-02-02 14:01:19] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-04 09:47:27] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-04 09:47:29] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-04 09:47:31] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-04 13:23:58] EMAIL | destino=sergio.ramos@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-04 13:24:15] EMAIL | destino=paula.ortiz@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-04 13:24:28] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-04 13:24:57] EMAIL | destino=paula.ortiz@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-04 13:25:05] EMAIL | destino=sergio.ramos@correo.es | estado=NOMINADA | resultado=FALLO

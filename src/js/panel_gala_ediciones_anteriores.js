@@ -20,9 +20,9 @@ fetch("../php/cargar_ediciones.php")
                     </div>
 
                     <div class="stat">
-                        <i class="fa-solid fa-trophy"></i>
+                        <i class="fa-solid fa-award"></i>
                         <span>${ed.total_ganadores}</span>
-                        <p>ganadores</p>
+                        <p>premios</p>
                     </div>
                 </div>
 

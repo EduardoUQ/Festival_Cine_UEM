@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/ayuda.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
+    <title>Ayuda</title>
+</head>
+<script src="../js/auth_nav.js"></script>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <!-- LOGO -->
+            <div class="logo">
+                <a href="index.html"><img src="../img/Logo_UEM_Blanco.png" alt=""></a>
+            </div>
+            <!-- HAMBURGER -->
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <!-- NAV -->
+            <nav class="nav" id="nav">
+                <a href="subir_corto.html">Sube tu corto</a>
+                <a href="bases_legales.html">Bases legales</a>
+                <a href="noticias.html">Noticias</a>
+                <a href="premios_galas.html">Premios y Galas</a>
+                <a href="calendario.html">Calendario</a>
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
+            </nav>
+            <!-- ACTIONS -->
+            <div class="actions" id="auth_actions">
+                <a class="login-btn" id="btn_login" href="../html/login.html">Ingresar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="ayuda-container">
+
+        <!--Ayuda admin-->
+        <section id="ayudaAdmin" style="display:none;">
+            <h1>Centro de ayuda (Admin)</h1>
+            <p>Guía para la gestión del festival.</p>
+
+            <div class="help-grid">
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-lock"></i>
+                        Seguridad y primer acceso
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Por motivos de seguridad, la primera vez que un administrador inicia sesión en la plataforma
+                            se le solicitará obligatoriamente el cambio de contraseña.
+                        </p>
+                        <p>
+                            Hasta que la nueva contraseña sea establecida correctamente, no será posible acceder al resto
+                            de funcionalidades del panel de administración.
+                        </p>
+                        <p>
+                            Esta medida garantiza que cada administrador disponga de credenciales personales y seguras,
+                            evitando el uso prolongado de contraseñas iniciales o compartidas.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-inbox"></i>
+                        Bandeja de Candidaturas
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Desde aquí puedes gestionar todas las candidaturas del festival.
+                            Es posible filtrarlas por estado (pendiente, aceptada, rechazada, subsanar o nominada) y por
+                            categoría (alumno o alumni), combinando ambos filtros para localizar rápidamente cualquier
+                            candidatura.
+                        </p>
+                        <p>
+                            Además, dispones de un buscador por título que te permite encontrar una candidatura concreta
+                            de forma directa.
+                        </p>
+                        <p>
+                            Al acceder a una candidatura podrás ver todos los datos del participante, la información del
+                            cortometraje, el cartel, la sinopsis y reproducir el vídeo completo.
+                            Desde esta vista podrás aceptar, rechazar o solicitar subsanación, indicando siempre el
+                            motivo del cambio de estado.
+                        </p>
+                        <p>
+                            Cada cambio de estado notifica automáticamente al usuario, que podrá consultar el mensaje al
+                            iniciar sesión. En determinados casos, como errores técnicos del cortometraje, será necesario
+                            rechazar la candidatura y solicitar el envío de una nueva.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-award"></i>
+                        Catálogo de Premios
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            En esta sección se gestionan todos los premios del festival.
+                            Por defecto se muestran los premios heredados de ediciones anteriores, que pueden editarse,
+                            eliminarse o reutilizarse en nuevas galas.
+                        </p>
+                        <p>
+                            Al crear un premio nuevo, es posible definir su puesto, dotación y estado.
+                            Si el puesto es 0, el premio será honorífico y se otorgará a una persona en lugar de a un
+                            cortometraje.
+                        </p>
+                        <p>
+                            Los premios pueden marcarse como inactivos para conservarlos sin necesidad de asignarles un
+                            ganador, permitiendo reactivarlos en futuras ediciones.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-trophy"></i>
+                        Palmarés
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Desde el palmarés se asignan los ganadores de cada categoría.
+                            Primero se selecciona la categoría (alumno o alumni) y, a continuación, se muestran los
+                            premios disponibles para asignar.
+                        </p>
+                        <p>
+                            Solo pueden premiarse candidaturas que hayan sido previamente nominadas.
+                            Los ganadores pueden asignarse de forma progresiva y modificarse en cualquier momento antes
+                            de cerrar la gala.
+                        </p>
+                        <p>
+                            Los premios honoríficos disponen de un formulario específico donde se indica la información
+                            del galardonado y se adjunta un vídeo a su trayectoria.
+                            Todos los ganadores pueden editarse o eliminarse si fuese necesario.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-film"></i>
+                        Gestión de Galas
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>Texto inicial…</p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Agenda del Festival
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>Texto inicial…</p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-newspaper"></i>
+                        Tablón de Noticias
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Aquí puedes gestionar todas las noticias del festival.
+                            Es posible crear nuevas noticias, editarlas o eliminarlas cuando sea necesario.
+                        </p>
+                        <p>
+                            Cada noticia incluye un titular, contenido, imagen y fecha de publicación, lo que permite
+                            programarlas para fechas futuras o personalizar su visibilidad.
+                        </p>
+                        <p>
+                            Las noticias publicadas se muestran automáticamente tanto en la sección de noticias como en
+                            la portada principal de la web.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                        Patrocinios
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            En esta sección se administran los patrocinadores del festival.
+                            Cada patrocinador incluye nombre, color de fondo, enlace web y el logotipo de la marca.
+                        </p>
+                        <p>
+                            El color de fondo permite adaptar visualmente cada patrocinador para garantizar una correcta
+                            legibilidad y coherencia con su identidad corporativa.
+                        </p>
+                        <p>
+                            Los patrocinadores se muestran ocupando el ancho total disponible de la web, repartiendo el
+                            espacio horizontal de forma equitativa según el número de patrocinadores activos.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-gear"></i>
+                        Panel de Control
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Desde el panel de control puedes gestionar tu perfil de administrador y realizar tareas
+                            avanzadas de gestión.
+                        </p>
+                        <p>
+                            En este apartado es posible cambiar la contraseña introduciendo primero la contraseña actual
+                            y confirmando la nueva contraseña dos veces, garantizando así la seguridad del acceso.
+                        </p>
+                        <p>
+                            Además, permite la gestión de administradores del sistema. Podrás crear nuevos administradores
+                            indicando su DNI, correo electrónico y nombre completo, así como definir si el nuevo usuario
+                            tendrá permisos de superadministrador.
+                        </p>
+                        <p>
+                            Los administradores estándar no pueden crear nuevos administradores, ni eliminarlos.
+                            Esta acción queda reservada exclusivamente a los superadministradores.
+                        </p>
+                        <p>
+                            Un superadministrador puede eliminar a otros administradores y superadministradores creados
+                            con posterioridad. Este control se basa en el identificador interno del sistema, lo que
+                            garantiza que los superadministradores principales no puedan ser eliminados por usuarios más
+                            recientes.
+                        </p>
+                        <p>
+                            Actualmente, el usuario principal del sistema es superadministrador, asegurando la estabilidad
+                            y el control total de la plataforma.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-video"></i>
+                        Gestión de contenidos
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Los vídeos que aparecen en el slider principal de la portada pueden actualizarse de forma muy
+                            sencilla para cada nueva edición del festival.
+                        </p>
+                        <p>
+                            Basta con facilitar los nuevos vídeos al equipo de IT de la universidad, que los sustituirá
+                            dentro de la carpeta <strong>videos</strong> situada en la raíz del proyecto.
+                        </p>
+                        <p>
+                            Los archivos deben llamarse <strong>video_1</strong>, <strong>video_2</strong> y
+                            <strong>video_3</strong>, correspondiendo automáticamente al slide 1, slide 2 y slide 3
+                            respectivamente.
+                        </p>
+                        <p>
+                            Este sistema permite renovar el contenido audiovisual año tras año sin necesidad de modificar
+                            la estructura de la web, reforzando su carácter escalable y reutilizable.
+                        </p>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <!--Ayuda usuario-->
+        <section id="ayudaUser" style="display:none;">
+            <h1>Centro de ayuda</h1>
+            <p>Todo lo que necesitas saber para participar en el festival.</p>
+
+            <div class="help-grid">
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-upload"></i>
+                        Participar (sube tu corto)
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            El proceso de registro y subida del cortometraje forma parte de un único flujo.
+                            No es posible registrarse previamente sin presentar una candidatura.
+                        </p>
+                        <p>
+                            Para participar deberás introducir tus datos personales: nombre y apellidos, DNI,
+                            número de expediente universitario, correo electrónico y una contraseña, que deberá
+                            confirmarse para completar el registro.
+                        </p>
+                        <p>
+                            Durante el proceso se solicita el año de graduación para determinar la categoría de participación.
+                            Los estudiantes que se graduaron en el año anterior al curso vigente pueden elegir participar
+                            como alumno, como alumni o en ambas categorías.
+                        </p>
+                        <p>
+                            En caso de participar en ambas categorías, será obligatorio presentar un cortometraje distinto
+                            para cada una de ellas.
+                        </p>
+                        <p>
+                            A continuación se deberá completar la información del cortometraje, incluyendo el título,
+                            el cartel y el archivo de vídeo, cumpliendo siempre con los requisitos establecidos en las bases
+                            del concurso.
+                        </p>
+                        <p>
+                            Una vez enviada, la candidatura quedará registrada con estado pendiente de revisión y todo cambio
+                            en el estado de la candidatura será notificado por email a la dirección de correo electrónico del
+                            registro, además de que dicho estado será visible desde el panel del usuario.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        Correcciones y Reenvío
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Cuando una candidatura es rechazada, no será posible realizar ningún tipo de modificación sobre ella.
+                            En este caso, si deseas volver a participar, deberás realizar un nuevo envío mediante una nueva candidatura.
+                        </p>
+                        <p>
+                            El acceso se mantendrá con el mismo usuario y contraseña, pero el cortometraje rechazado no podrá reutilizarse
+                            ni editarse.
+                        </p>
+                        <p>
+                            Si el estado de la candidatura es <strong>subsanar</strong>, sí será posible corregir determinados errores básicos
+                            indicados durante la revisión, como el título o la sinopsis del cortometraje.
+                        </p>
+                        <p>
+                            Los aspectos técnicos del vídeo no pueden modificarse. Si el problema afecta a estos elementos,
+                            será necesario crear una nueva candidatura.
+                        </p>
+                        <p>
+                            Una vez realizadas las correcciones, la candidatura volverá a quedar en estado pendiente hasta que sea revisada de nuevo.
+                            Todos los cambios y notificaciones se enviarán al correo electrónico con el que te registraste.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Nueva candidatura
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            Si tu candidatura ha sido rechazada o deseas presentar un nuevo cortometraje, puedes crear una nueva candidatura
+                            desde tu panel de usuario.
+                        </p>
+                        <p>
+                            Para ello, deberás iniciar sesión y acceder a la opción de crear nueva candidatura.
+                            Tus datos personales se cargarán automáticamente, por lo que solo será necesario completar la información
+                            correspondiente al nuevo cortometraje.
+                        </p>
+                        <p>
+                            En el caso de participantes que puedan optar tanto a la categoría alumno como alumni, será posible seleccionar
+                            la categoría en la que deseas participar en cada candidatura.
+                        </p>
+                        <p>
+                            Cada nueva candidatura se registrará de forma independiente y quedará en estado pendiente de revisión,
+                            siguiendo el mismo proceso de evaluación que el resto.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="help-acc">
+                    <summary class="help-acc__title">
+                        <i class="fa-solid fa-bell"></i>
+                        Infórmate
+                    </summary>
+                    <div class="help-acc__content">
+                        <p>
+                            La web dispone de distintas secciones informativas donde puedes consultar todos los detalles relacionados
+                            con el festival.
+                        </p>
+                        <p>
+                            En la sección de bases legales encontrarás la información jurídica del concurso, así como los requisitos
+                            necesarios para participar y las características que deben cumplir los cortometrajes.
+                        </p>
+                        <p>
+                            La sección de noticias recoge las últimas novedades del festival, mientras que en premios y galas podrás
+                            consultar tanto la gala actual como los premios disponibles y las galas de ediciones anteriores, si están archivadas.
+                        </p>
+                        <p>
+                            Por último, el calendario muestra todas las fechas clave del festival, incluyendo eventos previos y la fecha de celebración de la gala.
+                        </p>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../img/Logo_UEM_Blanco.png" alt="">
+                </div>
+                <p class="footer-description">
+                    El festival universitario de cortometrajes más importante de la región,
+                    promoviendo el talento cinematográfico emergente.
+                </p>
+            </div>
+
+            <!-- FESTIVAL -->
+            <div class="footer-column">
+                <h4>Festival</h4>
+                <ul>
+                    <li><a href="subir_corto.html">Sube tu corto</a></li>
+                    <li><a href="bases_legales.html">Bases legales</a></li>
+                    <li><a href="noticias.html">Noticias</a></li>
+                    <li><a href="premios_galas.html">Galas</a></li>
+                    <li><a href="calendario.html">Calendario</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@cinefest.edu</li>
+                    <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Campus Villaviciosa</li>
+                </ul>
+                <div class="social-links">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="footer-bottom">
+            <p>© Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/ayuda.js"></script>
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const nav = document.getElementById("nav");
+
+        hamburger.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    </script>
+</body>
+
+</html>

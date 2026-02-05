@@ -8,12 +8,6 @@
     --accent: #FF3228;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     background: radial-gradient(circle at top, #1b1b1b, #000);
     color: var(--text-main);

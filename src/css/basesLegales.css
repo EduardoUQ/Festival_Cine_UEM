@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #0f0f1a;
+    --bg-color: #1E1E1E;
     --card-color: #171719;
     --accent: #FF3228;
     --text-main: #ffffff;
@@ -7,14 +7,8 @@
     --border-soft: rgba(255, 255, 255, 0.08);
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background: radial-gradient(circle at top, #171719, var(--bg-color));
+    background: #1E1E1E;
     color: var(--text-main);
     line-height: 1.6;
 }

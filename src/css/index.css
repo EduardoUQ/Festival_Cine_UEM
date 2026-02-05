@@ -7,94 +7,6 @@
 }
 
 /* =========================
-   RESET
-   ========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Hellix";
-  background: #000;
-}
-
-/* =========================
-   HEADER
-   ========================= */
-.header {
-  background: #000;
-  padding: 24px 8rem;
-}
-
-.header-container {
-  max-width: 1400px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-
-.logo img {
-  width: 12rem;
-  height: 3rem;
-}
-
-/* NAV */
-.nav {
-  display: flex;
-  gap: 64px;
-}
-
-.nav a {
-  color: #e5e5e5;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.nav a:hover {
-  color: #fff;
-}
-
-/* LOGIN BUTTON */
-.actions {
-  display: flex;
-  align-items: center;
-}
-
-.login-btn {
-  background: #FF3228;
-  color: #fff;
-  padding: 8px 18px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.login-btn:hover {
-  background: #fff;
-  color: #FF3228;
-}
-
-/* HAMBURGUESA */
-.hamburger {
-  display: none;
-  font-size: 1.8rem;
-  color: #fff;
-  cursor: pointer;
-}
-
-/* LOGIN MOBILE */
-.login-mobile {
-  display: none;
-}
-
-/* =========================
    HERO SLIDER (VIDEOS)
    ========================= */
 .hero {
@@ -333,10 +245,11 @@ body {
 }
 
 .news-card {
-  background: #111;
+  background: rgba(39, 39, 42, 0.3);
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease;
+  border: 0.5px, solid, rgba(255, 255, 255, 0.05)
 }
 
 .news-card:hover {
@@ -371,39 +284,11 @@ body {
 }
 
 
-.news-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 5px 10px;
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.premios {
-  background: #f5c542;
-  color: #000;
-}
-
-.talleres {
-  background: #c9a14a;
-  color: #000;
-}
-
-.jurado {
-  background: #7c1d1d;
-}
-
-.urgente {
-  background: #e63946;
-}
-
 /* =========================
    PREMIOS / GALAS
    ========================= */
 .awards {
-  background: #171719;
+  background: #1E1E1E80;
   padding: 90px 6%;
   color: #fff;
   text-align: center;
@@ -421,7 +306,7 @@ body {
 
 .awards-header p {
   color: #bdbdbd;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
@@ -442,9 +327,10 @@ body {
 }
 
 .award-card {
-  background: linear-gradient(180deg, #1b1b1b, #111);
+  background: rgba(39, 39, 42, 0.3);
   padding: 36px 24px;
   transition: transform 0.3s ease;
+  border: 0.5px, solid, rgba(255, 255, 255, 0.05)
 }
 
 .award-card:hover {
@@ -495,7 +381,7 @@ body {
 }
 
 .galas-title {
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   margin-bottom: 30px;
 }
 
@@ -645,122 +531,6 @@ body {
 .banner-btn:hover {
   background: #fff;
   color: #000;
-}
-
-/* =========================
-   FOOTER
-   ========================= */
-.footer {
-  background: #000;
-  color: #cfcfcf;
-  padding: 40px 24px 30px;
-}
-
-.footer-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 100px;
-}
-
-.footer-logo {
-  display: flex;
-  justify-content: left;
-  padding-left: 40px;
-}
-
-.footer-logo img {
-  width: 20rem;
-  height: 5rem;
-}
-
-.footer-description {
-  margin: 20px 0;
-  line-height: 1.6;
-  color: #9ca3af;
-  max-width: 400px;
-  text-align: center;
-}
-
-.footer-column h4 {
-  color: #fff;
-  margin-bottom: 16px;
-  font-size: 1rem;
-}
-
-.footer-column ul {
-  list-style: none;
-}
-
-.footer-column li {
-  margin-bottom: 10px;
-}
-
-.footer-column a {
-  color: #9ca3af;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.footer-column a:hover {
-  color: #FF7D78;
-}
-
-.contact-list li {
-  font-size: 1rem;
-  color: #9ca3af;
-  line-height: 1.6;
-}
-
-.social-links {
-  display: flex;
-  gap: 12px;
-  text-align: center;
-  padding-left: 4rem;
-  margin-top: 1rem;
-}
-
-.social-links i {
-  width: 42px;
-  height: 42px;
-  background: #4B4B4B;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 1.5rem;
-  transition: 0.2s;
-}
-
-.social-links i:hover {
-  background: #FF7D78;
-  cursor: pointer;
-}
-
-.footer-bottom {
-  max-width: 1400px;
-  margin: 40px auto 0;
-  padding-top: 20px;
-  border-top: 1px solid #1f1f1f;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 20px;
-}
-
-.footer-links a {
-  color: #9ca3af;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  color: #FF7D78;
 }
 
 /* =========================
@@ -942,18 +712,5 @@ body {
 .awards-more {
   display: flex;
   justify-content: center;
-  margin-top: 24px;
-}
-
-.btn-ver-mas {
-  padding: 12px 28px;
-  background: #FF3228;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.btn-ver-mas:hover {
-  background: #fff;
-  color: #FF3228;
+  margin-top: 2px;
 }

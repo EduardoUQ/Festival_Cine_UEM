@@ -1,21 +1,15 @@
 :root {
     --bg-main: #0e0f12;
-    --bg-card: #1a1c20;
-    --bg-input: #22242a;
-    --gold: #d4af37;
-    --gold-soft: #b8962e;
+    --bg-card: #171719;
+    --bg-input: #202020;
+    --primary-color: #FF3228;
     --text-main: #ffffff;
     --text-muted: #9aa0a6;
-    --radius: 14px;
-}
-
-* {
-    box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: radial-gradient(circle at top, #1b1d22, var(--bg-main));
+    background: rgba(39, 39, 42, 0.3);
     color: var(--text-main);
 }
 
@@ -38,7 +32,7 @@ body {
 }
 
 .upload-header h1 span {
-    color: var(--gold);
+    color: var(--primary-color);
 }
 
 .upload-header p {
@@ -50,16 +44,17 @@ body {
 
 /* Cards */
 .form-card {
-    background: linear-gradient(180deg, #1d1f24, #17191d);
+    background: rgba(24, 24, 27, 0.5);
     padding: 28px;
     margin-bottom: 28px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    border: 0.5px, solid, rgba(255, 255, 255, 0.05)
 }
 
 .form-card h2 {
     margin: 0 0 22px;
     font-size: 18px;
-    color: var(--gold);
+    color: var(--primary-color);
 }
 
 /* Grid */
@@ -89,11 +84,12 @@ textarea {
     padding: 12px 14px;
     color: var(--text-main);
     outline: none;
+    margin-bottom: 6px;
 }
 
 input:focus,
 textarea:focus {
-    border-color: var(--gold);
+    border-color: var(--primary-color);
 }
 
 textarea {
@@ -119,7 +115,7 @@ textarea {
 }
 
 .upload-box:hover {
-    border-color: var(--gold);
+    border-color: var(--primary-color);
 }
 
 .upload-box span {
@@ -146,17 +142,25 @@ button {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-    color: #000;
+    background: var(--primary-color);
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background: var(--text-main);
+    color: var(--primary-color);
 }
 
 .btn-secondary {
-    background: #2a2d34;
-    color: var(--text-main);
+    background: var(--text-main);
+    color: var(--bg-main);
+    font-size: 1rem;
 }
 
 .btn-secondary:hover {
-    background: #32353d;
+    background: var(--bg-main);
+    color: var(--text-main);
 }
 
 /* Responsive */

@@ -205,7 +205,6 @@ function mostrar_post_evento() {
       grid.appendChild(div);
     });
   }
-<<<<<<< HEAD
 
   /*=================================
 GALAS ANTERIORES
@@ -235,7 +234,6 @@ GALAS ANTERIORES
         previousSection.appendChild(card);
       });
     });
-=======
 }
 
 function pintarPremiosEnPremiosGalas() {
@@ -374,6 +372,5 @@ function pintarPremiosEnPremiosGalas() {
     if (n === 3) return "Tercer Premio";
     return "Premio";
   }
->>>>>>> f05abc5dd2bbc3e4c6e69c75d75767b4ab680fbb
 }
 

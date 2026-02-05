@@ -1,17 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   // =======================
-  // MENÚ HAMBURGUESA
-  // =======================
-  const hamburger = document.getElementById("hamburger");
-  const nav = document.getElementById("nav");
-
-  if (hamburger && nav) {
-    hamburger.addEventListener("click", () => {
-      nav.classList.toggle("active");
-    });
-  }
-
-  // =======================
   // NOTICIAS (4 más recientes)
   // =======================
   (function cargarNoticiasHome() {
@@ -250,13 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (video) {
       video.currentTime = 0;
       const p = video.play();
-<<<<<<< HEAD
       if (p && typeof p.catch === "function") {
         p.catch(() => { });
       }
-=======
-      if (p && typeof p.catch === "function") p.catch(() => { });
->>>>>>> f05abc5dd2bbc3e4c6e69c75d75767b4ab680fbb
     }
   }
 

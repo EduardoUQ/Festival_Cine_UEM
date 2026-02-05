@@ -1,17 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   // =======================
-  // MENÚ HAMBURGUESA
-  // =======================
-  const hamburger = document.getElementById("hamburger");
-  const nav = document.getElementById("nav");
-
-  if (hamburger && nav) {
-    hamburger.addEventListener("click", () => {
-      nav.classList.toggle("active");
-    });
-  }
-
-  // =======================
   // NOTICIAS (4 más recientes)
   // =======================
   (function cargarNoticiasHome() {

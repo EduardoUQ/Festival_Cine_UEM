@@ -46,6 +46,63 @@ document.addEventListener("DOMContentLoaded", () => {
   // true por defecto para NO bloquear si el navegador no puede leer metadata
   let resolucionOk = true;
 
+  // ====== DNI/NIE (letra de control) ======
+  // >>> AQUÍ he metido TODO lo del DNI/NIE:
+  // - Regex robusta para formato (DNI: 8 dígitos + letra / NIE: X/Y/Z + 7 dígitos + letra)
+  // - Cálculo de letra por módulo 23 y tabla oficial
+  const DNI_LETRAS = [
+    "T",
+    "R",
+    "W",
+    "A",
+    "G",
+    "M",
+    "Y",
+    "F",
+    "P",
+    "D",
+    "X",
+    "B",
+    "N",
+    "J",
+    "Z",
+    "S",
+    "Q",
+    "V",
+    "H",
+    "L",
+    "C",
+    "K",
+    "E",
+  ];
+
+  // DNI: 8 dígitos + letra | NIE: X/Y/Z + 7 dígitos + letra (última letra A-Z)
+  const DNI_NIE_REGEX = /^(\d{8}|[XYZ]\d{7})[A-Z]$/;
+
+  function validarDniNie(valor) {
+    const v = String(valor || "").trim().toUpperCase();
+
+    // 1) Validación de formato
+    if (!DNI_NIE_REGEX.test(v)) return false;
+
+    // 2) Extraer número base y letra introducida
+    const letraIntroducida = v.slice(-1);
+    const cuerpo = v.slice(0, -1);
+
+    // 3) Convertir NIE a número (X=0, Y=1, Z=2)
+    let numeroStr = cuerpo;
+    if (cuerpo[0] === "X") numeroStr = "0" + cuerpo.slice(1);
+    else if (cuerpo[0] === "Y") numeroStr = "1" + cuerpo.slice(1);
+    else if (cuerpo[0] === "Z") numeroStr = "2" + cuerpo.slice(1);
+
+    const numero = Number(numeroStr);
+    if (Number.isNaN(numero)) return false;
+
+    // 4) Calcular letra por módulo 23
+    const letraCorrecta = DNI_LETRAS[numero % 23];
+    return letraIntroducida === letraCorrecta;
+  }
+
   // ====== MODAL ======
   function abrirModal(tipo, tituloTxt, textoTxt, onAceptar) {
     modalIcono.classList.remove("modal-ok", "modal-error", "modal-warn");
@@ -223,8 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dni.addEventListener("blur", () => {
       const v = dni.value.trim().toUpperCase();
-      if (v.length < 9 || v.length > 9)
-        ponerMensajeError(dni, "DNI/NIE inválido");
+
+      // >>> AQUÍ he cambiado la validación simple por validarDniNie()
+      if (!validarDniNie(v)) ponerMensajeError(dni, "DNI/NIE inválido");
       else ponerMensajeError(dni, "");
     });
 
@@ -443,7 +501,9 @@ document.addEventListener("DOMContentLoaded", () => {
       else ponerMensajeError(nombre, "");
 
       const vDni = dni.value.trim().toUpperCase();
-      if (vDni.length !== 9) ponerMensajeError(dni, "DNI/NIE inválido");
+
+      // >>> AQUÍ he cambiado la validación simple por validarDniNie()
+      if (!validarDniNie(vDni)) ponerMensajeError(dni, "DNI/NIE inválido");
       else ponerMensajeError(dni, "");
 
       if (expediente.value.trim().length !== 8)

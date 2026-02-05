@@ -160,10 +160,10 @@ CREATE TABLE ganador_corto (
 CREATE TABLE ganador_honorifico (
     id_gala INT NOT NULL,
     id_premio INT NOT NULL,
-    nombre_apellidos VARCHAR(255),
-    email VARCHAR(255),
-    telefono VARCHAR(15),
-    video_url VARCHAR(500),
+    nombre_apellidos VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    video_url VARCHAR(500) NOT NULL,
     PRIMARY KEY (id_gala, id_premio),
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON UPDATE CASCADE
@@ -179,13 +179,24 @@ CREATE TABLE gala_media (
     media_url VARCHAR(500) NOT NULL,
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON DELETE CASCADE
-);
+)ENGINE=InnoDB;
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos,super_admin) VALUES
 ('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo', TRUE);
 
-INSERT INTO gala (anio, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
-(2026, 'Gala del Festival de Cine UEM 2026','2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
+INSERT INTO gala (anio, descripcion, total_participantes, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
+(2025, 'Gala del Festival de Cine UEM 2025',117, '2025-12-04', 'Auditorio Edificio B', 'Universidad Europea Edificio B', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', FALSE),
+(2026, 'Gala del Festival de Cine UEM 2026',0,'2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
+
+INSERT INTO gala_media (id_gala, media_url) VALUES
+(1, '../uploads/galeria/Foto1.jpg'),
+(1, '../uploads/galeria/Foto2.jpg'),
+(1, '../uploads/galeria/Foto3.jpg'),
+(1, '../uploads/galeria/Foto4.jpg'),
+(1, '../uploads/galeria/Foto5.jpg'),
+(1, '../uploads/galeria/Foto6.jpg'),
+(1, '../uploads/galeria/Foto7.jpg'),
+(1, '../uploads/galeria/Foto8.jpg');
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
 ('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2025),
@@ -306,6 +317,16 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
 ('Canon','uploads/patrocinadores/patrocinador_Canon.png','FFFFFF','https://www.canon.es',1);
+
+INSERT INTO ganador_corto (id_gala, id_premio, nombre, titulo, sinopsis, cartel_url, corto_url) VALUES
+(1, 1, 'Raúl Rodríguez', 'Umbra', 'Emma recibe una carta.','ganadores/1/ALUMNO/premio1/cartel.png', 'ganadores/1/ALUMNO/premio1/corto.mp4'),  
+(1, 2, 'Sara Viullanueva', 'De todo un poco', 'Un trayecto en un coche.','ganadores/1/ALUMNO/premio2/cartel.png', 'ganadores/1/ALUMNO/premio2/corto.mp4'),  
+(1, 3, 'Raquel Cerdá', 'Esperando', 'Una parada de autobús.','ganadores/1/ALUMNO/premio3/cartel.png', 'ganadores/1/ALUMNO/premio3/corto.mp4'),  
+(1, 4, 'Irene del Rincón', 'ZOE', 'Una llamada inesperada','ganadores/1/ALUMNI/premio1/cartel.png', 'ganadores/1/ALUMNI/premio1/corto.mp4'),  
+(1, 5, 'Lidia De Grado', 'Tormento', '¿Qué guarda Dios a los ojos de los mortales?','ganadores/1/ALUMNI/premio2/cartel.png', 'ganadores/1/ALUMNI/premio2/corto.mp4');
+
+INSERT INTO ganador_honorifico (id_gala, id_premio, nombre_apellidos, email, telefono, video_url) VALUES
+(1, 6, 'Miguel Ángel Guerra', 'miguel.angel.guerra@gmail.com', '699699699','ganadores/1/honorifico/honorifico.mp4'); 
 ";
 
 if ($conexion->multi_query($sql)) {

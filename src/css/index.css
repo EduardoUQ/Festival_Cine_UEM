@@ -225,7 +225,7 @@ body {
    BASES LEGALES
    ========================= */
 .bases {
-  background: #171719;
+  background: rgba(30, 30, 30, 0.5);
   padding: 80px 6%;
   color: #fff;
 }
@@ -302,7 +302,7 @@ body {
    NOTICIAS
    ========================= */
 .news {
-  background: radial-gradient(circle at top, #141414 0%, #171719 60%);
+  background: #1E1E1E80;
   padding: 80px 6%;
   color: #fff;
 }
@@ -597,7 +597,7 @@ body {
    ========================= */
 .banner {
   position: relative;
-  min-height: 80vh;
+  min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;

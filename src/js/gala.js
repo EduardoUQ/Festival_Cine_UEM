@@ -25,7 +25,7 @@ function pintarGala() {
 
       const g = data.gala;
       const h2Info = document.getElementById("titulo_info_gala");
-      if(h2Info){
+      if (h2Info) {
         h2Info.textContent = `Información de la gala ${g.anio || ""}`;
       }
       contLocalizacion.innerHTML = `
@@ -205,7 +205,6 @@ function mostrar_post_evento() {
       grid.appendChild(div);
     });
   }
-<<<<<<< HEAD
 
   /*=================================
 GALAS ANTERIORES
@@ -235,7 +234,6 @@ GALAS ANTERIORES
         previousSection.appendChild(card);
       });
     });
-=======
 }
 
 function pintarPremiosEnPremiosGalas() {
@@ -321,7 +319,7 @@ function pintarPremiosEnPremiosGalas() {
 
       // Orden por puesto dentro de cada categoría
       Object.keys(grupos).forEach(cat => {
-        grupos[cat].sort((a,b) => (a.puesto || 0) - (b.puesto || 0));
+        grupos[cat].sort((a, b) => (a.puesto || 0) - (b.puesto || 0));
       });
 
       // 1) ALUMNO: 3 tarjetas en una fila
@@ -374,6 +372,5 @@ function pintarPremiosEnPremiosGalas() {
     if (n === 3) return "Tercer Premio";
     return "Premio";
   }
->>>>>>> f05abc5dd2bbc3e4c6e69c75d75767b4ab680fbb
 }
 

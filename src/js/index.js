@@ -250,13 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (video) {
       video.currentTime = 0;
       const p = video.play();
-<<<<<<< HEAD
       if (p && typeof p.catch === "function") {
         p.catch(() => { });
       }
-=======
-      if (p && typeof p.catch === "function") p.catch(() => { });
->>>>>>> f05abc5dd2bbc3e4c6e69c75d75767b4ab680fbb
     }
   }
 

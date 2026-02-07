@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   pintarGala();
   pintarPrograma();
+  pintarPremiosEnPremiosGalas();
   mostrarEvento()
   mostrar_post_evento();
 });

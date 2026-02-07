@@ -1,0 +1,1 @@
+{"version":2,"defects":{"LoginTest::testCamposVaciosDevuelveError":8,"LoginTest::testCredencialesIncorrectasDevuelveError":7,"LoginTest::testLoginAdminCorrectoFuerzaCambioPassword":7},"times":{"LoginTest::testCamposVaciosDevuelveError":0.016,"LoginTest::testCredencialesIncorrectasDevuelveError":0.001,"LoginTest::testLoginAdminCorrectoFuerzaCambioPassword":0.017}}

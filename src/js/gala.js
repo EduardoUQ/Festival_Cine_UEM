@@ -26,7 +26,7 @@ function pintarGala() {
 
       const g = data.gala;
       const h2Info = document.getElementById("titulo_info_gala");
-      if(h2Info){
+      if (h2Info) {
         h2Info.textContent = `Información de la gala ${g.anio || ""}`;
       }
       contLocalizacion.innerHTML = `
@@ -206,6 +206,35 @@ function mostrar_post_evento() {
       grid.appendChild(div);
     });
   }
+
+  /*=================================
+GALAS ANTERIORES
+===================================*/
+  const previousSection = document.querySelector(".galas-grid");
+
+  fetch("../php/cargar_ediciones.php")
+    .then(r => r.json())
+    .then(data => {
+      if (data.status !== "success") return;
+
+      data.ediciones.forEach(ed => {
+        const card = document.createElement("div");
+        card.classList.add("gala-card");
+
+        card.innerHTML = `
+                <div class="gala-image"><img src="${ed.media_url}"></div>
+
+                <div class="gala-content"> <h3>Gala ${ed.anio}</h3></div>
+                    
+                <div class="gala-footer"><a href="edicion_anterior.html?id=${ed.id}" class="btn-secondary">
+                    Ver Gala completa →
+                </a>
+                </div>
+            `;
+
+        previousSection.appendChild(card);
+      });
+    });
 }
 
 function pintarPremiosEnPremiosGalas() {
@@ -291,7 +320,7 @@ function pintarPremiosEnPremiosGalas() {
 
       // Orden por puesto dentro de cada categoría
       Object.keys(grupos).forEach(cat => {
-        grupos[cat].sort((a,b) => (a.puesto || 0) - (b.puesto || 0));
+        grupos[cat].sort((a, b) => (a.puesto || 0) - (b.puesto || 0));
       });
 
       // 1) ALUMNO: 3 tarjetas en una fila

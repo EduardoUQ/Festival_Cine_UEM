@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Inicio</title>
+    <link rel="shortcut icon" href="../img/UEM_logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a0c53b3773.js" crossorigin="anonymous"></script>
@@ -183,56 +184,39 @@
 
         <!-- HEADER -->
         <div class="awards-header">
-            <span class="section-tag">EDICIONES ANTERIORES</span>
-            <h2>Premios y Galas</h2>
+            <span class="section-tag">NUESTRAS EDICIONES</span>
+            <h2>Premios</h2>
             <p>
-                Revive los mejores momentos de nuestras galas anteriores y conoce a los
-                talentosos ganadores
+                El festival cuenta con diferentes premios en cada categoría repartidos
+                en cada gala.
             </p>
         </div>
 
         <!-- PREMIOS (AQUÍ SE PINTAN DESDE BBDD: una categoría por línea) -->
         <div id="awards_by_category"></div>
         <div class="awards-more">
-            <a class="btn-ver-mas" href="premios_galas.html">Ver más</a>
+            <a class="awards-link" href="premios_galas.html">Ver más <span>→</span></a>
         </div>
 
         <!-- GALAS -->
-        <h3 class="galas-title">Galas Anteriores</h3>
+        <h2 class="galas-title">Galas Anteriores</h2>
 
         <div class="galas-grid">
-
-            <article class="gala-card">
-                <img src="../img/gala1.png" alt="Gala 2023">
-                <div class="gala-info">
-                    <h4>2023</h4>
-                    <span>8va Edición</span>
-                </div>
-            </article>
-
-            <article class="gala-card">
-                <img src="../img/gala2.png" alt="Gala 2022">
-                <div class="gala-info">
-                    <h4>2022</h4>
-                    <span>7ma Edición</span>
-                </div>
-            </article>
+            <!-- Se llamará a la BD -->
         </div>
-
+        <a href="premios_galas.html#past-galas" class="awards-link">Ver todas <span>→</span></a>
     </section>
 
     <!-- BANNER -->
     <section class="banner">
-
         <!-- OVERLAY -->
         <div class="banner-overlay"></div>
-
         <!-- CONTENT -->
         <div class="banner-content">
             <i class="fa-solid fa-video"></i>
             <h1>¿Listo para participar?</h1>
             <p>
-                Sube tu crtometraje y forma parte de la próxima generación de cineastas. El proceso es simple y rápido.
+                Sube tu cortometraje y forma parte de la próxima generación de cineastas. El proceso es simple y rápido.
             </p>
             <a href="subir_corto.html" class="banner-btn">
                 Subir mi cortometraje
@@ -302,6 +286,8 @@
     </a>
 
     <script src="../js/index.js"></script>
+    
+    <script src="../js/menu_hamburguesa.js"></script>
 </body>
 
 </html>

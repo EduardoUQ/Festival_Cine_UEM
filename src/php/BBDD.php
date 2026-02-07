@@ -160,10 +160,10 @@ CREATE TABLE ganador_corto (
 CREATE TABLE ganador_honorifico (
     id_gala INT NOT NULL,
     id_premio INT NOT NULL,
-    nombre_apellidos VARCHAR(255),
-    email VARCHAR(255),
-    telefono VARCHAR(15),
-    video_url VARCHAR(500),
+    nombre_apellidos VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    video_url VARCHAR(500) NOT NULL,
     PRIMARY KEY (id_gala, id_premio),
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON UPDATE CASCADE
@@ -179,13 +179,24 @@ CREATE TABLE gala_media (
     media_url VARCHAR(500) NOT NULL,
     FOREIGN KEY (id_gala) REFERENCES gala(id)
         ON DELETE CASCADE
-);
+)ENGINE=InnoDB;
 
 INSERT INTO admin (dni, email, passwd_hash, nombre_apellidos,super_admin) VALUES
 ('00000000A', 'sara.delcastillo@universidadeuropea.es', '$hash2', 'Sara Del Castillo', TRUE);
 
-INSERT INTO gala (anio, descripcion, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
-(2026, 'Gala del Festival de Cine UEM 2026','2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
+INSERT INTO gala (anio, descripcion, total_participantes, fecha_evento,lugar_nombre, lugar_subtitulo, direccion, capacidad, estacionamiento, activa) VALUES
+(2025, 'Gala del Festival de Cine UEM 2025',117, '2025-12-04', 'Auditorio Edificio B', 'Universidad Europea Edificio B', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', FALSE),
+(2026, 'Gala del Festival de Cine UEM 2026',0,'2026-12-11','Auditorio Principal', 'Universidad Europea Edficio A', 'Calle Tajo S/N, Villaviciosa de Odón', 500, 'Disponible en el campus', TRUE);
+
+INSERT INTO gala_media (id_gala, media_url) VALUES
+(1, '../uploads/galeria/Foto1.jpg'),
+(1, '../uploads/galeria/Foto2.jpg'),
+(1, '../uploads/galeria/Foto3.jpg'),
+(1, '../uploads/galeria/Foto4.jpg'),
+(1, '../uploads/galeria/Foto5.jpg'),
+(1, '../uploads/galeria/Foto6.jpg'),
+(1, '../uploads/galeria/Foto7.jpg'),
+(1, '../uploads/galeria/Foto8.jpg');
 
 INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_expediente, anio_graduacion) VALUES
 ('Hugo Rubio', '12345678Z', 'hugo@correo.es', '$hash', NOW(), '22441924', 2025),
@@ -204,22 +215,22 @@ INSERT INTO usuario (nombre_apellidos, dni, email, passwd_hash, fecha_alta, num_
 ('Iván Cabrera', '44556677N', 'ivan.cabrera@correo.es', '$hash', NOW(), '22441937', 2026);
 
 INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, titulo, sinopsis, cartel_url, corto_url) VALUES
-(1, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
-(2, 1, 'SUBSANAR', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
-(3, 1, 'ACEPTADA', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4'),
-(4, 1, 'NOMINADA', 'ALUMNI', NULL, 'Eco de Pantalla', 'Una antigua grabación reabre un recuerdo que parecía cerrado.', 'uploads/candidaturas/4/4/cartel.jpg', 'uploads/candidaturas/4/4/corto.mp4'),
-(1, 1, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4'),
+(1, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Luces de Pasillo', 'Un grupo de alumnos se enfrenta a su última entrega antes del festival.', 'uploads/candidaturas/1/1/cartel.jpg', 'uploads/candidaturas/1/1/corto.mp4'),
+(2, 2, 'SUBSANAR', 'ALUMNO', NULL, 'Plano Secuencia', 'Un rodaje improvisado pone a prueba a todo el equipo.', 'uploads/candidaturas/2/2/cartel.jpg', 'uploads/candidaturas/2/2/corto.mp4'),
+(3, 2, 'ACEPTADA', 'ALUMNO', NULL, 'Corte y Acción', 'Una idea brillante nace justo cuando se acaba el tiempo.', 'uploads/candidaturas/3/3/cartel.jpg', 'uploads/candidaturas/3/3/corto.mp4'),
+(4, 2, 'NOMINADA', 'ALUMNI', NULL, 'Eco de Pantalla', 'Una antigua grabación reabre un recuerdo que parecía cerrado.', 'uploads/candidaturas/4/4/cartel.jpg', 'uploads/candidaturas/4/4/corto.mp4'),
+(1, 2, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4'),
 
-(5, 1, 'PENDIENTE', 'ALUMNO', NULL, 'A Contraluz', 'Un proyecto nocturno revela la verdadera amistad del equipo.', 'uploads/candidaturas/5/6/cartel.jpg', 'uploads/candidaturas/5/6/corto.mp4'),
-(6, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg','uploads/candidaturas/6/7/corto.mp4'),
-(7, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Silencio en Set', 'El sonido desaparece y el equipo improvisa una solución.', 'uploads/candidaturas/7/8/cartel.jpg', 'uploads/candidaturas/7/8/corto.mp4'),
-(8, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Storyboard', 'Un cuaderno perdido cambia el rumbo del rodaje.', 'uploads/candidaturas/8/9/cartel.jpg', 'uploads/candidaturas/8/9/corto.mp4'),
-(9, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Foco', 'Una luz fundida desencadena un efecto inesperado en la escena.', 'uploads/candidaturas/9/10/cartel.jpg', 'uploads/candidaturas/9/10/corto.mp4'),
-(10, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Toma Dos', 'Repetir la escena se convierte en la clave para mejorar el corto.', 'uploads/candidaturas/10/11/cartel.jpg', 'uploads/candidaturas/10/11/corto.mp4'),
-(11, 1, 'PENDIENTE', 'ALUMNO', NULL, 'El Plano Perdido', 'Aparece una grabación que nadie recuerda haber hecho.', 'uploads/candidaturas/11/12/cartel.jpg', 'uploads/candidaturas/11/12/corto.mp4'),
-(12, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cinta Roja', 'Un simple marcador de escena se vuelve imprescindible.', 'uploads/candidaturas/12/13/cartel.jpg', 'uploads/candidaturas/12/13/corto.mp4'),
-(13, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Días de Montaje', 'Las prisas y el cansancio ponen a prueba al editor.', 'uploads/candidaturas/13/14/cartel.jpg', 'uploads/candidaturas/13/14/corto.mp4'),
-(14, 1, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
+(5, 2, 'PENDIENTE', 'ALUMNO', NULL, 'A Contraluz', 'Un proyecto nocturno revela la verdadera amistad del equipo.', 'uploads/candidaturas/5/6/cartel.jpg', 'uploads/candidaturas/5/6/corto.mp4'),
+(6, 2, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg','uploads/candidaturas/6/7/corto.mp4'),
+(7, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Silencio en Set', 'El sonido desaparece y el equipo improvisa una solución.', 'uploads/candidaturas/7/8/cartel.jpg', 'uploads/candidaturas/7/8/corto.mp4'),
+(8, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Storyboard', 'Un cuaderno perdido cambia el rumbo del rodaje.', 'uploads/candidaturas/8/9/cartel.jpg', 'uploads/candidaturas/8/9/corto.mp4'),
+(9, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Foco', 'Una luz fundida desencadena un efecto inesperado en la escena.', 'uploads/candidaturas/9/10/cartel.jpg', 'uploads/candidaturas/9/10/corto.mp4'),
+(10, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Toma Dos', 'Repetir la escena se convierte en la clave para mejorar el corto.', 'uploads/candidaturas/10/11/cartel.jpg', 'uploads/candidaturas/10/11/corto.mp4'),
+(11, 2, 'PENDIENTE', 'ALUMNO', NULL, 'El Plano Perdido', 'Aparece una grabación que nadie recuerda haber hecho.', 'uploads/candidaturas/11/12/cartel.jpg', 'uploads/candidaturas/11/12/corto.mp4'),
+(12, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Cinta Roja', 'Un simple marcador de escena se vuelve imprescindible.', 'uploads/candidaturas/12/13/cartel.jpg', 'uploads/candidaturas/12/13/corto.mp4'),
+(13, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Días de Montaje', 'Las prisas y el cansancio ponen a prueba al editor.', 'uploads/candidaturas/13/14/cartel.jpg', 'uploads/candidaturas/13/14/corto.mp4'),
+(14, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES
 ('Arranca la semana del Festival de Cortos UEM',
@@ -306,6 +317,16 @@ INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) 
 
 INSERT INTO patrocinador (nombre, logo_url, color_hex, web_url, id_admin) VALUES 
 ('Canon','uploads/patrocinadores/patrocinador_Canon.png','FFFFFF','https://www.canon.es',1);
+
+INSERT INTO ganador_corto (id_gala, id_premio, nombre, titulo, sinopsis, cartel_url, corto_url) VALUES
+(1, 1, 'Raúl Rodríguez', 'Umbra', 'Emma recibe una carta.','ganadores/1/ALUMNO/premio1/cartel.png', 'ganadores/1/ALUMNO/premio1/corto.mp4'),  
+(1, 2, 'Sara Viullanueva', 'De todo un poco', 'Un trayecto en un coche.','ganadores/1/ALUMNO/premio2/cartel.png', 'ganadores/1/ALUMNO/premio2/corto.mp4'),  
+(1, 3, 'Raquel Cerdá', 'Esperando', 'Una parada de autobús.','ganadores/1/ALUMNO/premio3/cartel.png', 'ganadores/1/ALUMNO/premio3/corto.mp4'),  
+(1, 4, 'Irene del Rincón', 'ZOE', 'Una llamada inesperada','ganadores/1/ALUMNI/premio1/cartel.png', 'ganadores/1/ALUMNI/premio1/corto.mp4'),  
+(1, 5, 'Lidia De Grado', 'Tormento', '¿Qué guarda Dios a los ojos de los mortales?','ganadores/1/ALUMNI/premio2/cartel.png', 'ganadores/1/ALUMNI/premio2/corto.mp4');
+
+INSERT INTO ganador_honorifico (id_gala, id_premio, nombre_apellidos, email, telefono, video_url) VALUES
+(1, 6, 'Miguel Ángel Guerra', 'miguel.angel.guerra@gmail.com', '699699699','ganadores/1/honorifico/honorifico.mp4'); 
 ";
 
 if ($conexion->multi_query($sql)) {

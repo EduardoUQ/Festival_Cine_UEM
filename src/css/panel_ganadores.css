@@ -231,6 +231,20 @@ textarea {
     color: #fff;
     cursor: pointer;
 }
+/* Validación honoríficos */
+.input-error {
+  border: 1px solid #ff3b3b !important;
+  outline: none;
+}
+
+.error-msg {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #ff3b3b;
+  min-height: 1em; 
+}
+
 
 @keyframes aparecer {
     from {

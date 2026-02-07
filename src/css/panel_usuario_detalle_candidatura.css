@@ -285,3 +285,10 @@ textarea:disabled {
 .modal button {
     margin: 1.5rem auto 0;
 }
+
+.modal-actions{
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}

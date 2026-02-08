@@ -14,6 +14,21 @@ function limpiar($s)
     return trim((string)$s);
 }
 
+/* =========================================================
+   Validación PASSWORD (mín. 8, letras y números)
+========================================================= */
+function validar_password($pass)
+{
+    // - Mínimo 8 caracteres
+    // - Al menos 1 letra
+    // - Al menos 1 número
+    // - Da igual mayúsculas o minúsculas
+    if (strlen($pass) < 8) return false;
+    if (!preg_match('/[A-Za-z]/', $pass)) return false;
+    if (!preg_match('/[0-9]/', $pass)) return false;
+    return true;
+}
+
 /* ====== POST ====== */
 $modo             = limpiar($_POST["modo"] ?? ""); // "panel" | "publico"
 
@@ -317,8 +332,12 @@ if (!preg_match($expRegex, $num_expediente)) {
 if ($pass !== $pass2) {
     respuesta_error("Las contraseñas no coinciden");
 }
-if (strlen($pass) < 6) {
-    respuesta_error("Contraseña demasiado corta (mín. 6 caracteres)");
+
+// >>> AQUÍ he cambiado la validación de contraseña:
+// Antes: mínimo 6
+// Ahora: mínimo 8 y que tenga letras + números
+if (!validar_password($pass)) {
+    respuesta_error("Contraseña inválida. Debe tener mínimo 8 caracteres e incluir al menos 1 letra y 1 número.");
 }
 
 /* ====== Archivos ====== */

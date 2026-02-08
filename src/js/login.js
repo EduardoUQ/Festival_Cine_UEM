@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         abrirModalCambio();
                         return;
                     }
-                    window.location.href = "../html/panel_noticias.html";
+                    window.location.href = "../html/panel_candidaturas.html";
                 } else if (data.status === "success" && data.rol === 'usuario') {
                     window.location.href = "../html/panel_usuario_candidatura.html";
                 } else {

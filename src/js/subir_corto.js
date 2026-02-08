@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ====== VALIDACIÓN RESOLUCIÓN VÍDEO ======
   // Ajusta aquí si cambias la resolución “oficial”
-  const RES_W = 1000;
-  const RES_H = 500;
+  const RES_W = 1920;
+  const RES_H = 1080;
   // true por defecto para NO bloquear si el navegador no puede leer metadata
   let resolucionOk = true;
 
@@ -305,9 +305,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     pass.addEventListener("blur", () => {
-      if (pass.value.length < 4)
-        ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
-      else ponerMensajeError(pass, "");
+      // >>> AQUÍ he cambiado la validación de contraseña:
+      // - Mínimo 8 caracteres
+      // - Al menos 1 letra y 1 número
+      // - Da igual mayúsculas/minúsculas
+      const passRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+      if (!passRegex.test(pass.value)) {
+        ponerMensajeError(
+          pass,
+          "Contraseña inválida (mín. 8 caracteres y debe incluir al menos 1 letra y 1 número)",
+        );
+      } else {
+        ponerMensajeError(pass, "");
+      }
     });
 
     pass2.addEventListener("blur", () => {
@@ -360,7 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const f = cartel.files[0];
-    const okType = f.type === "image/tif" || f.type === "image/jpg";
+    const okType = f.type === "image/jpeg" || f.type === "image/tif";
     const okSize = f.size <= 2 * 1024 * 1024;
 
     if (!okType) ponerMensajeError(cartel, "Formato inválido. Solo JPG o TIF");
@@ -514,8 +525,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ponerMensajeError(email, "El email es obligatorio");
       else ponerMensajeError(email, "");
 
-      if (pass.value.length < 4)
-        ponerMensajeError(pass, "Contraseña demasiado corta (mín. 4)");
+      // (mantengo coherencia en submit también)
+      const passRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+      if (!passRegex.test(pass.value))
+        ponerMensajeError(
+          pass,
+          "Contraseña inválida (mín. 8 caracteres y debe incluir al menos 1 letra y 1 número)",
+        );
       else ponerMensajeError(pass, "");
 
       if (!pass2.value) ponerMensajeError(pass2, "Confirma la contraseña");

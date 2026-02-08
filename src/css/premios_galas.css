@@ -715,3 +715,18 @@ body {
     color: #bdbdbd;
     line-height: 1.5;
 }
+
+.gala-card-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.fecha-gala{
+  margin-left:auto;
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;
+  font-size:.95rem;
+  opacity:.9;
+}

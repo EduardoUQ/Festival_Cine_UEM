@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=utf-8");
 $sql = "
     SELECT 
         id, anio, total_participantes,
-        (SELECT COUNT(*) FROM ganador_corto WHERE id_gala = gala.id) AS total_ganadores,
+        ((SELECT COUNT(*) FROM ganador_corto WHERE id_gala = gala.id)+1) AS total_ganadores,
         (SELECT COUNT(*) FROM candidatura WHERE id_gala = gala.id) AS total_cortos,
         (SELECT media_url FROM gala_media WHERE id_gala = gala.id LIMIT 1) AS media_url
     FROM gala

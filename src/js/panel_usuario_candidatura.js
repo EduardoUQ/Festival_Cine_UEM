@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tr.innerHTML = `
           <td>${candidatura.titulo}</td>
           <td>${candidatura.categoria}</td>
-          <td>${candidatura.estado}</td>
+          <td><span class="estado-${candidatura.estado}">${candidatura.estado}</span></td>
           <td>
             <a class="btn" href="panel_usuario_detalle_candidatura.html?id=${encodeURIComponent(candidatura.id)}">Ver candidatura</a>
           </td>

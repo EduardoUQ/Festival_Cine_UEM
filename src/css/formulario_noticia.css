@@ -1,6 +1,6 @@
 /* Body */
 body {
-    background: #171719;
+    background: #0b0b0b;
 }
 
 .content {
@@ -8,6 +8,8 @@ body {
     margin: 60px auto;
     padding: 0 20px;
     color: #fff;
+    background: #0b0b0b;
+    border: solid 1px #2e2e2e;
 }
 
 .content h1 {
@@ -31,7 +33,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #d1d5db;
 }
 
@@ -116,12 +118,13 @@ body {
 
 /* BUTTONS */
 .btn-cancel {
-    background: #2a2a2a;
-    color: #fff;
+    background: #ffffff;
+    color: #000;
     padding: 10px 18px;
     border: none;
-    border-color: #FF3228;
     cursor: pointer;
+    font-size: 1rem;
+    border: 1px solid #fff;
 }
 
 .btn-save {
@@ -131,15 +134,26 @@ body {
     border: none;
     font-weight: 600;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .btn-save i {
     margin-right: 6px;
 }
 
-.btn-cancel:hover,
+.btn-cancel:hover {
+    background: #000;
+    color: #ffffff;
+}
+
 .btn-save:hover {
-    opacity: 0.9;
+    background: #ffffff;
+    color: #FF3228;
+}
+
+.image-upload.dragover {
+    border-color: #FF3228;
+    background: rgba(255, 50, 40, 0.2);
 }
 
 /* Mensajes de error */
@@ -164,55 +178,6 @@ body {
         flex-direction: column;
         align-items: stretch;
     }
-}
-
-/* MODAL */
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.modal.mostrar {
-    display: flex;
-}
-
-.modal_contenido {
-    background: #fff;
-    color: #1f1f1f;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    width: 90%;
-    max-width: 420px;
-    animation: aparecer 0.25s ease;
-}
-
-.modal_contenido i {
-    font-size: 48px;
-    margin-bottom: 15px;
-}
-
-.modal_exito i {
-    color: #2ecc71;
-}
-
-.modal_error i {
-    color: #e74c3c;
-}
-
-.modal_contenido button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border: none;
-    background: #000;
-    color: #fff;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 @keyframes aparecer {

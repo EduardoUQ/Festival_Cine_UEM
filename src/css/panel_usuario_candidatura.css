@@ -73,7 +73,7 @@ body {
 .menu a:hover,
 .menu a.active {
     background: var(--accent);
-    color: var(--text-main);
+    color: var(--bg-main);
 }
 
 .badge {
@@ -172,14 +172,34 @@ tbody tr:hover {
 }
 
 /* Estados */
-.estado {
-    padding: 4px 10px;
-    font-size: 1rem;
+.estado-PENDIENTE {
+    padding: 2px 8px;
+    background: rgba(234, 179, 8, 0.2);
+    color: rgba(234, 179, 8, 1);
 }
 
-.estado.pendiente {
-    background: #d4af37;
-    color: #000;
+.estado-ACEPTADA {
+    padding: 2px 8px;
+    background: rgba(8, 234, 68, 0.2);
+    color: rgba(8, 234, 68, 1);
+}
+
+.estado-RECHAZADA {
+    padding: 2px 8px;
+    background: rgba(255, 50, 40, 0.2);
+    color: rgba(255, 50, 40, 1);
+}
+
+.estado-SUBSANAR {
+    padding: 2px 8px;
+    background: rgba(234, 179, 8, 0.2);
+    color: rgba(234, 179, 8, 1);
+}
+
+.estado-NOMINADA {
+    padding: 2px 8px;
+    background: rgba(8, 234, 68, 0.2);
+    color: rgba(8, 234, 68, 1);
 }
 
 /* Botón */
@@ -193,6 +213,10 @@ tbody tr:hover {
     font-size: 1rem;
 }
 
+.btn:hover {
+    background: var(--text-main);
+    color: var(--accent);
+}
 
 /* Paginación */
 .paginacion {

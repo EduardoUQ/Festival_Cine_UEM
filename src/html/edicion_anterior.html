@@ -30,13 +30,12 @@
                 <a href="noticias.html">Noticias</a>
                 <a href="premios_galas.html">Premios y Galas</a>
                 <a href="calendario.html">Calendario</a>
-                <!-- BOTÓN LOGOUT -->
-                <!-- <i class="fa-solid fa-right-from-bracket" class="login-mobile"></i> -->
+                <!-- LOGIN MOBILE -->
+                <a href="../html/login.html" class="login-mobile">Ingresar</a>
             </nav>
             <!-- ACTIONS -->
-            <div class="actions">
-                <i class="fa-solid fa-user"></i>
-                <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
+            <div class="actions" id="auth_actions">
+                <a class="login-btn" id="btn_login" href="../html/login.html">Ingresar</a>
             </div>
         </div>
     </header>
@@ -77,113 +76,12 @@
 
         <!-- Winners Grid -->
         <section class="winners-grid">
-
-            <!-- Winner Card 1 -->
-            <!-- <div class="winner-card gold">
-                <div class="winner-badge">
-                    <span>Mejor Cortometraje - Alumno</span>
-                </div>
-
-                <div class="winner-info">
-                    <h3>Laura Martínez Silva</h3>
-                    <span class="winner-place">1</span>
-                </div>
-
-                <p class="work-title">"Entre Sombras"</p>
-                <p class="description">
-                    Un viaje introspectivo sobre la identidad y la memoria familiar en tiempos de cambio.
-                </p>
-
-                <button class="btn-view">Ver cortometraje</button>
-            </div>
-
-      
-            <div class="winner-card blue">
-                <div class="winner-badge">
-                    <span>Mejor Cortometraje - Alumno</span>
-                </div>
-
-                <div class="winner-info">
-                    <h3>Diego Fernández López</h3>
-                    <span class="winner-place">2</span>
-                </div>
-
-                <p class="work-title">"El Último Tren"</p>
-                <p class="description">
-                    Una reflexión sobre las segundas oportunidades y los encuentros fortuitos de la vida.
-                </p>
-
-                <button class="btn-view">Ver cortometraje</button>
-            </div>
-
-      
-            <div class="winner-card green">
-                <div class="winner-badge">
-                    <span>Premio del Público - Alumni </span>
-                </div>
-
-                <div class="winner-info">
-                    <h3>Javier Moreno Sanz</h3>
-                    <span class="winner-place">1</span>
-                </div>
-
-                <p class="work-title">"Café con Leche"</p>
-                <p class="description">
-                    Un cortometraje emotivo que conquistó al público gracias a su autenticidad.
-                </p>
-
-                <button class="btn-view">Ver cortometraje</button>
-            </div>
-
-           
-            <div class="winner-card purple">
-                <div class="winner-badge">
-                    <span>Premio Especial</span>
-                </div>
-
-                <div class="winner-info">
-                    <h3>Carmen Ruiz Navarro</h3>
-                </div>
-
-                <p class="work-title">Trayectoria Profesional Destacada</p>
-                <p class="description">
-                    Reconocimiento a su destacada labor en el ámbito cinematográfico y su formación.
-                </p>
-
-                <button class="btn-view">Más detalles</button>
-            </div> -->
-
         </section>
-
+        <!-- Gallety Section -->
         <section class="gallery-section">
             <h2 class="gallery-title"><i class="fa-solid fa-images"></i> Galería de la Edición</h2>
 
             <div class="gallery-grid">
-
-                <!-- <div class="gallery-item">
-                    <img src="../img/gala1.png" alt="Imagen 1">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="../img/gala2.png" alt="Imagen 2">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="../img/noticia1.png" alt="Imagen 3">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="../img/noticia2.png" alt="Imagen 4">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="../img/noticia3.png" alt="Imagen 5">
-                </div>
-
-                <div class="gallery-item">
-                    <img src="../img/noticia4.png" alt="Imagen 6">
-                </div> -->
-
             </div>
         </section>
         <!-- LIGHTBOX -->
@@ -243,10 +141,11 @@
             </div>
         </div>
     </footer>
-
+    <script src="../js/auth_nav.js"></script>
     <script src="../js/edicion_anterior.js"></script>
     <script src="../js/detalle_gala.js"></script>
     <script src="../js/menu_hamburguesa.js"></script>
+
 </body>
 
 </html>

@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (resp.status === "success") {
                                 window.location.href = "../html/login.html";
                             } else {
-                                alert("No se pudo cerrar sesión");
+                                mostrarModal("error", "No se pudo cerrar sesión");
                             }
                         })
                         .catch((err) => {
                             console.error("Error al cerrar sesión", err);
-                            alert("Error al cerrar sesión. Observa la consola.");
+                            mostrarModal("error", "Error al cerrar sesión. Observa la consola.");
                         });
                 });
             }
@@ -179,7 +179,7 @@ if (patrocinadorId) {
     if (h1) h1.textContent = "EDITAR PATROCINADOR";
 
     const btnSubmit = document.getElementById("btn_enviar");
-    if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar cambios';
+    if (btnSubmit) btnSubmit.innerHTML = 'Guardar cambios';
 
     fetch(`../php/editar_patrocinador.php?id=${encodeURIComponent(patrocinadorId)}`)
         .then((r) => r.json())
@@ -234,6 +234,34 @@ input_imagen.addEventListener("change", () => {
 
     // Importante: si vuelves a elegir el mismo archivo, algunos navegadores no disparan change
     input_imagen.value = "";
+});
+
+// Drag & Drop para la imagen
+["dragenter", "dragover", "dragleave", "drop"].forEach(ev =>
+    uploadBox.addEventListener(ev, e => e.preventDefault())
+);
+
+uploadBox.addEventListener("dragover", () => {
+    uploadBox.classList.add("dragover");
+});
+
+uploadBox.addEventListener("dragleave", () => {
+    uploadBox.classList.remove("dragover");
+});
+
+uploadBox.addEventListener("drop", (e) => {
+    uploadBox.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    // Simular selección en el input
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    input_imagen.files = dataTransfer.files;
+
+    // Reusar tu validación existente
+    input_imagen.dispatchEvent(new Event("change"));
 });
 
 // Submit

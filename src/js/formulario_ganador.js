@@ -189,7 +189,7 @@ function inicializarPanelGanadores() {
 }
 
 // =======================
-// FETCH NORMAL (FormData) - SIN HELPERS RAROS
+// FETCH NORMAL (FormData) 
 // =======================
 function postFormData(url, dataObj) {
   const fd = new FormData();
@@ -378,7 +378,7 @@ function guardarGanadores() {
     });
   }
 
-  // ✅ VALIDACIÓN NUEVA: no permitir guardar si no hay ningún corto seleccionado
+  // VALIDACIÓN NUEVA: no permitir guardar si no hay ningún corto seleccionado
   if (!algunoSeleccionado) {
     mostrarModal("error", "No has seleccionado ningún corto nominado.");
     return;
@@ -577,20 +577,25 @@ function cargarHonorificos() {
         if (h.asignado) {
           const g = h.ganador || {};
           html += `
-            <div style="border:1px solid #1f1f1f;border-radius:12px;padding:14px;margin-top:14px;background:#101010;">
-              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
-                <h4 style="margin:0;">${escapeHtml(h.descripcion || ("Premio Honorífico " + h.id_premio))}</h4>
-                <i class="fa-solid fa-trash js-borrar-honorifico" data-id-premio="${h.id_premio}" style="cursor:pointer;"></i>
-              </div>
+                  <div class="honorifico-card">
+                  <div class="honorifico-header">
+                    <h4>${escapeHtml(h.descripcion || ("Premio Honorífico " + h.id_premio))}</h4>
+                    <i class="fa-solid fa-trash js-borrar-honorifico" data-id-premio="${h.id_premio}"></i>
+                  </div>
 
-              <p style="color:#c9a43b;margin:10px 0 6px 0;"><strong>Ya hay un ganador asignado para la gala activa.</strong></p>
-              <p style="color:#e5e5e5;margin:0;">${escapeHtml(g.nombre_apellidos || "-")}</p>
-              <p style="color:#aaa;margin:6px 0 0 0;">
-                ${escapeHtml(g.email || "")}${g.telefono ? " · " + escapeHtml(g.telefono) : ""}
-              </p>
-              ${g.video_url ? `<p style="margin:10px 0 0 0;"><a href="../${escapeHtml(g.video_url)}" target="_blank" style="color:#c9a43b;">Ver vídeo</a></p>` : ""}
-            </div>
-          `;
+                  <p class="honorifico-warning"><strong>Ya hay un ganador asignado para la gala activa.</strong></p>
+                  <p class="honorifico-nombre">${escapeHtml(g.nombre_apellidos || "-")}</p>
+                  <p class="honorifico-contacto">
+                    ${escapeHtml(g.email || "")}${g.telefono ? " · " + escapeHtml(g.telefono) : ""}
+                  </p>
+
+                  ${g.video_url ? `
+                    <p class="honorifico-video">
+                      <a href="../${escapeHtml(g.video_url)}" target="_blank">Ver vídeo</a>
+                    </p>`
+              : ""}
+                </div>
+              `;
           return;
         }
 
@@ -633,13 +638,13 @@ function cargarHonorificos() {
 
       const forms = document.querySelectorAll(".form-honorifico");
       for (let i = 0; i < forms.length; i++) {
-        // ✅ NUEVO: blur validation
+        // NUEVO: blur validation
         engancharValidacionBlurHonorifico(forms[i]);
 
         forms[i].addEventListener("submit", function (e) {
           e.preventDefault();
 
-          // ✅ NUEVO: validación completa antes de enviar
+          // NUEVO: validación completa antes de enviar
           if (!validarFormularioHonorifico(this)) {
             mostrarModal("error", "Revisa los campos del honorífico: hay datos vacíos o el email/vídeo no es válido.");
             return;
@@ -694,7 +699,7 @@ function enviarHonorifico(formEl) {
   fd.append("numero", numero);
   fd.append("video", video);
 
-  
+
   fetch("../php/formulario_ganador_honorifico.php", {
     method: "POST",
     body: fd

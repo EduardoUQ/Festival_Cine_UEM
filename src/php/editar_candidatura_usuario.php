@@ -88,10 +88,8 @@ $stmtChk->close();
    UPDATE TEXTO (SIEMPRE)
    - Si estaba en SUBSANAR, vuelve a PENDIENTE
 ========================= */
-$sqlUpd = "UPDATE candidatura
-           SET titulo = ?,
-               sinopsis = ?,
-               estado = IF(estado='SUBSANAR','PENDIENTE',estado)
+$sqlUpd = "UPDATE candidatura 
+           SET titulo = ?, sinopsis = ?, estado = 'PENDIENTE'
            WHERE id = ? AND id_usuario = ?";
 
 $stmtUpd = $conexion->prepare($sqlUpd);

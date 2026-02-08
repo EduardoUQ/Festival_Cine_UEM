@@ -76,6 +76,7 @@ function showModal(type, title, message, isConfirm = false) {
 
 function hideModal() {
     modalOverlay.classList.remove("active");
+    window.location.href = "../html/panel_usuario_candidatura.html";
     confirmMode = false;
 }
 
@@ -203,12 +204,12 @@ editar.addEventListener("click", () => {
         toggleInputs(true);
         imagenBox.style.cursor = "pointer";
         enviar.disabled = false;
-        editar.innerHTML = '<i class="fa-solid fa-xmark"></i> Cancelar edición';
+        editar.innerHTML = 'Cancelar edición';
     } else {
         toggleInputs(false);
         enviar.disabled = true;
         imagenBox.style.cursor = "default";
-        editar.innerHTML = '<i class="fa-solid fa-pen"></i> Editar';
+        editar.innerHTML = 'Editar';
     }
 });
 
@@ -258,6 +259,9 @@ form.addEventListener("submit", (e) => {
         return; // NO enviamos todavía
     }
 
+    toggleInputs(false);
+    editMode = false;
+    editar.innerHTML = 'Editar';
     // Si no está en SUBSANAR, bloqueamos
     showModal("error", "Acción no válida", "No puedes editar esta candidatura en su estado actual.", false);
 });

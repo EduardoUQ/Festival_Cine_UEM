@@ -66,7 +66,7 @@
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
-                <a class="active" href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
+                <a href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
                     Administrador</a>
             </nav>
         </aside>
@@ -80,11 +80,6 @@
                     <h1>Gestión de Eventos</h1>
                     <p>Revisa, edita o borra los eventos del calendario.</p>
                 </div>
-
-                <!-- <div class="search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Buscar candidatura...">
-                </div> -->
             </div>
 
             <!-- Filtros -->
@@ -93,8 +88,8 @@
             </div>
 
             <!-- Filtro por tipo de evento -->
-            <div style="margin:12px 0;">
-                <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
+            <div class="category-select">
+                <label for="filtro_eventos">Filtrar:</label>
                 <select id="filtro_eventos">
                     <option value="todos">Todos los eventos</option>
                     <option value="gala">Eventos del día de la gala</option>
@@ -121,9 +116,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
-                                <a class="btn" href="#"></a>
+                            <td>
                             </td>
 
                         </tr>
@@ -201,8 +194,10 @@
             <i id="modal_icono" class="fa-solid"></i>
             <h2 id="modal_titulo"></h2>
             <p id="modal_texto"></p>
-            <button id="modalBtn">Aceptar</button>
-            <button id="modalBtnCancel" type="button">Cancelar</button>
+            <div class="modal_acciones">
+                <button id="modalBtnCancel" type="button">Cancelar</button>
+                <button id="modalBtn">Aceptar</button>
+            </div>
         </div>
     </div>
     <!-- WIDGET AYUDA (STICKY) -->

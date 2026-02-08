@@ -33,7 +33,7 @@
                 <a href="calendario.html">Calendario</a>
             </nav>
             <!-- ACTIONS -->
-            <div class="actions">
+            <div class="actions" id="auth_actions">
                 <i class="fa-solid fa-user"></i>
                 <i class="fa-solid fa-right-from-bracket" id="btn_logout"></i>
             </div>
@@ -63,6 +63,8 @@
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a class="active" href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
+                <a href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
+                    Administrador</a>
             </nav>
         </aside>
 
@@ -114,7 +116,7 @@
                 <div class="form-actions">
                     <button type="reset" class="btn-cancel" id="btn_cancelar">Cancelar</button>
                     <button type="submit" class="btn-save" id="btn_enviar">
-                        <i class="fa-solid fa-floppy-disk"></i> Agregar
+                        Agregar
                     </button>
                 </div>
 
@@ -194,6 +196,7 @@
 
     <script src="../js/menu_hamburguesa.js"></script>
     <script src="../js/formulario_patrocinador.js"></script>
+    <script src="../js/auth_nav.js"></script>
 </body>
 
 </html>

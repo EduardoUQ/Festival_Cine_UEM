@@ -7,9 +7,9 @@
 /* Sidebar */
 .sidebar {
     width: 260px;
-    background: #111;
+    background: linear-gradient(180deg, #1a1a1a, #111);
     padding: 24px;
-    border-right: 1px solid #1f1f1f;
+    border-right: 1px solid #2e2e2e;
 }
 
 .profile {
@@ -40,7 +40,7 @@
 
 .menu a.active,
 .menu a:hover {
-    background: #f5c542;
+    background: #FF3228;
     color: #000;
 }
 
@@ -48,7 +48,7 @@
 .content {
     flex: 1;
     padding: 32px;
-    background: #171719;
+    background: #000;
 }
 
 /* Header */
@@ -108,7 +108,9 @@
     justify-content: space-between;
 }
 
-#create-news {
+#create-news,
+#activarPre,
+#activarPost {
     background: #FF3228;
     color: #ffffff;
     border: none;
@@ -121,7 +123,9 @@
 }
 
 /* Crear evento */
-#create-news:hover {
+#create-news:hover,
+#activarPre:hover,
+#activarPost:hover {
     background: #ffffff;
     color: #FF3228;
 }
@@ -175,10 +179,10 @@ tbody tr:hover {
 /* Botón */
 .btn {
     padding: 6px 12px;
-    background: #d4af37;
+    background: #FF3228;
     border: none;
     cursor: pointer;
-    color: #000;
+    color: #ffffff;
     text-decoration: none;
     font-size: 0.8rem;
 }
@@ -203,8 +207,8 @@ tbody tr:hover {
 }
 
 .paginacion button.active {
-    background: #d4af37;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
 }
 
 /* MODAL */

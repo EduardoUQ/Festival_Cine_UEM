@@ -196,7 +196,7 @@ function pintarTabla(candidaturas) {
       <td>${escapeHTML(c.titulo)}</td>
       <td>${escapeHTML(c.categoria)}</td>
       <td>${escapeHTML(c.participante)}</td>
-      <td class="estado">${escapeHTML(c.estado)}</td>
+      <td class="estado"><span class="${c.estado}">${escapeHTML(c.estado)}</span></td>
       <td>
         <a class="btn" href="panel_detalle_candidatura.html?id=${encodeURIComponent(c.id)}">
           Ver candidatura

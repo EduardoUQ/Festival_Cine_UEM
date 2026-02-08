@@ -1,14 +1,9 @@
 :root {
-    --bg-dark: #0e0e0f;
+    --bg-dark: #000;
     --card-dark: #1a1a1d;
     --text-light: #ffffff;
     --text-muted: #bbbbbb;
-    --radius: 14px;
-
-    --gold: #cfa93e;
-    --blue: #0d3b66;
-    --purple: #5a2f82;
-    --green: #0f6d42;
+    --red: #ff3228;
 }
 
 body {
@@ -50,7 +45,7 @@ main {
 .event-date strong {
     display: block;
     margin-top: 4px;
-    color: var(--gold);
+    color: var(--red);
 }
 
 /* SUMMARY CARDS */
@@ -62,21 +57,25 @@ main {
 }
 
 .summary-card {
-    background: var(--card-dark);
+    background: linear-gradient(180deg, #1b1b1b, #111);
     padding: 18px;
-    border-radius: var(--radius);
     text-align: center;
 }
 
 .summary-card h2 {
     margin: 0;
     font-size: 28px;
-    color: var(--gold);
+    color: var(--red);
 }
 
 .summary-card p {
     margin: 8px 0 0;
     color: var(--text-muted);
+}
+
+.summary-card i {
+    font-size: 2rem;
+    margin-bottom: 4px;
 }
 
 /* SECTION TITLE */
@@ -88,32 +87,19 @@ main {
 /* WINNERS GRID */
 .winners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
 }
 
 /* WINNER CARDS */
 .winner-card {
-    background: var(--card-dark);
+    background: linear-gradient(180deg, #1b1b1b, #111);
     padding: 20px;
-    border-radius: var(--radius);
     border-left: 6px solid;
 }
 
 .winner-card.gold {
-    border-color: var(--gold);
-}
-
-.winner-card.blue {
-    border-color: #3fa9f5;
-}
-
-.winner-card.purple {
-    border-color: #c27bff;
-}
-
-.winner-card.green {
-    border-color: #2ecc71;
+    border-color: var(--red);
 }
 
 .winner-badge {
@@ -133,13 +119,13 @@ main {
 
 .winner-info h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 .winner-place {
     font-size: 20px;
     font-weight: bold;
-    color: var(--gold);
+    color: var(--red);
 }
 
 .work-title {
@@ -150,24 +136,26 @@ main {
 .description {
     margin: 8px 0 15px;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 /* BUTTON */
 .btn-view {
     width: 100%;
-    padding: 10px 0;
-    background: var(--gold);
-    color: #000;
+    padding: 8px 3px;
+    background: var(--red);
+    color: var(--text-light);
     border: none;
-    border-radius: var(--radius);
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s;
+    margin-right: 4px;
+    text-decoration: none;
 }
 
 .btn-view:hover {
-    background: #e0b74c;
+    background: var(--text-light);
+    color: var(--red)
 }
 
 /* RESPONSIVE FIX */

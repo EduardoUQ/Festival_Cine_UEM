@@ -199,7 +199,33 @@ input_imagen.addEventListener("change", () => {
 
 });
 
+// Drag & Drop para la imagen
+["dragenter", "dragover", "dragleave", "drop"].forEach(ev =>
+    uploadBox.addEventListener(ev, e => e.preventDefault())
+);
 
+uploadBox.addEventListener("dragover", () => {
+    uploadBox.classList.add("dragover");
+});
+
+uploadBox.addEventListener("dragleave", () => {
+    uploadBox.classList.remove("dragover");
+});
+
+uploadBox.addEventListener("drop", (e) => {
+    uploadBox.classList.remove("dragover");
+
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+
+    // Simular selección en el input
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    input_imagen.files = dataTransfer.files;
+
+    // Reusar tu validación existente
+    input_imagen.dispatchEvent(new Event("change"));
+});
 
 // Verificamos cuando se envíe
 if (form_noticias) {

@@ -67,7 +67,7 @@
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
-                <a class="active" href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
+                <a href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
                     Administrador</a>
             </nav>
         </aside>
@@ -85,8 +85,8 @@
 
             <!-- Modo de la gala -->
             <div class="tabs">
-                <button class="tab active" id="preEventoBtn">Pre-evento</button>
-                <button class="tab" id="postEventoBtn">Post-evento</button>
+                <button class="tab active" id="preEventoBtn">Pre-gala</button>
+                <button class="tab" id="postEventoBtn">Post-gala</button>
                 <button class="tab" id="edicionesAnterioresBtn">Ediciones anteriores</button>
             </div>
             <!-- Pre evento -->
@@ -96,17 +96,6 @@
                     <a id="create-news" href="formulario_gala.html">Editar gala</a>
                     <button id="activarPre">Activar Pre Gala</button>
                 </div>
-
-                <!-- Filtro por tipo de evento -->
-                <!-- <div style="margin:12px 0;">
-                    <label for="filtro_eventos" style="margin-right:8px;">Filtrar:</label>
-                    <select id="filtro_eventos">
-                        <option value="todos">Todos los eventos</option>
-                        <option value="gala">Eventos del día de la gala</option>
-                        <option value="otros">Otros días</option>
-                    </select>
-                </div> -->
-
 
                 <!-- Tabla -->
                 <div class="tabla-container">
@@ -189,7 +178,7 @@
                     <!-- Galería adicional -->
                     <div class="gallery">
                         <div class="gallery-header">
-                            <span>🖼️ Galería adicional</span>
+                            <span><i class="fa-regular fa-images"></i> Galería adicional</span>
                         </div>
 
                         <div id="galleryGrid" class="gallery-grid">

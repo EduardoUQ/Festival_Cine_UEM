@@ -156,8 +156,9 @@ textarea:disabled {
 .poster-box {
     border: 2px dashed #333;
     padding: 12px;
-    width: fit-content;
-    /* cursor: default; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .poster-box input {
@@ -165,7 +166,8 @@ textarea:disabled {
 }
 
 .poster-box img {
-    max-width: 220px;
+    max-width: min-content;
+    max-height: 500px;
 }
 
 /* VIDEO */

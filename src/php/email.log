@@ -9,3 +9,10 @@
 [2026-02-04 13:25:05] EMAIL | destino=sergio.ramos@correo.es | estado=NOMINADA | resultado=FALLO
 [2026-02-06 09:29:35] EMAIL | destino=edu@correo.es | estado=SUBSANAR | resultado=FALLO
 [2026-02-06 12:32:52] EMAIL | destino=edu@correo.es | estado=SUBSANAR | resultado=FALLO
+[2026-02-08 21:12:16] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-08 21:12:18] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-08 21:12:26] EMAIL | destino=nerea.blanco@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-08 21:12:36] EMAIL | destino=ivan.cabrera@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-08 21:12:44] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-08 21:17:49] EMAIL | destino=alejandro@gmail.com | estado=ACEPTADA | resultado=FALLO
+[2026-02-08 21:18:02] EMAIL | destino=alejandro@gmail.com | estado=NOMINADA | resultado=FALLO

@@ -184,6 +184,12 @@ tbody tr:hover {
     color: rgba(8, 234, 68, 1);
 }
 
+.estado-PREMIADA {
+    padding: 2px 8px;
+    background: rgba(8, 234, 68, 0.2);
+    color: rgba(8, 234, 68, 1);
+}
+
 .estado-RECHAZADA {
     padding: 2px 8px;
     background: rgba(255, 50, 40, 0.2);

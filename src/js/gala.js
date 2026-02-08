@@ -115,8 +115,6 @@ function mostrarEvento() {
 }
 
 function mostrar_post_evento() {
-
-
   fetch("../php/mostrar_gala_post_evento.php")
     .then(r => r.json())
     .then(data => {
@@ -135,22 +133,6 @@ function mostrar_post_evento() {
     document.getElementById("h2").textContent = "Información de la Gala " + gala.anio;
     // document.querySelector(".event-date strong").textContent = formatearFecha(gala.fecha_evento);
   }
-
-  // function formatearFecha(f) {
-  //     const d = new Date(f);
-  //     return d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
-  // }
-
-  /* ============================
-     SUMMARY CARDS
-     ============================ */
-  // function pintarSummary(gala) {
-  //     const cards = document.querySelectorAll(".summary-card h2");
-
-  //     cards[0].textContent = gala.anio;
-  //     cards[1].textContent = gala.total_participantes;
-  //     cards[2].textContent = ""; // se rellena con ganadores reales luego
-  // }
 
   /* ============================
      GANADORES
@@ -194,34 +176,123 @@ function mostrar_post_evento() {
   /* ============================
      GALERÍA
      ============================ */
+  let imagenesLightbox = [];
+  let indexActual = 0;
+
   function pintarGaleria(imagenes) {
     const grid = document.querySelector(".gallery-grid");
     grid.innerHTML = "";
+    imagenesLightbox = imagenes;
 
-    imagenes.forEach(url => {
+    imagenes.forEach((url, i) => {
       const div = document.createElement("div");
       div.classList.add("gallery-item");
+      div.dataset.index = i;
 
       div.innerHTML = `<img src="${url}" alt="">`;
       grid.appendChild(div);
     });
   }
 
-  /*=================================
+  // Abrir lightbox
+  document.addEventListener("click", e => {
+    const item = e.target.closest(".gallery-item");
+    if (!item) return;
+
+    indexActual = Number(item.dataset.index);
+    mostrarImagen(indexActual);
+  });
+
+  // Abrir cartel / video en el lightbox
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("btn-view")) {
+      e.preventDefault();
+
+      const url = e.target.getAttribute("href");
+      abrirEnLightbox(url);
+    }
+  });
+
+
+  // Botón siguiente
+  document.getElementById("lb-next").addEventListener("click", e => {
+    e.stopPropagation(); // evita que se cierre el lightbox
+    indexActual = (indexActual + 1) % imagenesLightbox.length;
+    mostrarImagen(indexActual);
+  });
+
+  // Botón anterior
+  document.getElementById("lb-prev").addEventListener("click", e => {
+    e.stopPropagation();
+    indexActual = (indexActual - 1 + imagenesLightbox.length) % imagenesLightbox.length;
+    mostrarImagen(indexActual);
+  });
+
+  // Cerrar solo si se hace click fuera de la imagen y de las flechas
+  document.getElementById("lightbox").addEventListener("click", e => {
+    if (e.target.id === "lightbox") {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  });
+
+  function mostrarImagen(i) {
+    const content = document.getElementById("lightbox-content");
+
+    content.innerHTML = `<img src="${imagenesLightbox[i]}">`;
+
+    // Mostrar flechas para imágenes
+    document.getElementById("lb-prev").style.display = "block";
+    document.getElementById("lb-next").style.display = "block";
+
+    document.getElementById("lightbox").style.display = "flex";
+  }
+
+  function abrirEnLightbox(url) {
+    const content = document.getElementById("lightbox-content");
+
+    // limpiar contenido anterior
+    content.innerHTML = "";
+
+    const ext = url.split(".").pop().toLowerCase();
+
+    // Imagen (carteles)
+    if (["jpg", "jpeg", "png", "webp"].includes(ext)) {
+      content.innerHTML = `<img src="${url}">`;
+    }
+
+    // Video (mp4 / mov / webm)
+    else if (["mp4", "mov", "webm"].includes(ext)) {
+      content.innerHTML = `
+            <video controls autoplay>
+                <source src="${url}">
+            </video>
+        `;
+    }
+
+    // Ocultar flechas porque video/cartel no pertenece al carrusel
+    document.getElementById("lb-prev").style.display = "none";
+    document.getElementById("lb-next").style.display = "none";
+
+    document.getElementById("lightbox").style.display = "flex";
+  }
+
+}
+
+/*=================================
 GALAS ANTERIORES
 ===================================*/
-  const previousSection = document.querySelector(".galas-grid");
+const previousSection = document.querySelector(".galas-grid");
 
-  fetch("../php/cargar_ediciones.php")
-    .then(r => r.json())
-    .then(data => {
-      if (data.status !== "success") return;
+fetch("../php/cargar_ediciones.php")
+  .then(r => r.json())
+  .then(data => {
+    if (data.status !== "success") return;
 
-      data.ediciones.forEach(ed => {
-        const card = document.createElement("div");
-        card.classList.add("gala-card");
+    data.ediciones.forEach(ed => {
+      const card = document.createElement("div");
+      card.classList.add("gala-card");
 
-        card.innerHTML = `
+      card.innerHTML = `
                 <div class="gala-image"><img src="${ed.media_url}"></div>
 
                 <div class="gala-content"> <h3>Gala ${ed.anio}</h3></div>
@@ -232,10 +303,10 @@ GALAS ANTERIORES
                 </div>
             `;
 
-        previousSection.appendChild(card);
-      });
+      previousSection.appendChild(card);
     });
-}
+  });
+
 
 function pintarPremiosEnPremiosGalas() {
   const cont = document.getElementById("premios_container");

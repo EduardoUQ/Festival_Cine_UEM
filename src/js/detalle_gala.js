@@ -14,6 +14,7 @@ fetch("../php/mostrar_detalle_gala.php?id=" + id)
         pintarSummary(data.gala);
         pintarGanadores(data.ganadores);
         pintarGaleria(data.imagenes);
+
     });
 
 /* ============================
@@ -82,15 +83,103 @@ function pintarGanadores(lista) {
 /* ============================
    GALERÍA
    ============================ */
+
+let imagenesLightbox = [];
+let indexActual = 0;
+
 function pintarGaleria(imagenes) {
     const grid = document.querySelector(".gallery-grid");
     grid.innerHTML = "";
+    imagenesLightbox = imagenes;
 
-    imagenes.forEach(url => {
+    imagenes.forEach((url, i) => {
         const div = document.createElement("div");
         div.classList.add("gallery-item");
+        div.dataset.index = i;
 
         div.innerHTML = `<img src="${url}" alt="">`;
         grid.appendChild(div);
     });
+}
+
+// Abrir lightbox
+document.addEventListener("click", e => {
+    const item = e.target.closest(".gallery-item");
+    if (!item) return;
+
+    indexActual = Number(item.dataset.index);
+    mostrarImagen(indexActual);
+});
+
+// Abrir cartel / video en el lightbox
+document.addEventListener("click", e => {
+    if (e.target.classList.contains("btn-view")) {
+        e.preventDefault();
+
+        const url = e.target.getAttribute("href");
+        abrirEnLightbox(url);
+    }
+});
+
+
+// Botón siguiente
+document.getElementById("lb-next").addEventListener("click", e => {
+    e.stopPropagation(); // evita que se cierre el lightbox
+    indexActual = (indexActual + 1) % imagenesLightbox.length;
+    mostrarImagen(indexActual);
+});
+
+// Botón anterior
+document.getElementById("lb-prev").addEventListener("click", e => {
+    e.stopPropagation();
+    indexActual = (indexActual - 1 + imagenesLightbox.length) % imagenesLightbox.length;
+    mostrarImagen(indexActual);
+});
+
+// Cerrar solo si se hace click fuera de la imagen y de las flechas
+document.getElementById("lightbox").addEventListener("click", e => {
+    if (e.target.id === "lightbox") {
+        document.getElementById("lightbox").style.display = "none";
+    }
+});
+
+function mostrarImagen(i) {
+    const content = document.getElementById("lightbox-content");
+
+    content.innerHTML = `<img src="${imagenesLightbox[i]}">`;
+
+    // Mostrar flechas para imágenes
+    document.getElementById("lb-prev").style.display = "block";
+    document.getElementById("lb-next").style.display = "block";
+
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function abrirEnLightbox(url) {
+    const content = document.getElementById("lightbox-content");
+
+    // limpiar contenido anterior
+    content.innerHTML = "";
+
+    const ext = url.split(".").pop().toLowerCase();
+
+    // Imagen (carteles)
+    if (["jpg", "jpeg", "png", "webp"].includes(ext)) {
+        content.innerHTML = `<img src="${url}">`;
+    }
+
+    // Video (mp4 / mov / webm)
+    else if (["mp4", "mov", "webm"].includes(ext)) {
+        content.innerHTML = `
+            <video controls autoplay>
+                <source src="${url}">
+            </video>
+        `;
+    }
+
+    // Ocultar flechas porque video/cartel no pertenece al carrusel
+    document.getElementById("lb-prev").style.display = "none";
+    document.getElementById("lb-next").style.display = "none";
+
+    document.getElementById("lightbox").style.display = "flex";
 }

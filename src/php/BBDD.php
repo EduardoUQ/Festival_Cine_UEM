@@ -308,10 +308,10 @@ INSERT INTO evento (titulo, descripcion, localizacion, fecha, hora, id_admin) VA
 ('Q&A con coordinación del festival', 'Dudas abiertas sobre candidaturas, categorías y estados.', 'Online', '2026-02-28', '12:00', 1);
 
 INSERT INTO premio (categoria, puesto, descripcion, dotacion, activa, id_admin) VALUES
-('ALUMNO', 1, 'Mejor Corto (Alumno) - 1º Premio', 500.00, TRUE, 1),
+('ALUMNO', 1, 'Mejor Corto (Alumno) - 1º Premio', 600.00, TRUE, 1),
 ('ALUMNO', 2, 'Mejor Corto (Alumno) - 2º Premio', 300.00, TRUE, 1),
-('ALUMNO', 3, 'Mejor Corto (Alumno) - 3º Premio', 150.00, TRUE, 1),
-('ALUMNI', 1, 'Mejor Corto (Alumni) - 1º Premio', 500.00, TRUE, 1),
+('ALUMNO', 3, 'Mejor Corto (Alumno) - 3º Premio', 100.00, TRUE, 1),
+('ALUMNI', 1, 'Mejor Corto (Alumni) - 1º Premio', 700.00, TRUE, 1),
 ('ALUMNI', 2, 'Mejor Corto (Alumni) - 2º Premio', 300.00, TRUE, 1),
 ('ESPECIAL', 0, 'Premio Especial del Certamen a una figura distinguida del sector', NULL, TRUE, 1);
 

@@ -230,35 +230,51 @@ main {
 
 
 /* LIGHTBOX */
-.lightbox {
+#lightbox {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.85);
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
-    backdrop-filter: blur(3px);
-    cursor: zoom-out;
+    z-index: 9999;
 }
 
-.lightbox img {
+/* #lightbox img {
     max-width: 90%;
-    max-height: 85%;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-    animation: pop 0.25s ease-out;
+    max-height: 90%;
+} */
+
+#lightbox-content {
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Animación suave */
-@keyframes pop {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
+#lightbox-content img,
+#lightbox-content video {
+    max-width: 80%;
+    max-height: 70%;
+}
 
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+}
+
+#lb-prev {
+    left: 20px;
+}
+
+#lb-next {
+    right: 20px;
 }

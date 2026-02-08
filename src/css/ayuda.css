@@ -7,7 +7,7 @@
 
 /* Fondo general */
 body {
-  background: radial-gradient(circle at top, #171719, var(--bg));
+  background: #000;
   color: var(--text);
 }
 
@@ -25,8 +25,8 @@ body {
   margin-bottom: 0.5rem;
 }
 
-#ayudaAdmin > p,
-#ayudaUser > p {
+#ayudaAdmin>p,
+#ayudaUser>p {
   color: var(--text-soft);
   margin-bottom: 2.5rem;
 }
@@ -42,7 +42,8 @@ body {
   background: transparent;
   border: 0;
   position: relative;
-  padding-bottom: 18px; /* espacio para la línea */
+  padding-bottom: 18px;
+  /* espacio para la línea */
 }
 
 /* Línea punteada al FINAL del details (siempre visible) */
@@ -54,11 +55,12 @@ body {
   bottom: 0;
 
   height: 2px;
-  background-image: repeating-linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.9) 0 2px,   /* tamaño del punto */
-    transparent 2px 14px              /* separación entre puntos */
-  );
+  background-image: repeating-linear-gradient(to right,
+      rgba(255, 255, 255, 0.9) 0 2px,
+      /* tamaño del punto */
+      transparent 2px 14px
+      /* separación entre puntos */
+    );
 }
 
 /* Summary / título */

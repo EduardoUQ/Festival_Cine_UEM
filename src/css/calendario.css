@@ -1,5 +1,5 @@
 body {
-  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  background: #000;
 }
 
 .calendar-section {
@@ -15,13 +15,15 @@ body {
 }
 
 .section-tag {
+  background: rgba(255, 50, 40, 0.2);
   color: #FF3228;
-  font-size: 12px;
+  padding: 6px 14px;
+  font-size: 0.7rem;
   letter-spacing: 2px;
 }
 
 .calendar-header h2 {
-  font-size: 36px;
+  font-size: 2.4rem;
   margin: 10px 0;
 }
 
@@ -29,6 +31,7 @@ body {
   color: #9aa0a6;
   max-width: 600px;
   margin: auto;
+  font-size: 0.95rem;
 }
 
 /* Card calendario */

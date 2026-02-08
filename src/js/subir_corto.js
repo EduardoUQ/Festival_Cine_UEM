@@ -360,10 +360,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const f = cartel.files[0];
-    const okType = f.type === "image/jpeg" || f.type === "image/png";
+    const okType = f.type === "image/tif" || f.type === "image/jpg";
     const okSize = f.size <= 2 * 1024 * 1024;
 
-    if (!okType) ponerMensajeError(cartel, "Formato inválido. Solo JPG o PNG");
+    if (!okType) ponerMensajeError(cartel, "Formato inválido. Solo JPG o TIF");
     else if (!okSize) ponerMensajeError(cartel, "El cartel supera 2MB");
     else ponerMensajeError(cartel, "");
   });

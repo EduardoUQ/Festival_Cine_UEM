@@ -33,6 +33,7 @@ body {
 
 .upload-header h1 span {
     color: var(--primary-color);
+    font-size: 2.5rem;
 }
 
 .upload-header p {
@@ -71,9 +72,15 @@ body {
 /* Inputs */
 .form-group label {
     display: block;
-    font-size: 13px;
-    margin-bottom: 6px;
+    font-size: 1rem;
+    margin: 10px 0px 0px;
     color: var(--text-muted);
+}
+
+.form-group small {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    margin: 5px;
 }
 
 input,
@@ -125,6 +132,7 @@ textarea {
 
 .upload-box small {
     color: var(--text-muted);
+    font-size: 0.75rem;
 }
 
 /* Actions */

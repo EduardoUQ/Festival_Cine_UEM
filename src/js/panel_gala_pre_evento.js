@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let accionConfirmada = null;
     let redireccion = null;
 
-
-
     function mostrarModal(tipo, mensaje, redirect = null) {
         modal.className = "modal mostrar";
 
@@ -254,3 +252,4 @@ function formatearFecha(fechaISO) {
     if (parts.length !== 3) return fechaISO;
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
 }
+

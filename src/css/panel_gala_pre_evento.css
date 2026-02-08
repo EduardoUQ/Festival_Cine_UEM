@@ -211,11 +211,12 @@ tbody tr:hover {
     color: #ffffff;
 }
 
+
 /* MODAL */
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     display: none;
     justify-content: center;
     align-items: center;
@@ -227,13 +228,14 @@ tbody tr:hover {
 }
 
 .modal_contenido {
-    background: #fff;
-    color: #1f1f1f;
+    background: #141414;
+    color: #fff;
     padding: 30px;
     text-align: center;
     width: 90%;
     max-width: 420px;
     animation: aparecer 0.25s ease;
+    border: 1px solid #2a2a2a;
 }
 
 .modal_contenido i {
@@ -249,17 +251,43 @@ tbody tr:hover {
     color: #e74c3c;
 }
 
+.modal_acciones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .modal_contenido button {
     margin-top: 20px;
     padding: 10px 25px;
     border: none;
-    background: #000;
-    color: #fff;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 #modalBtnCancel {
     display: none;
+}
+
+#modalBtn {
+    background: #FF3228;
+    color: #fff;
+}
+
+#modalBtnCancel {
+    background: #ffffff;
+    color: #000;
+    border: 1px solid #fff;
+}
+
+#modalBtn:hover {
+    background: #fff;
+    color: #FF3228;
+}
+
+#modalBtnCancel:hover {
+    background: #000;
+    color: #fff;
 }
 
 @keyframes aparecer {

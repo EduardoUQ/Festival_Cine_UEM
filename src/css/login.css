@@ -26,7 +26,7 @@ body {
     max-width: 520px;
     background: linear-gradient(180deg, #111, #0a0a0a);
     padding: 32px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border: solid 1px #2e2e2e;
 }
 
 /* TEXT */
@@ -49,6 +49,7 @@ label {
     margin-bottom: 6px;
     display: block;
     color: #d1d5db;
+    margin-top: 2rem;
 }
 
 .input-group {
@@ -56,7 +57,6 @@ label {
     align-items: center;
     background: #1a1a1a;
     padding: 10px 12px;
-    margin-bottom: 16px;
     border: 1px solid #262626;
 }
 
@@ -86,7 +86,7 @@ label {
     justify-content: space-between;
     align-items: center;
     font-size: 0.75rem;
-    margin-bottom: 20px;
+    margin: 20px 0px;
 }
 
 .remember {
@@ -156,7 +156,6 @@ label {
 #mensaje {
     color: #A71D2D;
     font-size: 1rem;
-    margin-top: 6px;
     flex-basis: 100%;
     margin: 6px 0 0;
 }

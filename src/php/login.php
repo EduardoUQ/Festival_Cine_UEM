@@ -13,7 +13,7 @@ function manejarLogin()
     // Incluimos conexión
     require_once "conexion.php";
 
-    // ✅ Si por lo que sea conexion.php no dejó $conexion válido, devolvemos error en vez de petar
+    //  Si por lo que sea conexion.php no dejó $conexion válido, devolvemos error en vez de petar
     if (!isset($conexion) || !($conexion instanceof mysqli)) {
         return ['status' => 'error', 'message' => 'Error de conexión con la base de datos'];
     }

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnGuardar = document.getElementById("btnGuardarPass");
     const btnCerrar = document.getElementById("btnCerrarModal");
 
-    // Toggle ojo (opcional, ya que lo tienes en el HTML)
+    // Toggle ojo mostrar contraseña
     const eye = document.getElementById("eye");
     if (eye) {
         eye.addEventListener("click", () => {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 if (data.status === "success") {
                     cerrarModalCambio();
-                    window.location.href = "../html/panel_noticias.html";
+                    window.location.href = "../html/panel_candidaturas.html";
                 } else {
                     modalMsg.textContent = data.message || "No se pudo cambiar la contraseña.";
                 }

@@ -98,6 +98,11 @@
     display: none;
 }
 
+.image-upload.dragover {
+    border-color: #FF3228;
+    background: rgba(255, 50, 40, 0.2);
+}
+
 /* ACTIONS */
 .form-actions {
     display: flex;

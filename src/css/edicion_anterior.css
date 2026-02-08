@@ -1,5 +1,5 @@
 :root {
-    --bg-dark: #0e0e0f;
+    --bg-dark: #000;
     --card-dark: #1a1a1d;
     --text-light: #ffffff;
     --text-muted: #bbbbbb;
@@ -57,7 +57,7 @@ main {
 }
 
 .summary-card {
-    background: var(--card-dark);
+    background: linear-gradient(180deg, #1b1b1b, #111);
     padding: 18px;
     text-align: center;
 }
@@ -87,31 +87,19 @@ main {
 /* WINNERS GRID */
 .winners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 20px;
 }
 
 /* WINNER CARDS */
 .winner-card {
-    background: var(--card-dark);
+    background: linear-gradient(180deg, #1b1b1b, #111);
     padding: 20px;
     border-left: 6px solid;
 }
 
 .winner-card.gold {
     border-color: var(--red);
-}
-
-.winner-card.blue {
-    border-color: #3fa9f5;
-}
-
-.winner-card.purple {
-    border-color: #c27bff;
-}
-
-.winner-card.green {
-    border-color: #2ecc71;
 }
 
 .winner-badge {

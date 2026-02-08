@@ -151,6 +151,11 @@ body {
     color: #FF3228;
 }
 
+.image-upload.dragover {
+    border-color: #FF3228;
+    background: rgba(255, 50, 40, 0.2);
+}
+
 /* Mensajes de error */
 #mensaje_titulo,
 #mensaje_descripcion,

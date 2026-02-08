@@ -155,6 +155,56 @@ textarea {
     color: #FF3228;
 }
 
+/* GANADOR HONORÍFICO*/
+.honorifico-card {
+    border: 1px solid #1f1f1f;
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 14px;
+    background: #101010;
+}
+
+.honorifico-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.honorifico-header h4 {
+    margin: 0;
+}
+
+.js-borrar-honorifico {
+    cursor: pointer;
+}
+
+.honorifico-warning {
+    color: #c9a43b;
+    margin: 10px 0 6px 0;
+}
+
+.honorifico-nombre {
+    color: #e5e5e5;
+    margin: 0;
+}
+
+.honorifico-contacto {
+    color: #aaa;
+    margin: 6px 0 0 0;
+}
+
+.honorifico-video {
+    margin: 10px 0 0 0;
+}
+
+.honorifico-video a {
+    color: #FF3228;
+    text-decoration: none;
+}
+
+
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .cards {
@@ -254,18 +304,19 @@ textarea {
     background: #000;
     color: #fff;
 }
+
 /* Validación honoríficos */
 .input-error {
-  border: 1px solid #ff3b3b !important;
-  outline: none;
+    border: 1px solid #ff3b3b !important;
+    outline: none;
 }
 
 .error-msg {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.85rem;
-  color: #ff3b3b;
-  min-height: 1em; 
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #ff3b3b;
+    min-height: 1em;
 }
 
 

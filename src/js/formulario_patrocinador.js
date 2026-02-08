@@ -25,12 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (resp.status === "success") {
                                 window.location.href = "../html/login.html";
                             } else {
-                                alert("No se pudo cerrar sesión");
+                                mostrarModal("error", "No se pudo cerrar sesión");
                             }
                         })
                         .catch((err) => {
                             console.error("Error al cerrar sesión", err);
-                            alert("Error al cerrar sesión. Observa la consola.");
+                            mostrarModal("error", "Error al cerrar sesión. Observa la consola.");
                         });
                 });
             }
@@ -179,7 +179,7 @@ if (patrocinadorId) {
     if (h1) h1.textContent = "EDITAR PATROCINADOR";
 
     const btnSubmit = document.getElementById("btn_enviar");
-    if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar cambios';
+    if (btnSubmit) btnSubmit.innerHTML = 'Guardar cambios';
 
     fetch(`../php/editar_patrocinador.php?id=${encodeURIComponent(patrocinadorId)}`)
         .then((r) => r.json())

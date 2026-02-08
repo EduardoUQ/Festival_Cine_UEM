@@ -63,6 +63,7 @@ function showModal(type, title, message) {
 
 modalCloseBtn.addEventListener("click", () => {
     modalOverlay.classList.remove("active");
+    window.location.href = "../html/panel_usuario_candidatura.html";
 });
 
 // Variables de la cabecera
@@ -159,12 +160,12 @@ editar.addEventListener("click", () => {
         enviar.style.display = "block";
         imagenBox.style.cursor = "pointer";
         enviar.disabled = false;
-        editar.innerHTML = '<i class="fa-solid fa-xmark"></i> Cancelar edición';
+        editar.innerHTML = 'Cancelar edición';
     } else {
         toggleInputs(false);
         enviar.disabled = true;
         imagenBox.style.cursor = "default";
-        editar.innerHTML = '<i class="fa-solid fa-pen"></i> Editar';
+        editar.innerHTML = 'Editar';
     }
 });
 
@@ -209,7 +210,7 @@ form.addEventListener("submit", (e) => {
 
     toggleInputs(false);
     editMode = false;
-    editar.innerHTML = '<i class="fa-solid fa-pen"></i> Editar';
+    editar.innerHTML = 'Editar';
 });
 
 // Función de envío al PHP

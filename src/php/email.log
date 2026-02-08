@@ -7,3 +7,9 @@
 [2026-02-04 13:24:28] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
 [2026-02-04 13:24:57] EMAIL | destino=paula.ortiz@correo.es | estado=NOMINADA | resultado=FALLO
 [2026-02-04 13:25:05] EMAIL | destino=sergio.ramos@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-07 18:45:21] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-07 18:45:23] EMAIL | destino=ivan.cabrera@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-07 19:43:24] EMAIL | destino=hugo@correo.es | estado=RECHAZADA | resultado=FALLO
+[2026-02-07 20:28:24] EMAIL | destino=ivan.cabrera@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-07 20:28:27] EMAIL | destino=ivan.cabrera@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-08 01:03:45] EMAIL | destino=hugo@correo.es | estado=SUBSANAR | resultado=FALLO

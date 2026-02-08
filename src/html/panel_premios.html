@@ -66,7 +66,7 @@
                 <a href="panel_noticias.html"><i class="fa-solid fa-newspaper"></i>Noticias</a>
                 <a href="panel_patrocinadores.html"><i class="fa-solid fa-handshake"></i>
                     Patrocinadores</a>
-                <a class="active" href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
+                <a href="panel_administrador.html"><i class="fa-solid fa-user-gear"></i>
                     Administrador</a>
             </nav>
         </aside>
@@ -83,9 +83,8 @@
             </header>
 
             <!-- ACCIONES SUPERIORES -->
-            <div class="category-select"
-                style="display:flex; justify-content:space-between; gap:12px; align-items:end;">
-                <div style="flex:1;">
+            <div class="category-select">
+                <div id="filtrosPremios">
                     <label>Estado</label>
                     <select id="selectActiva">
                         <option value="">Todas</option>
@@ -169,8 +168,8 @@
             <p id="modal_texto"></p>
 
             <div class="modal_acciones">
+                <button id="modalBtnCancel" type="button">Cancelar</button>
                 <button id="modalBtn" type="button">Aceptar</button>
-                <button id="modalBtnCancel" type="button" style="display:none;">Cancelar</button>
             </div>
         </div>
     </div>

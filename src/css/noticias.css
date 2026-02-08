@@ -1,5 +1,4 @@
 /* FUENTE DEL TEXTO */
-
 .news-section {
     background: #000;
     padding: 80px 24px;
@@ -131,29 +130,6 @@
     object-fit: cover;
 }
 
-/* BADGE */
-.badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 4px 10px;
-    font-size: 0.65rem;
-    font-weight: 600;
-}
-
-.badge.destacado {
-    background: #f5c542;
-    color: #000;
-}
-
-.badge.evento {
-    background: #2563eb;
-}
-
-.badge.networking {
-    background: #9333ea;
-}
-
 /* CONTENT */
 .news-content {
     padding: 16px;
@@ -182,12 +158,6 @@
     overflow: hidden;
 }
 
-.news-content a {
-    color: #f5c542;
-    font-size: 0.8rem;
-    text-decoration: none;
-}
-
 /* PAGINATION (abajo a la derecha) */
 .pagination {
     display: flex;
@@ -206,7 +176,7 @@
 }
 
 .page-btn.active {
-    background: #f5c542;
+    background: #FF3228;
     color: #000;
     border-color: transparent;
 }

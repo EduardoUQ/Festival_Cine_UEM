@@ -66,7 +66,7 @@ $stmtChk->close();
    UPDATE TEXTO (SIEMPRE)
 ========================= */
 $sqlUpd = "UPDATE candidatura 
-           SET titulo = ?, sinopsis = ?
+           SET titulo = ?, sinopsis = ?, estado = 'PENDIENTE'
            WHERE id = ? AND id_usuario = ?";
 
 $stmtUpd = $conexion->prepare($sqlUpd);

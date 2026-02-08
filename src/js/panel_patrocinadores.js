@@ -51,7 +51,7 @@ function cargarPatrocinadores() {
         const web = p.web_url ? p.web_url : "";
 
         const webHtml = web
-          ? `<a href="${escapeHtml(web)}" target="_blank" rel="noopener noreferrer">Abrir</a>`
+          ? `<a class="webUrl" href="${escapeHtml(web)}" target="_blank" rel="noopener noreferrer">Abrir</a>`
           : "—";
 
         const tr = document.createElement("tr");

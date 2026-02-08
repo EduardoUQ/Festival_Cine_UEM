@@ -40,7 +40,7 @@
 .summary-card i {
     font-size: 35px;
     margin-bottom: 10px;
-    color: #d4b443;
+    color: #b3b3b3;
 }
 
 .summary-card h3 {
@@ -221,9 +221,9 @@ table tr:hover {
 
 .alerta {
     background-color: rgba(200, 22, 13, 0.2);
-    /* border-left: 4px solid #ffc107; */
     padding: 1rem;
     margin-bottom: 1.5rem;
+    border: 1px solid #FF3228
 }
 
 .alerta i {
@@ -252,20 +252,36 @@ table tr:hover {
     color: #555;
 }
 
-.btn-archivar {
-    background-color: #d9534f;
+.btn-archivar:disabled {
+    background-color: #666;
+    color: #ccc;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    cursor: not-allowed;
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+.btn-archivar:not(:disabled) {
+    background-color: #FF3228;
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1rem;
 }
 
-.btn-archivar:hover {
-    background-color: #c9302c;
+.btn-archivar:not(:disabled):hover {
+    background-color: white;
+    color: #FF3228;
 }
 
 /* GALAS ANTERIORES */
+.ediciones-anteriores {
+    width: 10%;
+}
+
 .previous-editions {
     background: #111;
     padding: 35px;
@@ -283,7 +299,7 @@ table tr:hover {
 }
 
 .previous-editions h2 i {
-    color: #d4b443;
+    color: #FF3228;
 }
 
 /* Tarjeta de edición */
@@ -292,7 +308,6 @@ table tr:hover {
     border: 1px solid #242424;
     padding: 22px;
     margin-bottom: 20px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -302,7 +317,7 @@ table tr:hover {
 .edition-year {
     font-size: 2.3rem;
     font-weight: 700;
-    color: #d4b443;
+    color: #FF3228;
 }
 
 /* Stats */
@@ -315,12 +330,14 @@ table tr:hover {
 
 .stat {
     text-align: center;
+    display: flex;
+    gap: 10px;
 }
 
 .stat i {
     color: #bdbdbd;
-    font-size: 1rem;
-    margin-bottom: 4px;
+    font-size: 1.3rem;
+    margin-bottom: 0px;
 }
 
 .stat span {
@@ -331,8 +348,7 @@ table tr:hover {
 
 .stat p {
     color: #aaa;
-    font-size: 0.85rem;
-    margin: 0;
+    font-size: 1.2rem;
 }
 
 /* Botón detalles */
@@ -340,17 +356,23 @@ table tr:hover {
     background: #2a2a2a;
     color: #fff;
     padding: 14px 22px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-weight: 600;
     line-height: 1.2;
     transition: 0.3s;
+    font-size: 1.2rem;
     border: 1px solid #3a3a3a;
+    text-decoration: none;
+    gap: 6px;
 }
 
 .btn-details i {
     display: block;
     font-size: 1.2rem;
-    margin-bottom: 5px;
 }
 
 .btn-details:hover {

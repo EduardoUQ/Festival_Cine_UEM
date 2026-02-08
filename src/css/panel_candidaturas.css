@@ -1,11 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: #0f0f0f;
     color: #fff;
 }
 
@@ -18,9 +11,9 @@ body {
 /* Sidebar */
 .sidebar {
     width: 260px;
-    background: #111;
+    background: linear-gradient(180deg, #1a1a1a, #111);
     padding: 24px;
-    border-right: 1px solid #1f1f1f;
+    border-right: 1px solid #2e2e2e;
 }
 
 .profile {
@@ -51,7 +44,7 @@ body {
 
 .menu a.active,
 .menu a:hover {
-    background: #f5c542;
+    background: #FF3228;
     color: #000;
 }
 
@@ -92,7 +85,11 @@ body {
 .tabs {
     display: flex;
     gap: 10px;
+    padding: 10px;
     margin-bottom: 20px;
+    background-color: #202020;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    width: 550px;
 }
 
 .tab {
@@ -104,8 +101,25 @@ body {
 }
 
 .tab.active {
-    background: #d4af37;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
+}
+
+/* SELECT */
+.filtro-categoria {
+    margin: 12px 0;
+}
+
+.filtro-categoria label {
+    margin-right: 8px;
+}
+
+#filtro_categoria {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 12px;
+    width: 180px;
 }
 
 /* Tabla */
@@ -142,27 +156,54 @@ tbody tr:hover {
     background: #222;
 }
 
-/* Estados */
-/* .estado {
-    background: #FF3228;
-} */
-
-.estado.pendiente {
-    background: #d4af37;
-    color: #000;
+.estado .PENDIENTE {
+    padding: 2px 8px;
+    background: rgba(234, 179, 8, 0.2);
+    color: rgba(234, 179, 8, 1);
 }
+
+.estado .ACEPTADA {
+    padding: 2px 8px;
+    background: rgba(8, 234, 68, 0.2);
+    color: rgba(8, 234, 68, 1);
+}
+
+.estado .RECHAZADA {
+    padding: 2px 8px;
+    background: rgba(255, 50, 40, 0.2);
+    color: rgba(255, 50, 40, 1);
+}
+
+.estado .SUBSANAR {
+    padding: 2px 8px;
+    background: rgba(234, 179, 8, 0.2);
+    color: rgba(234, 179, 8, 1);
+}
+
+
+.estado .NOMINADA {
+    padding: 2px 8px;
+    background: rgba(8, 234, 68, 0.2);
+    color: rgba(8, 234, 68, 1);
+}
+
 
 /* Botón */
 .btn {
     padding: 6px 12px;
-    background: #d4af37;
+    background: #FF3228;
     border: none;
     cursor: pointer;
     color: #000;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    color: #fff;
 }
 
+.btn:hover {
+    background: #ffffff;
+    color: #FF3228;
+}
 
 /* Paginación */
 .paginacion {
@@ -183,6 +224,6 @@ tbody tr:hover {
 }
 
 .paginacion button.active {
-    background: #d4af37;
-    color: #000;
+    background: #FF3228;
+    color: #ffffff;
 }

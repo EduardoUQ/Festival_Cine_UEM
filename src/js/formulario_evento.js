@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const btnEnviar = document.getElementById("enviar");
         if (btnEnviar) {
-            btnEnviar.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Guardar cambios`;
+            btnEnviar.innerHTML = `Guardar cambios`;
         }
 
         cargarEvento(idEvento);

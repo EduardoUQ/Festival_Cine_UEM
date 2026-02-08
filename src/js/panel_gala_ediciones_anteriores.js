@@ -28,7 +28,7 @@ fetch("../php/cargar_ediciones.php")
 
                 <a href="edicion_anterior.html?id=${ed.id}" class="btn-details">
                     <i class="fa-solid fa-eye"></i>
-                    Ver<br>detalles
+                    Ver detalles
                 </a>
             `;
 

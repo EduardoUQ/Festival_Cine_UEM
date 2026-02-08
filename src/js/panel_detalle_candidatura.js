@@ -120,6 +120,7 @@ const modalTexto = document.getElementById("modalTexto");
 const modalMensaje = document.getElementById("modalMensaje");
 const btnConfirmar = document.getElementById("modalConfirmar");
 const btnCancelar = document.getElementById("modalCancelar");
+const mensajeErrorModal = document.getElementById("mensajeErrorModal");
 
 let accionActual = null;
 
@@ -155,6 +156,7 @@ function abrirModal(accion) {
 
 btnCancelar.addEventListener("click", () => {
   modal.classList.add("hidden");
+  mensajeErrorModal.textContent = "";
 });
 
 // Confirmar el envío
@@ -162,7 +164,7 @@ btnConfirmar.addEventListener("click", () => {
   const mensaje = modalMensaje.value.trim();
 
   if ((accionActual === "SUBSANAR" || accionActual === "RECHAZADA") && mensaje === "") {
-    alert("Debes escribir un mensaje");
+    mensajeErrorModal.textContent = "*El mensaje no puede estar vacío";
     return;
   }
 

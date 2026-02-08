@@ -1,14 +1,11 @@
 /* Body */
-body {
-    background: #171719;
-}
 
 /* CONTENEDOR GENERAL */
 .news-detail {
     max-width: 900px;
     margin: 60px auto;
     padding: 0 20px;
-    color: #e5e5e5;
+    color: #ffffff;
 }
 
 /* BREADCRUMB */
@@ -36,7 +33,7 @@ body {
     display: inline-block;
     font-size: 0.75rem;
     letter-spacing: 1px;
-    color: #FF7D78;
+    color: #C8160D;
     margin-bottom: 10px;
 }
 
@@ -78,31 +75,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* CITA */
-.news-content blockquote {
-    background: #111;
-    border-left: 4px solid #FF7D78;
-    padding: 20px;
-    margin: 30px 0;
-    font-style: italic;
-    color: #e5e5e5;
-}
-
-.news-content blockquote span {
-    display: block;
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: #9ca3af;
-}
-
-/* LISTA */
-.news-content ul {
-    margin: 20px 0 30px 20px;
-}
-
-.news-content li {
-    margin-bottom: 10px;
-}
 
 /* ACCIONES */
 .news-actions {
@@ -113,8 +85,7 @@ body {
 
 .btn {
     padding: 10px 18px;
-    font-size: 0.9rem;
-    border-radius: 20px;
+    font-size: 1rem;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -122,7 +93,7 @@ body {
 }
 
 .btn-secondary {
-    background: #1f2937;
+    background: #FF3228;
     color: #fff;
 }
 
@@ -132,11 +103,12 @@ body {
 }
 
 .btn:hover {
-    opacity: 0.9;
+    background: #fff;
+    color: #FF3228;
 }
 
 #noticia_contenido {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 /* RESPONSIVE */

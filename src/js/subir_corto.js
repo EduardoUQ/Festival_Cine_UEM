@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ====== VALIDACIÓN RESOLUCIÓN VÍDEO ======
   // Ajusta aquí si cambias la resolución “oficial”
-  const RES_W = 1000;
-  const RES_H = 500;
+  const RES_W = 1920;
+  const RES_H = 1080;
   // true por defecto para NO bloquear si el navegador no puede leer metadata
   let resolucionOk = true;
 

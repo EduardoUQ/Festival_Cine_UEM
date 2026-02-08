@@ -158,7 +158,6 @@ textarea {
 /* GANADOR HONORÍFICO*/
 .honorifico-card {
     border: 1px solid #1f1f1f;
-    border-radius: 12px;
     padding: 14px;
     margin-top: 14px;
     background: #101010;
@@ -329,5 +328,51 @@ textarea {
     to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* --- RESPONSIVE PARA PANEL CALENDARIO --- */
+
+/* Sidebar más estrecho en pantallas medianas */
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Sidebar arriba + contenido debajo */
+@media (max-width: 850px) {
+    .panel {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 16px;
+    }
+
+    .profile {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .menu a {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .content {
+        padding: 20px;
     }
 }

@@ -281,7 +281,7 @@ function pintarYaOtorgados() {
   }
 
   let html = `
-    <div style="border:1px solid #1f1f1f;border-radius:12px;padding:12px;background:#101010;">
+    <div style="border:1px solid #1f1f1f;padding:12px;background:#101010;">
       <strong style="display:block;margin-bottom:8px;color:#c9a43b;">Premios ya otorgados</strong>
   `;
 

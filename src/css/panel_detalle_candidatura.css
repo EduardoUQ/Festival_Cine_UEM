@@ -298,3 +298,85 @@ textarea:disabled {
     padding: 8px 16px;
     cursor: pointer;
 }
+
+/* --- RESPONSIVE PARA PANEL DETALLE CANDIDATURA --- */
+
+/* Sidebar más estrecho en pantallas medianas */
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Sidebar arriba + contenido debajo */
+@media (max-width: 850px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 16px;
+    }
+
+    .profile {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .menu a {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+}
+
+/* Grid de datos personales en una columna */
+@media (max-width: 750px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Poster y vídeo adaptados */
+@media (max-width: 700px) {
+    .poster-box img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .video-box {
+        height: auto;
+    }
+
+    #video {
+        height: auto;
+    }
+}
+
+/* Botones de acciones en columna */
+@media (max-width: 600px) {
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

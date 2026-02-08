@@ -246,3 +246,114 @@ tbody tr:hover {
     background: #d4af37;
     color: #000;
 }
+
+/* --- RESPONSIVE PARA PANEL CANDIDATURAS --- */
+
+/* Sidebar más estrecho en pantallas medianas */
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Sidebar arriba + contenido debajo */
+@media (max-width: 850px) {
+    .panel {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 16px;
+    }
+
+    .profile {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .menu a {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+}
+
+/* Header responsive: buscador debajo del título */
+@media (max-width: 750px) {
+    .main-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .search input {
+        width: 100%;
+    }
+}
+
+/* Tabs en columna */
+@media (max-width: 700px) {
+    .tabs {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .tab {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+    }
+}
+
+/* Select de categoría adaptado */
+@media (max-width: 600px) {
+    .filtro-categoria {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    #filtro_categoria {
+        width: 100%;
+    }
+}
+
+/* Tabla scrollable en móvil */
+@media (max-width: 650px) {
+    .tabla-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    .btn {
+        padding: 4px 8px;
+        font-size: 0.9rem;
+    }
+
+    .paginacion {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

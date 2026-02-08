@@ -302,3 +302,121 @@ tbody tr:hover {
         opacity: 1;
     }
 }
+
+/* --- RESPONSIVE PARA PANEL GALA --- */
+
+/* Sidebar más estrecho en pantallas medianas */
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Sidebar arriba + contenido debajo */
+@media (max-width: 850px) {
+    .panel {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 16px;
+    }
+
+    .profile {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .menu a {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+}
+
+/* Tabs en varias líneas */
+@media (max-width: 700px) {
+    .tabs {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .tab {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+    }
+
+    .eventoBtn {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #create-news,
+    #activarPre,
+    #activarPost {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Tabla scrollable */
+@media (max-width: 650px) {
+    .tabla-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 650px;
+    }
+
+    .paginacion {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Summary grid en una columna */
+@media (max-width: 700px) {
+    .summary-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* Galería responsive */
+@media (max-width: 700px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Botón archivar */
+@media (max-width: 600px) {
+    .btn-archivar {
+        width: 100%;
+        text-align: center;
+    }
+}

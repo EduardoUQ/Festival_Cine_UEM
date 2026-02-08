@@ -297,3 +297,10 @@ textarea:disabled {
     background: var(--text-main);
     color: var(--accent);
 }
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}

@@ -173,7 +173,7 @@
         </div>
     </footer>
 
-    <!-- MODAL CONFIRMACIÓN -->
+    <!-- MODAL CONFIRMACIÓN / RESULTADO -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-icon success" id="modalIcon">
@@ -185,11 +185,19 @@
                 Tus candidatura se ha actualizado correctamente.
             </p>
 
-            <button class="btn btn-primary" id="modalCloseBtn">
-                Aceptar
-            </button>
+            <!-- NUEVO: 2 botones -->
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="modalCancelBtn">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-primary" id="modalCloseBtn">
+                    Aceptar
+                </button>
+            </div>
         </div>
     </div>
+
     <!-- WIDGET AYUDA (STICKY) -->
     <a href="../html/ayuda.html" class="help-btn">
         <span class="help-icon">?</span>

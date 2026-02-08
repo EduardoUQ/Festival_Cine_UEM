@@ -129,22 +129,6 @@ let nominadosCategoria = [];
 let ganadoresOtorgados = [];
 
 // =======================
-// FETCH HELPERS
-// =======================
-function fetchPOSTForm(url, dataObj) {
-  const fd = new FormData();
-  Object.keys(dataObj).forEach((k) => fd.append(k, dataObj[k]));
-
-  return fetch(url, {
-    method: "POST",
-    body: fd
-  }).then((r) => {
-    if (!r.ok) throw new Error("Error HTTP");
-    return r.json();
-  });
-}
-
-// =======================
 // INIT
 // =======================
 function inicializarPanelGanadores() {
@@ -205,6 +189,22 @@ function inicializarPanelGanadores() {
 }
 
 // =======================
+// FETCH NORMAL (FormData) - SIN HELPERS RAROS
+// =======================
+function postFormData(url, dataObj) {
+  const fd = new FormData();
+  Object.keys(dataObj).forEach((k) => fd.append(k, dataObj[k]));
+
+  return fetch(url, {
+    method: "POST",
+    body: fd
+  }).then((r) => {
+    if (!r.ok) throw new Error("Error HTTP");
+    return r.json();
+  });
+}
+
+// =======================
 // CATEGORÍAS
 // =======================
 function cargarCategoriasPremios() {
@@ -212,7 +212,7 @@ function cargarCategoriasPremios() {
 
   selectCategoria.innerHTML = `<option value="">Cargando...</option>`;
 
-  fetchPOSTForm("../php/panel_ganadores.php", { funcion: "get_categorias" })
+  postFormData("../php/panel_ganadores.php", { funcion: "get_categorias" })
     .then((data) => {
       if (data.status !== "success") {
         selectCategoria.innerHTML = `<option value="">(Error al cargar)</option>`;
@@ -247,7 +247,7 @@ function cargarDatosCategoria(categoria) {
   contenedorPuestos.innerHTML = "Cargando...";
   contenedorYaOtorgados.innerHTML = "";
 
-  fetchPOSTForm("../php/panel_ganadores.php", {
+  postFormData("../php/panel_ganadores.php", {
     funcion: "get_datos_categoria",
     categoria: categoria
   })
@@ -351,6 +351,7 @@ function guardarGanadores() {
 
   const payload = [];
   const usados = new Set();
+  let algunoSeleccionado = false;
 
   for (let i = 0; i < selects.length; i++) {
     const sel = selects[i];
@@ -361,6 +362,8 @@ function guardarGanadores() {
     if (!idPremio || !puesto) continue;
 
     if (idCandidatura) {
+      algunoSeleccionado = true;
+
       if (usados.has(idCandidatura)) {
         mostrarModal("error", "No puedes premiar la misma candidatura en dos puestos distintos.");
         return;
@@ -375,7 +378,13 @@ function guardarGanadores() {
     });
   }
 
-  fetchPOSTForm("../php/panel_ganadores.php", {
+  // ✅ VALIDACIÓN NUEVA: no permitir guardar si no hay ningún corto seleccionado
+  if (!algunoSeleccionado) {
+    mostrarModal("error", "No has seleccionado ningún corto nominado.");
+    return;
+  }
+
+  postFormData("../php/panel_ganadores.php", {
     funcion: "guardar_ganadores",
     categoria: categoria,
     datos: JSON.stringify(payload)
@@ -397,7 +406,7 @@ function guardarGanadores() {
 // Borrar ganador corto
 // =======================
 function borrarGanador(idPremio, categoria) {
-  fetchPOSTForm("../php/panel_ganadores.php", {
+  postFormData("../php/panel_ganadores.php", {
     funcion: "borrar_ganador",
     id_premio: idPremio,
     categoria: categoria
@@ -416,14 +425,139 @@ function borrarGanador(idPremio, categoria) {
 }
 
 // =======================
-// HONORÍFICOS (hide si asignado + trash)
+// HONORÍFICOS (validación blur + submit)
 // =======================
+const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const TIPOS_VIDEO_PERMITIDOS = ["video/mp4", "video/quicktime"];
+
+function setFieldError(inputEl, msg) {
+  if (!inputEl) return;
+
+  inputEl.classList.add("input-error");
+
+  // Creamos un <small> de error justo debajo del input si no existe
+  const parent = inputEl.closest(".form-group") || inputEl.parentElement;
+  if (!parent) return;
+
+  let small = parent.querySelector(".error-msg");
+  if (!small) {
+    small = document.createElement("small");
+    small.className = "error-msg";
+    parent.appendChild(small);
+  }
+  small.textContent = msg || "Campo inválido";
+}
+
+function clearFieldError(inputEl) {
+  if (!inputEl) return;
+
+  inputEl.classList.remove("input-error");
+
+  const parent = inputEl.closest(".form-group") || inputEl.parentElement;
+  if (!parent) return;
+
+  const small = parent.querySelector(".error-msg");
+  if (small) small.textContent = "";
+}
+
+function validarCampoHonorifico(inputEl) {
+  if (!inputEl) return true;
+
+  const name = inputEl.getAttribute("name") || "";
+  const type = (inputEl.getAttribute("type") || "").toLowerCase();
+
+  // Video
+  if (type === "file" && name === "video") {
+    const file = inputEl.files && inputEl.files[0] ? inputEl.files[0] : null;
+
+    if (!file) {
+      setFieldError(inputEl, "Selecciona un vídeo (MP4 o MOV).");
+      return false;
+    }
+
+    // Validación por MIME (cliente). Ojo: el server vuelve a validar.
+    if (!TIPOS_VIDEO_PERMITIDOS.includes(file.type)) {
+      setFieldError(inputEl, "Formato de vídeo no válido (solo MP4 o MOV).");
+      return false;
+    }
+
+    clearFieldError(inputEl);
+    return true;
+  }
+
+  const value = (inputEl.value || "").trim();
+
+  // Vacíos
+  if (name === "nombre") {
+    if (!value) {
+      setFieldError(inputEl, "El nombre no puede estar vacío.");
+      return false;
+    }
+    clearFieldError(inputEl);
+    return true;
+  }
+
+  if (name === "correo") {
+    if (!value) {
+      setFieldError(inputEl, "El correo no puede estar vacío.");
+      return false;
+    }
+    if (!EMAIL_REGEX.test(value)) {
+      setFieldError(inputEl, "El correo no tiene un formato válido.");
+      return false;
+    }
+    clearFieldError(inputEl);
+    return true;
+  }
+
+  if (name === "numero") {
+    if (!value) {
+      setFieldError(inputEl, "El teléfono no puede estar vacío.");
+      return false;
+    }
+    clearFieldError(inputEl);
+    return true;
+  }
+
+  return true;
+}
+
+function engancharValidacionBlurHonorifico(formEl) {
+  if (!formEl) return;
+
+  const inputs = formEl.querySelectorAll('input[name="nombre"], input[name="correo"], input[name="numero"]');
+  inputs.forEach((inp) => {
+    inp.addEventListener("blur", () => validarCampoHonorifico(inp));
+    inp.addEventListener("input", () => clearFieldError(inp));
+  });
+
+  const videoInput = formEl.querySelector('input[name="video"]');
+  if (videoInput) {
+    videoInput.addEventListener("blur", () => validarCampoHonorifico(videoInput));
+    videoInput.addEventListener("change", () => validarCampoHonorifico(videoInput));
+  }
+}
+
+function validarFormularioHonorifico(formEl) {
+  const nombreInput = formEl.querySelector('input[name="nombre"]');
+  const correoInput = formEl.querySelector('input[name="correo"]');
+  const numeroInput = formEl.querySelector('input[name="numero"]');
+  const videoInput = formEl.querySelector('input[name="video"]');
+
+  const okNombre = validarCampoHonorifico(nombreInput);
+  const okCorreo = validarCampoHonorifico(correoInput);
+  const okNumero = validarCampoHonorifico(numeroInput);
+  const okVideo = validarCampoHonorifico(videoInput);
+
+  return okNombre && okCorreo && okNumero && okVideo;
+}
+
 function cargarHonorificos() {
   if (!contenedorHonorificos) return;
 
   contenedorHonorificos.innerHTML = "Cargando...";
 
-  fetchPOSTForm("../php/panel_ganadores.php", { funcion: "get_honorificos" })
+  postFormData("../php/panel_ganadores.php", { funcion: "get_honorificos" })
     .then((data) => {
       if (data.status !== "success") {
         contenedorHonorificos.innerHTML = "";
@@ -468,21 +602,25 @@ function cargarHonorificos() {
               <div class="form-group">
                 <label>Nombre completo</label>
                 <input type="text" name="nombre" placeholder="Nombre del profesional">
+                <small class="error-msg"></small>
               </div>
 
               <div class="form-group">
                 <label>Correo electrónico</label>
                 <input type="text" name="correo" placeholder="ganador@gmail.com">
+                <small class="error-msg"></small>
               </div>
 
               <div class="form-group">
                 <label>Teléfono de contacto</label>
                 <input type="text" name="numero" placeholder="987654321">
+                <small class="error-msg"></small>
               </div>
 
               <div class="form-group">
                 <label>Video de recorrido profesional</label>
                 <input type="file" name="video" accept="video/mp4,video/quicktime">
+                <small class="error-msg"></small>
               </div>
 
               <button type="submit" class="btn-primary">Guardar ganador</button>
@@ -495,8 +633,18 @@ function cargarHonorificos() {
 
       const forms = document.querySelectorAll(".form-honorifico");
       for (let i = 0; i < forms.length; i++) {
+        // ✅ NUEVO: blur validation
+        engancharValidacionBlurHonorifico(forms[i]);
+
         forms[i].addEventListener("submit", function (e) {
           e.preventDefault();
+
+          // ✅ NUEVO: validación completa antes de enviar
+          if (!validarFormularioHonorifico(this)) {
+            mostrarModal("error", "Revisa los campos del honorífico: hay datos vacíos o el email/vídeo no es válido.");
+            return;
+          }
+
           enviarHonorifico(this);
         });
       }
@@ -521,6 +669,12 @@ function enviarHonorifico(formEl) {
     return;
   }
 
+  // ✅ NUEVO: validar email por regex también aquí (por seguridad)
+  if (!EMAIL_REGEX.test(correo.trim())) {
+    mostrarModal("error", "El correo no tiene un formato válido.");
+    return;
+  }
+
   const tiposPermitidos = ["video/mp4", "video/quicktime"];
   if (!tiposPermitidos.includes(video.type)) {
     mostrarModal("error", "Formato de vídeo no válido (solo MP4 o MOV).");
@@ -540,6 +694,7 @@ function enviarHonorifico(formEl) {
   fd.append("numero", numero);
   fd.append("video", video);
 
+  
   fetch("../php/formulario_ganador_honorifico.php", {
     method: "POST",
     body: fd
@@ -562,7 +717,7 @@ function enviarHonorifico(formEl) {
 }
 
 function borrarHonorifico(idPremio) {
-  fetchPOSTForm("../php/panel_ganadores.php", {
+  postFormData("../php/panel_ganadores.php", {
     funcion: "borrar_honorifico",
     id_premio: idPremio
   })

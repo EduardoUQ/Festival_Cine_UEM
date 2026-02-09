@@ -37,11 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
     modalTexto.textContent = mensaje;
     redireccion = redirect;
     accionConfirmada = null;
+
+    if (modalBtnCancel) modalBtnCancel.style.display = "none";
   }
 
   modalBtn.addEventListener("click", () => {
     modal.classList.remove("mostrar");
-
+    if (modalBtnCancel) modalBtnCancel.style.display = "inline-block";
     //Si venimos de una confirmación, ejecutamos la acción
     if (accionConfirmada) {
       const fn = accionConfirmada;

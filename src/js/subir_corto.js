@@ -371,10 +371,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const f = cartel.files[0];
-    const okType = f.type === "image/jpeg" || f.type === "image/tif";
+    const okType = f.type === "image/jpeg";
     const okSize = f.size <= 2 * 1024 * 1024;
 
-    if (!okType) ponerMensajeError(cartel, "Formato inválido. Solo JPG o TIF");
+    if (!okType) ponerMensajeError(cartel, "Formato inválido. Solo JPG");
     else if (!okSize) ponerMensajeError(cartel, "El cartel supera 2MB");
     else ponerMensajeError(cartel, "");
   });

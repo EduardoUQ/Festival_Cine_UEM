@@ -58,6 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputCapacidad = document.getElementById("capacidad");
     const inputEstacionamiento = document.getElementById("estacionamiento");
 
+    const btnCancel = document.getElementById("btn_cancel");
+
+    btnCancel.addEventListener("click", () => {
+        window.location.href = "../html/panel_gala.html";
+    });
+
 
 
     //MENSAJES

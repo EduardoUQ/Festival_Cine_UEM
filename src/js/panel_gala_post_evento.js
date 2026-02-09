@@ -161,6 +161,50 @@ function borrarImagen(e) {
 
 galleryAdd.addEventListener("click", () => galleryInput.click());
 
+/* ============================
+   DRAG & DROP PARA GALERÍA
+   ============================ */
+
+// Evitar que el navegador abra la imagen
+["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+    galleryGrid.addEventListener(eventName, e => e.preventDefault());
+    galleryGrid.addEventListener(eventName, e => e.stopPropagation());
+});
+
+// Visual feedback
+galleryGrid.addEventListener("dragover", () => {
+    galleryGrid.classList.add("dragover");
+});
+
+galleryGrid.addEventListener("dragleave", () => {
+    galleryGrid.classList.remove("dragover");
+});
+
+galleryGrid.addEventListener("drop", e => {
+    galleryGrid.classList.remove("dragover");
+
+    const files = Array.from(e.dataTransfer.files);
+
+    files.forEach(file => {
+        if (!file.type.startsWith("image/")) return;
+
+        const formData = new FormData();
+        formData.append("imagen", file);
+
+        fetch("../php/subir_galeria.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === "success") {
+                    agregarImagen(data.id, data.url);
+                }
+            });
+    });
+});
+
+
 // Archivar una edición 
 const archivarBtn = document.getElementById("archivar");
 const confirmacion = document.getElementById("confirmacion");

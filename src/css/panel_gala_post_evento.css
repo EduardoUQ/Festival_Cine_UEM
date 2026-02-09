@@ -196,7 +196,7 @@ table tr:hover {
 
 .gallery-add {
     border: 2px dashed #444;
-    width: 300px;
+    width: 250px;
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -208,6 +208,11 @@ table tr:hover {
 
 .gallery-add span {
     font-size: 24px;
+}
+
+.gallery-grid.dragover {
+    border: 2px dashed #4da3ff;
+    background: #eaf4ff;
 }
 
 /* ----------ARCHIVAR EDICIÓN ----------- */

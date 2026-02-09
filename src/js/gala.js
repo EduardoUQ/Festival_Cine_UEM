@@ -57,6 +57,9 @@ function pintarPrograma() {
   const contPrograma = document.getElementById("schedule_gala");
   if (!contPrograma) return;
 
+  const elFecha = document.getElementById("fecha_gala_pre");
+
+
   const formData = new FormData();
   formData.append("funcion", "obtener_programa_gala");
 
@@ -70,6 +73,11 @@ function pintarPrograma() {
         contPrograma.innerHTML = "<li class='schedule-item'><div>Error al cargar el programa.</div></li>";
         return;
       }
+
+      if (elFecha) {
+        elFecha.textContent = data.fecha_evento ? formatearFecha(data.fecha_evento) : "";
+      }
+
 
       const eventos = data.eventos || [];
       if (eventos.length === 0) {
@@ -91,6 +99,13 @@ function pintarPrograma() {
     .catch(() => {
       contPrograma.innerHTML = "<li class='schedule-item'><div>Error al cargar el programa.</div></li>";
     });
+
+     function formatearFecha(fechaISO) {
+    // YYYY-MM-DD -> DD/MM/YYYY
+    const [y, m, d] = String(fechaISO).split("-");
+    if (!y || !m || !d) return fechaISO;
+    return `${d}/${m}/${y}`;
+  }
 }
 
 function mostrarEvento() {

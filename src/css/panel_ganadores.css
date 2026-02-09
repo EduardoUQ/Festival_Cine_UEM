@@ -318,6 +318,56 @@ textarea {
     min-height: 1em;
 }
 
+/* LIGHTBOX */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+} */
+
+#lightbox-content {
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lightbox-content img,
+#lightbox-content video {
+    max-width: 80%;
+    max-height: 70%;
+}
+
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+}
+
+#lb-prev {
+    left: 20px;
+}
+
+#lb-next {
+    right: 20px;
+}
+
 
 @keyframes aparecer {
     from {

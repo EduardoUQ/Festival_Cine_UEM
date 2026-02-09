@@ -591,12 +591,22 @@ function cargarHonorificos() {
 
                   ${g.video_url ? `
                     <p class="honorifico-video">
-                      <a href="../${escapeHtml(g.video_url)}" target="_blank">Ver vídeo</a>
+                      <a href="../${escapeHtml(g.video_url)}" class="lb-video">Ver vídeo</a>
                     </p>`
               : ""}
                 </div>
               `;
+          // Lightbox para videos de honoríficos
+          document.addEventListener("click", e => {
+            if (e.target.classList.contains("lb-video")) {
+              e.preventDefault();
+
+              const url = e.target.getAttribute("href");
+              abrirVideoHonorifico(url);
+            }
+          });
           return;
+
         }
 
         html += `
@@ -661,6 +671,29 @@ function cargarHonorificos() {
     });
 }
 
+function abrirVideoHonorifico(url) {
+  const content = document.getElementById("lightbox-content");
+
+  content.innerHTML = `
+        <video controls autoplay>
+            <source src="${url}">
+        </video>
+    `;
+
+  // Ocultar flechas porque no es parte del carrusel
+  document.getElementById("lb-prev").style.display = "none";
+  document.getElementById("lb-next").style.display = "none";
+
+  document.getElementById("lightbox").style.display = "flex";
+  // Cerrar solo si se hace click fuera de la imagen y de las flechas
+  document.getElementById("lightbox").addEventListener("click", e => {
+    if (e.target.id === "lightbox") {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  });
+}
+
+
 function enviarHonorifico(formEl) {
   const idPremio = formEl.getAttribute("data-id-premio");
   const nombre = (formEl.querySelector('input[name="nombre"]') || {}).value || "";
@@ -674,7 +707,7 @@ function enviarHonorifico(formEl) {
     return;
   }
 
-  // ✅ NUEVO: validar email por regex también aquí (por seguridad)
+  //  NUEVO: validar email por regex también aquí (por seguridad)
   if (!EMAIL_REGEX.test(correo.trim())) {
     mostrarModal("error", "El correo no tiene un formato válido.");
     return;

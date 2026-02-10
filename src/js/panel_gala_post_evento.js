@@ -1,4 +1,4 @@
-(()=>{
+(() => {
 
 
     // Varibales del resumen de la gala
@@ -164,6 +164,50 @@
 
     galleryAdd.addEventListener("click", () => galleryInput.click());
 
+    /* ============================
+   DRAG & DROP PARA GALERÍA
+   ============================ */
+
+    // Evitar que el navegador abra la imagen
+    ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+        galleryGrid.addEventListener(eventName, e => e.preventDefault());
+        galleryGrid.addEventListener(eventName, e => e.stopPropagation());
+    });
+
+    // Visual feedback
+    galleryGrid.addEventListener("dragover", () => {
+        galleryGrid.classList.add("dragover");
+    });
+
+    galleryGrid.addEventListener("dragleave", () => {
+        galleryGrid.classList.remove("dragover");
+    });
+
+    galleryGrid.addEventListener("drop", e => {
+        galleryGrid.classList.remove("dragover");
+
+        const files = Array.from(e.dataTransfer.files);
+
+        files.forEach(file => {
+            if (!file.type.startsWith("image/")) return;
+
+            const formData = new FormData();
+            formData.append("imagen", file);
+
+            fetch("../php/subir_galeria.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        agregarImagen(data.id, data.url);
+                    }
+                });
+        });
+    });
+
+
     // Archivar una edición 
     const archivarBtn = document.getElementById("archivar");
     const confirmacion = document.getElementById("confirmacion");
@@ -189,195 +233,86 @@
     let redireccion = null;
 
     function mostrarModal(tipo, mensaje, redirect = null) {
-    if (!modal) return;
+        if (!modal) return;
 
-    modal.className = "modal mostrar";
-    modalIcono.className = "fa-solid";
-    modal.classList.remove("modal_exito", "modal_error");
+        modal.className = "modal mostrar";
+        modalIcono.className = "fa-solid";
+        modal.classList.remove("modal_exito", "modal_error");
 
-    if (tipo === "success") {
-        modal.classList.add("modal_exito");
-        modalIcono.classList.add("fa-circle-check");
-        modalTitulo.textContent = "Operación correcta";
-    } else {
-        modal.classList.add("modal_error");
-        modalIcono.classList.add("fa-circle-xmark");
-        modalTitulo.textContent = "Error";
-    }
+        if (tipo === "success") {
+            modal.classList.add("modal_exito");
+            modalIcono.classList.add("fa-circle-check");
+            modalTitulo.textContent = "Operación correcta";
+        } else {
+            modal.classList.add("modal_error");
+            modalIcono.classList.add("fa-circle-xmark");
+            modalTitulo.textContent = "Error";
+        }
 
-    modalTexto.textContent = mensaje;
-    redireccion = redirect;
-    accionConfirmada = null;
+        modalTexto.textContent = mensaje;
+        redireccion = redirect;
+        accionConfirmada = null;
 
-    if (modalBtnCancel) modalBtnCancel.style.display = "none";
+        if (modalBtnCancel) modalBtnCancel.style.display = "none";
     }
 
     function mostrarConfirmacion(mensaje, onConfirm) {
-    if (!modal) return;
+        if (!modal) return;
 
-    modal.className = "modal mostrar";
-    modalIcono.className = "fa-solid";
-    modal.classList.remove("modal_exito", "modal_error");
+        modal.className = "modal mostrar";
+        modalIcono.className = "fa-solid";
+        modal.classList.remove("modal_exito", "modal_error");
 
-    modal.classList.add("modal_error");
-    modalIcono.classList.add("fa-triangle-exclamation");
-    modalTitulo.textContent = "Confirmación";
-    modalTexto.textContent = mensaje;
+        modal.classList.add("modal_error");
+        modalIcono.classList.add("fa-triangle-exclamation");
+        modalTitulo.textContent = "Confirmación";
+        modalTexto.textContent = mensaje;
 
-    redireccion = null;
-    accionConfirmada = onConfirm;
+        redireccion = null;
+        accionConfirmada = onConfirm;
 
-    if (modalBtnCancel) modalBtnCancel.style.display = "inline-block";
+        if (modalBtnCancel) modalBtnCancel.style.display = "inline-block";
     }
 
     if (modalBtn) {
-    modalBtn.addEventListener("click", () => {
-        modal.classList.remove("mostrar");
-        if (modalBtnCancel) modalBtnCancel.style.display = "none";
+        modalBtn.addEventListener("click", () => {
+            modal.classList.remove("mostrar");
+            if (modalBtnCancel) modalBtnCancel.style.display = "none";
 
-        if (accionConfirmada) {
-        const fn = accionConfirmada;
-        accionConfirmada = null;
-        fn();
-        return;
-        }
+            if (accionConfirmada) {
+                const fn = accionConfirmada;
+                accionConfirmada = null;
+                fn();
+                return;
+            }
 
-        if (redireccion) window.location.href = redireccion;
-    });
+            if (redireccion) window.location.href = redireccion;
+        });
     }
 
     if (modalBtnCancel) {
-    modalBtnCancel.addEventListener("click", () => {
-        modal.classList.remove("mostrar");
-        modalBtnCancel.style.display = "none";
-        accionConfirmada = null;
-        redireccion = null;
-    });
+        modalBtnCancel.addEventListener("click", () => {
+            modal.classList.remove("mostrar");
+            modalBtnCancel.style.display = "none";
+            accionConfirmada = null;
+            redireccion = null;
+        });
     }
 
     archivarBtn.addEventListener("click", () => {
-    mostrarConfirmacion("¿Seguro que quieres archivar esta edición? Esta acción es irreversible.", () => {
-        fetch("../php/archivar_gala.php", { method: "POST" })
-        .then(r => r.json())
-        .then(data => {
-            if (data.status === "success") {
-<<<<<<< HEAD
-            mostrarModal("success", "La gala ha sido archivada correctamente.", data.redirect);
-=======
-                agregarImagen(data.id, data.url);
-            }
+        mostrarConfirmacion("¿Seguro que quieres archivar esta edición? Esta acción es irreversible.", () => {
+            fetch("../php/archivar_gala.php", { method: "POST" })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        mostrarModal("success", "La gala ha sido archivada correctamente.", data.redirect);
+                    } else {
+                        mostrarModal("error", "Error: " + (data.message || "No se pudo archivar la gala."));
+                    }
+                })
+                .catch(() => {
+                    mostrarModal("error", "Error archivando gala: no se pudo contactar con el servidor.");
+                });
         });
-
-    galleryInput.value = "";
-});
-
-// Crear elemento visual
-function agregarImagen(id, url) {
-    const div = document.createElement("div");
-    div.className = "gallery-item";
-
-    div.innerHTML = `
-        <img src="${url}">
-        <button class="delete-btn" data-id="${id}">✕</button>
-    `;
-
-    galleryGrid.insertBefore(div, galleryAdd);
-
-    div.querySelector(".delete-btn").addEventListener("click", borrarImagen);
-}
-
-// Borrar imagen
-function borrarImagen(e) {
-    const id = e.target.dataset.id;
-
-    fetch("../php/borrar_galeria.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: "id=" + id
-    })
-        .then(r => r.json())
-        .then(data => {
-            if (data.status === "success") {
-                e.target.parentElement.remove();
-            }
-        });
-}
-
-galleryAdd.addEventListener("click", () => galleryInput.click());
-
-/* ============================
-   DRAG & DROP PARA GALERÍA
-   ============================ */
-
-// Evitar que el navegador abra la imagen
-["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
-    galleryGrid.addEventListener(eventName, e => e.preventDefault());
-    galleryGrid.addEventListener(eventName, e => e.stopPropagation());
-});
-
-// Visual feedback
-galleryGrid.addEventListener("dragover", () => {
-    galleryGrid.classList.add("dragover");
-});
-
-galleryGrid.addEventListener("dragleave", () => {
-    galleryGrid.classList.remove("dragover");
-});
-
-galleryGrid.addEventListener("drop", e => {
-    galleryGrid.classList.remove("dragover");
-
-    const files = Array.from(e.dataTransfer.files);
-
-    files.forEach(file => {
-        if (!file.type.startsWith("image/")) return;
-
-        const formData = new FormData();
-        formData.append("imagen", file);
-
-        fetch("../php/subir_galeria.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(r => r.json())
-            .then(data => {
-                if (data.status === "success") {
-                    agregarImagen(data.id, data.url);
-                }
-            });
-    });
-});
-
-
-// Archivar una edición 
-const archivarBtn = document.getElementById("archivar");
-const confirmacion = document.getElementById("confirmacion");
-
-archivarBtn.disabled = true;
-
-// Escuchar cambios del checkbox
-confirmacion.addEventListener("change", () => {
-    archivarBtn.disabled = !confirmacion.checked;
-});
-
-archivarBtn.addEventListener("click", () => {
-
-    fetch("../php/archivar_gala.php", {
-        method: "POST"
-    })
-        .then(r => r.json())
-        .then(data => {
-            if (data.status === "success") {
-                alert("La gala ha sido archivada correctamente.");
-                window.location.href = data.redirect;
->>>>>>> 5cea7b78e2707b2b807facc9b1beb34c921264a9
-            } else {
-            mostrarModal("error", "Error: " + (data.message || "No se pudo archivar la gala."));
-            }
-        })
-        .catch(() => {
-            mostrarModal("error", "Error archivando gala: no se pudo contactar con el servidor.");
-        });
-    });
     });
 })();

@@ -298,10 +298,20 @@ document.addEventListener("DOMContentLoaded", () => {
       else ponerMensajeError(expediente, "");
     });
 
+    // ====== EMAIL (regex igual que en el back) ======
+    // '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/'
+    const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
     email.addEventListener("blur", () => {
-      if (!email.value.trim())
+      const v = email.value.trim();
+
+      if (!v) {
         ponerMensajeError(email, "El email es obligatorio");
-      else ponerMensajeError(email, "");
+      } else if (!EMAIL_REGEX.test(v)) {
+        ponerMensajeError(email, "Email inválido");
+      } else {
+        ponerMensajeError(email, "");
+      }
     });
 
     pass.addEventListener("blur", () => {
@@ -521,8 +531,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ponerMensajeError(expediente, "Número de expediente inválido");
       else ponerMensajeError(expediente, "");
 
+      // ====== EMAIL (regex igual que en el back) ======
+      // '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/'
+      const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
       if (!email.value.trim())
         ponerMensajeError(email, "El email es obligatorio");
+      else if (!EMAIL_REGEX.test(email.value.trim()))
+        ponerMensajeError(email, "Email inválido");
       else ponerMensajeError(email, "");
 
       // (mantengo coherencia en submit también)

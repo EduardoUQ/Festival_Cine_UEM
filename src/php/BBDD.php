@@ -222,14 +222,14 @@ INSERT INTO candidatura (id_usuario, id_gala, estado, categoria, comentarios, ti
 (1, 2, 'NOMINADA', 'ALUMNO', NULL, 'Última Toma', 'En el último minuto, todo el equipo debe decidir entre rendirse o rodar.', 'uploads/candidaturas/1/5/cartel.jpg', 'uploads/candidaturas/1/5/corto.mp4'),
 
 (5, 2, 'PENDIENTE', 'ALUMNO', NULL, 'A Contraluz', 'Un proyecto nocturno revela la verdadera amistad del equipo.', 'uploads/candidaturas/5/6/cartel.jpg', 'uploads/candidaturas/5/6/corto.mp4'),
-(6, 2, 'PENDIENTE', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg','uploads/candidaturas/6/7/corto.mp4'),
+(6, 2, 'NOMINADA', 'ALUMNO', NULL, 'El Último Render', 'Una exportación fallida obliga a rehacerlo todo en una noche.', 'uploads/candidaturas/6/7/cartel.jpg','uploads/candidaturas/6/7/corto.mp4'),
 (7, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Silencio en Set', 'El sonido desaparece y el equipo improvisa una solución.', 'uploads/candidaturas/7/8/cartel.jpg', 'uploads/candidaturas/7/8/corto.mp4'),
 (8, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Storyboard', 'Un cuaderno perdido cambia el rumbo del rodaje.', 'uploads/candidaturas/8/9/cartel.jpg', 'uploads/candidaturas/8/9/corto.mp4'),
 (9, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Foco', 'Una luz fundida desencadena un efecto inesperado en la escena.', 'uploads/candidaturas/9/10/cartel.jpg', 'uploads/candidaturas/9/10/corto.mp4'),
 (10, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Toma Dos', 'Repetir la escena se convierte en la clave para mejorar el corto.', 'uploads/candidaturas/10/11/cartel.jpg', 'uploads/candidaturas/10/11/corto.mp4'),
-(11, 2, 'PENDIENTE', 'ALUMNO', NULL, 'El Plano Perdido', 'Aparece una grabación que nadie recuerda haber hecho.', 'uploads/candidaturas/11/12/cartel.jpg', 'uploads/candidaturas/11/12/corto.mp4'),
+(11, 2, 'NOMINADA', 'ALUMNO', NULL, 'El Plano Perdido', 'Aparece una grabación que nadie recuerda haber hecho.', 'uploads/candidaturas/11/12/cartel.jpg', 'uploads/candidaturas/11/12/corto.mp4'),
 (12, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Cinta Roja', 'Un simple marcador de escena se vuelve imprescindible.', 'uploads/candidaturas/12/13/cartel.jpg', 'uploads/candidaturas/12/13/corto.mp4'),
-(13, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Días de Montaje', 'Las prisas y el cansancio ponen a prueba al editor.', 'uploads/candidaturas/13/14/cartel.jpg', 'uploads/candidaturas/13/14/corto.mp4'),
+(13, 2, 'NOMINADA', 'ALUMNO', NULL, 'Días de Montaje', 'Las prisas y el cansancio ponen a prueba al editor.', 'uploads/candidaturas/13/14/cartel.jpg', 'uploads/candidaturas/13/14/corto.mp4'),
 (14, 2, 'PENDIENTE', 'ALUMNO', NULL, 'Cámara en Mano', 'Un rodaje sin trípode acaba siendo el estilo perfecto.', 'uploads/candidaturas/14/15/cartel.jpg', 'uploads/candidaturas/14/15/corto.mp4');
 
 INSERT INTO noticia (titulo, contenido, imagen_url, fecha, id_admin) VALUES

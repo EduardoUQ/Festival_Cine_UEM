@@ -16,3 +16,6 @@
 [2026-02-08 21:12:44] EMAIL | destino=toby@correo.es | estado=NOMINADA | resultado=FALLO
 [2026-02-08 21:17:49] EMAIL | destino=alejandro@gmail.com | estado=ACEPTADA | resultado=FALLO
 [2026-02-08 21:18:02] EMAIL | destino=alejandro@gmail.com | estado=NOMINADA | resultado=FALLO
+[2026-02-10 16:15:31] EMAIL | destino=lebasi130910@gmail.com | estado=SUBSANAR | resultado=FALLO
+[2026-02-10 16:16:18] EMAIL | destino=lebasi130910@gmail.com | estado=ACEPTADA | resultado=FALLO
+[2026-02-10 16:16:30] EMAIL | destino=lebasi130910@gmail.com | estado=NOMINADA | resultado=FALLO

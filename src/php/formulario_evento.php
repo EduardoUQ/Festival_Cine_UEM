@@ -4,7 +4,7 @@ include("conexion.php");
 header('Content-Type: application/json; charset=utf-8');
 
 //Recogemos el id del admin de la sesión (si lo tienes guardado así)
-$id_admin = isset($_SESSION["id_admin"]) ? (int)$_SESSION["id_admin"] : 0;
+$id_admin = isset($_SESSION["id"]) ? (int)$_SESSION["id"] : 0;
 
 //llamado a la función para procesar los datos
 if (isset($_POST['funcion'])) {
@@ -385,33 +385,32 @@ if (isset($_POST['funcion'])) {
             "eventos" => $eventos
         ]);
         exit;
-    }elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
+    } elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
 
-    $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
+        $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
             FROM evento
             ORDER BY fecha ASC, hora ASC";
 
-    $stmt = $conexion->prepare($sql);
-    if (!$stmt) {
-        echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+        $stmt = $conexion->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+            exit;
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $eventos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $eventos[] = $fila;
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "eventos" => $eventos
+        ]);
         exit;
     }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $eventos = [];
-    while ($fila = $result->fetch_assoc()) {
-        $eventos[] = $fila;
-    }
-
-    echo json_encode([
-        "status" => "success",
-        "eventos" => $eventos
-    ]);
-    exit;
- 
- }
 }
 
 $conexion->close();

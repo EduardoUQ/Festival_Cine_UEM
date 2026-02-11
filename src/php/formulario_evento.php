@@ -4,7 +4,7 @@ include("conexion.php");
 header('Content-Type: application/json; charset=utf-8');
 
 //Recogemos el id del admin de la sesión (si lo tienes guardado así)
-$id_admin = isset($_SESSION["id_admin"]) ? (int)$_SESSION["id_admin"] : 0;
+$id_admin = isset($_SESSION["id"]) ? (int)$_SESSION["id"] : 0;
 
 //llamado a la función para procesar los datos
 if (isset($_POST['funcion'])) {
@@ -25,10 +25,16 @@ if (isset($_POST['funcion'])) {
             ]);
             exit;
         }
+        // Fecha de la gala activa (si existe)
+        $fechaGala = null;
+        $resGala = $conexion->query("SELECT fecha_evento FROM gala WHERE activa = 1 LIMIT 1");
+        if ($resGala && $resGala->num_rows > 0) {
+            $fechaGala = $resGala->fetch_assoc()["fecha_evento"];
+        }
 
         //Validar rango de fechas
         $hoy = date("Y-m-d");
-        $fecha_maxima = "2026-12-21";
+        $fecha_maxima = $fechaGala;
 
         if ($fecha < $hoy) {
             echo json_encode([
@@ -41,7 +47,7 @@ if (isset($_POST['funcion'])) {
         if ($fecha > $fecha_maxima) {
             echo json_encode([
                 "status"  => "error",
-                "message" => "La fecha no puede ser posterior al 21/12/2026"
+                "message" => "La fecha no puede ser posterior a la fecha de la gala"
             ]);
             exit;
         }
@@ -81,6 +87,7 @@ if (isset($_POST['funcion'])) {
         if ($resGala && $resGala->num_rows > 0) {
             $fechaGala = $resGala->fetch_assoc()["fecha_evento"];
         }
+
 
         // WHERE dinámico según filtro
         $where = "";
@@ -355,14 +362,29 @@ if (isset($_POST['funcion'])) {
         exit;
     } elseif ($_POST['funcion'] === 'listar_eventos_gala') {
 
-        $fechaGala = "2026-12-11";
+        // 1) Buscar fecha de la gala activa
+        $sqlG = "SELECT fecha_evento FROM gala WHERE activa = 1 LIMIT 1";
+        $stmtG = $conexion->prepare($sqlG);
+        $stmtG->execute();
+        $resG = $stmtG->get_result();
 
-        $sql = "
-        SELECT id, titulo, descripcion, fecha, hora, localizacion
-        FROM evento
-        WHERE fecha = ?
-        ORDER BY hora ASC
-     ";
+        // Si no hay gala activa -> devolver vacío
+        if (!$resG || $resG->num_rows === 0) {
+            echo json_encode([
+                "status" => "success",
+                "fecha_gala" => null,
+                "eventos" => []
+            ]);
+            exit;
+        }
+
+        $fechaGala = $resG->fetch_assoc()["fecha_evento"];
+
+        // 2) Traer eventos SOLO de esa fecha
+        $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
+            FROM evento
+            WHERE fecha = ?
+            ORDER BY hora ASC";
 
         $stmt = $conexion->prepare($sql);
         if (!$stmt) {
@@ -385,33 +407,32 @@ if (isset($_POST['funcion'])) {
             "eventos" => $eventos
         ]);
         exit;
-    }elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
+    } elseif ($_POST['funcion'] === 'listar_eventos_calendario') {
 
-    $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
+        $sql = "SELECT id, titulo, descripcion, fecha, hora, localizacion
             FROM evento
             ORDER BY fecha ASC, hora ASC";
 
-    $stmt = $conexion->prepare($sql);
-    if (!$stmt) {
-        echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+        $stmt = $conexion->prepare($sql);
+        if (!$stmt) {
+            echo json_encode(["status" => "error", "message" => "Error preparando SELECT"]);
+            exit;
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $eventos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $eventos[] = $fila;
+        }
+
+        echo json_encode([
+            "status" => "success",
+            "eventos" => $eventos
+        ]);
         exit;
     }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $eventos = [];
-    while ($fila = $result->fetch_assoc()) {
-        $eventos[] = $fila;
-    }
-
-    echo json_encode([
-        "status" => "success",
-        "eventos" => $eventos
-    ]);
-    exit;
- 
- }
 }
 
 $conexion->close();

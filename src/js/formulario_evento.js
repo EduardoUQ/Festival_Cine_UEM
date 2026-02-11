@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mensaje_formulario = document.getElementById("mensaje_formulario");
 
     // Límite superior (próxima gala)
-    const FECHA_MAXIMA_EVENTO = "2026-12-21";
+    // const FECHA_MAXIMA_EVENTO = "2026-12-21";
 
     //--- MODO EDICIÓN (si viene ?id=...) ---
     const params = new URLSearchParams(window.location.search);
@@ -176,10 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const FECHA_MINIMA_EVENTO = obtenerHoyLocal();
 
     //Establecemos límites directamente en el input date
-    if (input_fecha) {
-        input_fecha.min = FECHA_MINIMA_EVENTO;
-        input_fecha.max = FECHA_MAXIMA_EVENTO;
-    }
+    // if (input_fecha) {
+    //     input_fecha.min = FECHA_MINIMA_EVENTO;
+    //     input_fecha.max = FECHA_MAXIMA_EVENTO;
+    // }
 
     function comprobarEvento(fecha, hora, location, id = null, modo = "completo") {
         let formDataCheck = new FormData();
@@ -263,10 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return false;
         }
 
-        if (fecha > FECHA_MAXIMA_EVENTO) {
-            mensaje_fecha.textContent = "*La fecha no puede ser posterior al 21/12/2026";
-            return false;
-        }
+        // if (fecha > FECHA_MAXIMA_EVENTO) {
+        //     mensaje_fecha.textContent = "*La fecha no puede ser posterior al 21/12/2026";
+        //     return false;
+        // }
 
         mensaje_fecha.textContent = "";
         return true;

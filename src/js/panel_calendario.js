@@ -1,6 +1,6 @@
-  const POR_PAGINA = 8;
-  let paginaActual = 1;
-  let filtroActual = "todos";
+const POR_PAGINA = 8;
+let paginaActual = 1;
+let filtroActual = "todos";
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarEventos();
@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let accionConfirmada = null;
   let redireccion = null;
-
-
 
   function mostrarModal(tipo, mensaje, redirect = null) {
     modal.className = "modal mostrar";
@@ -146,6 +144,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
   });
+
+  const selFiltro = document.getElementById("filtro_eventos");
+  if (selFiltro) {
+    selFiltro.addEventListener("change", () => {
+      filtroActual = selFiltro.value;
+      paginaActual = 1;
+      cargarEventos();
+    });
+  }
 });
 
 function cargarEventos() {
@@ -233,15 +240,6 @@ function pintarBotones(total, perPage, page) {
 
     cont.appendChild(btn);
   }
-}
-
-const selFiltro = document.getElementById("filtro_eventos");
-if (selFiltro) {
-  selFiltro.addEventListener("change", () => {
-    filtroActual = selFiltro.value;
-    paginaActual = 1;
-    cargarEventos();
-  });
 }
 
 function formatearFecha(fechaISO) {

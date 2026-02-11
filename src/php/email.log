@@ -19,3 +19,12 @@
 [2026-02-10 16:15:31] EMAIL | destino=lebasi130910@gmail.com | estado=SUBSANAR | resultado=FALLO
 [2026-02-10 16:16:18] EMAIL | destino=lebasi130910@gmail.com | estado=ACEPTADA | resultado=FALLO
 [2026-02-10 16:16:30] EMAIL | destino=lebasi130910@gmail.com | estado=NOMINADA | resultado=FALLO
+[2026-02-10 18:06:28] EMAIL | destino=isabel@gmail.com | estado=SUBSANAR | resultado=FALLO
+[2026-02-10 18:07:35] EMAIL | destino=isabel@gmail.com | estado=ACEPTADA | resultado=FALLO
+[2026-02-10 18:07:59] EMAIL | destino=isabel@gmail.com | estado=NOMINADA | resultado=FALLO
+[2026-02-11 09:38:12] EMAIL | destino=isabel@gmail.com | estado=SUBSANAR | resultado=FALLO
+[2026-02-11 09:38:59] EMAIL | destino=isabel@gmail.com | estado=ACEPTADA | resultado=FALLO
+[2026-02-11 09:39:09] EMAIL | destino=isabel@gmail.com | estado=NOMINADA | resultado=FALLO
+[2026-02-11 10:01:07] EMAIL | destino=llhugo@correo.es | estado=SUBSANAR | resultado=FALLO
+[2026-02-11 10:02:43] EMAIL | destino=llhugo@correo.es | estado=ACEPTADA | resultado=FALLO
+[2026-02-11 10:03:01] EMAIL | destino=llhugo@correo.es | estado=NOMINADA | resultado=FALLO

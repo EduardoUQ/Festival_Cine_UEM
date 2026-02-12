@@ -108,11 +108,7 @@
             });
         });
 
-    // Subir imagen
-    galleryInput.addEventListener('change', () => {
-        const file = galleryInput.files[0];
-        if (!file) return;
-
+    function subirImagen(file) {
         const formData = new FormData();
         formData.append("imagen", file);
 
@@ -126,6 +122,16 @@
                     agregarImagen(data.id, data.url);
                 }
             });
+    }
+
+    // Subir imagen
+    galleryInput.addEventListener('change', () => {
+        const files = Array.from(galleryInput.files);
+        if (!files.length) return;
+
+        files.forEach(file => {
+            subirImagen(file);
+        });
 
         galleryInput.value = "";
     });
@@ -190,20 +196,7 @@
 
         files.forEach(file => {
             if (!file.type.startsWith("image/")) return;
-
-            const formData = new FormData();
-            formData.append("imagen", file);
-
-            fetch("../php/subir_galeria.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        agregarImagen(data.id, data.url);
-                    }
-                });
+            subirImagen(file);
         });
     });
 

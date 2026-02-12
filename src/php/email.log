@@ -28,3 +28,4 @@
 [2026-02-11 10:01:07] EMAIL | destino=llhugo@correo.es | estado=SUBSANAR | resultado=FALLO
 [2026-02-11 10:02:43] EMAIL | destino=llhugo@correo.es | estado=ACEPTADA | resultado=FALLO
 [2026-02-11 10:03:01] EMAIL | destino=llhugo@correo.es | estado=NOMINADA | resultado=FALLO
+[2026-02-12 09:08:16] EMAIL | destino=alejandro@gmail.com | estado=SUBSANAR | resultado=FALLO

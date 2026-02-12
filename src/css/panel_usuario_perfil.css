@@ -191,6 +191,10 @@ input:disabled {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .dashboard {
         flex-direction: column;
     }

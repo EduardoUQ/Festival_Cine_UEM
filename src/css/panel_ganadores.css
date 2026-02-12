@@ -392,6 +392,10 @@ textarea {
 
 /* Sidebar arriba + contenido debajo */
 @media (max-width: 850px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .admin-layout {
         flex-direction: column;
     }

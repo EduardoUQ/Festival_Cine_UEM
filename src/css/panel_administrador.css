@@ -324,6 +324,10 @@ tbody tr:hover {
         flex-direction: column;
     }
 
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .sidebar {
         width: 100%;
         display: flex;
@@ -357,6 +361,10 @@ tbody tr:hover {
 
 /* Formularios en una sola columna */
 @media (max-width: 700px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .form-grid {
         grid-template-columns: 1fr !important;
     }
@@ -369,6 +377,10 @@ tbody tr:hover {
 
 /* Tablas scrollables en móvil */
 @media (max-width: 650px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .tabla-container {
         overflow-x: auto;
     }

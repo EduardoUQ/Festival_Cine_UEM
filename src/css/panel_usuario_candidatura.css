@@ -258,6 +258,10 @@ tbody tr:hover {
 
 /* Sidebar arriba + contenido debajo */
 @media (max-width: 850px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .panel {
         flex-direction: column;
     }
@@ -295,6 +299,10 @@ tbody tr:hover {
 
 /* Header responsive: buscador debajo del título */
 @media (max-width: 750px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .main-header {
         flex-direction: column;
         align-items: stretch;
@@ -312,6 +320,10 @@ tbody tr:hover {
 
 /* Tabs en columna */
 @media (max-width: 700px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .tabs {
         flex-wrap: wrap;
         width: 100%;
@@ -325,6 +337,10 @@ tbody tr:hover {
 
 /* Select de categoría adaptado */
 @media (max-width: 600px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .filtro-categoria {
         display: flex;
         flex-direction: column;
@@ -338,6 +354,10 @@ tbody tr:hover {
 
 /* Tabla scrollable en móvil */
 @media (max-width: 650px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .tabla-container {
         overflow-x: auto;
     }

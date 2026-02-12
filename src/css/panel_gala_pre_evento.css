@@ -314,6 +314,10 @@ tbody tr:hover {
 
 /* Sidebar arriba + contenido debajo */
 @media (max-width: 850px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .panel {
         flex-direction: column;
     }
@@ -351,6 +355,11 @@ tbody tr:hover {
 
 /* Tabs en varias líneas */
 @media (max-width: 700px) {
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .tabs {
         flex-wrap: wrap;
         width: 100%;
@@ -376,6 +385,11 @@ tbody tr:hover {
 
 /* Tabla scrollable */
 @media (max-width: 650px) {
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .tabla-container {
         overflow-x: auto;
     }

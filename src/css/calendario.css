@@ -228,5 +228,101 @@ body {
 /* Día con evento */
 .dia-con-evento {
   border: 2px solid #2B7ABC;
-  /*box-shadow: 0 0 10px rgba(255, 216, 10, 0.35); */
+}
+
+/* Ajustes generales en tablets */
+@media (max-width: 900px) {
+  .calendar-section {
+    padding: 50px 16px;
+  }
+
+  .calendar-header h2 {
+    font-size: 2rem;
+  }
+
+  .calendar-header p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Header del calendario en columnas */
+@media (max-width: 750px) {
+  .calendario-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .calendario-header-spacer {
+    display: none;
+  }
+
+  .calendar-legend {
+    justify-content: center;
+  }
+
+  .calendario-header-center {
+    justify-content: center;
+  }
+}
+
+/* Rejilla del calendario más compacta */
+@media (max-width: 650px) {
+  .calendario-grid {
+    gap: 6px;
+  }
+
+  .dia-calendario {
+    padding: 10px 0;
+    font-size: 0.9rem;
+  }
+
+  .dia-nombre {
+    font-size: 0.85rem;
+  }
+}
+
+/* Eventos en columna */
+@media (max-width: 600px) {
+  .event-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .event-date {
+    min-width: auto;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Detalles del día */
+@media (max-width: 550px) {
+  .calendar-details {
+    padding: 18px;
+  }
+
+  .details-header h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Ajustes finales para móviles pequeños */
+@media (max-width: 480px) {
+  .calendar-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .section-tag {
+    font-size: 0.6rem;
+    padding: 5px 10px;
+  }
+
+  .nav-mes {
+    padding: 6px 10px;
+  }
+
+  .titulo-mes {
+    font-size: 1rem;
+  }
 }

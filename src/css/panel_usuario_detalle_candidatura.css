@@ -318,6 +318,10 @@ textarea:disabled {
 
 /* Sidebar arriba + contenido debajo */
 @media (max-width: 850px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .panel {
         flex-direction: column;
     }
@@ -355,6 +359,10 @@ textarea:disabled {
 
 /* Grid de datos personales en una columna */
 @media (max-width: 750px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .grid {
         grid-template-columns: 1fr;
     }
@@ -362,6 +370,10 @@ textarea:disabled {
 
 /* Poster y vídeo adaptados */
 @media (max-width: 700px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .poster-box img {
         max-width: 100%;
         height: auto;
@@ -378,6 +390,10 @@ textarea:disabled {
 
 /* Botones de acciones en columna */
 @media (max-width: 600px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
     .actions {
         flex-direction: column;
         align-items: stretch;

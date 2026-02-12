@@ -403,3 +403,55 @@ table tr:hover {
         margin-top: 15px;
     }
 }
+
+/* --- RESPONSIVE: SECCIÓN DE GANADORES --- */
+
+/* Contenedor general */
+.winners-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Caja de categoría */
+.category-box {
+    background: #141414;
+    padding: 20px;
+    border: 1px solid #2a2a2a;
+}
+
+/* Título */
+.category-box h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+/* --- Tablas scrollables en móvil --- */
+@media (max-width: 750px) {
+    .category-box {
+        overflow-x: auto;
+    }
+
+    .category-box table {
+        min-width: 600px;
+    }
+}
+
+/* --- Ajustes visuales en pantallas pequeñas --- */
+@media (max-width: 600px) {
+    .category-box {
+        padding: 16px;
+    }
+
+    .category-box h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- Espaciado general en móvil --- */
+@media (max-width: 500px) {
+    .winners-section h2 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+}

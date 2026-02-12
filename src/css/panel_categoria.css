@@ -1,5 +1,4 @@
 body {
-    /* background: #171719; */
     color: #e5e5e5;
 }
 
@@ -364,5 +363,99 @@ a.btn:visited {
     to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+/* --- RESPONSIVE PARA PANEL PREMIOS --- */
+
+/* Sidebar más estrecho en pantallas medianas */
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* Sidebar arriba + contenido debajo */
+@media (max-width: 850px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 16px;
+    }
+
+    .profile {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .menu {
+        display: flex;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+
+    .menu a {
+        white-space: nowrap;
+        padding: 10px 14px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+}
+
+/* Header en columna */
+@media (max-width: 750px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* Filtros y botón en columna */
+@media (max-width: 700px) {
+    .category-select {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #filtrosPremios {
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Cards en una sola columna */
+@media (max-width: 600px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tablas scrollables */
+@media (max-width: 650px) {
+    .table {
+        min-width: 600px;
+    }
+
+    .categoria-card {
+        overflow-x: auto;
     }
 }
